@@ -88,13 +88,34 @@ const Index = () => {
             Calendrier à venir
           </h2>
           <p className="text-sm text-muted-foreground">
-            Affichage de {mockMatches.length} matchs prédits
+            1 match gratuit • {mockMatches.length - 1} matchs Premium
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {mockMatches.map((match, index) => (
-            <MatchCard key={index} {...match} />
+          {/* Premier match gratuit */}
+          <MatchCard key={0} {...mockMatches[0]} />
+          
+          {/* Matchs verrouillés */}
+          {mockMatches.slice(1).map((match, index) => (
+            <div key={index + 1} className="relative animate-slide-up">
+              <div className="absolute inset-0 backdrop-blur-sm bg-background/60 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
+                <Lock className="w-12 h-12 text-accent animate-glow-pulse" />
+                <div className="text-center px-4">
+                  <p className="font-semibold text-lg mb-2">Contenu Premium</p>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Débloquez toutes les prédictions
+                  </p>
+                  <Link to="/auth">
+                    <Button variant="default" size="sm" className="gap-2">
+                      S'abonner
+                      <Lock className="w-3 h-3" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <MatchCard {...match} />
+            </div>
           ))}
         </div>
 
