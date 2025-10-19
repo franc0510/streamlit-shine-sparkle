@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        display: ['Rajdhani', 'sans-serif'],
+        display: ['Rajdhani', 'Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
