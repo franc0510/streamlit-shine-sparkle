@@ -8,6 +8,7 @@ export interface Match {
   proba1: number;
   proba2: number;
   status?: string;
+  matchDate?: Date;
 }
 
 export const parseScheduleCSV = async (): Promise<Match[]> => {
@@ -46,6 +47,7 @@ export const parsePredictionsHistoryCSV = async (): Promise<Match[]> => {
     const response = await fetch('/Documents/predictions_history.csv');
     const text = await response.text();
     const lines = text.split('\n').slice(1); // Skip header
+    const now = new Date();
     
     return lines
       .filter(line => line.trim())
@@ -62,10 +64,11 @@ export const parsePredictionsHistoryCSV = async (): Promise<Match[]> => {
           team2: cols[6],
           proba1: parseFloat(cols[7]) * 100,
           proba2: parseFloat(cols[8]) * 100,
-          status: cols[12]
+          status: cols[12],
+          matchDate: dateTime
         };
       })
-      .filter(match => match.status === 'ok')
+      .filter(match => match.status === 'ok' && match.matchDate && match.matchDate < now)
       .reverse(); // Most recent first
   } catch (error) {
     console.error('Error parsing predictions history CSV:', error);
