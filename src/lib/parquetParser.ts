@@ -41,18 +41,62 @@ export type ScaleMode = 'none' | 'minmax' | 'zscore';
 
 // Team name aliases for better matching
 const TEAM_ALIASES: Record<string, string[]> = {
-  '100 thieves': ['100t', '100 thieves', '100thieves'],
+  // LCK
+  'gen.g': ['gen g esports', 'gen.g', 'geng', 'gen', 'gen g'],
   't1': ['t1', 't1 esports', 'skt', 'skt t1'],
-  'gen.g': ['gen g', 'gen.g', 'geng', 'gen'],
-  'top esports': ['topesports', 'top', 'tes'],
-  'bilibili gaming': ['blg', 'bilibili', 'bilibili gaming'],
-  'jd gaming': ['jdg', 'jd gaming'],
-  'lng esports': ['lng'],
-  'weibo gaming': ['wbg', 'weibo'],
-  'flyquest': ['fly', 'flyquest', 'fly quest'],
-  'g2 esports': ['g2'],
-  'mad lions': ['mad'],
+  'hanwha life esports': ['hle', 'hanwha', 'hanwha life esports', 'hanwha life'],
+  'nongshim redforce': ['ns', 'nongshim', 'redforce', 'nongshim redforce'],
+  'oksavingsbank brion': ['bro', 'ok brion', 'oksavingsbank', 'oksavingsbank brion', 'brion'],
+  'dplus kia': ['dk', 'dplus', 'dpluskia', 'dplus kia'],
+  'dn freecs': ['kdf', 'freecs', 'dn freecs'],
+  'bnk fearx': ['fearx', 'bnk fearx'],
+  'kt rolster': ['kt', 'kt rolster'],
+  // LEC
+  'mad lions koi': ['mad', 'mad lions koi', 'mad lions'],
+  'movistar koi': ['koi', 'movistar koi'],
+  'giantx': ['gx', 'giant x', 'giantx'],
+  'team vitality': ['vit', 'vitality', 'team vitality'],
+  'team heretics': ['heretics', 'team heretics'],
+  'karmine corp': ['kc', 'kcorp', 'karmine corp'],
   'fnatic': ['fnatic', 'fnc'],
+  'g2 esports': ['g2', 'g2 esports'],
+  'rogue': ['rogue'],
+  'sk gaming': ['sk', 'sk gaming'],
+  // LPL
+  'top esports': ['topesports', 'top', 'tes', 'top esports'],
+  'jd gaming': ['jdg', 'jd gaming'],
+  'bilibili gaming': ['blg', 'bilibili', 'bilibili gaming'],
+  'funplus phoenix': ['fpx', 'funplus phoenix'],
+  'royal never give up': ['rng', 'royal never give up'],
+  'oh my god': ['omg', 'oh my god'],
+  'thundertalk gaming': ['tt', 'thundertalk gaming'],
+  'rare atom': ['ra', 'rare atom'],
+  'ninjas in pyjamas': ['nip', 'ninjas in pyjamas'],
+  "anyone's legend": ['al', "anyone's legend", 'anyones legend'],
+  'team we': ['we', 'team we'],
+  'invictus gaming': ['ig', 'invictus gaming'],
+  'edward gaming': ['edg', 'edward gaming'],
+  'lgd gaming': ['lgd', 'lgd gaming'],
+  'lng esports': ['lng', 'lng esports'],
+  'weibo gaming': ['wbg', 'weibo', 'weibo gaming'],
+  // LCS / Americas
+  'cloud9': ['c9', 'cloud9'],
+  'team liquid': ['tl', 'team liquid', 'liquid'],
+  '100 thieves': ['100t', '100 thieves', '100thieves', '100'],
+  'flyquest': ['fly', 'flyquest', 'fly quest'],
+  'pain gaming': ['pain', 'pain gaming'],
+  'red canids': ['red kalunga', 'red canids', 'red'],
+  'loud': ['loud'],
+  'nrg': ['nrg'],
+  'immortals': ['imt', 'immortals'],
+  'dignitas': ['dig', 'dignitas'],
+  // LCP / Other regions
+  'ctbc flying oyster': ['ctbc', 'ctbc flying oyster', 'flying oyster'],
+  'saigon dino': ['saigon dino'],
+  'mgn vikings esports': ['mgn', 'mgn vikings esports', 'vikings'],
+  'team whales': ['team secret whales', 'team whales', 'whales'],
+  'vivo keyd stars': ['vivo keyd', 'vivo keyd stars', 'keyd'],
+  'psg talon': ['psg', 'psg talon', 'talon'],
 };
 
 const positionOrder: Record<string, number> = {
@@ -164,11 +208,17 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
       file: asyncBuffer,
       onComplete: (data: any[]) => {
         console.log('Parquet rows loaded:', data.length);
+        let logCount = 0;
         for (const row of data) {
           // Resilient column mapping
-          const teamName = row.team || row.teamname || '';
-          const playerName = row.player_name || row.player || '';
+          const teamName = row.team || row.teamname || row.teamName || '';
+          const playerName = row.player_name || row.player || row.playerName || '';
           const position = (row.position || '').toLowerCase();
+
+          if (logCount < 3) {
+            console.log('Row sample:', { teamName, playerName, position });
+            logCount++;
+          }
 
           if (teamsMatch(teamName, team1Name)) {
             if (!team1Power.power_team && row.power_team != null) {
