@@ -10,43 +10,26 @@ export type PlayerStats = {
   player: string;
   player_name?: string;
   position?: string;
+  // KPIs (toujours number | undefined après parsing)
   kda_last_10?: number;
   kda_last_20?: number;
   earned_gpm_avg_last_10?: number;
-  earned_gpm_avg_last_20?: number;
   earned_gpm_avg_last_365d?: number;
   dpm_avg_last_365d?: number;
   wcpm_avg_last_365d?: number;
   vspm_avg_last_365d?: number;
 };
 
-export type TeamAggregates = {
-  kda_last_10?: number;
-  kda_last_20?: number;
-  earned_gpm_last_10?: number;
-  earned_gpm_last_20?: number;
-  earned_gpm_365d?: number;
-  dpm_365d?: number;
-  wcpm_365d?: number;
-  vspm_365d?: number;
-};
-
+export type TeamAggregates = Record<string, number>;
 export type TeamStats = {
   team: string;
   players: PlayerStats[];
   aggregates: TeamAggregates;
   resolvedFrom: string;
 };
-
-export function getPlayerImage(playerName?: string): string {
-  if (!playerName) return '/Documents/players/imagenotfound.jpg';
-  const safeName = playerName.trim().replace(/\s+/g, '');
-  return `/Documents/players/${safeName}.jpg`;
-}
-
 export type ParseResult = [TeamStats, TeamStats];
 
-const PARQUET_URL = "/Documents/DF_filtered.parquet";
+const PARQUET_URL = "/Documents/DF_filtered.parquet"; // le fichier doit être servi par le site (place-le dans /public/Documents)
 
 const TEAM_ALIASES: Record<string, string> = {
   "GEN G": "Gen.G",
@@ -83,18 +66,22 @@ const TEAM_ALIASES: Record<string, string> = {
 function stripAccents(s: string) {
   return s.normalize("NFKD").replace(/\p{Diacritic}/gu, "");
 }
-
-function normalize(s: string) {
+function normKey(s: string) {
   return stripAccents(String(s || ""))
     .toUpperCase()
-    .replace(/[_\-]/g, " ")
-    .replace(/[.''\s]+/g, " ")
+    .replace(/[.'’\-]/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
 }
-
 function applyAlias(s: string) {
-  const k = normalize(s);
+  const k = normKey(s);
   return TEAM_ALIASES[k] ?? s;
+}
+
+// Helper cast → number | undefined
+function toNum(v: any): number | undefined {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : undefined;
 }
 
 /* ---------------- duckdb-wasm init ---------------- */
@@ -112,11 +99,8 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
   const db = new duckdb.AsyncDuckDB(logger, worker);
 
   await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
-  await db.open({
-    query: {
-      castBigIntToDouble: true,
-    },
-  });
+  await db.open({ backend: "httpfs" });
+
   const conn = await db.connect();
   await conn.query("INSTALL httpfs; LOAD httpfs;");
   await conn.close();
@@ -128,7 +112,9 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
 /* --------------- lecture & introspection --------------- */
 
 async function fetchAllTeams(conn: duckdb.AsyncDuckDBConnection, table: string, teamCol: string) {
-  const rs = await conn.query(`SELECT DISTINCT ${teamCol} as team FROM ${table} WHERE ${teamCol} IS NOT NULL`);
+  const rs = await conn.query(
+    `SELECT DISTINCT ${duckdb.escapeIdentifier(teamCol)} as team FROM ${table} WHERE ${duckdb.escapeIdentifier(teamCol)} IS NOT NULL`,
+  );
   return rs
     .toArray()
     .map((r: any) => String(r.team).trim())
@@ -145,7 +131,6 @@ async function detectTeamCol(conn: duckdb.AsyncDuckDBConnection, table: string):
     const idx = names.indexOf(w);
     if (idx >= 0) return orig[idx];
   }
-  // fallback: 1ère colonne qui contient "team"
   const idx2 = names.findIndex((n: string) => n.includes("team"));
   if (idx2 >= 0) return orig[idx2];
   return orig[0];
@@ -153,11 +138,11 @@ async function detectTeamCol(conn: duckdb.AsyncDuckDBConnection, table: string):
 
 function resolveTeam(wanted: string, candidates: string[]): { found?: string; why: string } {
   const wantAliased = applyAlias(wanted);
-  const key = normalize(wantAliased);
+  const key = normKey(wantAliased);
 
   const index = new Map<string, string>();
   for (const c of candidates) {
-    index.set(normalize(applyAlias(c)), c);
+    index.set(normKey(applyAlias(c)), c);
   }
 
   if (index.has(key)) return { found: index.get(key), why: "equal(norm+alias)" };
@@ -173,21 +158,22 @@ function resolveTeam(wanted: string, candidates: string[]): { found?: string; wh
 }
 
 function aggregatesFrom(players: PlayerStats[]): TeamAggregates {
-  const avg = (key: keyof PlayerStats) => {
-    const vals = players.map((p) => p[key]).filter((x): x is number => typeof x === 'number' && Number.isFinite(x));
-    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : undefined;
-  };
+  const keys = [
+    "kda_last_10",
+    "kda_last_20",
+    "earned_gpm_avg_last_10",
+    "earned_gpm_avg_last_365d",
+    "dpm_avg_last_365d",
+    "wcpm_avg_last_365d",
+    "vspm_avg_last_365d",
+  ] as const;
 
-  return {
-    kda_last_10: avg('kda_last_10'),
-    kda_last_20: avg('kda_last_20'),
-    earned_gpm_last_10: avg('earned_gpm_avg_last_10'),
-    earned_gpm_last_20: avg('earned_gpm_avg_last_20'),
-    earned_gpm_365d: avg('earned_gpm_avg_last_365d'),
-    dpm_365d: avg('dpm_avg_last_365d'),
-    wcpm_365d: avg('wcpm_avg_last_365d'),
-    vspm_365d: avg('vspm_avg_last_365d'),
-  };
+  const out: TeamAggregates = {};
+  for (const k of keys) {
+    const vals = players.map((p) => toNum((p as any)[k])).filter((x): x is number => typeof x === "number");
+    out[k] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+  }
+  return out;
 }
 
 /* -------------- mapping colonnes KPI (souple) -------------- */
@@ -211,6 +197,14 @@ function pickColName(existing: string[], candidates: string[]): string | null {
   return null;
 }
 
+/* ============ image joueurs (export demandée par tes composants) ============ */
+export function getPlayerImage(playerName: string): string {
+  // On ne change pas le nom du fichier (tu as déjà les .png exacts)
+  // Si besoin, applique une normalisation légère :
+  const clean = String(playerName || "").trim();
+  return `/Documents/teams/${clean}.png`;
+}
+
 /* ========================= API PRINCIPALE ========================= */
 
 export async function parsePlayerDataParquet(
@@ -222,19 +216,14 @@ export async function parsePlayerDataParquet(
   const conn = await db.connect();
 
   try {
-    // on lit le parquet en table volatile
     await conn.query(`CREATE OR REPLACE TEMP TABLE t AS SELECT * FROM read_parquet('${PARQUET_URL}')`);
 
-    // colonnes clés
     const teamCol = await detectTeamCol(conn, "t");
-
-    // toutes les équipes présentes (pour debug & matching)
     const allTeams = await fetchAllTeams(conn, "t", teamCol);
 
     const r1 = resolveTeam(team1, allTeams);
     const r2 = resolveTeam(team2, allTeams);
     if (!r1.found || !r2.found) {
-      // aide au debug : retourne les 60 premières équipes
       const sample = allTeams.slice(0, 60).join(", ");
       throw new Error(
         `Team resolution failed: (${team1} → ${r1.why}) / (${team2} → ${r2.why}). ` +
@@ -242,7 +231,6 @@ export async function parsePlayerDataParquet(
       );
     }
 
-    // colonnes existantes
     const info = await conn.query(`PRAGMA table_info('t')`);
     const cols = info.toArray().map((r: any) => String(r.name));
 
@@ -252,7 +240,6 @@ export async function parsePlayerDataParquet(
       "player";
     const posCol = pickColName(cols, ["position", "role", "pos"]);
 
-    // map KPI réels
     const kpiCols: Record<string, string> = {};
     for (const [key, candidates] of Object.entries(KPI_MAP)) {
       const hit = pickColName(cols, candidates);
@@ -266,17 +253,15 @@ export async function parsePlayerDataParquet(
       ...Object.values(kpiCols).map((c) => `${JSON.stringify(c)} as "${c}"`),
     ].filter(Boolean) as string[];
 
-    const escapeSql = (s: string) => `'${s.replace(/'/g, "''")}'`;
-    
     const q1 = `
       SELECT ${selectCols.join(", ")}
       FROM t
-      WHERE "${teamCol}" = ${escapeSql(r1.found!)}
+      WHERE ${duckdb.escapeIdentifier(teamCol)} = ${duckdb.escapeLiteral(r1.found!)}
     `;
     const q2 = `
       SELECT ${selectCols.join(", ")}
       FROM t
-      WHERE "${teamCol}" = ${escapeSql(r2.found!)}
+      WHERE ${duckdb.escapeIdentifier(teamCol)} = ${duckdb.escapeLiteral(r2.found!)}
     `;
 
     const rs1 = await conn.query(q1);
@@ -292,14 +277,15 @@ export async function parsePlayerDataParquet(
           teamname: team,
           player: String(r.player_col ?? "").trim(),
           position: posCol ? String(r.pos_col ?? "") : undefined,
+          // force number | undefined
+          kda_last_10: toNum(r["kda_last_10"]),
+          kda_last_20: toNum(r["kda_last_20"]),
+          earned_gpm_avg_last_10: toNum(r["earned_gpm_avg_last_10"]),
+          earned_gpm_avg_last_365d: toNum(r["earned_gpm_avg_last_365d"]),
+          dpm_avg_last_365d: toNum(r["dpm_avg_last_365d"]),
+          wcpm_avg_last_365d: toNum(r["wcpm_avg_last_365d"]),
+          vspm_avg_last_365d: toNum(r["vspm_avg_last_365d"]),
         };
-        // recopie des KPI si présents
-        for (const [apiKey, realCol] of Object.entries(kpiCols)) {
-          const v = Number(r[realCol as keyof typeof r]);
-          if (Number.isFinite(v)) {
-            (p as any)[apiKey] = v;
-          }
-        }
         return p;
       });
 
@@ -317,8 +303,8 @@ export async function parsePlayerDataParquet(
         const ra = roleOrder(a.position);
         const rb = roleOrder(b.position);
         if (ra !== rb) return ra - rb;
-        const ea = (a["earned_gpm_avg_last_10"] as number) ?? -1e9;
-        const eb = (b["earned_gpm_avg_last_10"] as number) ?? -1e9;
+        const ea = a.earned_gpm_avg_last_10 ?? -1e9;
+        const eb = b.earned_gpm_avg_last_10 ?? -1e9;
         return eb - ea;
       });
 
