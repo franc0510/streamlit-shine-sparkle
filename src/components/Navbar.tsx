@@ -26,12 +26,14 @@ export const Navbar = () => {
   useEffect(() => {
     // Check initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('[Navbar] Initial session check:', session?.user?.email);
       setUser(session?.user ?? null);
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      (event, session) => {
+        console.log('[Navbar] Auth state changed:', event, session?.user?.email);
         setUser(session?.user ?? null);
       }
     );
