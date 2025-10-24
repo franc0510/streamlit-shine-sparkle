@@ -4,31 +4,126 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Lock, Mail, User, CreditCard, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+import type { User as SupabaseUser, Session } from "@supabase/supabase-js";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Connexion réussie !",
-      description: "Bienvenue sur PredicteSport",
+  useEffect(() => {
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        // Redirect to home if user is authenticated
+        if (session?.user) {
+          setTimeout(() => {
+            navigate("/");
+          }, 0);
+        }
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      
+      // Redirect to home if already logged in
+      if (session?.user) {
+        navigate("/");
+      }
     });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast({
+          title: "Erreur de connexion",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Connexion réussie !",
+          description: "Bienvenue sur PredicteSport",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Erreur",
+        description: "Une erreur inattendue s'est produite",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Compte créé !",
-      description: "Votre compte a été créé avec succès",
-    });
+    setLoading(true);
+
+    try {
+      const redirectUrl = `${window.location.origin}/`;
+      
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            name: name,
+          },
+        },
+      });
+
+      if (error) {
+        toast({
+          title: "Erreur d'inscription",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Compte créé !",
+          description: "Connexion automatique en cours...",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Erreur",
+        description: "Une erreur inattendue s'est produite",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const pricingFeatures = [
@@ -97,8 +192,8 @@ const Auth = () => {
                       </div>
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full">
-                      Se connecter
+                    <Button type="submit" size="lg" className="w-full" disabled={loading}>
+                      {loading ? "Connexion..." : "Se connecter"}
                     </Button>
                   </form>
                 </TabsContent>
@@ -152,8 +247,8 @@ const Auth = () => {
                       </div>
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full">
-                      Créer mon compte
+                    <Button type="submit" size="lg" className="w-full" disabled={loading}>
+                      {loading ? "Création..." : "Créer mon compte"}
                     </Button>
                   </form>
                 </TabsContent>
