@@ -5,11 +5,13 @@ import { Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
   const [pastMatches, setPastMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const loadMatches = async () => {
@@ -22,6 +24,19 @@ const Index = () => {
       setLoading(false);
     };
     loadMatches();
+
+    // Check auth status
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const calculateMinOdds = (proba: number) => {
@@ -48,30 +63,34 @@ const Index = () => {
             Prédictions basées sur des modèles statistiques avancés
           </p>
           
-          <div className="inline-flex items-center gap-3 bg-accent/10 border border-accent/30 rounded-lg px-6 py-3 mb-8">
-            <Lock className="w-5 h-5 text-accent" />
-            <p className="text-sm text-foreground/90">
-              Accès complet aux prédictions avec un{" "}
-              <Link to="/auth" className="text-accent font-semibold hover:underline">
-                abonnement Premium
-              </Link>
-            </p>
-          </div>
+          {!user && (
+            <div className="inline-flex items-center gap-3 bg-accent/10 border border-accent/30 rounded-lg px-6 py-3 mb-8">
+              <Lock className="w-5 h-5 text-accent" />
+              <p className="text-sm text-foreground/90">
+                Accès complet aux prédictions avec un{" "}
+                <Link to="/auth" className="text-accent font-semibold hover:underline">
+                  abonnement Premium
+                </Link>
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="mb-8 flex items-center justify-between">
           <h2 className="text-2xl font-display font-bold">
             Calendrier à venir
           </h2>
-          <p className="text-sm text-muted-foreground">
-            1 match gratuit • {upcomingMatches.length - 1} matchs Premium
-          </p>
+          {!user && (
+            <p className="text-sm text-muted-foreground">
+              1 match gratuit • {upcomingMatches.length - 1} matchs Premium
+            </p>
+          )}
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {upcomingMatches.map((match, index) => (
             <div key={index} className="relative animate-slide-up">
-              {index > 0 && (
+              {!user && index > 0 && (
                 <div className="absolute inset-0 backdrop-blur-sm bg-background/60 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
                   <Lock className="w-12 h-12 text-accent animate-glow-pulse" />
                   <div className="text-center px-4">
@@ -147,20 +166,22 @@ const Index = () => {
           ))}
         </div>
 
-        <div className="mt-12 text-center bg-gradient-card border border-border/50 rounded-xl p-8">
-          <h3 className="text-2xl font-display font-bold mb-4">
-            Débloquez toutes les prédictions
-          </h3>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Accédez à l'ensemble de nos analyses, prédictions avancées et statistiques détaillées pour maximiser vos chances de succès.
-          </p>
-          <Link to="/auth">
-            <Button size="lg" className="gap-2">
-              Commencer maintenant
-              <Lock className="w-4 h-4" />
-            </Button>
-          </Link>
-        </div>
+        {!user && (
+          <div className="mt-12 text-center bg-gradient-card border border-border/50 rounded-xl p-8">
+            <h3 className="text-2xl font-display font-bold mb-4">
+              Débloquez toutes les prédictions
+            </h3>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              Accédez à l'ensemble de nos analyses, prédictions avancées et statistiques détaillées pour maximiser vos chances de succès.
+            </p>
+            <Link to="/auth">
+              <Button size="lg" className="gap-2">
+                Commencer maintenant
+                <Lock className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+        )}
       </main>
 
       <footer className="border-t border-border mt-20 py-8">

@@ -1,6 +1,15 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Gamepad2, User } from "lucide-react";
+import { Gamepad2, User, LogOut } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useToast } from "@/hooks/use-toast";
 
 const games = [
   { id: "lol", name: "League of Legends", path: "/", active: true },
@@ -10,6 +19,34 @@ const games = [
 
 export const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    // Check initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast({
+      title: "Déconnecté",
+      description: "À bientôt sur PredicteSport",
+    });
+    navigate("/");
+  };
 
   return (
     <nav className="border-b border-border bg-card/50 backdrop-blur-lg sticky top-0 z-50">
@@ -53,12 +90,30 @@ export const Navbar = () => {
                   Contact
                 </Button>
               </Link>
-              <Link to="/auth">
-                <Button variant="default" size="sm" className="gap-2">
-                  <User className="w-4 h-4" />
-                  Connexion
-                </Button>
-              </Link>
+              
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="default" size="sm" className="gap-2">
+                      <User className="w-4 h-4" />
+                      {user.email?.split('@')[0]}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={handleLogout} className="gap-2 cursor-pointer">
+                      <LogOut className="w-4 h-4" />
+                      Déconnexion
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link to="/auth">
+                  <Button variant="default" size="sm" className="gap-2">
+                    <User className="w-4 h-4" />
+                    Connexion
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
