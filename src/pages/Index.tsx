@@ -1,17 +1,19 @@
 import { Navbar } from "@/components/Navbar";
 import { MatchCard } from "@/components/MatchCard";
 import { Button } from "@/components/ui/button";
-import { Lock } from "lucide-react";
+import { Lock, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
 import { supabase } from "@/integrations/supabase/client";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 
 const Index = () => {
   const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
   const [pastMatches, setPastMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
+  const { isPremium } = useSubscription();
 
   useEffect(() => {
     const loadMatches = async () => {
@@ -63,7 +65,7 @@ const Index = () => {
             Prédictions basées sur des modèles statistiques avancés
           </p>
           
-          {!user && (
+          {!isPremium && (
             <div className="inline-flex items-center gap-3 bg-accent/10 border border-accent/30 rounded-lg px-6 py-3 mb-8">
               <Lock className="w-5 h-5 text-accent" />
               <p className="text-sm text-foreground/90">
@@ -74,13 +76,22 @@ const Index = () => {
               </p>
             </div>
           )}
+          
+          {isPremium && (
+            <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 mb-8">
+              <Check className="w-5 h-5 text-primary" />
+              <p className="text-sm text-foreground/90 font-semibold">
+                Vous êtes membre Premium - Accès illimité
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="mb-8 flex items-center justify-between">
           <h2 className="text-2xl font-display font-bold">
             Calendrier à venir
           </h2>
-          {!user && (
+          {!isPremium && (
             <p className="text-sm text-muted-foreground">
               1 match gratuit • {upcomingMatches.length - 1} matchs Premium
             </p>
@@ -90,7 +101,7 @@ const Index = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {upcomingMatches.map((match, index) => (
             <div key={index} className="relative animate-slide-up">
-              {!user && index > 0 && (
+              {!isPremium && index > 0 && (
                 <div className="absolute inset-0 backdrop-blur-sm bg-background/60 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
                   <Lock className="w-12 h-12 text-accent animate-glow-pulse" />
                   <div className="text-center px-4">
@@ -166,7 +177,7 @@ const Index = () => {
           ))}
         </div>
 
-        {!user && (
+        {!isPremium && (
           <div className="mt-12 text-center bg-gradient-card border border-border/50 rounded-xl p-8">
             <h3 className="text-2xl font-display font-bold mb-4">
               Débloquez toutes les prédictions
@@ -176,7 +187,7 @@ const Index = () => {
             </p>
             <Link to="/auth">
               <Button size="lg" className="gap-2">
-                Commencer maintenant
+                {user ? "S'abonner Premium" : "Commencer maintenant"}
                 <Lock className="w-4 h-4" />
               </Button>
             </Link>
