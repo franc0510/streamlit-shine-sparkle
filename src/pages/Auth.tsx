@@ -10,14 +10,13 @@ import { Lock, Mail, User, CreditCard, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-import type { User as SupabaseUser, Session } from "@supabase/supabase-js";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [user, setUser] = useState<SupabaseUser | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<any>(null);
+  const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
