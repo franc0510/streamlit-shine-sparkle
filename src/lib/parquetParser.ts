@@ -208,9 +208,41 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
       file: asyncBuffer,
       onComplete: (data: any[]) => {
         console.log('Parquet rows loaded:', data.length);
+        // 1) Collect available team names from dataset
+        const availableNames = Array.from(new Set(
+          data.map(r => (r.team || r.teamname || r.teamName || '').toString())
+        )).filter(Boolean);
+
+        const resolveFromAliases = (input: string): string => {
+          const inputNorm = normalizeTeamName(input);
+          // Exact match from dataset
+          const exact = availableNames.find(n => normalizeTeamName(n) === inputNorm);
+          if (exact) return exact;
+          // Alias to canonical, then map to dataset value
+          for (const [canonical, aliases] of Object.entries(TEAM_ALIASES)) {
+            if (canonical === inputNorm || aliases.includes(inputNorm)) {
+              const found = availableNames.find(n => normalizeTeamName(n) === canonical);
+              if (found) return found;
+            }
+          }
+          // Loose contains matching
+          const incl = availableNames.find(n => {
+            const nn = normalizeTeamName(n);
+            return nn.includes(inputNorm) || inputNorm.includes(nn);
+          });
+          return incl || input;
+        };
+
+        const team1Resolved = resolveFromAliases(team1Name);
+        const team2Resolved = resolveFromAliases(team2Name);
+        console.log('Resolved teams', { team1Name, team1Resolved, team2Name, team2Resolved });
+
+        const matchTeam = (name: string, target: string) =>
+          normalizeTeamName(name) === normalizeTeamName(target);
+
         let logCount = 0;
+        // 2) Build players in a second pass using resolved names
         for (const row of data) {
-          // Resilient column mapping
           const teamName = row.team || row.teamname || row.teamName || '';
           const playerName = row.player_name || row.player || row.playerName || '';
           const position = (row.position || '').toLowerCase();
@@ -220,7 +252,7 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
             logCount++;
           }
 
-          if (teamsMatch(teamName, team1Name)) {
+          if (matchTeam(teamName, team1Resolved)) {
             if (!team1Power.power_team && row.power_team != null) {
               team1Power.power_team = row.power_team;
             }
@@ -231,7 +263,7 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
               team1Players.push({
                 player_name: playerName,
                 team: teamName,
-                position: position,
+                position,
                 kda_last_10: row.kda_last_10 ?? row.kda_avg_last_10,
                 earned_gpm_avg_last_10: row.earned_gpm_avg_last_10 ?? row.earnedgpm_avg_last_10,
                 kda_last_20: row.kda_last_20 ?? row.kda_avg_last_20,
@@ -242,7 +274,7 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
                 earned_gpm_avg_last_365d: row.earned_gpm_avg_last_365d ?? row.earnedgpm_avg_last_365d,
               });
             }
-          } else if (teamsMatch(teamName, team2Name)) {
+          } else if (matchTeam(teamName, team2Resolved)) {
             if (!team2Power.power_team && row.power_team != null) {
               team2Power.power_team = row.power_team;
             }
@@ -253,7 +285,7 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
               team2Players.push({
                 player_name: playerName,
                 team: teamName,
-                position: position,
+                position,
                 kda_last_10: row.kda_last_10 ?? row.kda_avg_last_10,
                 earned_gpm_avg_last_10: row.earned_gpm_avg_last_10 ?? row.earnedgpm_avg_last_10,
                 kda_last_20: row.kda_last_20 ?? row.kda_avg_last_20,
