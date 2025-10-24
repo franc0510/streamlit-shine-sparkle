@@ -12,6 +12,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { openCustomerPortal } from "@/lib/subscription";
+import { useAuth } from "@/contexts/AuthContext";
 
 const games = [
   { id: "lol", name: "League of Legends", path: "/", active: true },
@@ -23,26 +24,8 @@ export const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [user, setUser] = useState<any>(null);
+  const { user } = useAuth();
   const { isPremium } = useSubscription();
-
-  useEffect(() => {
-    // Check initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log('[Navbar] Initial session check:', session?.user?.email);
-      setUser(session?.user ?? null);
-    });
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        console.log('[Navbar] Auth state changed:', event, session?.user?.email);
-        setUser(session?.user ?? null);
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();

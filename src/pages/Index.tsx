@@ -8,6 +8,9 @@ import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 
+const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-");
+const buildMatchUrl = (m: Match) => `/match/${slugify(m.tournament)}/${m.date}/${m.time}/${slugify(m.team1)}-vs-${slugify(m.team2)}`;
+
 const Index = () => {
   const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
   const [pastMatches, setPastMatches] = useState<Match[]>([]);
@@ -118,6 +121,44 @@ const Index = () => {
                   </div>
                 </div>
               )}
+              <Link to={buildMatchUrl(match)} className="block">
+                <MatchCard
+                  tournament={match.tournament}
+                  date={match.date}
+                  time={match.time}
+                  format={match.format}
+                  team1={{
+                    name: match.team1,
+                    logo: getTeamLogo(match.team1),
+                    winProbability: Math.round(match.proba1)
+                  }}
+                  team2={{
+                    name: match.team2,
+                    logo: getTeamLogo(match.team2),
+                    winProbability: Math.round(match.proba2)
+                  }}
+                  minOdds={{
+                    team1: parseFloat(calculateMinOdds(match.proba1)),
+                    team2: parseFloat(calculateMinOdds(match.proba2))
+                  }}
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 mb-8">
+          <h2 className="text-2xl font-display font-bold">
+            Prédictions récentes
+          </h2>
+          <p className="text-sm text-muted-foreground mt-2">
+            Historique des dernières prédictions
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {pastMatches.map((match, index) => (
+            <Link key={index} to={buildMatchUrl(match)} className="block">
               <MatchCard
                 tournament={match.tournament}
                 date={match.date}
@@ -138,42 +179,7 @@ const Index = () => {
                   team2: parseFloat(calculateMinOdds(match.proba2))
                 }}
               />
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-16 mb-8">
-          <h2 className="text-2xl font-display font-bold">
-            Prédictions récentes
-          </h2>
-          <p className="text-sm text-muted-foreground mt-2">
-            Historique des dernières prédictions
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {pastMatches.map((match, index) => (
-            <MatchCard
-              key={index}
-              tournament={match.tournament}
-              date={match.date}
-              time={match.time}
-              format={match.format}
-              team1={{
-                name: match.team1,
-                logo: getTeamLogo(match.team1),
-                winProbability: Math.round(match.proba1)
-              }}
-              team2={{
-                name: match.team2,
-                logo: getTeamLogo(match.team2),
-                winProbability: Math.round(match.proba2)
-              }}
-              minOdds={{
-                team1: parseFloat(calculateMinOdds(match.proba1)),
-                team2: parseFloat(calculateMinOdds(match.proba2))
-              }}
-            />
+            </Link>
           ))}
         </div>
 
