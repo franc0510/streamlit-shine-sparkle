@@ -1,66 +1,68 @@
 import { Card } from "@/components/ui/card";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
-import { PlayerStats, getPlayerImage, TimeWindow } from "@/lib/parquetParser";
+import { PlayerStats, getPlayerImage, TimeWindow, ScaleMode } from "@/lib/parquetParser";
 
 interface PlayerRadarChartProps {
   player: PlayerStats;
   teamColor: string;
   timeWindow: TimeWindow;
+  scaleMode: ScaleMode;
 }
 
-export const PlayerRadarChart = ({ player, teamColor, timeWindow }: PlayerRadarChartProps) => {
+export const PlayerRadarChart = ({ player, teamColor, timeWindow, scaleMode }: PlayerRadarChartProps) => {
   const buildData = () => {
     const data: Array<{ stat: string; value: number; fullMark: number }> = [];
+    const isNormalized = scaleMode !== 'none';
 
     if (timeWindow === 'last_10') {
       if (player.kda_last_10 != null) {
-        data.push({ stat: 'KDA\n(10g)', value: player.kda_last_10, fullMark: 10 });
+        data.push({ stat: 'KDA\n(10g)', value: player.kda_last_10, fullMark: isNormalized ? 1 : 10 });
       }
       if (player.earned_gpm_avg_last_10 != null) {
-        data.push({ stat: 'GPM\n(10g)', value: player.earned_gpm_avg_last_10, fullMark: 400 });
+        data.push({ stat: 'GPM\n(10g)', value: player.earned_gpm_avg_last_10, fullMark: isNormalized ? 1 : 400 });
       }
       if (player.dpm_avg_last_365d != null) {
-        data.push({ stat: 'DPM\n(365j)', value: player.dpm_avg_last_365d, fullMark: 800 });
+        data.push({ stat: 'DPM\n(365j)', value: player.dpm_avg_last_365d, fullMark: isNormalized ? 1 : 800 });
       }
       if (player.wcpm_avg_last_365d != null) {
-        data.push({ stat: 'WCPM\n(365j)', value: player.wcpm_avg_last_365d, fullMark: 1.5 });
+        data.push({ stat: 'WCPM\n(365j)', value: player.wcpm_avg_last_365d, fullMark: isNormalized ? 1 : 1.5 });
       }
       if (player.vspm_avg_last_365d != null) {
-        data.push({ stat: 'VSPM\n(365j)', value: player.vspm_avg_last_365d, fullMark: 2 });
+        data.push({ stat: 'VSPM\n(365j)', value: player.vspm_avg_last_365d, fullMark: isNormalized ? 1 : 2 });
       }
     } else if (timeWindow === 'last_20') {
       if (player.kda_last_20 != null) {
-        data.push({ stat: 'KDA\n(20g)', value: player.kda_last_20, fullMark: 10 });
+        data.push({ stat: 'KDA\n(20g)', value: player.kda_last_20, fullMark: isNormalized ? 1 : 10 });
       } else if (player.kda_last_10 != null) {
-        data.push({ stat: 'KDA\n(10g)', value: player.kda_last_10, fullMark: 10 });
+        data.push({ stat: 'KDA\n(10g)', value: player.kda_last_10, fullMark: isNormalized ? 1 : 10 });
       }
       if (player.earned_gpm_avg_last_20 != null) {
-        data.push({ stat: 'GPM\n(20g)', value: player.earned_gpm_avg_last_20, fullMark: 400 });
+        data.push({ stat: 'GPM\n(20g)', value: player.earned_gpm_avg_last_20, fullMark: isNormalized ? 1 : 400 });
       } else if (player.earned_gpm_avg_last_10 != null) {
-        data.push({ stat: 'GPM\n(10g)', value: player.earned_gpm_avg_last_10, fullMark: 400 });
+        data.push({ stat: 'GPM\n(10g)', value: player.earned_gpm_avg_last_10, fullMark: isNormalized ? 1 : 400 });
       }
       if (player.dpm_avg_last_365d != null) {
-        data.push({ stat: 'DPM\n(365j)', value: player.dpm_avg_last_365d, fullMark: 800 });
+        data.push({ stat: 'DPM\n(365j)', value: player.dpm_avg_last_365d, fullMark: isNormalized ? 1 : 800 });
       }
       if (player.wcpm_avg_last_365d != null) {
-        data.push({ stat: 'WCPM\n(365j)', value: player.wcpm_avg_last_365d, fullMark: 1.5 });
+        data.push({ stat: 'WCPM\n(365j)', value: player.wcpm_avg_last_365d, fullMark: isNormalized ? 1 : 1.5 });
       }
       if (player.vspm_avg_last_365d != null) {
-        data.push({ stat: 'VSPM\n(365j)', value: player.vspm_avg_last_365d, fullMark: 2 });
+        data.push({ stat: 'VSPM\n(365j)', value: player.vspm_avg_last_365d, fullMark: isNormalized ? 1 : 2 });
       }
     } else {
       // last_365d
       if (player.dpm_avg_last_365d != null) {
-        data.push({ stat: 'DPM\n(365j)', value: player.dpm_avg_last_365d, fullMark: 800 });
+        data.push({ stat: 'DPM\n(365j)', value: player.dpm_avg_last_365d, fullMark: isNormalized ? 1 : 800 });
       }
       if (player.wcpm_avg_last_365d != null) {
-        data.push({ stat: 'WCPM\n(365j)', value: player.wcpm_avg_last_365d, fullMark: 1.5 });
+        data.push({ stat: 'WCPM\n(365j)', value: player.wcpm_avg_last_365d, fullMark: isNormalized ? 1 : 1.5 });
       }
       if (player.vspm_avg_last_365d != null) {
-        data.push({ stat: 'VSPM\n(365j)', value: player.vspm_avg_last_365d, fullMark: 2 });
+        data.push({ stat: 'VSPM\n(365j)', value: player.vspm_avg_last_365d, fullMark: isNormalized ? 1 : 2 });
       }
       if (player.earned_gpm_avg_last_365d != null) {
-        data.push({ stat: 'GPM\n(365j)', value: player.earned_gpm_avg_last_365d, fullMark: 400 });
+        data.push({ stat: 'GPM\n(365j)', value: player.earned_gpm_avg_last_365d, fullMark: isNormalized ? 1 : 400 });
       }
     }
 

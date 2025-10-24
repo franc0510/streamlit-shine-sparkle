@@ -176,12 +176,14 @@ const MatchDetails = () => {
                   aggregates={team1Stats.aggregates}
                   teamColor="hsl(var(--primary))"
                   timeWindow={timeWindow}
+                  scaleMode={scaleMode}
                 />
                 <TeamRadarChart 
                   team={match.team2}
                   aggregates={team2Stats.aggregates}
                   teamColor="hsl(var(--accent))"
                   timeWindow={timeWindow}
+                  scaleMode={scaleMode}
                 />
               </div>
             </section>
@@ -203,6 +205,7 @@ const MatchDetails = () => {
                           player={p1} 
                           teamColor="hsl(var(--primary))" 
                           timeWindow={timeWindow}
+                          scaleMode={scaleMode}
                         />
                       ) : (
                         <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">
@@ -214,6 +217,7 @@ const MatchDetails = () => {
                           player={p2} 
                           teamColor="hsl(var(--accent))" 
                           timeWindow={timeWindow}
+                          scaleMode={scaleMode}
                         />
                       ) : (
                         <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">

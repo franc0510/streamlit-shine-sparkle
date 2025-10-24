@@ -1,67 +1,69 @@
 import { Card } from "@/components/ui/card";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
-import { TeamAggregates, TimeWindow } from "@/lib/parquetParser";
+import { TeamAggregates, TimeWindow, ScaleMode } from "@/lib/parquetParser";
 
 interface TeamRadarChartProps {
   team: string;
   aggregates: TeamAggregates;
   teamColor: string;
   timeWindow: TimeWindow;
+  scaleMode: ScaleMode;
 }
 
-export const TeamRadarChart = ({ team, aggregates, teamColor, timeWindow }: TeamRadarChartProps) => {
+export const TeamRadarChart = ({ team, aggregates, teamColor, timeWindow, scaleMode }: TeamRadarChartProps) => {
   const buildData = () => {
     const data: Array<{ stat: string; value: number; fullMark: number }> = [];
+    const isNormalized = scaleMode !== 'none';
 
     if (timeWindow === 'last_10') {
       if (aggregates.kda_last_10 != null) {
-        data.push({ stat: 'KDA\n(10g)', value: aggregates.kda_last_10, fullMark: 10 });
+        data.push({ stat: 'KDA\n(10g)', value: aggregates.kda_last_10, fullMark: isNormalized ? 1 : 10 });
       }
       if (aggregates.earned_gpm_last_10 != null) {
-        data.push({ stat: 'GPM\n(10g)', value: aggregates.earned_gpm_last_10, fullMark: 400 });
+        data.push({ stat: 'GPM\n(10g)', value: aggregates.earned_gpm_last_10, fullMark: isNormalized ? 1 : 400 });
       }
       if (aggregates.dpm_365d != null) {
-        data.push({ stat: 'DPM\n(365j)', value: aggregates.dpm_365d, fullMark: 800 });
+        data.push({ stat: 'DPM\n(365j)', value: aggregates.dpm_365d, fullMark: isNormalized ? 1 : 800 });
       }
       if (aggregates.wcpm_365d != null) {
-        data.push({ stat: 'WCPM\n(365j)', value: aggregates.wcpm_365d, fullMark: 1.5 });
+        data.push({ stat: 'WCPM\n(365j)', value: aggregates.wcpm_365d, fullMark: isNormalized ? 1 : 1.5 });
       }
       if (aggregates.vspm_365d != null) {
-        data.push({ stat: 'VSPM\n(365j)', value: aggregates.vspm_365d, fullMark: 2 });
+        data.push({ stat: 'VSPM\n(365j)', value: aggregates.vspm_365d, fullMark: isNormalized ? 1 : 2 });
       }
     } else if (timeWindow === 'last_20') {
       if (aggregates.kda_last_20 != null) {
-        data.push({ stat: 'KDA\n(20g)', value: aggregates.kda_last_20, fullMark: 10 });
+        data.push({ stat: 'KDA\n(20g)', value: aggregates.kda_last_20, fullMark: isNormalized ? 1 : 10 });
       } else if (aggregates.kda_last_10 != null) {
-        data.push({ stat: 'KDA\n(10g)', value: aggregates.kda_last_10, fullMark: 10 });
+        data.push({ stat: 'KDA\n(10g)', value: aggregates.kda_last_10, fullMark: isNormalized ? 1 : 10 });
       }
       if (aggregates.earned_gpm_last_20 != null) {
-        data.push({ stat: 'GPM\n(20g)', value: aggregates.earned_gpm_last_20, fullMark: 400 });
+        data.push({ stat: 'GPM\n(20g)', value: aggregates.earned_gpm_last_20, fullMark: isNormalized ? 1 : 400 });
       } else if (aggregates.earned_gpm_last_10 != null) {
-        data.push({ stat: 'GPM\n(10g)', value: aggregates.earned_gpm_last_10, fullMark: 400 });
+        data.push({ stat: 'GPM\n(10g)', value: aggregates.earned_gpm_last_10, fullMark: isNormalized ? 1 : 400 });
       }
       if (aggregates.dpm_365d != null) {
-        data.push({ stat: 'DPM\n(365j)', value: aggregates.dpm_365d, fullMark: 800 });
+        data.push({ stat: 'DPM\n(365j)', value: aggregates.dpm_365d, fullMark: isNormalized ? 1 : 800 });
       }
       if (aggregates.wcpm_365d != null) {
-        data.push({ stat: 'WCPM\n(365j)', value: aggregates.wcpm_365d, fullMark: 1.5 });
+        data.push({ stat: 'WCPM\n(365j)', value: aggregates.wcpm_365d, fullMark: isNormalized ? 1 : 1.5 });
       }
       if (aggregates.vspm_365d != null) {
-        data.push({ stat: 'VSPM\n(365j)', value: aggregates.vspm_365d, fullMark: 2 });
+        data.push({ stat: 'VSPM\n(365j)', value: aggregates.vspm_365d, fullMark: isNormalized ? 1 : 2 });
       }
     } else {
       // last_365d
       if (aggregates.dpm_365d != null) {
-        data.push({ stat: 'DPM\n(365j)', value: aggregates.dpm_365d, fullMark: 800 });
+        data.push({ stat: 'DPM\n(365j)', value: aggregates.dpm_365d, fullMark: isNormalized ? 1 : 800 });
       }
       if (aggregates.wcpm_365d != null) {
-        data.push({ stat: 'WCPM\n(365j)', value: aggregates.wcpm_365d, fullMark: 1.5 });
+        data.push({ stat: 'WCPM\n(365j)', value: aggregates.wcpm_365d, fullMark: isNormalized ? 1 : 1.5 });
       }
       if (aggregates.vspm_365d != null) {
-        data.push({ stat: 'VSPM\n(365j)', value: aggregates.vspm_365d, fullMark: 2 });
+        data.push({ stat: 'VSPM\n(365j)', value: aggregates.vspm_365d, fullMark: isNormalized ? 1 : 2 });
       }
       if (aggregates.earned_gpm_365d != null) {
-        data.push({ stat: 'GPM\n(365j)', value: aggregates.earned_gpm_365d, fullMark: 400 });
+        data.push({ stat: 'GPM\n(365j)', value: aggregates.earned_gpm_365d, fullMark: isNormalized ? 1 : 400 });
       }
     }
 
