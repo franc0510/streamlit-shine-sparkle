@@ -39,16 +39,27 @@ const MatchDetails = () => {
     const load = async () => {
       try {
         const matches = await parseScheduleCSV();
-        const m = matches.find(m =>
-          slugify(m.tournament) === params.tournament &&
-          m.date.toLowerCase().includes((params.date || "").toLowerCase()) &&
-          m.time.startsWith((params.time || "")) &&
-          slugify(m.team1) === slugify(team1 || "") &&
-          slugify(m.team2) === slugify(team2 || "")
-        );
+        const normalize = (s: string) => s.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-');
+        const m = matches.find(m => {
+          const tour = normalize(m.tournament);
+          const paramTour = (params.tournament || '').toLowerCase();
+          const tourOk = tour === paramTour || tour.includes(paramTour) || paramTour.includes(tour);
+          const dateOk = m.date?.toLowerCase().includes((params.date || '').toLowerCase());
+          const timeOk = m.time?.startsWith((params.time || ''));
+          const t1Ok = normalize(m.team1) === normalize(team1 || '');
+          const t2Ok = normalize(m.team2) === normalize(team2 || '');
+          return tourOk && dateOk && timeOk && t1Ok && t2Ok;
+        }) || matches.find(m => {
+          // Fallback relaxed: ignore tournament and date formatting differences
+          const t1Ok = normalize(m.team1) === normalize(team1 || '');
+          const t2Ok = normalize(m.team2) === normalize(team2 || '');
+          const timeOk = m.time?.startsWith((params.time || ''));
+          return t1Ok && t2Ok && timeOk;
+        });
         if (!m) {
           setNotFound(true);
         } else {
+          setNotFound(false);
           setMatch(m);
           // Load player stats with current scale mode
           const stats = await parsePlayerDataParquet(m.team1, m.team2, scaleMode);
@@ -57,7 +68,30 @@ const MatchDetails = () => {
             setTeam2Stats(stats[1]);
           }
         }
+      } catch (e) {
+        console.error(e);
       } finally {
+        // If still no match, attempt fallback using URL teams only
+        if (!match && team1 && team2) {
+          const fallback: any = {
+            tournament: params.tournament || '—',
+            date: params.date || '—',
+            time: params.time || '—',
+            team1: team1 || 'Équipe 1',
+            team2: team2 || 'Équipe 2',
+            proba1: 50,
+            proba2: 50,
+            format: 'BO?'
+          };
+          setMatch(fallback);
+          const stats = await parsePlayerDataParquet(team1, team2, scaleMode);
+          if (stats) {
+            setTeam1Stats(stats[0]);
+            setTeam2Stats(stats[1]);
+          } else {
+            setNotFound(true);
+          }
+        }
         setLoading(false);
       }
     };
