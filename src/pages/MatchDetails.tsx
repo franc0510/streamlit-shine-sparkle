@@ -1,310 +1,390 @@
-import { Navbar } from "@/components/Navbar";
-import { useEffect, useMemo, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { parseScheduleCSV, getTeamLogo } from "@/lib/csvParser";
-import { parsePlayerDataParquet, TeamStats, TimeWindow, ScaleMode } from "@/lib/parquetParser";
-import { PlayerRadarChart } from "@/components/PlayerRadarChart";
-import { TeamRadarChart } from "@/components/TeamRadarChart";
-import { StatsControls } from "@/components/StatsControls";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, TrendingUp, TrendingDown, Minus } from "lucide-react";
+import React, { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
+import clsx from "clsx";
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
 
-const slugify = (s: string) => s
-  .toLowerCase()
-  .replace(/\s+/g, "-")
-  .replace(/[^a-z0-9-]/g, "")
-  .replace(/-+/g, "-");
+import {
+  parsePlayerDataParquet,
+  type TeamStats,
+  type PlayerStats,
+  type ScaleMode,
+  type TimeWindow,
+} from "@/lib/parquetParser";
 
-const MatchDetails = () => {
-  const params = useParams();
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
-  const [match, setMatch] = useState<any>(null);
-  const [team1Stats, setTeam1Stats] = useState<TeamStats | null>(null);
-  const [team2Stats, setTeam2Stats] = useState<TeamStats | null>(null);
-  const [timeWindow, setTimeWindow] = useState<TimeWindow>('last_10');
-  const [scaleMode, setScaleMode] = useState<ScaleMode>('none');
+/* ========================== Helpers URL / UI ========================== */
 
-  const [team1, team2] = useMemo(() => {
-    const combo = (params.team1_vs_team2 || "").split("-vs-");
-    return [combo[0]?.replace(/-/g, " "), combo[1]?.replace(/-/g, " ")];
-  }, [params.team1_vs_team2]);
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
 
-  useEffect(() => {
-    document.title = `Détails du match | PredicteSport`;
-  }, []);
+function titleCase(s: string) {
+  return (s || "")
+    .toLowerCase()
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .replace(/_/g, " ");
+}
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const matches = await parseScheduleCSV();
-        const normalize = (s: string) => s.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-');
-        const m = matches.find(m => {
-          const tour = normalize(m.tournament);
-          const paramTour = (params.tournament || '').toLowerCase();
-          const tourOk = tour === paramTour || tour.includes(paramTour) || paramTour.includes(tour);
-          const dateOk = m.date?.toLowerCase().includes((params.date || '').toLowerCase());
-          const timeOk = m.time?.startsWith((params.time || ''));
-          const t1Ok = normalize(m.team1) === normalize(team1 || '');
-          const t2Ok = normalize(m.team2) === normalize(team2 || '');
-          return tourOk && dateOk && timeOk && t1Ok && t2Ok;
-        }) || matches.find(m => {
-          // Fallback relaxed: ignore tournament and date formatting differences
-          const t1Ok = normalize(m.team1) === normalize(team1 || '');
-          const t2Ok = normalize(m.team2) === normalize(team2 || '');
-          const timeOk = m.time?.startsWith((params.time || ''));
-          return t1Ok && t2Ok && timeOk;
-        });
-        if (!m) {
-          setNotFound(true);
-        } else {
-          setNotFound(false);
-          setMatch(m);
-          // Load player stats with current scale mode
-          const stats = await parsePlayerDataParquet(m.team1, m.team2, scaleMode);
-          if (stats) {
-            setTeam1Stats(stats[0]);
-            setTeam2Stats(stats[1]);
-          }
-        }
-      } catch (e) {
-        console.error(e);
-      } finally {
-        // If still no match, attempt fallback using URL teams only
-        if (!match && team1 && team2) {
-          const fallback: any = {
-            tournament: params.tournament || '—',
-            date: params.date || '—',
-            time: params.time || '—',
-            team1: team1 || 'Équipe 1',
-            team2: team2 || 'Équipe 2',
-            proba1: 50,
-            proba2: 50,
-            format: 'BO?'
-          };
-          setMatch(fallback);
-          setNotFound(false);
-          // Do not block loading on parsing parquet fallback
-          parsePlayerDataParquet(team1, team2, scaleMode)
-            .then((stats) => {
-              if (stats) {
-                setTeam1Stats(stats[0]);
-                setTeam2Stats(stats[1]);
-              } else {
-                setNotFound(true);
-              }
-            })
-            .catch((e) => {
-              console.error('Fallback parquet parse failed', e);
-              setNotFound(true);
-            });
-        }
-        setLoading(false);
-      }
-    };
-    load();
-  }, [params, team1, team2, scaleMode]);
+/* ========================== KPIs & Fenêtres ========================== */
+/** KPI “canoniques” disponibles dans DF_filtered.parquet */
+const KPI_BY_WINDOW: Record<TimeWindow, string[]> = {
+  last_10: [
+    "kda_last_10",
+    "earned_gpm_avg_last_10",
+    // on affiche aussi des KPIs 365 si 10 indispo
+    "dpm_avg_last_365d",
+    "wcpm_avg_last_365d",
+    "vspm_avg_last_365d",
+    "earned_gpm_avg_last_365d",
+  ],
+  last_20: [
+    // si tu as des colonnes *_last_20, ajoute-les ici. On garde 365 en fallback :
+    "kda_last_20",
+    "dpm_avg_last_365d",
+    "wcpm_avg_last_365d",
+    "vspm_avg_last_365d",
+    "earned_gpm_avg_last_365d",
+  ],
+  last_365d: [
+    "kda_last_10", // s’il n’y a pas kda_365, on garde le 10 (mieux que rien)
+    "dpm_avg_last_365d",
+    "wcpm_avg_last_365d",
+    "vspm_avg_last_365d",
+    "earned_gpm_avg_last_365d",
+  ],
+};
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-muted-foreground">Chargement du match...</p>
-      </div>
-    );
-  }
+/** Renvoie la liste finale de KPIs réellement présents dans les joueurs */
+function resolveAvailableKpis(players: PlayerStats[], win: TimeWindow): string[] {
+  const wanted = KPI_BY_WINDOW[win];
+  const has = (k: string) => players.some((p) => typeof (p as any)[k] === "number");
+  const primary = wanted.filter(has);
+  // si la fenêtre est trop pauvre, fallback (union douce) vers 365
+  if (primary.length >= 3) return primary;
+  const fallback = KPI_BY_WINDOW["last_365d"].filter(has);
+  const merged = [...new Set([...primary, ...fallback])];
+  // garder 3–6 axes max sur un radar
+  return merged.slice(0, 6);
+}
 
-  if (notFound || !match) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <main className="container mx-auto px-4 py-8">
-          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6">
-            <ArrowLeft className="w-4 h-4" /> Retour
-          </Link>
-          <Card className="p-8 bg-gradient-card border-border/50">
-            <p>Match introuvable.</p>
-          </Card>
-        </main>
-      </div>
-    );
-  }
+/* ========================== Normalisations ========================== */
 
-  const team1Logo = getTeamLogo(match.team1);
-  const team2Logo = getTeamLogo(match.team2);
+type ScaleChoice = "none" | "minmax" | "zscore";
 
-  const avg = (vals: Array<number | undefined>) => {
-    const v = vals.filter((x): x is number => x != null && !isNaN(x));
-    return v.length ? v.reduce((a,b)=>a+b,0)/v.length : undefined;
-  };
-  const computeAggregates = (players: any) => ({
-    kda_last_10: avg(players.map((p: any) => p.kda_last_10)),
-    earned_gpm_last_10: avg(players.map((p: any) => p.earned_gpm_avg_last_10)),
-    kda_last_20: avg(players.map((p: any) => p.kda_last_20)),
-    earned_gpm_last_20: avg(players.map((p: any) => p.earned_gpm_avg_last_20)),
-    dpm_365d: avg(players.map((p: any) => p.dpm_avg_last_365d)),
-    wcpm_365d: avg(players.map((p: any) => p.wcpm_avg_last_365d)),
-    vspm_365d: avg(players.map((p: any) => p.vspm_avg_last_365d)),
-    earned_gpm_365d: avg(players.map((p: any) => p.earned_gpm_avg_last_365d)),
+function normalizeMatrix(rows: number[][], mode: ScaleChoice = "none"): number[][] {
+  if (mode === "none") return rows;
+
+  const nRows = rows.length;
+  const nCols = rows[0]?.length ?? 0;
+  if (!nRows || !nCols) return rows;
+
+  const cols = Array.from({ length: nCols }, (_, j) => rows.map((r) => r[j]));
+  const normCols = cols.map((col) => {
+    const valid = col.filter((v) => Number.isFinite(v));
+    if (valid.length === 0) return col.map(() => 0);
+
+    if (mode === "minmax") {
+      const min = Math.min(...valid);
+      const max = Math.max(...valid);
+      const range = max - min || 1;
+      return col.map((v) => (Number.isFinite(v) ? (v - min) / range : 0));
+    } else {
+      // z-score
+      const mean = valid.reduce((a, b) => a + b, 0) / valid.length;
+      const var_ = valid.reduce((a, b) => a + (b - mean) ** 2, 0) / Math.max(valid.length - 1, 1);
+      const sd = Math.sqrt(var_) || 1;
+      return col.map((v) => (Number.isFinite(v) ? (v - mean) / sd : 0));
+    }
   });
-  const team1Agg = team1Stats ? computeAggregates(team1Stats.players) : undefined;
-  const team2Agg = team2Stats ? computeAggregates(team2Stats.players) : undefined;
 
+  // transpose back
+  return rows.map((_, i) => normCols.map((c) => c[i]));
+}
 
-  const powerDiff = (team1Stats?.power_team || 0) - (team2Stats?.power_team || 0);
-  const leaguePowerDiff = (team1Stats?.power_league || 0) - (team2Stats?.power_league || 0);
+/* ========================== Recharts Mappers ========================== */
 
-  const renderDiffIcon = (diff: number) => {
-    if (diff > 0) return <TrendingUp className="w-4 h-4 text-primary" />;
-    if (diff < 0) return <TrendingDown className="w-4 h-4 text-accent" />;
-    return <Minus className="w-4 h-4 text-muted-foreground" />;
-  };
+function toRadarSeries(label: string, axes: string[], values: number[]): Record<string, any>[] {
+  return axes.map((k, i) => ({
+    metric: titleCase(k.replace(/_avg_|_last_/g, " ").replace(/365d/g, "365d")),
+    [label]: Number.isFinite(values[i]) ? values[i] : 0,
+  }));
+}
+
+/* ========================== UI Composants ========================== */
+
+function Chip({ active, children, onClick }: { active?: boolean; children: React.ReactNode; onClick?: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className={clsx(
+        "px-3 py-1.5 rounded-md border transition",
+        active
+          ? "bg-yellow-500 text-black border-yellow-400"
+          : "bg-transparent text-white border-white/30 hover:bg-white/10",
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="mt-6">
+      <h3 className="text-xl font-extrabold text-white mb-3">{title}</h3>
+      <div className="rounded-xl border border-white/10 bg-white/5 p-3">{children}</div>
+    </div>
+  );
+}
+
+function PlayerRadar({
+  player,
+  axes,
+  scale,
+  colorKey,
+}: {
+  player: PlayerStats;
+  axes: string[];
+  scale: ScaleChoice;
+  colorKey: string; // "A" | "B" ou similaire
+}) {
+  const vec = axes.map((k) => Number(player[k] as number) || 0);
+  const norm = normalizeMatrix([vec], scale)[0];
+  const data = toRadarSeries(player.player, axes, norm);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main className="container mx-auto px-4 py-8">
-        <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6">
-          <ArrowLeft className="w-4 h-4" /> Retour aux matchs
-        </Link>
+    <div className="w-full h-64">
+      <ResponsiveContainer width="100%" height="100%">
+        <RadarChart data={data}>
+          <PolarGrid />
+          <PolarAngleAxis dataKey="metric" tick={{ fill: "white", fontSize: 11 }} />
+          <PolarRadiusAxis tick={{ fill: "white", fontSize: 10 }} stroke="#ffffff55" axisLine={false} />
+          <Radar
+            name={player.player}
+            dataKey={player.player}
+            fill={colorKey === "A" ? "#50B4FF99" : "#00D2AA99"}
+            stroke={colorKey === "A" ? "#50B4FF" : "#00D2AA"}
+            fillOpacity={0.5}
+          />
+          <Legend />
+          <Tooltip />
+        </RadarChart>
+      </ResponsiveContainer>
+      <div className="text-center mt-1 text-white/90 text-sm">
+        {player.player} {player.position ? `• ${player.position}` : ""}
+      </div>
+    </div>
+  );
+}
 
-        <div className="grid gap-6 md:grid-cols-[1fr,auto,1fr] items-start">
-          <Card className="p-6 bg-gradient-card border-border/50">
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-28 h-28 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden">
-                <img src={team1Logo} alt={match.team1} className="w-24 h-24 object-contain" />
-              </div>
-              <h2 className="font-display text-xl font-bold">{match.team1}</h2>
-              <Badge className="bg-primary/20 text-primary border-primary/30">{match.proba1.toFixed(0)}%</Badge>
-              <div className="text-center mt-2">
-                <p className="text-xs text-muted-foreground">Power Team: {team1Stats?.power_team?.toFixed(1) || '—'}</p>
-                <p className="text-xs text-muted-foreground">Power League: {team1Stats?.power_league?.toFixed(1) || '—'}</p>
-              </div>
+function TeamRadar({
+  team,
+  axes,
+  scale,
+  colorKey,
+}: {
+  team: TeamStats;
+  axes: string[];
+  scale: ScaleChoice;
+  colorKey: string;
+}) {
+  // moyenne des 5
+  const rows = team.players.map((p) => axes.map((k) => Number(p[k] as number) || 0));
+  const mean = axes.map((_, j) => {
+    const vals = rows.map((r) => r[j]).filter((x) => Number.isFinite(x));
+    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    // on pourrait aussi piocher team.aggregates[k] si tu préfères
+  });
+
+  const norm = normalizeMatrix([mean], scale)[0];
+  const data = toRadarSeries(team.team, axes, norm);
+
+  return (
+    <div className="w-full h-72">
+      <ResponsiveContainer width="100%" height="100%">
+        <RadarChart data={data}>
+          <PolarGrid />
+          <PolarAngleAxis dataKey="metric" tick={{ fill: "white", fontSize: 12 }} />
+          <PolarRadiusAxis tick={{ fill: "white", fontSize: 10 }} stroke="#ffffff55" />
+          <Radar
+            name={team.team}
+            dataKey={team.team}
+            fill={colorKey === "A" ? "#50B4FF55" : "#00D2AA55"}
+            stroke={colorKey === "A" ? "#50B4FF" : "#00D2AA"}
+            fillOpacity={0.5}
+          />
+          <Legend />
+          <Tooltip />
+        </RadarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+/* ========================== Page principale ========================== */
+
+export default function MatchDetails() {
+  const q = useQuery();
+
+  const initialTeam1 = q.get("team1") || "";
+  const initialTeam2 = q.get("team2") || "";
+  const league = q.get("league") || "";
+  const bo = q.get("bo") || "BO3";
+  const when = q.get("date") || "";
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const [scale, setScale] = useState<ScaleChoice>("none");
+  const [windowSel, setWindowSel] = useState<TimeWindow>("last_10");
+
+  const [teamA, setTeamA] = useState<TeamStats | null>(null);
+  const [teamB, setTeamB] = useState<TeamStats | null>(null);
+
+  // charge les données parquet via backend util
+  useEffect(() => {
+    let cancel = false;
+    async function run() {
+      setLoading(true);
+      setError(null);
+      setTeamA(null);
+      setTeamB(null);
+      try {
+        const res = await parsePlayerDataParquet(initialTeam1, initialTeam2, scale);
+        if (!res) {
+          if (!cancel) setError("Impossible de lire les données joueurs (parquet).");
+          return;
+        }
+        const [A, B] = res;
+        if (!cancel) {
+          setTeamA(A);
+          setTeamB(B);
+        }
+      } catch (e: any) {
+        if (!cancel) setError(String(e?.message || e));
+      } finally {
+        if (!cancel) setLoading(false);
+      }
+    }
+    run();
+    return () => {
+      cancel = true;
+    };
+  }, [initialTeam1, initialTeam2, scale]);
+
+  const axes = useMemo(() => {
+    const allPlayers = [...(teamA?.players || []), ...(teamB?.players || [])];
+    return resolveAvailableKpis(allPlayers, windowSel);
+  }, [teamA, teamB, windowSel]);
+
+  return (
+    <div className="px-4 md:px-8 lg:px-12 py-4">
+      {/* Header */}
+      <div className="text-center mb-4">
+        <div className="text-2xl md:text-3xl font-black text-white">
+          {initialTeam1} <span className="text-white/70">vs</span> {initialTeam2}
+        </div>
+        <div className="text-white/70 font-semibold">
+          {league ? `${league} • ` : ""} {bo} {when ? `• ${when}` : ""}
+        </div>
+      </div>
+
+      {/* Contrôles */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+        <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+          <div className="font-bold text-white mb-2">Fenêtre temporelle</div>
+          <div className="flex gap-2 flex-wrap">
+            {(["last_10", "last_20", "last_365d"] as TimeWindow[]).map((w) => (
+              <Chip key={w} active={windowSel === w} onClick={() => setWindowSel(w)}>
+                {w === "last_10" ? "10 derniers" : w === "last_20" ? "20 derniers" : "365 jours"}
+              </Chip>
+            ))}
+          </div>
+          <div className="text-xs text-white/60 mt-2">
+            Si des métriques manquent pour la fenêtre choisie, on complète automatiquement avec les meilleures
+            alternatives (ex: colonnes “365d”).
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+          <div className="font-bold text-white mb-2">Normalisation</div>
+          <div className="flex gap-2 flex-wrap">
+            {(["none", "minmax", "zscore"] as ScaleChoice[]).map((m) => (
+              <Chip key={m} active={scale === m} onClick={() => setScale(m)}>
+                {m === "none" ? "Aucune" : m === "minmax" ? "Min-Max" : "Z-score"}
+              </Chip>
+            ))}
+          </div>
+          <div className="text-xs text-white/60 mt-2">
+            La normalisation est appliquée <b>par radar</b> et <b>par métrique</b>.
+          </div>
+        </div>
+      </div>
+
+      {/* States */}
+      {loading && <div className="text-white/80">Chargement des données…</div>}
+      {error && <div className="text-red-300 bg-red-900/30 border border-red-700/40 rounded-md p-3">{error}</div>}
+
+      {/* Contenu */}
+      {!loading && !error && teamA && teamB && (
+        <>
+          {/* Résumé équipes */}
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+              <div className="font-extrabold text-white text-lg mb-2">{teamA.team}</div>
+              {teamA.players.length ? (
+                <>
+                  <div className="text-white/80 text-sm mb-2">
+                    Joueurs: {teamA.players.map((p) => p.player).join(", ")}
+                  </div>
+                  <TeamRadar team={teamA} axes={axes} scale={scale} colorKey="A" />
+                </>
+              ) : (
+                <div className="text-white/60">Données insuffisantes</div>
+              )}
             </div>
-          </Card>
 
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground">{match.tournament} • {match.format}</p>
-            <h1 className="text-3xl font-display font-bold my-2">{match.date} — {match.time}</h1>
-            <div className="flex flex-col gap-1 mt-4">
-              <div className="flex items-center justify-center gap-2">
-                {renderDiffIcon(powerDiff)}
-                <span className="text-xs text-muted-foreground">
-                  Δ Power: {powerDiff > 0 ? '+' : ''}{powerDiff.toFixed(1)}
-                </span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                {renderDiffIcon(leaguePowerDiff)}
-                <span className="text-xs text-muted-foreground">
-                  Δ League: {leaguePowerDiff > 0 ? '+' : ''}{leaguePowerDiff.toFixed(1)}
-                </span>
-              </div>
+            <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+              <div className="font-extrabold text-white text-lg mb-2">{teamB.team}</div>
+              {teamB.players.length ? (
+                <>
+                  <div className="text-white/80 text-sm mb-2">
+                    Joueurs: {teamB.players.map((p) => p.player).join(", ")}
+                  </div>
+                  <TeamRadar team={teamB} axes={axes} scale={scale} colorKey="B" />
+                </>
+              ) : (
+                <div className="text-white/60">Données insuffisantes</div>
+              )}
             </div>
           </div>
 
-          <Card className="p-6 bg-gradient-card border-border/50">
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-28 h-28 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden">
-                <img src={team2Logo} alt={match.team2} className="w-24 h-24 object-contain" />
+          {/* Radars joueurs (5v5) */}
+          <Section title="Comparaison joueurs (5v5)">
+            {teamA.players.length === 0 || teamB.players.length === 0 ? (
+              <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {teamA.players.map((p, i) => (
+                  <PlayerRadar key={`A-${p.player}-${i}`} player={p} axes={axes} scale={scale} colorKey="A" />
+                ))}
+                {teamB.players.map((p, i) => (
+                  <PlayerRadar key={`B-${p.player}-${i}`} player={p} axes={axes} scale={scale} colorKey="B" />
+                ))}
               </div>
-              <h2 className="font-display text-xl font-bold">{match.team2}</h2>
-              <Badge className="bg-accent/20 text-accent border-accent/30">{match.proba2.toFixed(0)}%</Badge>
-              <div className="text-center mt-2">
-                <p className="text-xs text-muted-foreground">Power Team: {team2Stats?.power_team?.toFixed(1) || '—'}</p>
-                <p className="text-xs text-muted-foreground">Power League: {team2Stats?.power_league?.toFixed(1) || '—'}</p>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {team1Stats && team2Stats && (
-          <>
-            <section className="mt-8">
-              <StatsControls 
-                timeWindow={timeWindow}
-                scaleMode={scaleMode}
-                onTimeWindowChange={setTimeWindow}
-                onScaleModeChange={setScaleMode}
-              />
-            </section>
-
-            <section className="mb-8">
-              <h3 className="text-2xl font-display font-bold mb-4">Radars d'équipe</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <TeamRadarChart 
-                  team={match.team1}
-                  aggregates={team1Agg || team1Stats.aggregates}
-                  teamColor="hsl(var(--primary))"
-                  timeWindow={timeWindow}
-                  scaleMode={scaleMode}
-                />
-                <TeamRadarChart 
-                  team={match.team2}
-                  aggregates={team2Agg || team2Stats.aggregates}
-                  teamColor="hsl(var(--accent))"
-                  timeWindow={timeWindow}
-                  scaleMode={scaleMode}
-                />
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text-2xl font-display font-bold mb-4">Comparaison joueurs (5v5)</h3>
-              
-              {['top', 'jungle', 'mid', 'bot', 'support'].map((pos) => {
-                const p1 = team1Stats.players.find(p => p.position === pos);
-                const p2 = team2Stats.players.find(p => p.position === pos);
-                if (!p1 && !p2) return null;
-
-                return (
-                  <div key={pos} className="mb-6">
-                    <h4 className="text-lg font-semibold mb-3 uppercase text-muted-foreground">{pos}</h4>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {p1 ? (
-                        <PlayerRadarChart 
-                          player={p1} 
-                          teamColor="hsl(var(--primary))" 
-                          timeWindow={timeWindow}
-                          scaleMode={scaleMode}
-                        />
-                      ) : (
-                        <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">
-                          <p className="text-muted-foreground text-sm">Aucune donnée</p>
-                        </Card>
-                      )}
-                      {p2 ? (
-                        <PlayerRadarChart 
-                          player={p2} 
-                          teamColor="hsl(var(--accent))" 
-                          timeWindow={timeWindow}
-                          scaleMode={scaleMode}
-                        />
-                      ) : (
-                        <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">
-                          <p className="text-muted-foreground text-sm">Aucune donnée</p>
-                        </Card>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </section>
-          </>
-        )}
-
-        {!team1Stats && !team2Stats && (
-          <section className="mt-8">
-            <h3 className="text-2xl font-display font-bold mb-4">Statistiques joueurs</h3>
-            <Card className="p-6 bg-gradient-card border-border/50">
-              <p className="text-sm text-muted-foreground">
-                Chargement des statistiques...
-              </p>
-            </Card>
-          </section>
-        )}
-      </main>
+            )}
+          </Section>
+        </>
+      )}
     </div>
   );
-};
-
-export default MatchDetails;
+}
