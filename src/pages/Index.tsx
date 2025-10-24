@@ -3,62 +3,38 @@ import { MatchCard } from "@/components/MatchCard";
 import { Button } from "@/components/ui/button";
 import { Lock } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const mockMatches = [
-  {
-    tournament: "WORLDS",
-    date: "Jeu 16 Oct 2025",
-    time: "08:00",
-    format: "BO1",
-    team1: {
-      name: "Team Secret Whales",
-      logo: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=200&h=200&fit=crop",
-      winProbability: 51.3,
-    },
-    team2: {
-      name: "kt Rolster",
-      logo: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=200&h=200&fit=crop",
-      winProbability: 48.7,
-    },
-    minOdds: { team1: 1.95, team2: 2.05 },
-  },
-  {
-    tournament: "WORLDS",
-    date: "Jeu 16 Oct 2025",
-    time: "09:00",
-    format: "BO1",
-    team1: {
-      name: "G2 Esports",
-      logo: "https://images.unsplash.com/photo-1511882150382-421056c89033?w=200&h=200&fit=crop",
-      winProbability: 60.9,
-    },
-    team2: {
-      name: "Movistar KOI",
-      logo: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=200&h=200&fit=crop",
-      winProbability: 39.1,
-    },
-    minOdds: { team1: 1.64, team2: 2.56 },
-  },
-  {
-    tournament: "WORLDS",
-    date: "Jeu 16 Oct 2025",
-    time: "10:00",
-    format: "BO1",
-    team1: {
-      name: "TOPESPORTS",
-      logo: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=200&h=200&fit=crop",
-      winProbability: 75.2,
-    },
-    team2: {
-      name: "100 Thieves",
-      logo: "https://images.unsplash.com/photo-1563207153-f403bf289096?w=200&h=200&fit=crop",
-      winProbability: 24.8,
-    },
-    minOdds: { team1: 1.33, team2: 4.03 },
-  },
-];
+import { useEffect, useState } from "react";
+import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
 
 const Index = () => {
+  const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
+  const [pastMatches, setPastMatches] = useState<Match[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadMatches = async () => {
+      const [upcoming, past] = await Promise.all([
+        parseScheduleCSV(),
+        parsePredictionsHistoryCSV()
+      ]);
+      setUpcomingMatches(upcoming);
+      setPastMatches(past.slice(0, 6));
+      setLoading(false);
+    };
+    loadMatches();
+  }, []);
+
+  const calculateMinOdds = (proba: number) => {
+    return (100 / proba).toFixed(2);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Chargement des matchs...</p>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -88,34 +64,86 @@ const Index = () => {
             Calendrier à venir
           </h2>
           <p className="text-sm text-muted-foreground">
-            1 match gratuit • {mockMatches.length - 1} matchs Premium
+            1 match gratuit • {upcomingMatches.length - 1} matchs Premium
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {/* Premier match gratuit */}
-          <MatchCard key={0} {...mockMatches[0]} />
-          
-          {/* Matchs verrouillés */}
-          {mockMatches.slice(1).map((match, index) => (
-            <div key={index + 1} className="relative animate-slide-up">
-              <div className="absolute inset-0 backdrop-blur-sm bg-background/60 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
-                <Lock className="w-12 h-12 text-accent animate-glow-pulse" />
-                <div className="text-center px-4">
-                  <p className="font-semibold text-lg mb-2">Contenu Premium</p>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Débloquez toutes les prédictions
-                  </p>
-                  <Link to="/auth">
-                    <Button variant="default" size="sm" className="gap-2">
-                      S'abonner
-                      <Lock className="w-3 h-3" />
-                    </Button>
-                  </Link>
+          {upcomingMatches.map((match, index) => (
+            <div key={index} className="relative animate-slide-up">
+              {index > 0 && (
+                <div className="absolute inset-0 backdrop-blur-sm bg-background/60 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
+                  <Lock className="w-12 h-12 text-accent animate-glow-pulse" />
+                  <div className="text-center px-4">
+                    <p className="font-semibold text-lg mb-2">Contenu Premium</p>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Débloquez toutes les prédictions
+                    </p>
+                    <Link to="/auth">
+                      <Button variant="default" size="sm" className="gap-2">
+                        S'abonner
+                        <Lock className="w-3 h-3" />
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <MatchCard {...match} />
+              )}
+              <MatchCard
+                tournament={match.tournament}
+                date={match.date}
+                time={match.time}
+                format={match.format}
+                team1={{
+                  name: match.team1,
+                  logo: getTeamLogo(match.team1),
+                  winProbability: Math.round(match.proba1)
+                }}
+                team2={{
+                  name: match.team2,
+                  logo: getTeamLogo(match.team2),
+                  winProbability: Math.round(match.proba2)
+                }}
+                minOdds={{
+                  team1: parseFloat(calculateMinOdds(match.proba1)),
+                  team2: parseFloat(calculateMinOdds(match.proba2))
+                }}
+              />
             </div>
+          ))}
+        </div>
+
+        <div className="mt-16 mb-8">
+          <h2 className="text-2xl font-display font-bold">
+            Prédictions récentes
+          </h2>
+          <p className="text-sm text-muted-foreground mt-2">
+            Historique des dernières prédictions
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {pastMatches.map((match, index) => (
+            <MatchCard
+              key={index}
+              tournament={match.tournament}
+              date={match.date}
+              time={match.time}
+              format={match.format}
+              team1={{
+                name: match.team1,
+                logo: getTeamLogo(match.team1),
+                winProbability: Math.round(match.proba1)
+              }}
+              team2={{
+                name: match.team2,
+                logo: getTeamLogo(match.team2),
+                winProbability: Math.round(match.proba2)
+              }}
+              minOdds={{
+                team1: parseFloat(calculateMinOdds(match.proba1)),
+                team2: parseFloat(calculateMinOdds(match.proba2))
+              }}
+            />
           ))}
         </div>
 
