@@ -2,8 +2,10 @@ import { Navbar } from "@/components/Navbar";
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { parseScheduleCSV, getTeamLogo } from "@/lib/csvParser";
-import { parsePlayerDataParquet, TeamStats } from "@/lib/parquetParser";
+import { parsePlayerDataParquet, TeamStats, TimeWindow, ScaleMode } from "@/lib/parquetParser";
 import { PlayerRadarChart } from "@/components/PlayerRadarChart";
+import { TeamRadarChart } from "@/components/TeamRadarChart";
+import { StatsControls } from "@/components/StatsControls";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, TrendingUp, TrendingDown, Minus } from "lucide-react";
@@ -21,6 +23,8 @@ const MatchDetails = () => {
   const [match, setMatch] = useState<any>(null);
   const [team1Stats, setTeam1Stats] = useState<TeamStats | null>(null);
   const [team2Stats, setTeam2Stats] = useState<TeamStats | null>(null);
+  const [timeWindow, setTimeWindow] = useState<TimeWindow>('last_10');
+  const [scaleMode, setScaleMode] = useState<ScaleMode>('none');
 
   const [team1, team2] = useMemo(() => {
     const combo = (params.team1_vs_team2 || "").split("-vs-");
@@ -154,37 +158,74 @@ const MatchDetails = () => {
         </div>
 
         {team1Stats && team2Stats && (
-          <section className="mt-8">
-            <h3 className="text-2xl font-display font-bold mb-4">Statistiques joueurs</h3>
-            
-            {['top', 'jungle', 'mid', 'bot', 'support'].map((pos) => {
-              const p1 = team1Stats.players.find(p => p.position === pos);
-              const p2 = team2Stats.players.find(p => p.position === pos);
-              if (!p1 && !p2) return null;
+          <>
+            <section className="mt-8">
+              <StatsControls 
+                timeWindow={timeWindow}
+                scaleMode={scaleMode}
+                onTimeWindowChange={setTimeWindow}
+                onScaleModeChange={setScaleMode}
+              />
+            </section>
 
-              return (
-                <div key={pos} className="mb-6">
-                  <h4 className="text-lg font-semibold mb-3 uppercase text-muted-foreground">{pos}</h4>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {p1 ? (
-                      <PlayerRadarChart player={p1} teamColor="hsl(var(--primary))" />
-                    ) : (
-                      <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">
-                        <p className="text-muted-foreground text-sm">Aucune donnée</p>
-                      </Card>
-                    )}
-                    {p2 ? (
-                      <PlayerRadarChart player={p2} teamColor="hsl(var(--accent))" />
-                    ) : (
-                      <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">
-                        <p className="text-muted-foreground text-sm">Aucune donnée</p>
-                      </Card>
-                    )}
+            <section className="mb-8">
+              <h3 className="text-2xl font-display font-bold mb-4">Radars d'équipe</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <TeamRadarChart 
+                  team={match.team1}
+                  aggregates={team1Stats.aggregates}
+                  teamColor="hsl(var(--primary))"
+                  timeWindow={timeWindow}
+                />
+                <TeamRadarChart 
+                  team={match.team2}
+                  aggregates={team2Stats.aggregates}
+                  teamColor="hsl(var(--accent))"
+                  timeWindow={timeWindow}
+                />
+              </div>
+            </section>
+
+            <section>
+              <h3 className="text-2xl font-display font-bold mb-4">Comparaison joueurs (5v5)</h3>
+              
+              {['top', 'jungle', 'mid', 'bot', 'support'].map((pos) => {
+                const p1 = team1Stats.players.find(p => p.position === pos);
+                const p2 = team2Stats.players.find(p => p.position === pos);
+                if (!p1 && !p2) return null;
+
+                return (
+                  <div key={pos} className="mb-6">
+                    <h4 className="text-lg font-semibold mb-3 uppercase text-muted-foreground">{pos}</h4>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {p1 ? (
+                        <PlayerRadarChart 
+                          player={p1} 
+                          teamColor="hsl(var(--primary))" 
+                          timeWindow={timeWindow}
+                        />
+                      ) : (
+                        <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">
+                          <p className="text-muted-foreground text-sm">Aucune donnée</p>
+                        </Card>
+                      )}
+                      {p2 ? (
+                        <PlayerRadarChart 
+                          player={p2} 
+                          teamColor="hsl(var(--accent))" 
+                          timeWindow={timeWindow}
+                        />
+                      ) : (
+                        <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">
+                          <p className="text-muted-foreground text-sm">Aucune donnée</p>
+                        </Card>
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </section>
+                );
+              })}
+            </section>
+          </>
         )}
 
         {!team1Stats && !team2Stats && (
