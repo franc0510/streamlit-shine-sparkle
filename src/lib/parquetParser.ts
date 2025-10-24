@@ -163,6 +163,7 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
     await parquetRead({
       file: asyncBuffer,
       onComplete: (data: any[]) => {
+        console.log('Parquet rows loaded:', data.length);
         for (const row of data) {
           // Resilient column mapping
           const teamName = row.team || row.teamname || '';
@@ -225,6 +226,8 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
     const sortedTeam1Players = sortPlayers(team1Players);
     const sortedTeam2Players = sortPlayers(team2Players);
     const allPlayers = [...sortedTeam1Players, ...sortedTeam2Players];
+
+    console.log('Team match:', { team1Name, team2Name, team1Count: sortedTeam1Players.length, team2Count: sortedTeam2Players.length });
 
     // Apply normalization across all 10 players if requested
     if (scaleMode !== 'none' && allPlayers.length > 0) {

@@ -84,12 +84,11 @@ const MatchDetails = () => {
             format: 'BO?'
           };
           setMatch(fallback);
+          setNotFound(false);
           const stats = await parsePlayerDataParquet(team1, team2, scaleMode);
           if (stats) {
             setTeam1Stats(stats[0]);
             setTeam2Stats(stats[1]);
-          } else {
-            setNotFound(true);
           }
         }
         setLoading(false);
