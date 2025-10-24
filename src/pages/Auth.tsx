@@ -76,6 +76,11 @@ const Auth = () => {
           title: "Connexion réussie !",
           description: "Bienvenue sur PredicteSport",
         });
+        // Forcer un rechargement pour garantir la persistance de session dans tous les contextes
+        setTimeout(() => {
+          window.location.assign("/");
+        }, 150);
+
       }
     } catch (error) {
       toast({

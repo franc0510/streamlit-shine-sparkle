@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Gamepad2, User, LogOut } from "lucide-react";
+import { Gamepad2, User, LogOut, CreditCard, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import {
@@ -10,6 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
+import { useSubscription } from "@/contexts/SubscriptionContext";
+import { openCustomerPortal } from "@/lib/subscription";
 
 const games = [
   { id: "lol", name: "League of Legends", path: "/", active: true },
@@ -22,6 +24,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [user, setUser] = useState<any>(null);
+  const { isPremium } = useSubscription();
 
   useEffect(() => {
     // Check initial session
@@ -48,6 +51,23 @@ export const Navbar = () => {
       description: "À bientôt sur PredicteSport",
     });
     navigate("/");
+  };
+
+  const handleOpenPortal = async () => {
+    try {
+      const url = await openCustomerPortal();
+      if (url) {
+        window.open(url, '_blank');
+      } else {
+        throw new Error('No portal URL');
+      }
+    } catch (e) {
+      toast({
+        title: "Erreur",
+        description: "Impossible d'ouvrir le portail client",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -102,6 +122,17 @@ export const Navbar = () => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
+                    {isPremium ? (
+                      <DropdownMenuItem onClick={handleOpenPortal} className="gap-2 cursor-pointer">
+                        <ExternalLink className="w-4 h-4" />
+                        Gérer mon abonnement
+                      </DropdownMenuItem>
+                    ) : (
+                      <DropdownMenuItem onClick={() => navigate('/auth')} className="gap-2 cursor-pointer">
+                        <CreditCard className="w-4 h-4" />
+                        S'abonner Premium
+                      </DropdownMenuItem>
+                    )}
                     <DropdownMenuItem onClick={handleLogout} className="gap-2 cursor-pointer">
                       <LogOut className="w-4 h-4" />
                       Déconnexion
