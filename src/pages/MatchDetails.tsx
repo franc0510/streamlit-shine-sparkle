@@ -233,13 +233,32 @@ function TeamRadar({
 /* ========================== Page principale ========================== */
 
 export default function MatchDetails() {
+  const location = useLocation();
   const q = useQuery();
 
-  const initialTeam1 = q.get("team1") || "";
-  const initialTeam2 = q.get("team2") || "";
-  const league = q.get("league") || "";
+  // Extract teams from URL path like /match/league/date/time/team1-vs-team2
+  const pathParts = location.pathname.split('/').filter(Boolean);
+  const matchString = pathParts[pathParts.length - 1] || "";
+  
+  // Parse "100-thieves-vs-t1" -> ["100-thieves", "t1"]
+  const vsMatch = matchString.match(/^(.+)-vs-(.+)$/);
+  let initialTeam1 = "";
+  let initialTeam2 = "";
+  
+  if (vsMatch) {
+    initialTeam1 = vsMatch[1].replace(/-/g, ' '); // "100-thieves" -> "100 thieves"
+    initialTeam2 = vsMatch[2].replace(/-/g, ' '); // "t1" -> "t1"
+  } else {
+    // Fallback to query params
+    initialTeam1 = q.get("team1") || "";
+    initialTeam2 = q.get("team2") || "";
+  }
+  
+  const league = pathParts[1] || q.get("league") || "";
   const bo = q.get("bo") || "BO3";
-  const when = q.get("date") || "";
+  const when = decodeURIComponent(pathParts[2] || "") || q.get("date") || "";
+  
+  console.log("[MatchDetails] Extracted teams:", { initialTeam1, initialTeam2, league, when, pathParts });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
