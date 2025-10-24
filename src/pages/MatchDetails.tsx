@@ -2,10 +2,11 @@ import { Navbar } from "@/components/Navbar";
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { parseScheduleCSV, getTeamLogo } from "@/lib/csvParser";
+import { parsePlayerDataParquet, TeamStats } from "@/lib/parquetParser";
+import { PlayerRadarChart } from "@/components/PlayerRadarChart";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 const slugify = (s: string) => s
   .toLowerCase()
@@ -18,6 +19,8 @@ const MatchDetails = () => {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [match, setMatch] = useState<any>(null);
+  const [team1Stats, setTeam1Stats] = useState<TeamStats | null>(null);
+  const [team2Stats, setTeam2Stats] = useState<TeamStats | null>(null);
 
   const [team1, team2] = useMemo(() => {
     const combo = (params.team1_vs_team2 || "").split("-vs-");
@@ -43,6 +46,12 @@ const MatchDetails = () => {
           setNotFound(true);
         } else {
           setMatch(m);
+          // Load player stats
+          const stats = await parsePlayerDataParquet(m.team1, m.team2);
+          if (stats) {
+            setTeam1Stats(stats[0]);
+            setTeam2Stats(stats[1]);
+          }
         }
       } finally {
         setLoading(false);
@@ -78,6 +87,15 @@ const MatchDetails = () => {
   const team1Logo = getTeamLogo(match.team1);
   const team2Logo = getTeamLogo(match.team2);
 
+  const powerDiff = (team1Stats?.power_team || 0) - (team2Stats?.power_team || 0);
+  const leaguePowerDiff = (team1Stats?.power_league || 0) - (team2Stats?.power_league || 0);
+
+  const renderDiffIcon = (diff: number) => {
+    if (diff > 0) return <TrendingUp className="w-4 h-4 text-primary" />;
+    if (diff < 0) return <TrendingDown className="w-4 h-4 text-accent" />;
+    return <Minus className="w-4 h-4 text-muted-foreground" />;
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -94,14 +112,30 @@ const MatchDetails = () => {
               </div>
               <h2 className="font-display text-xl font-bold">{match.team1}</h2>
               <Badge className="bg-primary/20 text-primary border-primary/30">{match.proba1.toFixed(0)}%</Badge>
-              <p className="text-xs text-muted-foreground">power_team: — | power_league: —</p>
+              <div className="text-center mt-2">
+                <p className="text-xs text-muted-foreground">Power Team: {team1Stats?.power_team?.toFixed(1) || '—'}</p>
+                <p className="text-xs text-muted-foreground">Power League: {team1Stats?.power_league?.toFixed(1) || '—'}</p>
+              </div>
             </div>
           </Card>
 
           <div className="text-center">
             <p className="text-sm text-muted-foreground">{match.tournament} • {match.format}</p>
             <h1 className="text-3xl font-display font-bold my-2">{match.date} — {match.time}</h1>
-            <p className="text-xs text-muted-foreground">Différences (équipe et joueurs) à venir</p>
+            <div className="flex flex-col gap-1 mt-4">
+              <div className="flex items-center justify-center gap-2">
+                {renderDiffIcon(powerDiff)}
+                <span className="text-xs text-muted-foreground">
+                  Δ Power: {powerDiff > 0 ? '+' : ''}{powerDiff.toFixed(1)}
+                </span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                {renderDiffIcon(leaguePowerDiff)}
+                <span className="text-xs text-muted-foreground">
+                  Δ League: {leaguePowerDiff > 0 ? '+' : ''}{leaguePowerDiff.toFixed(1)}
+                </span>
+              </div>
+            </div>
           </div>
 
           <Card className="p-6 bg-gradient-card border-border/50">
@@ -111,21 +145,58 @@ const MatchDetails = () => {
               </div>
               <h2 className="font-display text-xl font-bold">{match.team2}</h2>
               <Badge className="bg-accent/20 text-accent border-accent/30">{match.proba2.toFixed(0)}%</Badge>
-              <p className="text-xs text-muted-foreground">power_team: — | power_league: —</p>
+              <div className="text-center mt-2">
+                <p className="text-xs text-muted-foreground">Power Team: {team2Stats?.power_team?.toFixed(1) || '—'}</p>
+                <p className="text-xs text-muted-foreground">Power League: {team2Stats?.power_league?.toFixed(1) || '—'}</p>
+              </div>
             </div>
           </Card>
         </div>
 
-        <section className="mt-8">
-          <h3 className="text-2xl font-display font-bold mb-4">Statistiques joueurs</h3>
-          <Card className="p-6 bg-gradient-card border-border/50">
-            <p className="text-sm text-muted-foreground">
-              En attente du fichier Documents/DF_filtered.csv pour afficher les graphes par joueur (radar):
-              kda_last_10, dpm_avg_last_365d, wcpm_avg_last_365d, vspm_avg_last_365d, earned_gpm_avg_last_365d, earned_gpm_avg_last_10.
-            </p>
-            <p className="text-xs text-muted-foreground mt-2">Ordre d'affichage prévu: Top, Jungle, Mid, Bot, Support.</p>
-          </Card>
-        </section>
+        {team1Stats && team2Stats && (
+          <section className="mt-8">
+            <h3 className="text-2xl font-display font-bold mb-4">Statistiques joueurs</h3>
+            
+            {['top', 'jungle', 'mid', 'bot', 'support'].map((pos) => {
+              const p1 = team1Stats.players.find(p => p.position === pos);
+              const p2 = team2Stats.players.find(p => p.position === pos);
+              if (!p1 && !p2) return null;
+
+              return (
+                <div key={pos} className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 uppercase text-muted-foreground">{pos}</h4>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {p1 ? (
+                      <PlayerRadarChart player={p1} teamColor="hsl(var(--primary))" />
+                    ) : (
+                      <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">
+                        <p className="text-muted-foreground text-sm">Aucune donnée</p>
+                      </Card>
+                    )}
+                    {p2 ? (
+                      <PlayerRadarChart player={p2} teamColor="hsl(var(--accent))" />
+                    ) : (
+                      <Card className="p-4 bg-gradient-card border-border/50 flex items-center justify-center">
+                        <p className="text-muted-foreground text-sm">Aucune donnée</p>
+                      </Card>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </section>
+        )}
+
+        {!team1Stats && !team2Stats && (
+          <section className="mt-8">
+            <h3 className="text-2xl font-display font-bold mb-4">Statistiques joueurs</h3>
+            <Card className="p-6 bg-gradient-card border-border/50">
+              <p className="text-sm text-muted-foreground">
+                Chargement des statistiques...
+              </p>
+            </Card>
+          </section>
+        )}
       </main>
     </div>
   );
