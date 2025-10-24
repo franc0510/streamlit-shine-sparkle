@@ -78,7 +78,7 @@ export const StatsControls = ({
       </div>
       
       <p className="text-xs text-muted-foreground mt-3">
-        Les métriques non disponibles pour la fenêtre sélectionnée sont omises du radar.
+        Les métriques sont normalisées sur les 10 joueurs du match. Les métriques non disponibles sont omises du radar.
       </p>
     </Card>
   );

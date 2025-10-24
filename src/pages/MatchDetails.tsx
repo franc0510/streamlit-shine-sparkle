@@ -50,8 +50,8 @@ const MatchDetails = () => {
           setNotFound(true);
         } else {
           setMatch(m);
-          // Load player stats
-          const stats = await parsePlayerDataParquet(m.team1, m.team2);
+          // Load player stats with current scale mode
+          const stats = await parsePlayerDataParquet(m.team1, m.team2, scaleMode);
           if (stats) {
             setTeam1Stats(stats[0]);
             setTeam2Stats(stats[1]);
@@ -62,7 +62,7 @@ const MatchDetails = () => {
       }
     };
     load();
-  }, [params, team1, team2]);
+  }, [params, team1, team2, scaleMode]);
 
   if (loading) {
     return (

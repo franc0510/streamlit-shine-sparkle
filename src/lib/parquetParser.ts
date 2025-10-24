@@ -66,7 +66,39 @@ const calculateTeamAggregates = (players: PlayerStats[]): TeamAggregates => {
   };
 };
 
-export const parsePlayerDataParquet = async (team1Name: string, team2Name: string): Promise<[TeamStats, TeamStats] | null> => {
+// Normalisation helpers
+const normalizeMinMax = (values: (number | undefined)[]): (number | undefined)[] => {
+  const validValues = values.filter(v => v != null && !isNaN(v)) as number[];
+  if (validValues.length === 0) return values;
+  
+  const min = Math.min(...validValues);
+  const max = Math.max(...validValues);
+  const range = max - min;
+  
+  if (range === 0) return values.map(v => v != null ? 0.5 : v);
+  
+  return values.map(v => v != null && !isNaN(v) ? (v - min) / range : v);
+};
+
+const normalizeZScore = (values: (number | undefined)[]): (number | undefined)[] => {
+  const validValues = values.filter(v => v != null && !isNaN(v)) as number[];
+  if (validValues.length === 0) return values;
+  
+  const mean = validValues.reduce((a, b) => a + b, 0) / validValues.length;
+  const variance = validValues.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / validValues.length;
+  const std = Math.sqrt(variance);
+  
+  if (std === 0) return values.map(v => v != null ? 0.5 : v);
+  
+  // Z-score puis sigmoïde pour ramener dans [0,1]
+  return values.map(v => {
+    if (v == null || isNaN(v)) return v;
+    const z = (v - mean) / std;
+    return 1 / (1 + Math.exp(-z));
+  });
+};
+
+export const parsePlayerDataParquet = async (team1Name: string, team2Name: string, scaleMode: ScaleMode = 'none'): Promise<[TeamStats, TeamStats] | null> => {
   try {
     const response = await fetch('/Documents/DF_filtered.parquet');
     const arrayBuffer = await response.arrayBuffer();
@@ -148,21 +180,44 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
 
     const sortedTeam1Players = sortPlayers(team1Players);
     const sortedTeam2Players = sortPlayers(team2Players);
+    const allPlayers = [...sortedTeam1Players, ...sortedTeam2Players];
+
+    // Apply normalization across all 10 players if requested
+    if (scaleMode !== 'none' && allPlayers.length > 0) {
+      const metrics: Array<keyof PlayerStats> = [
+        'kda_last_10', 'kda_last_20',
+        'dpm_avg_last_365d', 'wcpm_avg_last_365d', 'vspm_avg_last_365d',
+        'earned_gpm_avg_last_365d', 'earned_gpm_avg_last_10', 'earned_gpm_avg_last_20'
+      ];
+
+      metrics.forEach(metric => {
+        const values = allPlayers.map(p => p[metric] as number | undefined);
+        const normalized = scaleMode === 'minmax' 
+          ? normalizeMinMax(values)
+          : normalizeZScore(values);
+        
+        allPlayers.forEach((player, idx) => {
+          if (normalized[idx] != null) {
+            (player as any)[metric] = normalized[idx];
+          }
+        });
+      });
+    }
 
     return [
       { 
         team: team1Name, 
         power_team: team1Power.power_team, 
         power_league: team1Power.power_league, 
-        players: sortedTeam1Players,
-        aggregates: calculateTeamAggregates(sortedTeam1Players)
+        players: allPlayers.slice(0, sortedTeam1Players.length),
+        aggregates: calculateTeamAggregates(allPlayers.slice(0, sortedTeam1Players.length))
       },
       { 
         team: team2Name, 
         power_team: team2Power.power_team, 
         power_league: team2Power.power_league, 
-        players: sortedTeam2Players,
-        aggregates: calculateTeamAggregates(sortedTeam2Players)
+        players: allPlayers.slice(sortedTeam1Players.length),
+        aggregates: calculateTeamAggregates(allPlayers.slice(sortedTeam1Players.length))
       }
     ];
   } catch (error) {
