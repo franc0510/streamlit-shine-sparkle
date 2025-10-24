@@ -1,173 +1,317 @@
-import { parquetRead } from "hyparquet";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import * as duckdb from "@duckdb/duckdb-wasm";
 
-export type ScaleMode = "none" | "minmax" | "zscore";
 export type TimeWindow = "last_10" | "last_20" | "last_365d";
+export type ScaleMode = "none" | "minmax" | "zscore";
 
-export interface PlayerStats {
-  player: string;
-  position?: string;
-  [key: string]: any;
-}
-
-export interface TeamStats {
+export type PlayerStats = {
   team: string;
-  resolvedFrom?: string;
-  players: PlayerStats[];
-}
-
-export interface TeamAggregates {
-  kda_last_10?: number;
-  kda_last_20?: number;
-  earned_gpm_last_10?: number;
-  earned_gpm_last_20?: number;
-  earned_gpm_365d?: number;
-  dpm_365d?: number;
-  wcpm_365d?: number;
-  vspm_365d?: number;
-}
-
-export function getPlayerImage(playerName: string): string {
-  const safeName = playerName.replace(/\s+/g, "_");
-  return `/Documents/players/${safeName}.jpg`;
-}
-
-const TEAM_ALIASES: Record<string, string[]> = {
-  "100 thieves": ["100t", "100 thieves", "100thieves", "100"],
-  "t1": ["t1", "skt", "sk telecom"],
-  "gen.g": ["geng", "gen.g", "gen g", "gen.g esports", "geng esports"],
-  "hanwha life esports": ["hle", "hanwha", "hanwha life", "hanwha life esports"],
-  "nongshim redforce": ["ns", "nongshim", "redforce", "nongshim redforce"],
-  "oksavingsbank brion": ["bro", "ok brion", "oksavingsbank", "oksavingsbank brion"],
-  "dplus kia": ["dk", "dplus", "dpluskia", "dplus kia"],
-  "dn freecs": ["kdf", "freecs", "dn freecs"],
-  "bnk fearx": ["fearx", "bnk fearx"],
-  "mad lions koi": ["mad", "koi", "mad lions koi"],
-  "movistar koi": ["koi", "movistar koi"],
-  "giantx": ["gx", "giant x", "giantx"],
-  "team vitality": ["vit", "vitality", "team vitality"],
-  "team heretics": ["heretics", "team heretics"],
-  "karmine corp": ["kc", "kcorp", "karmine corp"],
-  "top esports": ["topesports", "top esports", "tes"],
-  "jd gaming": ["jdg", "jd gaming"],
-  "bilibili gaming": ["blg", "bilibili gaming"],
-  "funplus phoenix": ["fpx", "funplus phoenix"],
-  "royal never give up": ["rng", "royal never give up"],
-  "oh my god": ["omg", "oh my god"],
-  "thundertalk gaming": ["tt", "thundertalk gaming"],
-  "rare atom": ["ra", "rare atom"],
-  "ninjas in pyjamas": ["nip", "ninjas in pyjamas"],
-  "anyone's legend": ["al", "anyone's legend"],
-  "team we": ["we", "team we"],
-  "invictus gaming": ["ig", "invictus gaming"],
-  "edward gaming": ["edg", "edward gaming"],
-  "lgd gaming": ["lgd", "lgd gaming"],
-  "cloud9": ["c9", "cloud9"],
-  "team liquid": ["tl", "team liquid"],
-  "flyquest": ["fly", "flyquest"],
-  "pain gaming": ["pain", "pain gaming"],
-  "red canids": ["red kalunga", "red canids"],
-  "ctbc flying oyster": ["ctbc", "ctbc flying oyster"],
-  "saigon dino": ["saigon dino"],
-  "mgn vikings esports": ["mgn", "mgn vikings esports"],
-  "team whales": ["team secret whales", "team whales"],
-  "vivo keyd stars": ["vivo keyd stars"],
+  teamname?: string;
+  player: string;
+  player_name?: string;
+  position?: string;
+  [k: string]: number | string | undefined;
 };
 
-function normalize(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[-_]/g, " ") // Convert dashes and underscores to spaces first
-    .replace(/[^a-z0-9\s]/g, "")
+export type TeamStats = {
+  team: string;
+  players: PlayerStats[];
+  aggregates: Record<string, number>;
+  resolvedFrom: string;
+};
+
+export type ParseResult = [TeamStats, TeamStats];
+
+const PARQUET_URL = "/Documents/DF_filtered.parquet"; // ⚠️ le fichier doit être servi statiquement (ex: dans /public/Documents/)
+
+const TEAM_ALIASES: Record<string, string> = {
+  "GEN G": "Gen.G",
+  "GEN.G": "Gen.G",
+  GENG: "Gen.G",
+  HLE: "Hanwha Life Esports",
+  NS: "Nongshim RedForce",
+  BRO: "OKSavingsBank BRION",
+  DK: "Dplus KIA",
+  KDF: "DN Freecs",
+  FEARX: "BNK FEARX",
+  MAD: "MAD Lions KOI",
+  GX: "GiantX",
+  "GIANT X": "GiantX",
+  VIT: "Team Vitality",
+  HERETICS: "Team Heretics",
+  KC: "Karmine Corp",
+  TES: "Top Esports",
+  TOPESPORTS: "Top Esports",
+  JDG: "JD Gaming",
+  BLG: "Bilibili Gaming",
+  "BILIBILI GAMING DREAMSMART": "Bilibili Gaming",
+  C9: "Cloud9",
+  TL: "Team Liquid",
+  "100T": "100 Thieves",
+  FLY: "FlyQuest",
+  "CTBC FLYING OYSTER": "CTBC Flying Oyster",
+  "TEAM SECRET WHALES": "Team Whales",
+  "ANYONE'S LEGEND": "Anyone's Legend",
+  "VIVO KEYD STARS": "Vivo Keyd Stars",
+  T1: "T1",
+};
+
+function stripAccents(s: string) {
+  return s.normalize("NFKD").replace(/\p{Diacritic}/gu, "");
+}
+function normKey(s: string) {
+  return stripAccents(String(s || ""))
+    .toUpperCase()
+    .replace(/[.'’\-]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
-
-function resolveTeamName(input: string, allTeamsFromParquet: string[]): string {
-  const norm = normalize(input);
-  
-  // 1) exact match
-  const exact = allTeamsFromParquet.find((t) => normalize(t) === norm);
-  if (exact) return exact;
-  
-  // 2) alias
-  for (const [canonical, aliasList] of Object.entries(TEAM_ALIASES)) {
-    if (aliasList.some((a) => normalize(a) === norm)) {
-      const match = allTeamsFromParquet.find((t) => normalize(t) === normalize(canonical));
-      if (match) return match;
-    }
-  }
-  
-  // 3) contains fallback
-  const contains = allTeamsFromParquet.find((t) => normalize(t).includes(norm) || norm.includes(normalize(t)));
-  if (contains) return contains;
-  
-  return input;
+function applyAlias(s: string) {
+  const k = normKey(s);
+  return TEAM_ALIASES[k] ?? s;
 }
 
+/* ---------------- duckdb-wasm init ---------------- */
+
+let _db: duckdb.AsyncDuckDB | null = null;
+
+async function getDB(): Promise<duckdb.AsyncDuckDB> {
+  if (_db) return _db;
+
+  const DUCKDB_BUNDLES = duckdb.getJsDelivrBundles(); // pratique: bundle auto CDN
+  const bundle = await duckdb.selectBundle(DUCKDB_BUNDLES);
+
+  const worker = new Worker(bundle.mainWorker!);
+  const logger = new duckdb.ConsoleLogger();
+  const db = new duckdb.AsyncDuckDB(logger, worker);
+
+  await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+  // Autoriser l’accès HTTP(s) au parquet
+  await db.open({ backend: "httpfs" });
+  const conn = await db.connect();
+  await conn.query("INSTALL httpfs; LOAD httpfs;");
+  await conn.close();
+
+  _db = db;
+  return db;
+}
+
+/* --------------- lecture & introspection --------------- */
+
+async function fetchAllTeams(conn: duckdb.AsyncDuckDBConnection, table: string, teamCol: string) {
+  const rs = await conn.query(`SELECT DISTINCT ${teamCol} as team FROM ${table} WHERE ${teamCol} IS NOT NULL`);
+  return rs
+    .toArray()
+    .map((r: any) => String(r.team).trim())
+    .filter(Boolean);
+}
+
+async function detectTeamCol(conn: duckdb.AsyncDuckDBConnection, table: string): Promise<string> {
+  const cols = await conn.query(`PRAGMA table_info('${table}')`);
+  const names = cols.toArray().map((r: any) => String(r.name).toLowerCase());
+  const orig = cols.toArray().map((r: any) => String(r.name));
+
+  const want = ["teamname", "team_name", "team"];
+  for (const w of want) {
+    const idx = names.indexOf(w);
+    if (idx >= 0) return orig[idx];
+  }
+  // fallback: 1ère colonne qui contient "team"
+  const idx2 = names.findIndex((n: string) => n.includes("team"));
+  if (idx2 >= 0) return orig[idx2];
+  return orig[0];
+}
+
+function resolveTeam(wanted: string, candidates: string[]): { found?: string; why: string } {
+  const wantAliased = applyAlias(wanted);
+  const key = normKey(wantAliased);
+
+  const index = new Map<string, string>();
+  for (const c of candidates) {
+    index.set(normKey(applyAlias(c)), c);
+  }
+
+  if (index.has(key)) return { found: index.get(key), why: "equal(norm+alias)" };
+
+  for (const [k, v] of index.entries()) {
+    if (k.includes(key) || key.includes(k)) return { found: v, why: "contains" };
+  }
+  const s = key.replace(/\s+/g, "");
+  for (const [k, v] of index.entries()) {
+    if (k.replace(/\s+/g, "") === s) return { found: v, why: "stripSpacesEqual" };
+  }
+  return { why: "not_found" };
+}
+
+function aggregatesFrom(players: PlayerStats[]): Record<string, number> {
+  const keys = [
+    "kda_last_10",
+    "kda_last_20",
+    "earned_gpm_avg_last_10",
+    "earned_gpm_avg_last_365d",
+    "dpm_avg_last_365d",
+    "wcpm_avg_last_365d",
+    "vspm_avg_last_365d",
+  ] as const;
+
+  const out: Record<string, number> = {};
+  for (const k of keys) {
+    const vals = players.map((p) => Number(p[k] as number)).filter((x) => Number.isFinite(x));
+    out[k] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+  }
+  return out;
+}
+
+/* -------------- mapping colonnes KPI (souple) -------------- */
+
+const KPI_MAP: Record<string, string[]> = {
+  kda_last_10: ["kda_last_10", "kda10"],
+  kda_last_20: ["kda_last_20", "kda20"],
+  earned_gpm_avg_last_10: ["earned_gpm_avg_last_10", "egpm10"],
+  earned_gpm_avg_last_365d: ["earned_gpm_avg_last_365d", "egpm365"],
+  dpm_avg_last_365d: ["dpm_avg_last_365d", "dpm365"],
+  wcpm_avg_last_365d: ["wcpm_avg_last_365d", "wcpm365"],
+  vspm_avg_last_365d: ["vspm_avg_last_365d", "vspm365"],
+};
+
+function pickColName(existing: string[], candidates: string[]): string | null {
+  const low = existing.map((c) => c.toLowerCase());
+  for (const c of candidates) {
+    const i = low.indexOf(c.toLowerCase());
+    if (i >= 0) return existing[i];
+  }
+  return null;
+}
+
+/* ========================= API PRINCIPALE ========================= */
+
 export async function parsePlayerDataParquet(
-  teamA: string,
-  teamB: string,
-  scale: ScaleMode
+  team1: string,
+  team2: string,
+  _scale: ScaleMode = "none",
 ): Promise<[TeamStats, TeamStats] | null> {
-  const url = "/Documents/DF_filtered.parquet";
-  
+  const db = await getDB();
+  const conn = await db.connect();
+
   try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Failed to fetch parquet: ${res.status}`);
-    
-    const buf = await res.arrayBuffer();
-    const rows: any[] = [];
-    
-    await parquetRead({
-      file: buf,
-      onComplete: (data) => rows.push(...data),
-    });
-    
-    console.log(`[parquetParser] Loaded ${rows.length} rows from parquet`);
-    console.log("[parquetParser] Sample rows (first 3):", rows.slice(0, 3));
-    
-    // Detect columns
-    const sample = rows[0] || {};
-    const cols = Object.keys(sample);
-    
-    const teamCol = cols.find((c) => /^team/i.test(c)) || "team";
-    const playerCol = cols.find((c) => /^player/i.test(c)) || "player";
-    const posCol = cols.find((c) => /^position/i.test(c)) || "position";
-    
-    console.log(`[parquetParser] Detected columns -> team: ${teamCol}, player: ${playerCol}, position: ${posCol}`);
-    
-    // Extract all unique team names from parquet
-    const allTeamsInParquet = Array.from(new Set(rows.map((r) => String(r[teamCol] || "")).filter(Boolean)));
-    console.log(`[parquetParser] Found ${allTeamsInParquet.length} unique teams in parquet:`, allTeamsInParquet);
-    
-    // Resolve
-    const resolvedA = resolveTeamName(teamA, allTeamsInParquet);
-    const resolvedB = resolveTeamName(teamB, allTeamsInParquet);
-    
-    console.log(`[parquetParser] Team resolution: "${teamA}" -> "${resolvedA}", "${teamB}" -> "${resolvedB}"`);
-    
-    // Filter players
-    const playersA = rows.filter((r) => normalize(String(r[teamCol] || "")) === normalize(resolvedA));
-    const playersB = rows.filter((r) => normalize(String(r[teamCol] || "")) === normalize(resolvedB));
-    
-    console.log(`[parquetParser] Found ${playersA.length} players for team A, ${playersB.length} for team B`);
-    
-    const buildTeam = (teamName: string, players: any[], resolvedFrom: string): TeamStats => ({
-      team: teamName,
-      resolvedFrom,
-      players: players.map((r) => ({
-        player: String(r[playerCol] || "Unknown"),
-        position: String(r[posCol] || ""),
-        ...r,
-      })),
-    });
-    
-    return [
-      buildTeam(teamA, playersA, resolvedA),
-      buildTeam(teamB, playersB, resolvedB),
-    ];
-  } catch (err: any) {
-    console.error("[parquetParser] Error:", err);
-    throw err;
+    // on lit le parquet en table volatile
+    await conn.query(`CREATE OR REPLACE TEMP TABLE t AS SELECT * FROM read_parquet('${PARQUET_URL}')`);
+
+    // colonnes clés
+    const teamCol = await detectTeamCol(conn, "t");
+
+    // toutes les équipes présentes (pour debug & matching)
+    const allTeams = await fetchAllTeams(conn, "t", teamCol);
+
+    const r1 = resolveTeam(team1, allTeams);
+    const r2 = resolveTeam(team2, allTeams);
+    if (!r1.found || !r2.found) {
+      // aide au debug : retourne les 60 premières équipes
+      const sample = allTeams.slice(0, 60).join(", ");
+      throw new Error(
+        `Team resolution failed: (${team1} → ${r1.why}) / (${team2} → ${r2.why}). ` +
+          `Sample teams in parquet: ${sample}`,
+      );
+    }
+
+    // colonnes existantes
+    const info = await conn.query(`PRAGMA table_info('t')`);
+    const cols = info.toArray().map((r: any) => String(r.name));
+
+    const playerCol =
+      pickColName(cols, ["player", "player_name", "playername", "name"]) ||
+      cols.find((c) => c.toLowerCase().includes("player")) ||
+      "player";
+    const posCol = pickColName(cols, ["position", "role", "pos"]);
+
+    // map KPI réels
+    const kpiCols: Record<string, string> = {};
+    for (const [key, candidates] of Object.entries(KPI_MAP)) {
+      const hit = pickColName(cols, candidates);
+      if (hit) kpiCols[key] = hit;
+    }
+
+    const selectCols = [
+      `${JSON.stringify(teamCol)} as team_col`,
+      `${JSON.stringify(playerCol)} as player_col`,
+      posCol ? `${JSON.stringify(posCol)} as pos_col` : null,
+      ...Object.values(kpiCols).map((c) => `${JSON.stringify(c)} as "${c}"`),
+    ].filter(Boolean) as string[];
+
+    // ⚠️ IMPORTANT: on passe les valeurs résolues telles quelles
+    const q1 = `
+      SELECT ${selectCols.join(", ")}
+      FROM t
+      WHERE ${duckdb.escapeIdentifier(teamCol)} = ${duckdb.escapeLiteral(r1.found!)}
+    `;
+    const q2 = `
+      SELECT ${selectCols.join(", ")}
+      FROM t
+      WHERE ${duckdb.escapeIdentifier(teamCol)} = ${duckdb.escapeLiteral(r2.found!)}
+    `;
+
+    const rs1 = await conn.query(q1);
+    const rs2 = await conn.query(q2);
+
+    const rows1 = rs1.toArray();
+    const rows2 = rs2.toArray();
+
+    function toPlayers(rows: any[], team: string): PlayerStats[] {
+      const players = rows.map((r) => {
+        const p: PlayerStats = {
+          team,
+          teamname: team,
+          player: String(r.player_col ?? "").trim(),
+          position: posCol ? String(r.pos_col ?? "") : undefined,
+        };
+        // recopie des KPI si présents
+        for (const [apiKey, realCol] of Object.entries(kpiCols)) {
+          const v = Number(r[realCol as keyof typeof r]);
+          if (Number.isFinite(v)) (p as any)[apiKey] = v;
+        }
+        return p;
+      });
+
+      const roleOrder = (s?: string) => {
+        const u = String(s || "").toUpperCase();
+        if (u.includes("TOP")) return 1;
+        if (u.includes("JGL") || u.includes("JUNG")) return 2;
+        if (u.includes("MID")) return 3;
+        if (u.includes("ADC") || u.includes("BOT")) return 4;
+        if (u.includes("SUP")) return 5;
+        return 99;
+      };
+
+      players.sort((a, b) => {
+        const ra = roleOrder(a.position);
+        const rb = roleOrder(b.position);
+        if (ra !== rb) return ra - rb;
+        const ea = (a["earned_gpm_avg_last_10"] as number) ?? -1e9;
+        const eb = (b["earned_gpm_avg_last_10"] as number) ?? -1e9;
+        return eb - ea;
+      });
+
+      return players.slice(0, 5);
+    }
+
+    const players1 = toPlayers(rows1, r1.found!);
+    const players2 = toPlayers(rows2, r2.found!);
+
+    const teamA: TeamStats = {
+      team: r1.found!,
+      players: players1,
+      aggregates: aggregatesFrom(players1),
+      resolvedFrom: r1.found!,
+    };
+    const teamB: TeamStats = {
+      team: r2.found!,
+      players: players2,
+      aggregates: aggregatesFrom(players2),
+      resolvedFrom: r2.found!,
+    };
+
+    return [teamA, teamB];
+  } finally {
+    await conn.close();
   }
 }
