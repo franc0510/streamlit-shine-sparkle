@@ -39,12 +39,58 @@ export interface TeamStats {
 export type TimeWindow = 'last_10' | 'last_20' | 'last_365d';
 export type ScaleMode = 'none' | 'minmax' | 'zscore';
 
+// Team name aliases for better matching
+const TEAM_ALIASES: Record<string, string[]> = {
+  '100 thieves': ['100t', '100 thieves', '100thieves'],
+  't1': ['t1', 't1 esports', 'skt', 'skt t1'],
+  'gen.g': ['gen g', 'gen.g', 'geng', 'gen'],
+  'top esports': ['topesports', 'top', 'tes'],
+  'bilibili gaming': ['blg', 'bilibili', 'bilibili gaming'],
+  'jd gaming': ['jdg', 'jd gaming'],
+  'lng esports': ['lng'],
+  'weibo gaming': ['wbg', 'weibo'],
+  'flyquest': ['fly', 'flyquest', 'fly quest'],
+  'g2 esports': ['g2'],
+  'mad lions': ['mad'],
+  'fnatic': ['fnatic', 'fnc'],
+};
+
 const positionOrder: Record<string, number> = {
   'top': 1,
   'jungle': 2,
   'mid': 3,
   'bot': 4,
   'support': 5,
+};
+
+// Normalize team name for matching
+const normalizeTeamName = (name: string): string => {
+  return name.toLowerCase()
+    .trim()
+    .replace(/[.\-_]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+};
+
+// Check if two team names match (considering aliases)
+const teamsMatch = (name1: string, name2: string): boolean => {
+  const norm1 = normalizeTeamName(name1);
+  const norm2 = normalizeTeamName(name2);
+  
+  // Exact match
+  if (norm1 === norm2) return true;
+  
+  // Check if one contains the other (for partial matches like "100 Thieves" vs "100T")
+  if (norm1.includes(norm2) || norm2.includes(norm1)) return true;
+  
+  // Check aliases
+  for (const [canonical, aliases] of Object.entries(TEAM_ALIASES)) {
+    const matchesCanonical1 = canonical === norm1 || aliases.some(a => a === norm1);
+    const matchesCanonical2 = canonical === norm2 || aliases.some(a => a === norm2);
+    if (matchesCanonical1 && matchesCanonical2) return true;
+  }
+  
+  return false;
 };
 
 // Helper to calculate team aggregates
@@ -123,8 +169,7 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
           const playerName = row.player_name || row.player || '';
           const position = (row.position || '').toLowerCase();
 
-          if (teamName.toLowerCase().includes(team1Name.toLowerCase()) || 
-              team1Name.toLowerCase().includes(teamName.toLowerCase())) {
+          if (teamsMatch(teamName, team1Name)) {
             if (!team1Power.power_team && row.power_team != null) {
               team1Power.power_team = row.power_team;
             }
@@ -136,18 +181,17 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
                 player_name: playerName,
                 team: teamName,
                 position: position,
-                kda_last_10: row.kda_last_10,
-                earned_gpm_avg_last_10: row.earned_gpm_avg_last_10,
-                kda_last_20: row.kda_last_20,
-                earned_gpm_avg_last_20: row.earned_gpm_avg_last_20,
-                dpm_avg_last_365d: row.dpm_avg_last_365d,
-                wcpm_avg_last_365d: row.wcpm_avg_last_365d,
-                vspm_avg_last_365d: row.vspm_avg_last_365d,
-                earned_gpm_avg_last_365d: row.earned_gpm_avg_last_365d,
+                kda_last_10: row.kda_last_10 ?? row.kda_avg_last_10,
+                earned_gpm_avg_last_10: row.earned_gpm_avg_last_10 ?? row.earnedgpm_avg_last_10,
+                kda_last_20: row.kda_last_20 ?? row.kda_avg_last_20,
+                earned_gpm_avg_last_20: row.earned_gpm_avg_last_20 ?? row.earnedgpm_avg_last_20,
+                dpm_avg_last_365d: row.dpm_avg_last_365d ?? row.dpm_365d,
+                wcpm_avg_last_365d: row.wcpm_avg_last_365d ?? row.wcpm_365d,
+                vspm_avg_last_365d: row.vspm_avg_last_365d ?? row.vspm_365d,
+                earned_gpm_avg_last_365d: row.earned_gpm_avg_last_365d ?? row.earnedgpm_avg_last_365d,
               });
             }
-          } else if (teamName.toLowerCase().includes(team2Name.toLowerCase()) || 
-                     team2Name.toLowerCase().includes(teamName.toLowerCase())) {
+          } else if (teamsMatch(teamName, team2Name)) {
             if (!team2Power.power_team && row.power_team != null) {
               team2Power.power_team = row.power_team;
             }
@@ -159,14 +203,14 @@ export const parsePlayerDataParquet = async (team1Name: string, team2Name: strin
                 player_name: playerName,
                 team: teamName,
                 position: position,
-                kda_last_10: row.kda_last_10,
-                earned_gpm_avg_last_10: row.earned_gpm_avg_last_10,
-                kda_last_20: row.kda_last_20,
-                earned_gpm_avg_last_20: row.earned_gpm_avg_last_20,
-                dpm_avg_last_365d: row.dpm_avg_last_365d,
-                wcpm_avg_last_365d: row.wcpm_avg_last_365d,
-                vspm_avg_last_365d: row.vspm_avg_last_365d,
-                earned_gpm_avg_last_365d: row.earned_gpm_avg_last_365d,
+                kda_last_10: row.kda_last_10 ?? row.kda_avg_last_10,
+                earned_gpm_avg_last_10: row.earned_gpm_avg_last_10 ?? row.earnedgpm_avg_last_10,
+                kda_last_20: row.kda_last_20 ?? row.kda_avg_last_20,
+                earned_gpm_avg_last_20: row.earned_gpm_avg_last_20 ?? row.earnedgpm_avg_last_20,
+                dpm_avg_last_365d: row.dpm_avg_last_365d ?? row.dpm_365d,
+                wcpm_avg_last_365d: row.wcpm_avg_last_365d ?? row.wcpm_365d,
+                vspm_avg_last_365d: row.vspm_avg_last_365d ?? row.vspm_365d,
+                earned_gpm_avg_last_365d: row.earned_gpm_avg_last_365d ?? row.earnedgpm_avg_last_365d,
               });
             }
           }
