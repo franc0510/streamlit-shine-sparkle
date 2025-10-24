@@ -1,0 +1,13 @@
+match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last_proba_team1_pct,last_proba_team2_pct,status,used_team1,used_team2,roster1_size,roster2_size,as_of,league_like,debug_error,symmetry_check,order_key,flip_applied
+2025-10-24T11:00:00+00:00,Worlds,BO3,100 Thieves,T1,79.8,20.2,83.5,16.5,ok,100 Thieves,T1,5,5,2025-10-24,WLDs,,ok,100 Thieves|T1,no
+2025-10-25T05:00:00+00:00,Worlds,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-25,WLDs,,skipped,,
+2025-10-25T08:00:00+00:00,Worlds,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-25,WLDs,,skipped,,
+2025-10-25T11:00:00+00:00,Worlds,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-25,WLDs,,skipped,,
+2025-10-28T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-28,WLDs,,skipped,,
+2025-10-29T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-29,WLDs,,skipped,,
+2025-10-30T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-30,WLDs,,skipped,,
+2025-10-31T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-31,WLDs,,skipped,,
+2025-11-01T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-11-01,WLDs,,skipped,,
+2025-11-02T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-11-02,WLDs,,skipped,,
+2025-11-02T18:00:00+00:00,EMEA Masters,BO5,Karmine Corp Blue,Los Heretics,50.0,50.0,71.3,50.0,no_roster:Los Heretics,Karmine Corp,Los Heretics,5,0,2025-11-02,EMEA MASTERS,,skipped,,
+2025-11-09T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-11-09,WLDs,,skipped,,
