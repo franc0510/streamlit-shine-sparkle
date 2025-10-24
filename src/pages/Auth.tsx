@@ -12,13 +12,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { createCheckoutSession, openCustomerPortal } from "@/lib/subscription";
 import { useSubscription } from "@/contexts/SubscriptionContext";
-
+import { useAuth } from "@/contexts/AuthContext";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [user, setUser] = useState<any>(null);
-  const [session, setSession] = useState<any>(null);
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const { toast } = useToast();
@@ -26,34 +25,9 @@ const Auth = () => {
   const { isPremium, subscriptionStatus, refreshSubscription } = useSubscription();
 
   useEffect(() => {
-    // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        // Redirect to home if user is authenticated
-        if (session?.user) {
-          setTimeout(() => {
-            navigate("/");
-          }, 0);
-        }
-      }
-    );
-
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      
-      // Redirect to home if already logged in
-      if (session?.user) {
-        navigate("/");
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
+    // Pas de redirection automatique depuis la page abonnement
+    // On laisse l'utilisateur gérer son abonnement ici même s'il est connecté
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
