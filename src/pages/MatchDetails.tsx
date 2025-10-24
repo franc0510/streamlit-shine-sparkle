@@ -91,6 +91,24 @@ const MatchDetails = () => {
   const team1Logo = getTeamLogo(match.team1);
   const team2Logo = getTeamLogo(match.team2);
 
+  const avg = (vals: Array<number | undefined>) => {
+    const v = vals.filter((x): x is number => x != null && !isNaN(x));
+    return v.length ? v.reduce((a,b)=>a+b,0)/v.length : undefined;
+  };
+  const computeAggregates = (players: any) => ({
+    kda_last_10: avg(players.map((p: any) => p.kda_last_10)),
+    earned_gpm_last_10: avg(players.map((p: any) => p.earned_gpm_avg_last_10)),
+    kda_last_20: avg(players.map((p: any) => p.kda_last_20)),
+    earned_gpm_last_20: avg(players.map((p: any) => p.earned_gpm_avg_last_20)),
+    dpm_365d: avg(players.map((p: any) => p.dpm_avg_last_365d)),
+    wcpm_365d: avg(players.map((p: any) => p.wcpm_avg_last_365d)),
+    vspm_365d: avg(players.map((p: any) => p.vspm_avg_last_365d)),
+    earned_gpm_365d: avg(players.map((p: any) => p.earned_gpm_avg_last_365d)),
+  });
+  const team1Agg = team1Stats ? computeAggregates(team1Stats.players) : undefined;
+  const team2Agg = team2Stats ? computeAggregates(team2Stats.players) : undefined;
+
+
   const powerDiff = (team1Stats?.power_team || 0) - (team2Stats?.power_team || 0);
   const leaguePowerDiff = (team1Stats?.power_league || 0) - (team2Stats?.power_league || 0);
 
@@ -173,14 +191,14 @@ const MatchDetails = () => {
               <div className="grid md:grid-cols-2 gap-4">
                 <TeamRadarChart 
                   team={match.team1}
-                  aggregates={team1Stats.aggregates}
+                  aggregates={team1Agg || team1Stats.aggregates}
                   teamColor="hsl(var(--primary))"
                   timeWindow={timeWindow}
                   scaleMode={scaleMode}
                 />
                 <TeamRadarChart 
                   team={match.team2}
-                  aggregates={team2Stats.aggregates}
+                  aggregates={team2Agg || team2Stats.aggregates}
                   teamColor="hsl(var(--accent))"
                   timeWindow={timeWindow}
                   scaleMode={scaleMode}
