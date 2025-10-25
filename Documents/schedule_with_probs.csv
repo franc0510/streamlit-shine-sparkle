@@ -1,7 +1,6 @@
 match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last_proba_team1_pct,last_proba_team2_pct,status,used_team1,used_team2,roster1_size,roster2_size,as_of,league_like,debug_error,symmetry_check,order_key,flip_applied
-2025-10-25T05:00:00+00:00,Worlds,BO3,CTBC Flying Oyster,FlyQuest,92.0,8.0,85.5,72.6,ok,CTBC Flying Oyster,FlyQuest,5,5,2025-10-25,WLDs,,ok,CTBC Flying Oyster|FlyQuest,no
-2025-10-25T08:00:00+00:00,Worlds,BO3,BILIBILI GAMING DREAMSMART,TOPESPORTS,84.8,15.2,89.3,7.8,ok,Bilibili Gaming,Top Esports,5,5,2025-10-25,WLDs,,ok,Bilibili Gaming|Top Esports,no
-2025-10-25T11:00:00+00:00,Worlds,BO3,Movistar KOI,T1,71.0,29.0,73.9,16.5,ok,Movistar KOI,T1,5,5,2025-10-25,WLDs,,ok,Movistar KOI|T1,no
+2025-10-25T08:00:00+00:00,Worlds,BO3,BILIBILI GAMING DREAMSMART,TOPESPORTS,78.2,21.8,89.3,7.8,ok,Bilibili Gaming,Top Esports,5,5,2025-10-25,WLDs,,ok,Bilibili Gaming|Top Esports,no
+2025-10-25T11:00:00+00:00,Worlds,BO3,Movistar KOI,T1,76.3,23.7,73.9,16.5,ok,Movistar KOI,T1,5,5,2025-10-25,WLDs,,ok,Movistar KOI|T1,no
 2025-10-28T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-28,WLDs,,skipped,,
 2025-10-29T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-29,WLDs,,skipped,,
 2025-10-30T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-10-30,WLDs,,skipped,,
