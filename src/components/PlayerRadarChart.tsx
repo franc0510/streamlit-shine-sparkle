@@ -36,9 +36,7 @@ export const PlayerRadarChart = ({ player, teamColor, timeWindow, scaleMode }: P
       } else if (player.kda_last_10 != null) {
         data.push({ stat: 'KDA\n(10g)', value: player.kda_last_10, fullMark: isNormalized ? 1 : 10 });
       }
-      if (player.earned_gpm_avg_last_20 != null) {
-        data.push({ stat: 'GPM\n(20g)', value: player.earned_gpm_avg_last_20, fullMark: isNormalized ? 1 : 400 });
-      } else if (player.earned_gpm_avg_last_10 != null) {
+      if (player.earned_gpm_avg_last_10 != null) {
         data.push({ stat: 'GPM\n(10g)', value: player.earned_gpm_avg_last_10, fullMark: isNormalized ? 1 : 400 });
       }
       if (player.dpm_avg_last_365d != null) {

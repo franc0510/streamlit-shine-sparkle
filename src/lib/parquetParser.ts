@@ -99,7 +99,7 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
   const db = new duckdb.AsyncDuckDB(logger, worker);
 
   await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
-  await db.open({ backend: "httpfs" });
+  await db.open({});
 
   const conn = await db.connect();
   await conn.query("INSTALL httpfs; LOAD httpfs;");
@@ -112,8 +112,9 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
 /* --------------- lecture & introspection --------------- */
 
 async function fetchAllTeams(conn: duckdb.AsyncDuckDBConnection, table: string, teamCol: string) {
+  const escapedCol = `"${teamCol.replace(/"/g, '""')}"`;
   const rs = await conn.query(
-    `SELECT DISTINCT ${duckdb.escapeIdentifier(teamCol)} as team FROM ${table} WHERE ${duckdb.escapeIdentifier(teamCol)} IS NOT NULL`,
+    `SELECT DISTINCT ${escapedCol} as team FROM ${table} WHERE ${escapedCol} IS NOT NULL`,
   );
   return rs
     .toArray()
@@ -253,15 +254,18 @@ export async function parsePlayerDataParquet(
       ...Object.values(kpiCols).map((c) => `${JSON.stringify(c)} as "${c}"`),
     ].filter(Boolean) as string[];
 
+    // Simple SQL escaping
+    const escapeSql = (val: string) => val.replace(/'/g, "''");
+    
     const q1 = `
       SELECT ${selectCols.join(", ")}
       FROM t
-      WHERE ${duckdb.escapeIdentifier(teamCol)} = ${duckdb.escapeLiteral(r1.found!)}
+      WHERE "${teamCol}" = '${escapeSql(r1.found!)}'
     `;
     const q2 = `
       SELECT ${selectCols.join(", ")}
       FROM t
-      WHERE ${duckdb.escapeIdentifier(teamCol)} = ${duckdb.escapeLiteral(r2.found!)}
+      WHERE "${teamCol}" = '${escapeSql(r2.found!)}'
     `;
 
     const rs1 = await conn.query(q1);
