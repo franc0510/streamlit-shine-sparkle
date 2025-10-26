@@ -17,6 +17,22 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
       return { subscribed: false, product_id: null, subscription_end: null };
     }
 
+    // First check if user has manual premium access
+    const { data: premiumUser } = await supabase
+      .from('premium_users')
+      .select('*')
+      .eq('user_id', session.user.id)
+      .maybeSingle();
+
+    if (premiumUser) {
+      return {
+        subscribed: true,
+        product_id: PREMIUM_PRODUCT_ID,
+        subscription_end: null, // Manual premium has no expiration
+      };
+    }
+
+    // If not manual premium, check Stripe subscription
     const { data, error } = await supabase.functions.invoke('check-subscription', {
       headers: {
         Authorization: `Bearer ${session.access_token}`,
