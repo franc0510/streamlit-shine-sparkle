@@ -94,7 +94,13 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
   const DUCKDB_BUNDLES = duckdb.getJsDelivrBundles();
   const bundle = await duckdb.selectBundle(DUCKDB_BUNDLES);
 
-  const worker = new Worker(bundle.mainWorker!);
+  // Create worker with proper CORS handling
+  const workerUrl = new URL(bundle.mainWorker!);
+  const response = await fetch(workerUrl);
+  const blob = await response.blob();
+  const blobUrl = URL.createObjectURL(blob);
+  
+  const worker = new Worker(blobUrl, { type: 'module' });
   const logger = new duckdb.ConsoleLogger();
   const db = new duckdb.AsyncDuckDB(logger, worker);
 

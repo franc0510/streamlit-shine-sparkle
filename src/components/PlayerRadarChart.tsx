@@ -56,13 +56,13 @@ function normalizeVector(
 
 function chooseKDA(window_: TimeWindow, p: PlayerStats): number {
   if (window_ === "last_10") {
-    return num(p.kda_last_10, p.kda_last_20, p.kda_last_365d);
+    return num(p.kda_last_10, p.kda_last_20);
   }
   if (window_ === "last_20") {
-    return num(p.kda_last_20, p.kda_last_10, p.kda_last_365d);
+    return num(p.kda_last_20, p.kda_last_10);
   }
   // 365d
-  return num(p.kda_last_365d, p.kda_last_20, p.kda_last_10);
+  return num(p.kda_last_20, p.kda_last_10);
 }
 
 function chooseEGPM(window_: TimeWindow, p: PlayerStats): number {
