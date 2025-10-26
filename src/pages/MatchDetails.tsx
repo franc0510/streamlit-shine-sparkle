@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import clsx from "clsx";
-import { Navbar } from "@/components/Navbar";
 import {
   Radar,
   RadarChart,
@@ -20,7 +19,6 @@ import {
   type ScaleMode,
   type TimeWindow,
 } from "@/lib/parquetParser";
-import { parseScheduleCSV, getTeamLogo, type Match } from "@/lib/csvParser";
 
 /* ========================== Helpers URL / UI ========================== */
 
@@ -36,52 +34,28 @@ function titleCase(s: string) {
     .replace(/_/g, " ");
 }
 
-// Same slugification as Index.tsx to match URLs
-function slugify(s: string) {
-  return (s || "")
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "")
-    .replace(/-+/g, "-");
-}
-
-/* ========================== KPIs & Fenêtres ========================== */
-/** KPI “canoniques” disponibles dans DF_filtered.parquet */
-const KPI_BY_WINDOW: Record<TimeWindow, string[]> = {
-  last_10: [
-    "kda_last_10",
-    "earned_gpm_avg_last_10",
-    "dpm_avg_last_365d",
-    "wcpm_avg_last_365d",
-    "vspm_avg_last_365d",
-  ],
+/* ========================== KPIs stricts par fenêtre ========================== */
+/** Uniquement les colonnes de la fenêtre sélectionnée (pas de fallback) */
+const KPI_BY_WINDOW_STRICT: Record<TimeWindow, string[]> = {
+  last_10: ["kda_last_10", "earned_gpm_avg_last_10"],
   last_20: [
     "kda_last_20",
-    "earned_gpm_avg_last_10",
-    "dpm_avg_last_365d",
-    "wcpm_avg_last_365d",
-    "vspm_avg_last_365d",
+    // ajoute ici d'éventuelles colonnes *_last_20 si tu en as
   ],
   last_365d: [
-    "kda_last_20",
-    "earned_gpm_avg_last_365d",
     "dpm_avg_last_365d",
     "wcpm_avg_last_365d",
     "vspm_avg_last_365d",
+    "earned_gpm_avg_last_365d",
+    // si tu as kda_365d, ajoute-le ici
   ],
 };
 
-/** Renvoie la liste finale de KPIs réellement présents dans les joueurs */
-function resolveAvailableKpis(players: PlayerStats[], win: TimeWindow): string[] {
-  const wanted = KPI_BY_WINDOW[win];
+/** Ne garde que les KPIs réellement présents dans au moins 1 joueur */
+function resolveAvailableKpisStrict(players: PlayerStats[], win: TimeWindow): string[] {
+  const candidates = KPI_BY_WINDOW_STRICT[win];
   const has = (k: string) => players.some((p) => typeof (p as any)[k] === "number");
-  const primary = wanted.filter(has);
-  // si la fenêtre est trop pauvre, fallback (union douce) vers 365
-  if (primary.length >= 3) return primary;
-  const fallback = KPI_BY_WINDOW["last_365d"].filter(has);
-  const merged = [...new Set([...primary, ...fallback])];
-  // garder 3–6 axes max sur un radar
-  return merged.slice(0, 6);
+  return candidates.filter(has);
 }
 
 /* ========================== Normalisations ========================== */
@@ -114,7 +88,6 @@ function normalizeMatrix(rows: number[][], mode: ScaleChoice = "none"): number[]
     }
   });
 
-  // transpose back
   return rows.map((_, i) => normCols.map((c) => c[i]));
 }
 
@@ -163,9 +136,9 @@ function PlayerRadar({
   player: PlayerStats;
   axes: string[];
   scale: ScaleChoice;
-  colorKey: string; // "A" | "B" ou similaire
+  colorKey: string; // "A" | "B"
 }) {
-  const vec = axes.map((k) => Number(player[k] as number) || 0);
+  const vec = axes.map((k) => Number((player as any)[k]) || 0);
   const norm = normalizeMatrix([vec], scale)[0];
   const data = toRadarSeries(player.player, axes, norm);
 
@@ -205,12 +178,10 @@ function TeamRadar({
   scale: ScaleChoice;
   colorKey: string;
 }) {
-  // moyenne des 5
-  const rows = team.players.map((p) => axes.map((k) => Number(p[k] as number) || 0));
+  const rows = team.players.map((p) => axes.map((k) => Number((p as any)[k]) || 0));
   const mean = axes.map((_, j) => {
     const vals = rows.map((r) => r[j]).filter((x) => Number.isFinite(x));
     return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
-    // on pourrait aussi piocher team.aggregates[k] si tu préfères
   });
 
   const norm = normalizeMatrix([mean], scale)[0];
@@ -245,28 +216,21 @@ export default function MatchDetails() {
   const q = useQuery();
 
   // Extract teams from URL path like /match/league/date/time/team1-vs-team2
-  const pathParts = location.pathname.split('/').filter(Boolean);
+  const pathParts = location.pathname.split("/").filter(Boolean);
   const matchString = pathParts[pathParts.length - 1] || "";
-  
-  // Parse "100-thieves-vs-t1" -> ["100-thieves", "t1"]
   const vsMatch = matchString.match(/^(.+)-vs-(.+)$/);
   let initialTeam1 = "";
   let initialTeam2 = "";
-  
   if (vsMatch) {
-    initialTeam1 = vsMatch[1].replace(/-/g, ' '); // "100-thieves" -> "100 thieves"
-    initialTeam2 = vsMatch[2].replace(/-/g, ' '); // "t1" -> "t1"
+    initialTeam1 = vsMatch[1].replace(/-/g, " ");
+    initialTeam2 = vsMatch[2].replace(/-/g, " ");
   } else {
-    // Fallback to query params
     initialTeam1 = q.get("team1") || "";
     initialTeam2 = q.get("team2") || "";
   }
-  
   const league = pathParts[1] || q.get("league") || "";
   const bo = q.get("bo") || "BO3";
   const when = decodeURIComponent(pathParts[2] || "") || q.get("date") || "";
-  
-  console.log("[MatchDetails] Extracted teams:", { initialTeam1, initialTeam2, league, when, pathParts });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -276,13 +240,9 @@ export default function MatchDetails() {
 
   const [teamA, setTeamA] = useState<TeamStats | null>(null);
   const [teamB, setTeamB] = useState<TeamStats | null>(null);
-  const [scheduleInfo, setScheduleInfo] = useState<Match | null>(null);
-  const [teamParquetNames, setTeamParquetNames] = useState<{ team1: string; team2: string } | null>(null);
 
   // charge les données parquet via backend util
   useEffect(() => {
-    if (!teamParquetNames) return; // Wait for schedule to load
-    
     let cancel = false;
     async function run() {
       setLoading(true);
@@ -290,7 +250,7 @@ export default function MatchDetails() {
       setTeamA(null);
       setTeamB(null);
       try {
-        const res = await parsePlayerDataParquet(teamParquetNames.team1, teamParquetNames.team2, scale);
+        const res = await parsePlayerDataParquet(initialTeam1, initialTeam2, scale);
         if (!res) {
           if (!cancel) setError("Impossible de lire les données joueurs (parquet).");
           return;
@@ -310,102 +270,26 @@ export default function MatchDetails() {
     return () => {
       cancel = true;
     };
-  }, [teamParquetNames, scale]);
-
-  // Load schedule to retrieve official team names, percents and logos
-  useEffect(() => {
-    async function loadSchedule() {
-      try {
-        const matches = await parseScheduleCSV();
-        const t1Slug = slugify(initialTeam1);
-        const t2Slug = slugify(initialTeam2);
-        const leagueSlug = (pathParts[1] || "").toLowerCase();
-        const dateSeg = decodeURIComponent(pathParts[2] || "");
-        const timeSeg = decodeURIComponent(pathParts[3] || "");
-
-        const found =
-          matches.find(
-            (m) =>
-              slugify(m.team1) === t1Slug &&
-              slugify(m.team2) === t2Slug &&
-              slugify(m.tournament) === leagueSlug &&
-              m.date === dateSeg &&
-              m.time === timeSeg,
-          ) ||
-          matches.find((m) => slugify(m.team1) === t1Slug && slugify(m.team2) === t2Slug) ||
-          matches.find((m) => slugify(m.team1) === t2Slug && slugify(m.team2) === t1Slug);
-
-        if (found) {
-          setScheduleInfo(found);
-          // Use the exact parquet names (used_team1, used_team2) for data loading
-          setTeamParquetNames({ team1: found.used_team1, team2: found.used_team2 });
-        } else {
-          setScheduleInfo(null);
-        }
-      } catch (e) {
-        setScheduleInfo(null);
-      }
-    }
-    loadSchedule();
-  }, [location.pathname, initialTeam1, initialTeam2]);
+  }, [initialTeam1, initialTeam2, scale]);
 
   const axes = useMemo(() => {
     const allPlayers = [...(teamA?.players || []), ...(teamB?.players || [])];
-    return resolveAvailableKpis(allPlayers, windowSel);
+    return resolveAvailableKpisStrict(allPlayers, windowSel);
   }, [teamA, teamB, windowSel]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <div className="px-4 md:px-8 lg:px-12 py-4">
-        {/* Header */}
-        <div className="mb-4">
-        <button
-          onClick={() => history.back()}
-          className="text-white/80 hover:text-white text-sm mb-3"
-          aria-label="Retour"
-        >
-          ← Retour
-        </button>
-        <div className="flex items-center justify-center gap-8 text-center">
-          {/* Team 1 */}
-          <div className="flex flex-col items-center gap-2 min-w-[120px]">
-            <img
-              src={getTeamLogo(scheduleInfo?.team1 || titleCase(initialTeam1))}
-              alt={scheduleInfo?.team1 || titleCase(initialTeam1)}
-              className="w-14 h-14 object-contain"
-            />
-            <div className="font-bold text-white truncate max-w-[180px]">
-              {scheduleInfo?.team1 || titleCase(initialTeam1)}
-            </div>
-            {scheduleInfo && (
-              <div className="text-primary font-display text-xl">{Math.round(scheduleInfo.proba1)}%</div>
-            )}
-          </div>
-
-          <div className="text-white/70 font-semibold">VS</div>
-
-          {/* Team 2 */}
-          <div className="flex flex-col items-center gap-2 min-w-[120px]">
-            <img
-              src={getTeamLogo(scheduleInfo?.team2 || titleCase(initialTeam2))}
-              alt={scheduleInfo?.team2 || titleCase(initialTeam2)}
-              className="w-14 h-14 object-contain"
-            />
-            <div className="font-bold text-white truncate max-w-[180px]">
-              {scheduleInfo?.team2 || titleCase(initialTeam2)}
-            </div>
-            {scheduleInfo && (
-              <div className="text-accent font-display text-xl">{Math.round(scheduleInfo.proba2)}%</div>
-            )}
-          </div>
+    <div className="px-4 md:px-8 lg:px-12 py-4">
+      {/* Header */}
+      <div className="text-center mb-4">
+        <div className="text-2xl md:text-3xl font-black text-white">
+          {initialTeam1} <span className="text-white/70">vs</span> {initialTeam2}
         </div>
-        <div className="text-center text-white/70 font-semibold mt-2">
+        <div className="text-white/70 font-semibold">
           {league ? `${league} • ` : ""} {bo} {when ? `• ${when}` : ""}
         </div>
       </div>
 
-      {/* Contrôles */}
+      {/* Controls */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
         <div className="rounded-xl border border-white/10 bg-white/5 p-3">
           <div className="font-bold text-white mb-2">Fenêtre temporelle</div>
@@ -417,8 +301,7 @@ export default function MatchDetails() {
             ))}
           </div>
           <div className="text-xs text-white/60 mt-2">
-            Si des métriques manquent pour la fenêtre choisie, on complète automatiquement avec les meilleures
-            alternatives (ex: colonnes “365d”).
+            Les radars n’utilisent <b>que</b> les métriques de la fenêtre choisie.
           </div>
         </div>
 
@@ -441,6 +324,13 @@ export default function MatchDetails() {
       {loading && <div className="text-white/80">Chargement des données…</div>}
       {error && <div className="text-red-300 bg-red-900/30 border border-red-700/40 rounded-md p-3">{error}</div>}
 
+      {/* Info axes vides */}
+      {!loading && !error && axes.length === 0 && (
+        <div className="text-yellow-300 bg-yellow-900/20 border border-yellow-700/40 rounded-md p-3 mb-3">
+          Aucune métrique disponible pour la fenêtre sélectionnée.
+        </div>
+      )}
+
       {/* Contenu */}
       {!loading && !error && teamA && teamB && (
         <>
@@ -453,7 +343,11 @@ export default function MatchDetails() {
                   <div className="text-white/80 text-sm mb-2">
                     Joueurs: {teamA.players.map((p) => p.player).join(", ")}
                   </div>
-                  <TeamRadar team={teamA} axes={axes} scale={scale} colorKey="A" />
+                  {axes.length ? (
+                    <TeamRadar team={teamA} axes={axes} scale={scale} colorKey="A" />
+                  ) : (
+                    <div className="text-white/60">Pas de métriques pour cette fenêtre.</div>
+                  )}
                 </>
               ) : (
                 <div className="text-white/60">Données insuffisantes</div>
@@ -467,7 +361,11 @@ export default function MatchDetails() {
                   <div className="text-white/80 text-sm mb-2">
                     Joueurs: {teamB.players.map((p) => p.player).join(", ")}
                   </div>
-                  <TeamRadar team={teamB} axes={axes} scale={scale} colorKey="B" />
+                  {axes.length ? (
+                    <TeamRadar team={teamB} axes={axes} scale={scale} colorKey="B" />
+                  ) : (
+                    <div className="text-white/60">Pas de métriques pour cette fenêtre.</div>
+                  )}
                 </>
               ) : (
                 <div className="text-white/60">Données insuffisantes</div>
@@ -475,74 +373,25 @@ export default function MatchDetails() {
             </div>
           </div>
 
-          {/* Radars joueurs (5v5) - Face à face par position */}
+          {/* Radars joueurs (5v5) */}
           <Section title="Comparaison joueurs (5v5)">
             {teamA.players.length === 0 || teamB.players.length === 0 ? (
               <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
+            ) : axes.length === 0 ? (
+              <div className="text-white/70">Aucune métrique pour cette fenêtre.</div>
             ) : (
-              <div className="space-y-6">
-                {["top", "jng", "mid", "bot", "sup"].map((pos) => {
-                  const playerA = teamA.players.find(
-                    (p) => p.position?.toString().toLowerCase() === pos
-                  );
-                  const playerB = teamB.players.find(
-                    (p) => p.position?.toString().toLowerCase() === pos
-                  );
-
-                  if (!playerA && !playerB) return null;
-
-                  // Calculer la différence moyenne entre les deux joueurs
-                  let diffText = "";
-                  if (playerA && playerB) {
-                    const vecA = axes.map((k) => Number(playerA[k] as number) || 0);
-                    const vecB = axes.map((k) => Number(playerB[k] as number) || 0);
-                    const avgDiff = vecA.reduce((sum, v, i) => sum + (v - vecB[i]), 0) / axes.length;
-                    const pct = ((avgDiff / (Math.max(...vecA, ...vecB) || 1)) * 100).toFixed(1);
-                    diffText = avgDiff > 0 
-                      ? `${playerA.player} +${pct}%` 
-                      : `${playerB.player} +${Math.abs(Number(pct))}%`;
-                  }
-
-                  return (
-                    <div key={pos} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                      <div className="text-center font-bold text-white mb-3 uppercase">
-                        {pos === "jng" ? "Jungle" : pos === "sup" ? "Support" : pos}
-                      </div>
-                      <div className="grid md:grid-cols-3 gap-4 items-center">
-                        {/* Joueur Team A (gauche) */}
-                        <div>
-                          {playerA ? (
-                            <PlayerRadar player={playerA} axes={axes} scale={scale} colorKey="A" />
-                          ) : (
-                            <div className="text-white/60 text-center">Joueur non disponible</div>
-                          )}
-                        </div>
-
-                        {/* Différence (milieu) */}
-                        <div className="text-center">
-                          {diffText && (
-                            <div className="text-yellow-400 font-bold text-lg">{diffText}</div>
-                          )}
-                        </div>
-
-                        {/* Joueur Team B (droite) */}
-                        <div>
-                          {playerB ? (
-                            <PlayerRadar player={playerB} axes={axes} scale={scale} colorKey="B" />
-                          ) : (
-                            <div className="text-white/60 text-center">Joueur non disponible</div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {teamA.players.map((p, i) => (
+                  <PlayerRadar key={`A-${p.player}-${i}`} player={p} axes={axes} scale={scale} colorKey="A" />
+                ))}
+                {teamB.players.map((p, i) => (
+                  <PlayerRadar key={`B-${p.player}-${i}`} player={p} axes={axes} scale={scale} colorKey="B" />
+                ))}
               </div>
             )}
           </Section>
         </>
       )}
-      </div>
     </div>
   );
 }
