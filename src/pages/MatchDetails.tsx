@@ -51,26 +51,23 @@ const KPI_BY_WINDOW: Record<TimeWindow, string[]> = {
   last_10: [
     "kda_last_10",
     "earned_gpm_avg_last_10",
-    // on affiche aussi des KPIs 365 si 10 indispo
     "dpm_avg_last_365d",
     "wcpm_avg_last_365d",
     "vspm_avg_last_365d",
-    "earned_gpm_avg_last_365d",
   ],
   last_20: [
-    // si tu as des colonnes *_last_20, ajoute-les ici. On garde 365 en fallback :
     "kda_last_20",
+    "earned_gpm_avg_last_10",
     "dpm_avg_last_365d",
     "wcpm_avg_last_365d",
     "vspm_avg_last_365d",
-    "earned_gpm_avg_last_365d",
   ],
   last_365d: [
-    "kda_last_10", // s’il n’y a pas kda_365, on garde le 10 (mieux que rien)
+    "kda_last_20",
+    "earned_gpm_avg_last_365d",
     "dpm_avg_last_365d",
     "wcpm_avg_last_365d",
     "vspm_avg_last_365d",
-    "earned_gpm_avg_last_365d",
   ],
 };
 
@@ -478,18 +475,68 @@ export default function MatchDetails() {
             </div>
           </div>
 
-          {/* Radars joueurs (5v5) */}
+          {/* Radars joueurs (5v5) - Face à face par position */}
           <Section title="Comparaison joueurs (5v5)">
             {teamA.players.length === 0 || teamB.players.length === 0 ? (
               <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {teamA.players.map((p, i) => (
-                  <PlayerRadar key={`A-${p.player}-${i}`} player={p} axes={axes} scale={scale} colorKey="A" />
-                ))}
-                {teamB.players.map((p, i) => (
-                  <PlayerRadar key={`B-${p.player}-${i}`} player={p} axes={axes} scale={scale} colorKey="B" />
-                ))}
+              <div className="space-y-6">
+                {["top", "jng", "mid", "bot", "sup"].map((pos) => {
+                  const playerA = teamA.players.find(
+                    (p) => p.position?.toString().toLowerCase() === pos
+                  );
+                  const playerB = teamB.players.find(
+                    (p) => p.position?.toString().toLowerCase() === pos
+                  );
+
+                  if (!playerA && !playerB) return null;
+
+                  // Calculer la différence moyenne entre les deux joueurs
+                  let diffText = "";
+                  if (playerA && playerB) {
+                    const vecA = axes.map((k) => Number(playerA[k] as number) || 0);
+                    const vecB = axes.map((k) => Number(playerB[k] as number) || 0);
+                    const avgDiff = vecA.reduce((sum, v, i) => sum + (v - vecB[i]), 0) / axes.length;
+                    const pct = ((avgDiff / (Math.max(...vecA, ...vecB) || 1)) * 100).toFixed(1);
+                    diffText = avgDiff > 0 
+                      ? `${playerA.player} +${pct}%` 
+                      : `${playerB.player} +${Math.abs(Number(pct))}%`;
+                  }
+
+                  return (
+                    <div key={pos} className="rounded-xl border border-white/10 bg-white/5 p-4">
+                      <div className="text-center font-bold text-white mb-3 uppercase">
+                        {pos === "jng" ? "Jungle" : pos === "sup" ? "Support" : pos}
+                      </div>
+                      <div className="grid md:grid-cols-3 gap-4 items-center">
+                        {/* Joueur Team A (gauche) */}
+                        <div>
+                          {playerA ? (
+                            <PlayerRadar player={playerA} axes={axes} scale={scale} colorKey="A" />
+                          ) : (
+                            <div className="text-white/60 text-center">Joueur non disponible</div>
+                          )}
+                        </div>
+
+                        {/* Différence (milieu) */}
+                        <div className="text-center">
+                          {diffText && (
+                            <div className="text-yellow-400 font-bold text-lg">{diffText}</div>
+                          )}
+                        </div>
+
+                        {/* Joueur Team B (droite) */}
+                        <div>
+                          {playerB ? (
+                            <PlayerRadar player={playerB} axes={axes} scale={scale} colorKey="B" />
+                          ) : (
+                            <div className="text-white/60 text-center">Joueur non disponible</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </Section>
