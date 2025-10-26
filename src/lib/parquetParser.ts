@@ -29,8 +29,34 @@ export type TeamStats = {
 };
 export type ParseResult = [TeamStats, TeamStats];
 
-const PARQUET_URL = "/Documents/DF_filtered.parquet"; // le fichier doit être servi par le site (place-le dans /public/Documents)
+/* ============================================================================
+   Helpers URL : génère une URL web correcte, compatible basePath
+   - Place ton fichier dans: public/Documents/DF_filtered.parquet
+   - À l’exécution, il sera servi à: <base>/Documents/DF_filtered.parquet
+   ============================================================================ */
+function assetUrl(relPath: string): string {
+  // 1) base depuis <base href>, sinon BASE_URL (Vite), sinon "/"
+  const baseFromTag = document.querySelector("base")?.getAttribute("href") || "";
+  // @ts-ignore - import.meta peut ne pas exister selon bundler
+  const baseFromEnv = (typeof import !== "undefined" && (import.meta as any)?.env?.BASE_URL) || "";
+  const base = (baseFromTag || baseFromEnv || "/").toString();
 
+  // 2) normalise base → commence par "/" et ne finit pas par "/"
+  const normBase = (base.startsWith("/") ? base : "/" + base).replace(/\/+$/, "");
+
+  // 3) supprime "/" en tête du relPath
+  const rel = relPath.replace(/^\/+/, "");
+
+  // 4) construit l’URL finale: origin + base + "/" + rel
+  return new URL(`${normBase}/${rel}`, window.location.origin).toString();
+}
+
+/** URL publique du parquet (servi par l’app). */
+const PARQUET_URL = assetUrl("Documents/DF_filtered.parquet");
+
+/* ============================================================================
+   Aliases équipes
+   ============================================================================ */
 const TEAM_ALIASES: Record<string, string> = {
   "GEN G": "Gen.G",
   "GEN.G": "Gen.G",
@@ -84,8 +110,9 @@ function toNum(v: any): number | undefined {
   return Number.isFinite(n) ? n : undefined;
 }
 
-/* ---------------- duckdb-wasm init ---------------- */
-
+/* ============================================================================
+   duckdb-wasm init
+   ============================================================================ */
 let _db: duckdb.AsyncDuckDB | null = null;
 
 async function getDB(): Promise<duckdb.AsyncDuckDB> {
@@ -99,8 +126,8 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
   const response = await fetch(workerUrl);
   const blob = await response.blob();
   const blobUrl = URL.createObjectURL(blob);
-  
-  const worker = new Worker(blobUrl, { type: 'module' });
+
+  const worker = new Worker(blobUrl, { type: "module" });
   const logger = new duckdb.ConsoleLogger();
   const db = new duckdb.AsyncDuckDB(logger, worker);
 
@@ -115,8 +142,9 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
   return db;
 }
 
-/* --------------- lecture & introspection --------------- */
-
+/* ============================================================================
+   lecture & introspection
+   ============================================================================ */
 async function fetchAllTeams(conn: duckdb.AsyncDuckDBConnection, table: string, teamCol: string) {
   const escapedCol = `"${teamCol.replace(/"/g, '""')}"`;
   const rs = await conn.query(
@@ -184,7 +212,6 @@ function aggregatesFrom(players: PlayerStats[]): TeamAggregates {
 }
 
 /* -------------- mapping colonnes KPI (souple) -------------- */
-
 const KPI_MAP: Record<string, string[]> = {
   kda_last_10: ["kda_last_10", "kda10"],
   kda_last_20: ["kda_last_20", "kda20"],
@@ -204,16 +231,16 @@ function pickColName(existing: string[], candidates: string[]): string | null {
   return null;
 }
 
-/* ============ image joueurs (export demandée par tes composants) ============ */
+/* ============ images joueurs ============ */
 export function getPlayerImage(playerName: string): string {
-  // On ne change pas le nom du fichier (tu as déjà les .png exacts)
-  // Si besoin, applique une normalisation légère :
   const clean = String(playerName || "").trim();
-  return `/Documents/teams/${clean}.png`;
+  // Suppose des PNG dans: public/Documents/teams/<Player>.png
+  return assetUrl(`Documents/teams/${clean}.png`);
 }
 
-/* ========================= API PRINCIPALE ========================= */
-
+/* ============================================================================
+   API principale
+   ============================================================================ */
 export async function parsePlayerDataParquet(
   team1: string,
   team2: string,
@@ -223,6 +250,7 @@ export async function parsePlayerDataParquet(
   const conn = await db.connect();
 
   try {
+    // IMPORTANT : on passe une URL HTTP(S) complète
     await conn.query(`CREATE OR REPLACE TEMP TABLE t AS SELECT * FROM read_parquet('${PARQUET_URL}')`);
 
     const teamCol = await detectTeamCol(conn, "t");
@@ -262,7 +290,7 @@ export async function parsePlayerDataParquet(
 
     // Simple SQL escaping
     const escapeSql = (val: string) => val.replace(/'/g, "''");
-    
+
     const q1 = `
       SELECT ${selectCols.join(", ")}
       FROM t
