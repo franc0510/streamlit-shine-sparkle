@@ -19,6 +19,7 @@ import {
   type ScaleMode,
   type TimeWindow,
 } from "@/lib/parquetParser";
+import { parseScheduleCSV, getTeamLogo, type Match } from "@/lib/csvParser";
 
 /* ========================== Helpers URL / UI ========================== */
 
@@ -32,6 +33,15 @@ function titleCase(s: string) {
     .toLowerCase()
     .replace(/\b\w/g, (c) => c.toUpperCase())
     .replace(/_/g, " ");
+}
+
+// Same slugification as Index.tsx to match URLs
+function slugify(s: string) {
+  return (s || "")
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-");
 }
 
 /* ========================== KPIs & Fenêtres ========================== */
@@ -268,6 +278,7 @@ export default function MatchDetails() {
 
   const [teamA, setTeamA] = useState<TeamStats | null>(null);
   const [teamB, setTeamB] = useState<TeamStats | null>(null);
+  const [scheduleInfo, setScheduleInfo] = useState<Match | null>(null);
 
   // charge les données parquet via backend util
   useEffect(() => {
@@ -300,6 +311,37 @@ export default function MatchDetails() {
     };
   }, [initialTeam1, initialTeam2, scale]);
 
+  // Load schedule to retrieve official team names, percents and logos
+  useEffect(() => {
+    async function loadSchedule() {
+      try {
+        const matches = await parseScheduleCSV();
+        const t1Slug = slugify(initialTeam1);
+        const t2Slug = slugify(initialTeam2);
+        const leagueSlug = (pathParts[1] || "").toLowerCase();
+        const dateSeg = decodeURIComponent(pathParts[2] || "");
+        const timeSeg = decodeURIComponent(pathParts[3] || "");
+
+        const found =
+          matches.find(
+            (m) =>
+              slugify(m.team1) === t1Slug &&
+              slugify(m.team2) === t2Slug &&
+              slugify(m.tournament) === leagueSlug &&
+              m.date === dateSeg &&
+              m.time === timeSeg,
+          ) ||
+          matches.find((m) => slugify(m.team1) === t1Slug && slugify(m.team2) === t2Slug) ||
+          matches.find((m) => slugify(m.team1) === t2Slug && slugify(m.team2) === t1Slug);
+
+        setScheduleInfo(found ?? null);
+      } catch (e) {
+        setScheduleInfo(null);
+      }
+    }
+    loadSchedule();
+  }, [location.pathname, initialTeam1, initialTeam2]);
+
   const axes = useMemo(() => {
     const allPlayers = [...(teamA?.players || []), ...(teamB?.players || [])];
     return resolveAvailableKpis(allPlayers, windowSel);
@@ -308,11 +350,48 @@ export default function MatchDetails() {
   return (
     <div className="px-4 md:px-8 lg:px-12 py-4">
       {/* Header */}
-      <div className="text-center mb-4">
-        <div className="text-2xl md:text-3xl font-black text-white">
-          {initialTeam1} <span className="text-white/70">vs</span> {initialTeam2}
+      <div className="mb-4">
+        <button
+          onClick={() => history.back()}
+          className="text-white/80 hover:text-white text-sm mb-3"
+          aria-label="Retour"
+        >
+          ← Retour
+        </button>
+        <div className="flex items-center justify-center gap-8 text-center">
+          {/* Team 1 */}
+          <div className="flex flex-col items-center gap-2 min-w-[120px]">
+            <img
+              src={getTeamLogo(scheduleInfo?.team1 || titleCase(initialTeam1))}
+              alt={scheduleInfo?.team1 || titleCase(initialTeam1)}
+              className="w-14 h-14 object-contain"
+            />
+            <div className="font-bold text-white truncate max-w-[180px]">
+              {scheduleInfo?.team1 || titleCase(initialTeam1)}
+            </div>
+            {scheduleInfo && (
+              <div className="text-primary font-display text-xl">{Math.round(scheduleInfo.proba1)}%</div>
+            )}
+          </div>
+
+          <div className="text-white/70 font-semibold">VS</div>
+
+          {/* Team 2 */}
+          <div className="flex flex-col items-center gap-2 min-w-[120px]">
+            <img
+              src={getTeamLogo(scheduleInfo?.team2 || titleCase(initialTeam2))}
+              alt={scheduleInfo?.team2 || titleCase(initialTeam2)}
+              className="w-14 h-14 object-contain"
+            />
+            <div className="font-bold text-white truncate max-w-[180px]">
+              {scheduleInfo?.team2 || titleCase(initialTeam2)}
+            </div>
+            {scheduleInfo && (
+              <div className="text-accent font-display text-xl">{Math.round(scheduleInfo.proba2)}%</div>
+            )}
+          </div>
         </div>
-        <div className="text-white/70 font-semibold">
+        <div className="text-center text-white/70 font-semibold mt-2">
           {league ? `${league} • ` : ""} {bo} {when ? `• ${when}` : ""}
         </div>
       </div>
