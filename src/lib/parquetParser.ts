@@ -10,7 +10,7 @@ export type PlayerStats = {
   player: string;
   player_name?: string;
   position?: string;
-  // KPIs (toujours number | undefined après parsing)
+  // KPIs
   kda_last_10?: number;
   kda_last_20?: number;
   earned_gpm_avg_last_10?: number;
@@ -31,25 +31,21 @@ export type ParseResult = [TeamStats, TeamStats];
 
 /* ============================================================================
    Helpers URL : construit une URL absolue depuis l'origine (respecte BASE_URL)
-   - Mets bien ton fichier à: public/Documents/DF_filtered.parquet
-   - L’URL finale doit être: <origin><base>/Documents/DF_filtered.parquet
+   Place le fichier dans: public/Documents/DF_filtered.parquet
    ============================================================================ */
 function assetUrl(relPath: string): string {
-  const rel = relPath.replace(/^\/+/, ""); // enlève les / de tête
-  // Essaie d'utiliser <base href> si présent, sinon Vite BASE_URL, sinon "/"
+  const rel = relPath.replace(/^\/+/, "");
   const baseTagHref = document.querySelector("base")?.getAttribute("href") || "";
   const baseFromTag = baseTagHref ? new URL(baseTagHref, window.location.origin).pathname : "";
-  // @ts-ignore Vite fournit import.meta.env.BASE_URL
+  // @ts-ignore (Vite)
   const baseFromVite: string = (import.meta as any)?.env?.BASE_URL || "";
   const base = (baseFromTag || baseFromVite || "/").toString();
-  const normBase = (base.startsWith("/") ? base : "/" + base).replace(/\/+$/, ""); // "/app" ou ""
-  // Construit à partir de l'origine (⚠️ pas href) pour éviter d'hériter du chemin de page
+  const normBase = (base.startsWith("/") ? base : "/" + base).replace(/\/+$/, "");
   return new URL(`${normBase}/${rel}`, window.location.origin).toString();
 }
 
 /** URL publique du parquet (servi par l’app). */
 const PARQUET_URL = assetUrl("Documents/DF_filtered.parquet");
-// console.log("[parquetParser] PARQUET_URL =", PARQUET_URL);
 
 /* ============================================================================
    Aliases équipes
@@ -117,7 +113,7 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
   const DUCKDB_BUNDLES = duckdb.getJsDelivrBundles();
   const bundle = await duckdb.selectBundle(DUCKDB_BUNDLES);
 
-  // Create worker with proper CORS handling (blob: worker)
+  // worker (blob:) pour éviter CORS
   const workerUrl = new URL(bundle.mainWorker!);
   const response = await fetch(workerUrl);
   const blob = await response.blob();
@@ -228,7 +224,6 @@ function pickColName(existing: string[], candidates: string[]): string | null {
 /* ============ images joueurs (asset servi depuis public/) ============ */
 export function getPlayerImage(playerName: string): string {
   const clean = String(playerName || "").trim();
-  // Suppose des PNG dans: public/Documents/teams/<Player>.png
   return assetUrl(`Documents/teams/${clean}.png`);
 }
 
@@ -244,7 +239,6 @@ export async function parsePlayerDataParquet(
   const conn = await db.connect();
 
   try {
-    // IMPORTANT : read_parquet() via HTTP → URL complète, sans hériter du chemin de page
     await conn.query(`CREATE OR REPLACE TEMP TABLE t AS SELECT * FROM read_parquet('${PARQUET_URL}')`);
 
     const teamCol = await detectTeamCol(conn, "t");
@@ -302,45 +296,78 @@ export async function parsePlayerDataParquet(
     const rows1 = rs1.toArray();
     const rows2 = rs2.toArray();
 
+    /* === Sélection 1 joueur par rôle (TOP/JGL/MID/ADC/SUP) === */
     function toPlayers(rows: any[], team: string): PlayerStats[] {
-      const players = rows.map((r) => {
-        const p: PlayerStats = {
-          team,
-          teamname: team,
-          player: String(r.player_col ?? "").trim(),
-          position: posCol ? String(r.pos_col ?? "") : undefined,
-          // force number | undefined
-          kda_last_10: toNum(r["kda_last_10"]),
-          kda_last_20: toNum(r["kda_last_20"]),
-          earned_gpm_avg_last_10: toNum(r["earned_gpm_avg_last_10"]),
-          earned_gpm_avg_last_365d: toNum(r["earned_gpm_avg_last_365d"]),
-          dpm_avg_last_365d: toNum(r["dpm_avg_last_365d"]),
-          wcpm_avg_last_365d: toNum(r["wcpm_avg_last_365d"]),
-          vspm_avg_last_365d: toNum(r["vspm_avg_last_365d"]),
-        };
-        return p;
+      // 1) déduplique par joueur (garde le meilleur EGPM10 puis 365d)
+      const keyPlayer = (r: any) => String(r.player_col ?? "").trim();
+      const egpmVal = (r: any) => Number(r["earned_gpm_avg_last_10"]) ?? Number(r["earned_gpm_avg_last_365d"]) ?? -1e9;
+
+      const bestRowByPlayer = new Map<string, any>();
+      for (const r of rows) {
+        const name = keyPlayer(r);
+        if (!name) continue;
+        const cur = bestRowByPlayer.get(name);
+        if (!cur || egpmVal(r) > egpmVal(cur)) bestRowByPlayer.set(name, r);
+      }
+
+      const asPlayerStats = (r: any): PlayerStats => ({
+        team,
+        teamname: team,
+        player: String(r.player_col ?? "").trim(),
+        position: posCol ? String(r.pos_col ?? "") : undefined,
+        kda_last_10: toNum(r["kda_last_10"]),
+        kda_last_20: toNum(r["kda_last_20"]),
+        earned_gpm_avg_last_10: toNum(r["earned_gpm_avg_last_10"]),
+        earned_gpm_avg_last_365d: toNum(r["earned_gpm_avg_last_365d"]),
+        dpm_avg_last_365d: toNum(r["dpm_avg_last_365d"]),
+        wcpm_avg_last_365d: toNum(r["wcpm_avg_last_365d"]),
+        vspm_avg_last_365d: toNum(r["vspm_avg_last_365d"]),
       });
 
-      const roleOrder = (s?: string) => {
+      const uniquePlayers = Array.from(bestRowByPlayer.values()).map(asPlayerStats);
+
+      const normRole = (s?: string) => {
         const u = String(s || "").toUpperCase();
-        if (u.includes("TOP")) return 1;
-        if (u.includes("JGL") || u.includes("JUNG")) return 2;
-        if (u.includes("MID")) return 3;
-        if (u.includes("ADC") || u.includes("BOT")) return 4;
-        if (u.includes("SUP")) return 5;
-        return 99;
+        if (/\bTOP\b/.test(u)) return "TOP";
+        if (/\b(JGL|JUNG|JUNGLE|JUNGLER)\b/.test(u)) return "JGL";
+        if (/\bMID\b/.test(u)) return "MID";
+        if (/\b(ADC|BOT|BOTTOM)\b/.test(u)) return "ADC";
+        if (/\b(SUP|SUPP|SUPPORT)\b/.test(u)) return "SUP";
+        return "UNK";
       };
 
-      players.sort((a, b) => {
-        const ra = roleOrder(a.position);
-        const rb = roleOrder(b.position);
-        if (ra !== rb) return ra - rb;
-        const ea = a.earned_gpm_avg_last_10 ?? -1e9;
-        const eb = b.earned_gpm_avg_last_10 ?? -1e9;
-        return eb - ea;
-      });
+      const score = (p: PlayerStats) => {
+        const a = Number(p.earned_gpm_avg_last_10 ?? -1e9);
+        const b = Number(p.earned_gpm_avg_last_365d ?? -1e9);
+        const c = Number(p.kda_last_10 ?? p.kda_last_20 ?? -1e9);
+        return a * 1e6 + b * 1e3 + c;
+      };
 
-      return players.slice(0, 5);
+      const bestByRole = new Map<string, PlayerStats>();
+      for (const p of uniquePlayers) {
+        const role = normRole(p.position);
+        if (role === "UNK") continue;
+        const cur = bestByRole.get(role);
+        if (!cur || score(p) > score(cur)) bestByRole.set(role, p);
+      }
+
+      const order = ["TOP", "JGL", "MID", "ADC", "SUP"] as const;
+      const picked: PlayerStats[] = [];
+      for (const r of order) {
+        const p = bestByRole.get(r);
+        if (p) picked.push(p);
+      }
+
+      if (picked.length < 5) {
+        const already = new Set(picked.map((p) => p.player));
+        const rest = uniquePlayers.filter((p) => !already.has(p.player)).sort((a, b) => score(b) - score(a));
+        for (const p of rest) {
+          picked.push(p);
+          if (picked.length >= 5) break;
+        }
+      }
+
+      return picked.slice(0, 5);
     }
 
     const players1 = toPlayers(rows1, r1.found!);
