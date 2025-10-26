@@ -30,29 +30,21 @@ export type TeamStats = {
 export type ParseResult = [TeamStats, TeamStats];
 
 /* ============================================================================
-   Helpers URL : génère une URL web correcte, compatible basePath
+   Helpers URL : génère une URL web correcte, compatible sous-répertoire
    - Place ton fichier dans: public/Documents/DF_filtered.parquet
    - À l’exécution, il sera servi à: <base>/Documents/DF_filtered.parquet
    ============================================================================ */
 function assetUrl(relPath: string): string {
-  // 1) base depuis <base href>, sinon BASE_URL (Vite), sinon "/"
-  const baseFromTag = document.querySelector("base")?.getAttribute("href") || "";
-  // @ts-ignore - import.meta peut ne pas exister selon bundler
-  const baseFromEnv = (typeof import !== "undefined" && (import.meta as any)?.env?.BASE_URL) || "";
-  const base = (baseFromTag || baseFromEnv || "/").toString();
-
-  // 2) normalise base → commence par "/" et ne finit pas par "/"
-  const normBase = (base.startsWith("/") ? base : "/" + base).replace(/\/+$/, "");
-
-  // 3) supprime "/" en tête du relPath
-  const rel = relPath.replace(/^\/+/, "");
-
-  // 4) construit l’URL finale: origin + base + "/" + rel
-  return new URL(`${normBase}/${rel}`, window.location.origin).toString();
+  // retire les "/" en tête pour éviter de casser le basePath
+  const rel = String(relPath || "").replace(/^\/+/, "");
+  // construit une URL absolue à partir de l’URL courante (compatible sous-répertoire)
+  return new URL(rel, window.location.href).toString();
 }
 
 /** URL publique du parquet (servi par l’app). */
 const PARQUET_URL = assetUrl("Documents/DF_filtered.parquet");
+// (Optionnel) log de debug
+// console.log("[parquetParser] PARQUET_URL =", PARQUET_URL);
 
 /* ============================================================================
    Aliases équipes
@@ -121,7 +113,7 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
   const DUCKDB_BUNDLES = duckdb.getJsDelivrBundles();
   const bundle = await duckdb.selectBundle(DUCKDB_BUNDLES);
 
-  // Create worker with proper CORS handling
+  // Create worker with proper CORS handling (blob: worker)
   const workerUrl = new URL(bundle.mainWorker!);
   const response = await fetch(workerUrl);
   const blob = await response.blob();
@@ -147,9 +139,7 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
    ============================================================================ */
 async function fetchAllTeams(conn: duckdb.AsyncDuckDBConnection, table: string, teamCol: string) {
   const escapedCol = `"${teamCol.replace(/"/g, '""')}"`;
-  const rs = await conn.query(
-    `SELECT DISTINCT ${escapedCol} as team FROM ${table} WHERE ${escapedCol} IS NOT NULL`,
-  );
+  const rs = await conn.query(`SELECT DISTINCT ${escapedCol} as team FROM ${table} WHERE ${escapedCol} IS NOT NULL`);
   return rs
     .toArray()
     .map((r: any) => String(r.team).trim())
@@ -231,7 +221,7 @@ function pickColName(existing: string[], candidates: string[]): string | null {
   return null;
 }
 
-/* ============ images joueurs ============ */
+/* ============ images joueurs (asset servi depuis public/) ============ */
 export function getPlayerImage(playerName: string): string {
   const clean = String(playerName || "").trim();
   // Suppose des PNG dans: public/Documents/teams/<Player>.png
@@ -250,7 +240,7 @@ export async function parsePlayerDataParquet(
   const conn = await db.connect();
 
   try {
-    // IMPORTANT : on passe une URL HTTP(S) complète
+    // IMPORTANT : read_parquet() via HTTP → URL complète
     await conn.query(`CREATE OR REPLACE TEMP TABLE t AS SELECT * FROM read_parquet('${PARQUET_URL}')`);
 
     const teamCol = await detectTeamCol(conn, "t");
