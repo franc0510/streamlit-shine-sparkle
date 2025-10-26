@@ -30,20 +30,25 @@ export type TeamStats = {
 export type ParseResult = [TeamStats, TeamStats];
 
 /* ============================================================================
-   Helpers URL : génère une URL web correcte, compatible sous-répertoire
-   - Place ton fichier dans: public/Documents/DF_filtered.parquet
-   - À l’exécution, il sera servi à: <base>/Documents/DF_filtered.parquet
+   Helpers URL : construit une URL absolue depuis l'origine (respecte BASE_URL)
+   - Mets bien ton fichier à: public/Documents/DF_filtered.parquet
+   - L’URL finale doit être: <origin><base>/Documents/DF_filtered.parquet
    ============================================================================ */
 function assetUrl(relPath: string): string {
-  // retire les "/" en tête pour éviter de casser le basePath
-  const rel = String(relPath || "").replace(/^\/+/, "");
-  // construit une URL absolue à partir de l’URL courante (compatible sous-répertoire)
-  return new URL(rel, window.location.href).toString();
+  const rel = relPath.replace(/^\/+/, ""); // enlève les / de tête
+  // Essaie d'utiliser <base href> si présent, sinon Vite BASE_URL, sinon "/"
+  const baseTagHref = document.querySelector("base")?.getAttribute("href") || "";
+  const baseFromTag = baseTagHref ? new URL(baseTagHref, window.location.origin).pathname : "";
+  // @ts-ignore Vite fournit import.meta.env.BASE_URL
+  const baseFromVite: string = (import.meta as any)?.env?.BASE_URL || "";
+  const base = (baseFromTag || baseFromVite || "/").toString();
+  const normBase = (base.startsWith("/") ? base : "/" + base).replace(/\/+$/, ""); // "/app" ou ""
+  // Construit à partir de l'origine (⚠️ pas href) pour éviter d'hériter du chemin de page
+  return new URL(`${normBase}/${rel}`, window.location.origin).toString();
 }
 
 /** URL publique du parquet (servi par l’app). */
 const PARQUET_URL = assetUrl("Documents/DF_filtered.parquet");
-// (Optionnel) log de debug
 // console.log("[parquetParser] PARQUET_URL =", PARQUET_URL);
 
 /* ============================================================================
@@ -96,7 +101,6 @@ function applyAlias(s: string) {
   return TEAM_ALIASES[k] ?? s;
 }
 
-// Helper cast → number | undefined
 function toNum(v: any): number | undefined {
   const n = Number(v);
   return Number.isFinite(n) ? n : undefined;
@@ -240,7 +244,7 @@ export async function parsePlayerDataParquet(
   const conn = await db.connect();
 
   try {
-    // IMPORTANT : read_parquet() via HTTP → URL complète
+    // IMPORTANT : read_parquet() via HTTP → URL complète, sans hériter du chemin de page
     await conn.query(`CREATE OR REPLACE TEMP TABLE t AS SELECT * FROM read_parquet('${PARQUET_URL}')`);
 
     const teamCol = await detectTeamCol(conn, "t");
