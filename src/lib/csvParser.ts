@@ -5,6 +5,8 @@ export interface Match {
   format: string;
   team1: string;
   team2: string;
+  used_team1: string; // Exact name from parquet
+  used_team2: string; // Exact name from parquet
   proba1: number;
   proba2: number;
   status?: string;
@@ -32,6 +34,8 @@ export const parseScheduleCSV = async (): Promise<Match[]> => {
           team2: cols[4],
           proba1: parseFloat(cols[5]),
           proba2: parseFloat(cols[6]),
+          used_team1: cols[10] || cols[3], // Column 10: used_team1
+          used_team2: cols[11] || cols[4], // Column 11: used_team2
           status: cols[9]
         };
       })
@@ -64,6 +68,8 @@ export const parsePredictionsHistoryCSV = async (): Promise<Match[]> => {
           team2: cols[6],
           proba1: parseFloat(cols[7]) * 100,
           proba2: parseFloat(cols[8]) * 100,
+          used_team1: cols[9] || cols[5],
+          used_team2: cols[10] || cols[6],
           status: cols[12],
           matchDate: dateTime
         };

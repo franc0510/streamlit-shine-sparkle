@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import clsx from "clsx";
+import { Navbar } from "@/components/Navbar";
 import {
   Radar,
   RadarChart,
@@ -279,9 +280,12 @@ export default function MatchDetails() {
   const [teamA, setTeamA] = useState<TeamStats | null>(null);
   const [teamB, setTeamB] = useState<TeamStats | null>(null);
   const [scheduleInfo, setScheduleInfo] = useState<Match | null>(null);
+  const [teamParquetNames, setTeamParquetNames] = useState<{ team1: string; team2: string } | null>(null);
 
   // charge les données parquet via backend util
   useEffect(() => {
+    if (!teamParquetNames) return; // Wait for schedule to load
+    
     let cancel = false;
     async function run() {
       setLoading(true);
@@ -289,7 +293,7 @@ export default function MatchDetails() {
       setTeamA(null);
       setTeamB(null);
       try {
-        const res = await parsePlayerDataParquet(initialTeam1, initialTeam2, scale);
+        const res = await parsePlayerDataParquet(teamParquetNames.team1, teamParquetNames.team2, scale);
         if (!res) {
           if (!cancel) setError("Impossible de lire les données joueurs (parquet).");
           return;
@@ -309,7 +313,7 @@ export default function MatchDetails() {
     return () => {
       cancel = true;
     };
-  }, [initialTeam1, initialTeam2, scale]);
+  }, [teamParquetNames, scale]);
 
   // Load schedule to retrieve official team names, percents and logos
   useEffect(() => {
@@ -334,7 +338,13 @@ export default function MatchDetails() {
           matches.find((m) => slugify(m.team1) === t1Slug && slugify(m.team2) === t2Slug) ||
           matches.find((m) => slugify(m.team1) === t2Slug && slugify(m.team2) === t1Slug);
 
-        setScheduleInfo(found ?? null);
+        if (found) {
+          setScheduleInfo(found);
+          // Use the exact parquet names (used_team1, used_team2) for data loading
+          setTeamParquetNames({ team1: found.used_team1, team2: found.used_team2 });
+        } else {
+          setScheduleInfo(null);
+        }
       } catch (e) {
         setScheduleInfo(null);
       }
@@ -348,9 +358,11 @@ export default function MatchDetails() {
   }, [teamA, teamB, windowSel]);
 
   return (
-    <div className="px-4 md:px-8 lg:px-12 py-4">
-      {/* Header */}
-      <div className="mb-4">
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <div className="px-4 md:px-8 lg:px-12 py-4">
+        {/* Header */}
+        <div className="mb-4">
         <button
           onClick={() => history.back()}
           className="text-white/80 hover:text-white text-sm mb-3"
@@ -483,6 +495,7 @@ export default function MatchDetails() {
           </Section>
         </>
       )}
+      </div>
     </div>
   );
 }
