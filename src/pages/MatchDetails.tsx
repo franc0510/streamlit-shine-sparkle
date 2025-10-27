@@ -1,14 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import clsx from "clsx";
-import { Navbar } from "@/components/Navbar";
 import {
-  Radar,
+  ResponsiveContainer,
   RadarChart,
+  Radar,
   PolarGrid,
   PolarAngleAxis,
   PolarRadiusAxis,
-  ResponsiveContainer,
   Legend,
   Tooltip,
 } from "recharts";
@@ -20,10 +19,9 @@ import {
   type ScaleMode,
   type TimeWindow,
 } from "@/lib/parquetParser";
-import { parseScheduleCSV, getTeamLogo, type Match } from "@/lib/csvParser";
+import PlayerRadarChart from "@/components/PlayerRadarChart";
 
-/* ========================== Helpers URL / UI ========================== */
-
+/* ===================== helpers ===================== */
 function useQuery() {
   const { search } = useLocation();
   return useMemo(() => new URLSearchParams(search), [search]);
@@ -35,99 +33,6 @@ function titleCase(s: string) {
     .replace(/\b\w/g, (c) => c.toUpperCase())
     .replace(/_/g, " ");
 }
-
-// Same slugification as Index.tsx to match URLs
-function slugify(s: string) {
-  return (s || "")
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "")
-    .replace(/-+/g, "-");
-}
-
-/* ========================== KPIs & Fenêtres ========================== */
-/** KPI “canoniques” disponibles dans DF_filtered.parquet */
-const KPI_BY_WINDOW: Record<TimeWindow, string[]> = {
-  last_10: [
-    "kda_last_10",
-    "earned_gpm_avg_last_10",
-    "dpm_avg_last_365d",
-    "wcpm_avg_last_365d",
-    "vspm_avg_last_365d",
-  ],
-  last_20: [
-    "kda_last_20",
-    "earned_gpm_avg_last_10",
-    "dpm_avg_last_365d",
-    "wcpm_avg_last_365d",
-    "vspm_avg_last_365d",
-  ],
-  last_365d: [
-    "kda_last_20",
-    "earned_gpm_avg_last_365d",
-    "dpm_avg_last_365d",
-    "wcpm_avg_last_365d",
-    "vspm_avg_last_365d",
-  ],
-};
-
-/** Renvoie la liste finale de KPIs réellement présents dans les joueurs */
-function resolveAvailableKpis(players: PlayerStats[], win: TimeWindow): string[] {
-  const wanted = KPI_BY_WINDOW[win];
-  const has = (k: string) => players.some((p) => typeof (p as any)[k] === "number");
-  const primary = wanted.filter(has);
-  // si la fenêtre est trop pauvre, fallback (union douce) vers 365
-  if (primary.length >= 3) return primary;
-  const fallback = KPI_BY_WINDOW["last_365d"].filter(has);
-  const merged = [...new Set([...primary, ...fallback])];
-  // garder 3–6 axes max sur un radar
-  return merged.slice(0, 6);
-}
-
-/* ========================== Normalisations ========================== */
-
-type ScaleChoice = "none" | "minmax" | "zscore";
-
-function normalizeMatrix(rows: number[][], mode: ScaleChoice = "none"): number[][] {
-  if (mode === "none") return rows;
-
-  const nRows = rows.length;
-  const nCols = rows[0]?.length ?? 0;
-  if (!nRows || !nCols) return rows;
-
-  const cols = Array.from({ length: nCols }, (_, j) => rows.map((r) => r[j]));
-  const normCols = cols.map((col) => {
-    const valid = col.filter((v) => Number.isFinite(v));
-    if (valid.length === 0) return col.map(() => 0);
-
-    if (mode === "minmax") {
-      const min = Math.min(...valid);
-      const max = Math.max(...valid);
-      const range = max - min || 1;
-      return col.map((v) => (Number.isFinite(v) ? (v - min) / range : 0));
-    } else {
-      // z-score
-      const mean = valid.reduce((a, b) => a + b, 0) / valid.length;
-      const var_ = valid.reduce((a, b) => a + (b - mean) ** 2, 0) / Math.max(valid.length - 1, 1);
-      const sd = Math.sqrt(var_) || 1;
-      return col.map((v) => (Number.isFinite(v) ? (v - mean) / sd : 0));
-    }
-  });
-
-  // transpose back
-  return rows.map((_, i) => normCols.map((c) => c[i]));
-}
-
-/* ========================== Recharts Mappers ========================== */
-
-function toRadarSeries(label: string, axes: string[], values: number[]): Record<string, any>[] {
-  return axes.map((k, i) => ({
-    metric: titleCase(k.replace(/_avg_|_last_/g, " ").replace(/365d/g, "365d")),
-    [label]: Number.isFinite(values[i]) ? values[i] : 0,
-  }));
-}
-
-/* ========================== UI Composants ========================== */
 
 function Chip({ active, children, onClick }: { active?: boolean; children: React.ReactNode; onClick?: () => void }) {
   return (
@@ -154,147 +59,73 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function PlayerRadar({
-  player,
-  axes,
-  scale,
-  colorKey,
-}: {
-  player: PlayerStats;
-  axes: string[];
-  scale: ScaleChoice;
-  colorKey: string; // "A" | "B" ou similaire
-}) {
-  const vec = axes.map((k) => Number(player[k] as number) || 0);
-  const norm = normalizeMatrix([vec], scale)[0];
-  const data = toRadarSeries(player.player, axes, norm);
+/* === Axes joueurs : gérés dans PlayerRadarChart === */
 
+/* ===================== Composants ===================== */
+
+function TeamSummary({ team, winrate, power }: { team: string; winrate?: number; power?: number }) {
   return (
-    <div className="w-full h-64">
-      <ResponsiveContainer width="100%" height="100%">
-        <RadarChart data={data}>
-          <PolarGrid />
-          <PolarAngleAxis dataKey="metric" tick={{ fill: "white", fontSize: 11 }} />
-          <PolarRadiusAxis tick={{ fill: "white", fontSize: 10 }} stroke="#ffffff55" axisLine={false} />
-          <Radar
-            name={player.player}
-            dataKey={player.player}
-            fill={colorKey === "A" ? "#50B4FF99" : "#00D2AA99"}
-            stroke={colorKey === "A" ? "#50B4FF" : "#00D2AA"}
-            fillOpacity={0.5}
-          />
-          <Legend />
-          <Tooltip />
-        </RadarChart>
-      </ResponsiveContainer>
-      <div className="text-center mt-1 text-white/90 text-sm">
-        {player.player} {player.position ? `• ${player.position}` : ""}
+    <div className="rounded-xl border border-white/10 bg-white/5 p-3 flex items-center justify-between gap-3">
+      <div className="text-white font-extrabold text-lg">{team}</div>
+      <div className="flex items-center gap-6 text-white/90">
+        <div>
+          <div className="text-white/60 text-xs">Winrate</div>
+          <div className="text-white font-bold">
+            {typeof winrate === "number" ? `${(winrate * 100).toFixed(1)}%` : "—"}
+          </div>
+        </div>
+        <div>
+          <div className="text-white/60 text-xs">Power team</div>
+          <div className="text-white font-bold">{typeof power === "number" ? power.toFixed(2) : "—"}</div>
+        </div>
       </div>
     </div>
   );
 }
 
-function TeamRadar({
-  team,
-  axes,
-  scale,
-  colorKey,
-}: {
-  team: TeamStats;
-  axes: string[];
-  scale: ScaleChoice;
-  colorKey: string;
-}) {
-  // moyenne des 5
-  const rows = team.players.map((p) => axes.map((k) => Number(p[k] as number) || 0));
-  const mean = axes.map((_, j) => {
-    const vals = rows.map((r) => r[j]).filter((x) => Number.isFinite(x));
-    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
-    // on pourrait aussi piocher team.aggregates[k] si tu préfères
-  });
-
-  const norm = normalizeMatrix([mean], scale)[0];
-  const data = toRadarSeries(team.team, axes, norm);
-
-  return (
-    <div className="w-full h-72">
-      <ResponsiveContainer width="100%" height="100%">
-        <RadarChart data={data}>
-          <PolarGrid />
-          <PolarAngleAxis dataKey="metric" tick={{ fill: "white", fontSize: 12 }} />
-          <PolarRadiusAxis tick={{ fill: "white", fontSize: 10 }} stroke="#ffffff55" />
-          <Radar
-            name={team.team}
-            dataKey={team.team}
-            fill={colorKey === "A" ? "#50B4FF55" : "#00D2AA55"}
-            stroke={colorKey === "A" ? "#50B4FF" : "#00D2AA"}
-            fillOpacity={0.5}
-          />
-          <Legend />
-          <Tooltip />
-        </RadarChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
-
-/* ========================== Page principale ========================== */
+/* ===================== Page ===================== */
 
 export default function MatchDetails() {
   const location = useLocation();
   const q = useQuery();
 
-  // Extract teams from URL path like /match/league/date/time/team1-vs-team2
-  const pathParts = location.pathname.split('/').filter(Boolean);
+  // /match/<league>/<date>/<time>/<team1>-vs-<team2>
+  const pathParts = location.pathname.split("/").filter(Boolean);
   const matchString = pathParts[pathParts.length - 1] || "";
-  
-  // Parse "100-thieves-vs-t1" -> ["100-thieves", "t1"]
   const vsMatch = matchString.match(/^(.+)-vs-(.+)$/);
+
   let initialTeam1 = "";
   let initialTeam2 = "";
-  
   if (vsMatch) {
-    initialTeam1 = vsMatch[1].replace(/-/g, ' '); // "100-thieves" -> "100 thieves"
-    initialTeam2 = vsMatch[2].replace(/-/g, ' '); // "t1" -> "t1"
+    initialTeam1 = vsMatch[1].replace(/-/g, " ");
+    initialTeam2 = vsMatch[2].replace(/-/g, " ");
   } else {
-    // Fallback to query params
     initialTeam1 = q.get("team1") || "";
     initialTeam2 = q.get("team2") || "";
   }
-  
   const league = pathParts[1] || q.get("league") || "";
   const bo = q.get("bo") || "BO3";
   const when = decodeURIComponent(pathParts[2] || "") || q.get("date") || "";
-  
-  console.log("[MatchDetails] Extracted teams:", { initialTeam1, initialTeam2, league, when, pathParts });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [scale, setScale] = useState<ScaleChoice>("none");
+  const [scale, setScale] = useState<ScaleMode>("none");
   const [windowSel, setWindowSel] = useState<TimeWindow>("last_10");
 
   const [teamA, setTeamA] = useState<TeamStats | null>(null);
   const [teamB, setTeamB] = useState<TeamStats | null>(null);
-  const [scheduleInfo, setScheduleInfo] = useState<Match | null>(null);
-  const [teamParquetNames, setTeamParquetNames] = useState<{ team1: string; team2: string } | null>(null);
 
-  // charge les données parquet via backend util
   useEffect(() => {
-    if (!teamParquetNames) return; // Wait for schedule to load
-    
     let cancel = false;
-    async function run() {
+    (async () => {
       setLoading(true);
       setError(null);
       setTeamA(null);
       setTeamB(null);
       try {
-        const res = await parsePlayerDataParquet(teamParquetNames.team1, teamParquetNames.team2, scale);
-        if (!res) {
-          if (!cancel) setError("Impossible de lire les données joueurs (parquet).");
-          return;
-        }
+        const res = await parsePlayerDataParquet(initialTeam1, initialTeam2, scale);
+        if (!res) throw new Error("Impossible de lire les données joueurs (parquet).");
         const [A, B] = res;
         if (!cancel) {
           setTeamA(A);
@@ -305,107 +136,32 @@ export default function MatchDetails() {
       } finally {
         if (!cancel) setLoading(false);
       }
-    }
-    run();
+    })();
     return () => {
       cancel = true;
     };
-  }, [teamParquetNames, scale]);
+  }, [initialTeam1, initialTeam2, scale]);
 
-  // Load schedule to retrieve official team names, percents and logos
-  useEffect(() => {
-    async function loadSchedule() {
-      try {
-        const matches = await parseScheduleCSV();
-        const t1Slug = slugify(initialTeam1);
-        const t2Slug = slugify(initialTeam2);
-        const leagueSlug = (pathParts[1] || "").toLowerCase();
-        const dateSeg = decodeURIComponent(pathParts[2] || "");
-        const timeSeg = decodeURIComponent(pathParts[3] || "");
-
-        const found =
-          matches.find(
-            (m) =>
-              slugify(m.team1) === t1Slug &&
-              slugify(m.team2) === t2Slug &&
-              slugify(m.tournament) === leagueSlug &&
-              m.date === dateSeg &&
-              m.time === timeSeg,
-          ) ||
-          matches.find((m) => slugify(m.team1) === t1Slug && slugify(m.team2) === t2Slug) ||
-          matches.find((m) => slugify(m.team1) === t2Slug && slugify(m.team2) === t1Slug);
-
-        if (found) {
-          setScheduleInfo(found);
-          // Use the exact parquet names (used_team1, used_team2) for data loading
-          setTeamParquetNames({ team1: found.used_team1, team2: found.used_team2 });
-        } else {
-          setScheduleInfo(null);
-        }
-      } catch (e) {
-        setScheduleInfo(null);
-      }
-    }
-    loadSchedule();
-  }, [location.pathname, initialTeam1, initialTeam2]);
-
-  const axes = useMemo(() => {
-    const allPlayers = [...(teamA?.players || []), ...(teamB?.players || [])];
-    return resolveAvailableKpis(allPlayers, windowSel);
-  }, [teamA, teamB, windowSel]);
+  const winrateFor = (t: TeamStats | null, win: TimeWindow) => {
+    if (!t) return undefined;
+    if (win === "last_10") return t.meta.team_winrate_last_10;
+    if (win === "last_20") return t.meta.team_winrate_last_20;
+    return t.meta.team_winrate_last_year;
+  };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <div className="px-4 md:px-8 lg:px-12 py-4">
-        {/* Header */}
-        <div className="mb-4">
-        <button
-          onClick={() => history.back()}
-          className="text-white/80 hover:text-white text-sm mb-3"
-          aria-label="Retour"
-        >
-          ← Retour
-        </button>
-        <div className="flex items-center justify-center gap-8 text-center">
-          {/* Team 1 */}
-          <div className="flex flex-col items-center gap-2 min-w-[120px]">
-            <img
-              src={getTeamLogo(scheduleInfo?.team1 || titleCase(initialTeam1))}
-              alt={scheduleInfo?.team1 || titleCase(initialTeam1)}
-              className="w-14 h-14 object-contain"
-            />
-            <div className="font-bold text-white truncate max-w-[180px]">
-              {scheduleInfo?.team1 || titleCase(initialTeam1)}
-            </div>
-            {scheduleInfo && (
-              <div className="text-primary font-display text-xl">{Math.round(scheduleInfo.proba1)}%</div>
-            )}
-          </div>
-
-          <div className="text-white/70 font-semibold">VS</div>
-
-          {/* Team 2 */}
-          <div className="flex flex-col items-center gap-2 min-w-[120px]">
-            <img
-              src={getTeamLogo(scheduleInfo?.team2 || titleCase(initialTeam2))}
-              alt={scheduleInfo?.team2 || titleCase(initialTeam2)}
-              className="w-14 h-14 object-contain"
-            />
-            <div className="font-bold text-white truncate max-w-[180px]">
-              {scheduleInfo?.team2 || titleCase(initialTeam2)}
-            </div>
-            {scheduleInfo && (
-              <div className="text-accent font-display text-xl">{Math.round(scheduleInfo.proba2)}%</div>
-            )}
-          </div>
+    <div className="px-4 md:px-8 lg:px-12 py-4">
+      {/* Header */}
+      <div className="text-center mb-4">
+        <div className="text-2xl md:text-3xl font-black text-white">
+          {initialTeam1} <span className="text-white/70">vs</span> {initialTeam2}
         </div>
-        <div className="text-center text-white/70 font-semibold mt-2">
+        <div className="text-white/70 font-semibold">
           {league ? `${league} • ` : ""} {bo} {when ? `• ${when}` : ""}
         </div>
       </div>
 
-      {/* Contrôles */}
+      {/* Controls */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
         <div className="rounded-xl border border-white/10 bg-white/5 p-3">
           <div className="font-bold text-white mb-2">Fenêtre temporelle</div>
@@ -417,15 +173,14 @@ export default function MatchDetails() {
             ))}
           </div>
           <div className="text-xs text-white/60 mt-2">
-            Si des métriques manquent pour la fenêtre choisie, on complète automatiquement avec les meilleures
-            alternatives (ex: colonnes “365d”).
+            Les radars joueurs utilisent <b>uniquement</b> les métriques de la fenêtre choisie.
           </div>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-white/5 p-3">
           <div className="font-bold text-white mb-2">Normalisation</div>
           <div className="flex gap-2 flex-wrap">
-            {(["none", "minmax", "zscore"] as ScaleChoice[]).map((m) => (
+            {(["none", "minmax", "zscore"] as ScaleMode[]).map((m) => (
               <Chip key={m} active={scale === m} onClick={() => setScale(m)}>
                 {m === "none" ? "Aucune" : m === "minmax" ? "Min-Max" : "Z-score"}
               </Chip>
@@ -444,105 +199,41 @@ export default function MatchDetails() {
       {/* Contenu */}
       {!loading && !error && teamA && teamB && (
         <>
-          {/* Résumé équipes */}
+          {/* Résumé équipes (PAS de radar d'équipe) */}
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-              <div className="font-extrabold text-white text-lg mb-2">{teamA.team}</div>
-              {teamA.players.length ? (
-                <>
-                  <div className="text-white/80 text-sm mb-2">
-                    Joueurs: {teamA.players.map((p) => p.player).join(", ")}
-                  </div>
-                  <TeamRadar team={teamA} axes={axes} scale={scale} colorKey="A" />
-                </>
-              ) : (
-                <div className="text-white/60">Données insuffisantes</div>
-              )}
-            </div>
-
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-              <div className="font-extrabold text-white text-lg mb-2">{teamB.team}</div>
-              {teamB.players.length ? (
-                <>
-                  <div className="text-white/80 text-sm mb-2">
-                    Joueurs: {teamB.players.map((p) => p.player).join(", ")}
-                  </div>
-                  <TeamRadar team={teamB} axes={axes} scale={scale} colorKey="B" />
-                </>
-              ) : (
-                <div className="text-white/60">Données insuffisantes</div>
-              )}
-            </div>
+            <TeamSummary team={teamA.team} winrate={winrateFor(teamA, windowSel)} power={teamA.meta.power_team} />
+            <TeamSummary team={teamB.team} winrate={winrateFor(teamB, windowSel)} power={teamB.meta.power_team} />
           </div>
 
-          {/* Radars joueurs (5v5) - Face à face par position */}
+          {/* Radars joueurs (5 axes pour 10/20, 4 pour 365d) */}
           <Section title="Comparaison joueurs (5v5)">
-            {teamA.players.length === 0 || teamB.players.length === 0 ? (
+            {!teamA.players.length || !teamB.players.length ? (
               <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
             ) : (
-              <div className="space-y-6">
-                {["top", "jng", "mid", "bot", "sup"].map((pos) => {
-                  const playerA = teamA.players.find(
-                    (p) => p.position?.toString().toLowerCase() === pos
-                  );
-                  const playerB = teamB.players.find(
-                    (p) => p.position?.toString().toLowerCase() === pos
-                  );
-
-                  if (!playerA && !playerB) return null;
-
-                  // Calculer la différence moyenne entre les deux joueurs
-                  let diffText = "";
-                  if (playerA && playerB) {
-                    const vecA = axes.map((k) => Number(playerA[k] as number) || 0);
-                    const vecB = axes.map((k) => Number(playerB[k] as number) || 0);
-                    const avgDiff = vecA.reduce((sum, v, i) => sum + (v - vecB[i]), 0) / axes.length;
-                    const pct = ((avgDiff / (Math.max(...vecA, ...vecB) || 1)) * 100).toFixed(1);
-                    diffText = avgDiff > 0 
-                      ? `${playerA.player} +${pct}%` 
-                      : `${playerB.player} +${Math.abs(Number(pct))}%`;
-                  }
-
-                  return (
-                    <div key={pos} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                      <div className="text-center font-bold text-white mb-3 uppercase">
-                        {pos === "jng" ? "Jungle" : pos === "sup" ? "Support" : pos}
-                      </div>
-                      <div className="grid md:grid-cols-3 gap-4 items-center">
-                        {/* Joueur Team A (gauche) */}
-                        <div>
-                          {playerA ? (
-                            <PlayerRadar player={playerA} axes={axes} scale={scale} colorKey="A" />
-                          ) : (
-                            <div className="text-white/60 text-center">Joueur non disponible</div>
-                          )}
-                        </div>
-
-                        {/* Différence (milieu) */}
-                        <div className="text-center">
-                          {diffText && (
-                            <div className="text-yellow-400 font-bold text-lg">{diffText}</div>
-                          )}
-                        </div>
-
-                        {/* Joueur Team B (droite) */}
-                        <div>
-                          {playerB ? (
-                            <PlayerRadar player={playerB} axes={axes} scale={scale} colorKey="B" />
-                          ) : (
-                            <div className="text-white/60 text-center">Joueur non disponible</div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {teamA.players.map((p, i) => (
+                  <PlayerRadarChart
+                    key={`A-${p.player}-${i}`}
+                    player={p}
+                    timeWindow={windowSel}
+                    scaleMode={scale}
+                    accentColor="#50B4FF"
+                  />
+                ))}
+                {teamB.players.map((p, i) => (
+                  <PlayerRadarChart
+                    key={`B-${p.player}-${i}`}
+                    player={p}
+                    timeWindow={windowSel}
+                    scaleMode={scale}
+                    accentColor="#00D2AA"
+                  />
+                ))}
               </div>
             )}
           </Section>
         </>
       )}
-      </div>
     </div>
   );
 }

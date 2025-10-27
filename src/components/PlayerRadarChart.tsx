@@ -1,88 +1,59 @@
 import React, { useMemo } from "react";
 import { ResponsiveContainer, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip } from "recharts";
-import { getPlayerImage, type PlayerStats } from "@/lib/parquetParser";
-
-export type TimeWindow = "last_10" | "last_20" | "last_365d";
-export type ScaleMode = "none" | "minmax" | "zscore";
+import { getPlayerImage, type PlayerStats, type TimeWindow, type ScaleMode } from "@/lib/parquetParser";
 
 type Props = {
   player: PlayerStats | null | undefined;
   title?: string;
-  accentColor?: string; // couleur principale du radar
+  accentColor?: string;
   scaleMode?: ScaleMode; // none | minmax | zscore
   timeWindow?: TimeWindow; // last_10 | last_20 | last_365d
   height?: number;
 };
 
-/* ----------------------------- helpers ----------------------------- */
-
-function num(...vals: Array<number | string | null | undefined>): number {
-  for (const v of vals) {
-    const n = Number(v as any);
-    if (Number.isFinite(n)) return n;
-  }
-  return 0;
-}
-
-// Normalise un vecteur (tableau de numbers) et retourne [normed, extra]
-// - minmax: [0,1]
-// - zscore: moyenne 0, écart-type 1 (si std=0 → tout 0)
-// - none  : identique
-function normalizeVector(
-  xs: number[],
-  mode: ScaleMode,
-): { values: number[]; extra?: { min?: number; max?: number; mean?: number; std?: number } } {
-  if (!xs.length) return { values: [] };
-
+function normalizeVector(xs: number[], mode: ScaleMode) {
+  if (!xs.length || mode === "none") return xs.slice();
   if (mode === "minmax") {
-    const mn = Math.min(...xs);
-    const mx = Math.max(...xs);
-    if (mx === mn) return { values: xs.map(() => 0), extra: { min: mn, max: mx } };
-    const vals = xs.map((x) => (x - mn) / (mx - mn));
-    return { values: vals, extra: { min: mn, max: mx } };
+    const mn = Math.min(...xs),
+      mx = Math.max(...xs);
+    if (mx === mn) return xs.map(() => 0);
+    return xs.map((x) => (x - mn) / (mx - mn));
   }
-
-  if (mode === "zscore") {
-    const mean = xs.reduce((a, b) => a + b, 0) / xs.length;
-    const var_ = xs.reduce((s, x) => s + (x - mean) * (x - mean), 0) / xs.length;
-    const std = Math.sqrt(var_);
-    if (std === 0) return { values: xs.map(() => 0), extra: { mean, std } };
-    const vals = xs.map((x) => (x - mean) / std);
-    return { values: vals, extra: { mean, std } };
-  }
-
-  return { values: xs.slice() };
+  // z-score
+  const mean = xs.reduce((a, b) => a + b, 0) / xs.length;
+  const var_ = xs.reduce((s, x) => s + (x - mean) ** 2, 0) / xs.length;
+  const sd = Math.sqrt(var_) || 1;
+  return xs.map((x) => (x - mean) / sd);
 }
 
-function chooseKDA(window_: TimeWindow, p: PlayerStats): number {
-  if (window_ === "last_10") {
-    return num(p.kda_last_10, p.kda_last_20);
-  }
-  if (window_ === "last_20") {
-    return num(p.kda_last_20, p.kda_last_10);
-  }
-  // 365d
-  return num(p.kda_last_20, p.kda_last_10);
-}
+/** Axe → label humain */
+const LABELS: Record<string, string> = {
+  kda_last_10: "KDA",
+  kda_last_20: "KDA",
 
-function chooseEGPM(window_: TimeWindow, p: PlayerStats): number {
-  if (window_ === "last_10") {
-    return num(p.earned_gpm_avg_last_10, p.earned_gpm_avg_last_365d);
-  }
-  if (window_ === "last_20") {
-    // pas de colonne last_20 → on downshift vers 10 puis 365
-    return num(p.earned_gpm_avg_last_10, p.earned_gpm_avg_last_365d);
-  }
-  // 365d
-  return num(p.earned_gpm_avg_last_365d, p.earned_gpm_avg_last_10);
-}
+  earned_gpm_avg_last_10: "GPM",
+  earned_gpm_avg_last_20: "GPM",
+  earned_gpm_avg_last_365d: "GPM",
 
-function safeTooltipVal(v: unknown): string {
-  const n = Number(v as any);
-  return Number.isFinite(n) ? n.toFixed(2) : "-";
-}
+  cspm_avg_last_10: "CSPM",
+  cspm_avg_last_20: "CSPM",
+  cspm_avg_last_365d: "CSPM",
 
-/* --------------------------- composant ---------------------------- */
+  vspm_avg_last_10: "VSPM",
+  vspm_avg_last_20: "VSPM",
+  vspm_avg_last_365d: "VSPM",
+
+  dpm_avg_last_10: "DPM",
+  dpm_avg_last_20: "DPM",
+  dpm_avg_last_365d: "DPM",
+};
+
+/** Axes stricts par fenêtre (5 axes pour 10/20, 4 axes pour 365d sans KDA) */
+const AXES_BY_WINDOW: Record<TimeWindow, string[]> = {
+  last_10: ["kda_last_10", "earned_gpm_avg_last_10", "cspm_avg_last_10", "vspm_avg_last_10", "dpm_avg_last_10"],
+  last_20: ["kda_last_20", "earned_gpm_avg_last_20", "cspm_avg_last_20", "vspm_avg_last_20", "dpm_avg_last_20"],
+  last_365d: ["earned_gpm_avg_last_365d", "cspm_avg_last_365d", "vspm_avg_last_365d", "dpm_avg_last_365d"],
+};
 
 const PlayerRadarChart: React.FC<Props> = ({
   player,
@@ -92,60 +63,28 @@ const PlayerRadarChart: React.FC<Props> = ({
   timeWindow = "last_10",
   height = 280,
 }) => {
-  // garde-fous
-  const hasData = Boolean(
-    player &&
-      (player.player || player.player_name) &&
-      (player.kda_last_10 ||
-        player.kda_last_20 ||
-        player.earned_gpm_avg_last_10 ||
-        player.earned_gpm_avg_last_365d ||
-        player.dpm_avg_last_365d ||
-        player.wcpm_avg_last_365d ||
-        player.vspm_avg_last_365d),
-  );
-
   const playerName =
     (player?.player && String(player.player)) || (player?.player_name && String(player.player_name)) || "Unknown";
   const imgSrc = getPlayerImage(playerName);
 
-  // 1) On construit les 6 KPIs (avec fallback selon la fenêtre)
+  const axes = AXES_BY_WINDOW[timeWindow];
+
   const rawPoints = useMemo(() => {
     if (!player) return [];
+    return axes.map((k) => ({ key: k, value: Number((player as any)[k]) })).filter((x) => Number.isFinite(x.value));
+  }, [player, axes]);
 
-    const kda = chooseKDA(timeWindow, player);
-    const egpm = chooseEGPM(timeWindow, player);
-    const dpm = num(player.dpm_avg_last_365d);
-    const wcpm = num(player.wcpm_avg_last_365d);
-    const vspm = num(player.vspm_avg_last_365d);
-
-    const pts = [
-      { key: "KDA", value: kda, hint: timeWindow === "last_365d" ? "365d" : timeWindow.replace("last_", "") },
-      { key: "EGPM", value: egpm, hint: timeWindow === "last_365d" ? "365d" : timeWindow.replace("last_", "") },
-      { key: "DPM", value: dpm, hint: "365d" },
-      { key: "WCPM", value: wcpm, hint: "365d" },
-      { key: "VSPM", value: vspm, hint: "365d" },
-    ];
-
-    // retire ceux qui sont tous à 0 (très rare) → on garde le graphe lisible
-    return pts.filter((p) => Number.isFinite(p.value));
-  }, [player, timeWindow]);
-
-  // 2) Normalisation par radar
   const chartData = useMemo(() => {
-    if (!rawPoints.length) return [];
-
-    const xs = rawPoints.map((p) => Number(p.value) || 0);
+    const xs = rawPoints.map((p) => p.value);
     const normed = normalizeVector(xs, scaleMode);
-
     return rawPoints.map((p, i) => ({
-      metric: `${p.key}${p.hint ? ` (${p.hint})` : ""}`,
-      value: normed.values[i],
+      metric: LABELS[p.key],
+      value: normed[i],
       raw: p.value,
     }));
   }, [rawPoints, scaleMode]);
 
-  if (!hasData || chartData.length === 0) {
+  if (!player || chartData.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border border-white/10 bg-white/5 p-4">
         <div className="text-white/90 font-bold mb-1">{title || playerName}</div>
@@ -158,14 +97,11 @@ const PlayerRadarChart: React.FC<Props> = ({
     <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
       {/* header */}
       <div className="flex items-center gap-3 mb-2">
-        {/* avatar */}
         <img
           src={imgSrc}
           alt={playerName}
           className="h-10 w-10 rounded-full object-cover border border-white/20"
-          onError={(e) => {
-            (e.currentTarget as HTMLImageElement).style.visibility = "hidden";
-          }}
+          onError={(e) => ((e.currentTarget as HTMLImageElement).style.visibility = "hidden")}
         />
         <div className="min-w-0">
           <div className="text-white font-extrabold leading-tight truncate">{title || playerName}</div>
@@ -196,7 +132,12 @@ const PlayerRadarChart: React.FC<Props> = ({
               }}
               formatter={(v, _n, ctx) => {
                 const raw = (ctx?.payload && (ctx.payload as any).raw) ?? v;
-                return [`${safeTooltipVal(v)} (raw: ${safeTooltipVal(raw)})`, (ctx?.payload as any)?.metric ?? ""];
+                const num = Number(v as any);
+                const rawNum = Number(raw as any);
+                return [
+                  `${Number.isFinite(num) ? num.toFixed(2) : "-"} (raw: ${Number.isFinite(rawNum) ? rawNum.toFixed(2) : "-"})`,
+                  (ctx?.payload as any)?.metric ?? "",
+                ];
               }}
               labelStyle={{ color: "#fff" }}
               itemStyle={{ color: "#fff" }}
@@ -205,7 +146,6 @@ const PlayerRadarChart: React.FC<Props> = ({
         </ResponsiveContainer>
       </div>
 
-      {/* footer scale */}
       <div className="text-white/60 text-[11px] mt-2 text-center">
         Normalisation: <span className="text-white/80 font-semibold">{scaleMode}</span>
       </div>
