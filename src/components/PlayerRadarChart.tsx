@@ -6,25 +6,11 @@ type Props = {
   player: PlayerStats | null | undefined;
   title?: string;
   accentColor?: string;
-  scaleMode?: ScaleMode; // none | minmax | zscore
   timeWindow?: TimeWindow; // last_10 | last_20 | last_365d
+  globalMinMax?: Record<string, { min: number; max: number }>; // Global min/max per metric
   height?: number;
 };
 
-function normalizeVector(xs: number[], mode: ScaleMode) {
-  if (!xs.length || mode === "none") return xs.slice();
-  if (mode === "minmax") {
-    const mn = Math.min(...xs),
-      mx = Math.max(...xs);
-    if (mx === mn) return xs.map(() => 0);
-    return xs.map((x) => (x - mn) / (mx - mn));
-  }
-  // z-score
-  const mean = xs.reduce((a, b) => a + b, 0) / xs.length;
-  const var_ = xs.reduce((s, x) => s + (x - mean) ** 2, 0) / xs.length;
-  const sd = Math.sqrt(var_) || 1;
-  return xs.map((x) => (x - mean) / sd);
-}
 
 /** Axe → label humain */
 const LABELS: Record<string, string> = {
@@ -59,8 +45,8 @@ const PlayerRadarChart: React.FC<Props> = ({
   player,
   title,
   accentColor = "#4DA3FF",
-  scaleMode = "none",
   timeWindow = "last_10",
+  globalMinMax,
   height = 280,
 }) => {
   const playerName =
@@ -75,14 +61,26 @@ const PlayerRadarChart: React.FC<Props> = ({
   }, [player, axes]);
 
   const chartData = useMemo(() => {
-    const xs = rawPoints.map((p) => p.value);
-    const normed = normalizeVector(xs, scaleMode);
-    return rawPoints.map((p, i) => ({
-      metric: LABELS[p.key],
-      value: normed[i],
-      raw: p.value,
-    }));
-  }, [rawPoints, scaleMode]);
+    if (!globalMinMax) {
+      // Fallback: no normalization
+      return rawPoints.map((p) => ({
+        metric: LABELS[p.key],
+        value: p.value,
+        raw: p.value,
+      }));
+    }
+
+    // Normalize using global min/max
+    return rawPoints.map((p) => {
+      const { min, max } = globalMinMax[p.key] || { min: 0, max: 1 };
+      const normalized = max > min ? (p.value - min) / (max - min) : 0;
+      return {
+        metric: LABELS[p.key],
+        value: normalized,
+        raw: p.value,
+      };
+    });
+  }, [rawPoints, globalMinMax]);
 
   if (!player || chartData.length === 0) {
     return (
@@ -113,9 +111,15 @@ const PlayerRadarChart: React.FC<Props> = ({
       <div style={{ width: "100%", height }}>
         <ResponsiveContainer>
           <RadarChart data={chartData} margin={{ top: 8, right: 16, bottom: 8, left: 16 }}>
-            <PolarGrid stroke="rgba(255,255,255,0.2)" strokeDasharray="3 3" />
-            <PolarAngleAxis dataKey="metric" tick={{ fill: "#ffffff", fontSize: 12 }} />
-            <PolarRadiusAxis tick={{ fill: "#ffffff", fontSize: 10 }} axisLine={false} tickLine={false} domain={scaleMode === "minmax" ? [0, 1] : undefined} tickCount={5} />
+            <PolarGrid stroke="rgba(255,255,255,0.3)" strokeDasharray="3 3" />
+            <PolarAngleAxis dataKey="metric" tick={{ fill: "#ffffff", fontSize: 12, fontWeight: 600 }} />
+            <PolarRadiusAxis 
+              tick={{ fill: "#ffffff", fontSize: 10 }} 
+              axisLine={false} 
+              tickLine={false} 
+              domain={[0, 1]} 
+              tickCount={6}
+            />
             <Radar
               name={playerName}
               dataKey="value"
@@ -135,11 +139,9 @@ const PlayerRadarChart: React.FC<Props> = ({
                 const raw = (ctx?.payload && (ctx.payload as any).raw) ?? v;
                 const num = Number(v as any);
                 const rawNum = Number(raw as any);
-                const valueText = scaleMode === "minmax"
-                  ? `${Number.isFinite(num) ? (num * 100).toFixed(0) : "-"}%`
-                  : `${Number.isFinite(num) ? num.toFixed(2) : "-"}`;
+                const percentile = Number.isFinite(num) ? (num * 100).toFixed(0) : "-";
                 return [
-                  `${valueText} (raw: ${Number.isFinite(rawNum) ? rawNum.toFixed(2) : "-"})`,
+                  `${percentile}% (${Number.isFinite(rawNum) ? rawNum.toFixed(2) : "-"})`,
                   (ctx?.payload as any)?.metric ?? "",
                 ];
               }}
@@ -151,7 +153,7 @@ const PlayerRadarChart: React.FC<Props> = ({
       </div>
 
       <div className="text-white/60 text-[11px] mt-2 text-center">
-        Normalisation: <span className="text-white/80 font-semibold">{scaleMode}</span>
+        Normalisé globalement (0-100%)
       </div>
     </div>
   );

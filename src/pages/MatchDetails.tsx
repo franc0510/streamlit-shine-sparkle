@@ -64,7 +64,7 @@ function TeamSummary({ team, winrate, power }: { team: string; winrate?: number;
 const normalizePos = (pos?: string) => {
   const p = (pos || "").toLowerCase().trim();
   if (["top", "toplane", "top lane"].includes(p)) return "top";
-  if (["jg", "jng", "jungle"].includes(p)) return "jungle";
+  if (["jg", "jgl", "jng", "jungle"].includes(p)) return "jungle";
   if (["mid", "middle", "midlane", "mid lane"].includes(p)) return "mid";
   if (["bot", "bottom", "adc", "ad carry", "marksman"].includes(p)) return "bot";
   if (["sup", "support", "supp"].includes(p)) return "support";
@@ -179,18 +179,30 @@ export default function MatchDetails() {
               <div className="text-xl font-bold text-white">{teamA?.team || initialTeam1}</div>
             </div>
 
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-3">
               <div className="text-4xl font-black text-white/70">VS</div>
               {teamA && teamB && (
-                <div className="text-sm text-white/60">
-                  Power Δ:{" "}
-                  <span className={clsx("font-bold", 
-                    (teamA.meta.power_team || 0) > (teamB.meta.power_team || 0) 
-                      ? "text-green-400" 
-                      : "text-red-400"
-                  )}>
-                    {((teamA.meta.power_team || 0) - (teamB.meta.power_team || 0)).toFixed(2)}
-                  </span>
+                <div className="grid grid-cols-2 gap-4 mt-2">
+                  <div className="text-center">
+                    <div className="text-white/60 text-xs mb-1">Winrate</div>
+                    <div className="text-white font-bold">
+                      {typeof winrateFor(teamA, windowSel) === "number" ? `${(winrateFor(teamA, windowSel)! * 100).toFixed(1)}%` : "—"}
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-white/60 text-xs mb-1">Winrate</div>
+                    <div className="text-white font-bold">
+                      {typeof winrateFor(teamB, windowSel) === "number" ? `${(winrateFor(teamB, windowSel)! * 100).toFixed(1)}%` : "—"}
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-white/60 text-xs mb-1">Power</div>
+                    <div className="text-white font-bold">{(teamA.meta.power_team || 0).toFixed(2)}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-white/60 text-xs mb-1">Power</div>
+                    <div className="text-white font-bold">{(teamB.meta.power_team || 0).toFixed(2)}</div>
+                  </div>
                 </div>
               )}
             </div>
@@ -219,36 +231,6 @@ export default function MatchDetails() {
           </div>
         </div>
 
-      {/* Controls */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-        <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-          <div className="font-bold text-white mb-2">Fenêtre temporelle</div>
-          <div className="flex gap-2 flex-wrap">
-            {(["last_10", "last_20", "last_365d"] as TimeWindow[]).map((w) => (
-              <Chip key={w} active={windowSel === w} onClick={() => setWindowSel(w)}>
-                {w === "last_10" ? "10 derniers" : w === "last_20" ? "20 derniers" : "365 jours"}
-              </Chip>
-            ))}
-          </div>
-          <div className="text-xs text-white/60 mt-2">
-            Les radars joueurs utilisent <b>uniquement</b> les métriques de la fenêtre choisie.
-          </div>
-        </div>
-
-        <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-          <div className="font-bold text-white mb-2">Normalisation</div>
-          <div className="flex gap-2 flex-wrap">
-            {(["none", "minmax", "zscore"] as ScaleMode[]).map((m) => (
-              <Chip key={m} active={scale === m} onClick={() => setScale(m)}>
-                {m === "none" ? "Aucune" : m === "minmax" ? "Min-Max" : "Z-score"}
-              </Chip>
-            ))}
-          </div>
-          <div className="text-xs text-white/60 mt-2">
-            La normalisation est appliquée <b>par radar</b> et <b>par métrique</b>.
-          </div>
-        </div>
-      </div>
 
       {/* States */}
       {loading && <div className="text-white/80">Chargement des données…</div>}
@@ -257,10 +239,18 @@ export default function MatchDetails() {
         {/* Contenu */}
         {!loading && !error && teamA && teamB && (
           <>
-            {/* Résumé équipes */}
-            <div className="grid md:grid-cols-2 gap-4">
-              <TeamSummary team={teamA.team} winrate={winrateFor(teamA, windowSel)} power={teamA.meta.power_team} />
-              <TeamSummary team={teamB.team} winrate={winrateFor(teamB, windowSel)} power={teamB.meta.power_team} />
+            {/* Fenêtre temporelle */}
+            <div className="mb-6">
+              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                <div className="font-bold text-white mb-3">Fenêtre temporelle</div>
+                <div className="flex gap-2 flex-wrap">
+                  {(["last_10", "last_20", "last_365d"] as TimeWindow[]).map((w) => (
+                    <Chip key={w} active={windowSel === w} onClick={() => setWindowSel(w)}>
+                      {w === "last_10" ? "10 derniers" : w === "last_20" ? "20 derniers" : "365 jours"}
+                    </Chip>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Comparaison joueurs par position */}
@@ -269,98 +259,117 @@ export default function MatchDetails() {
                 <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
               ) : (
                 <div className="space-y-6">
-                  {(["top", "jungle", "mid", "bot", "support"] as const).map((position) => {
-                    const playerA = teamA.players.find(
-                      (p) => normalizePos(p.position) === position
-                    );
-                    const playerB = teamB.players.find(
-                      (p) => normalizePos(p.position) === position
-                    );
-
-                    if (!playerA && !playerB) return null;
-
-                    // Calculate KPI difference for the selected window
+                  {(() => {
+                    // Calculate global min/max for normalization across all players
                     const KPI_BY_WINDOW: Record<TimeWindow, string[]> = {
                       last_10: ["kda_last_10", "earned_gpm_avg_last_10", "cspm_avg_last_10", "vspm_avg_last_10", "dpm_avg_last_10"],
                       last_20: ["kda_last_20", "earned_gpm_avg_last_20", "cspm_avg_last_20", "vspm_avg_last_20", "dpm_avg_last_20"],
                       last_365d: ["earned_gpm_avg_last_365d", "cspm_avg_last_365d", "vspm_avg_last_365d", "dpm_avg_last_365d"],
                     };
-
+                    
                     const kpis = KPI_BY_WINDOW[windowSel];
-                    let totalDiff = 0;
-                    let count = 0;
+                    const allPlayers = [...teamA.players, ...teamB.players];
+                    
+                    // Calculate min/max per metric across ALL players
+                    const globalMinMax: Record<string, { min: number; max: number }> = {};
+                    kpis.forEach((kpi) => {
+                      const values = allPlayers
+                        .map((p) => Number((p as any)[kpi]))
+                        .filter((v) => Number.isFinite(v));
+                      if (values.length > 0) {
+                        globalMinMax[kpi] = {
+                          min: Math.min(...values),
+                          max: Math.max(...values),
+                        };
+                      }
+                    });
 
-                    if (playerA && playerB) {
-                      kpis.forEach((kpi) => {
-                        const valA = Number((playerA as any)[kpi]);
-                        const valB = Number((playerB as any)[kpi]);
-                        if (Number.isFinite(valA) && Number.isFinite(valB)) {
-                          totalDiff += valA - valB;
-                          count++;
-                        }
-                      });
-                    }
+                    return (["top", "jungle", "mid", "bot", "support"] as const).map((position) => {
+                      const playerA = teamA.players.find(
+                        (p) => normalizePos(p.position) === position
+                      );
+                      const playerB = teamB.players.find(
+                        (p) => normalizePos(p.position) === position
+                      );
 
-                    const avgDiff = count > 0 ? totalDiff / count : 0;
+                      if (!playerA && !playerB) return null;
 
-                    return (
-                      <div key={position} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                        <h4 className="text-center text-white/80 font-bold uppercase text-sm mb-4">
-                          {position}
-                        </h4>
-                        <div className="grid md:grid-cols-3 gap-4 items-center">
-                          {/* Player A (left) */}
-                          <div>
-                            {playerA ? (
-                              <PlayerRadarChart
-                                player={playerA}
-                                timeWindow={windowSel}
-                                scaleMode={scale}
-                                accentColor="#50B4FF"
-                              />
-                            ) : (
-                              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
-                                Pas de joueur
-                              </div>
-                            )}
-                          </div>
+                      // Calculate average difference
+                      let totalDiff = 0;
+                      let count = 0;
 
-                          {/* Difference (middle) */}
-                          <div className="flex flex-col items-center justify-center gap-2">
-                            <div className="text-white/60 text-xs uppercase">Δ Moyenne</div>
-                            <div
-                              className={clsx(
-                                "text-3xl font-black",
-                                avgDiff > 0 ? "text-green-400" : avgDiff < 0 ? "text-red-400" : "text-white/50"
+                      if (playerA && playerB) {
+                        kpis.forEach((kpi) => {
+                          const valA = Number((playerA as any)[kpi]);
+                          const valB = Number((playerB as any)[kpi]);
+                          if (Number.isFinite(valA) && Number.isFinite(valB)) {
+                            totalDiff += valA - valB;
+                            count++;
+                          }
+                        });
+                      }
+
+                      const avgDiff = count > 0 ? totalDiff / count : 0;
+
+                      return (
+                        <div key={position} className="rounded-xl border border-white/10 bg-white/5 p-4">
+                          <h4 className="text-center text-white/80 font-bold uppercase text-sm mb-4">
+                            {position}
+                          </h4>
+                          <div className="grid md:grid-cols-3 gap-4 items-center">
+                            {/* Player A (left) */}
+                            <div>
+                              {playerA ? (
+                                <PlayerRadarChart
+                                  player={playerA}
+                                  timeWindow={windowSel}
+                                  globalMinMax={globalMinMax}
+                                  accentColor="#50B4FF"
+                                />
+                              ) : (
+                                <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
+                                  Pas de joueur
+                                </div>
                               )}
-                            >
-                              {avgDiff > 0 ? "+" : ""}
-                              {avgDiff.toFixed(2)}
                             </div>
-                            <div className="text-white/40 text-xs text-center">
-                              (basé sur les KPIs sélectionnés)
-                            </div>
-                          </div>
 
-                          {/* Player B (right) */}
-                          <div>
-                            {playerB ? (
-                              <PlayerRadarChart
-                                player={playerB}
-                                timeWindow={windowSel}
-                                scaleMode={scale}
-                                accentColor="#00D2AA"
-                              />
-                            ) : (
-                              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
-                                Pas de joueur
+                            {/* Difference (middle) */}
+                            <div className="flex flex-col items-center justify-center gap-2">
+                              <div className="text-white/60 text-xs uppercase">Δ Moyenne</div>
+                              <div
+                                className={clsx(
+                                  "text-3xl font-black",
+                                  avgDiff > 0 ? "text-green-400" : avgDiff < 0 ? "text-red-400" : "text-white/50"
+                                )}
+                              >
+                                {avgDiff > 0 ? "+" : ""}
+                                {avgDiff.toFixed(2)}
                               </div>
-                            )}
+                              <div className="text-white/40 text-xs text-center">
+                                (basé sur les KPIs sélectionnés)
+                              </div>
+                            </div>
+
+                            {/* Player B (right) */}
+                            <div>
+                              {playerB ? (
+                                <PlayerRadarChart
+                                  player={playerB}
+                                  timeWindow={windowSel}
+                                  globalMinMax={globalMinMax}
+                                  accentColor="#00D2AA"
+                                />
+                              ) : (
+                                <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
+                                  Pas de joueur
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    });
+                  })()}
                 </div>
               )}
             </Section>
