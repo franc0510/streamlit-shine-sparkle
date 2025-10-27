@@ -318,12 +318,12 @@ export default function MatchDetails() {
                     const kpis = KPI_BY_WINDOW[windowSel];
                     const allPlayers = [...teamA.players, ...teamB.players];
                     
-                    // Calculate min/max per metric across ALL players
+                    // Calculate min/max per metric across ALL players (filtering outliers)
                     const globalMinMax: Record<string, { min: number; max: number }> = {};
                     kpis.forEach((kpi) => {
                       const values = allPlayers
                         .map((p) => Number((p as any)[kpi]))
-                        .filter((v) => Number.isFinite(v));
+                        .filter((v) => Number.isFinite(v) && !isOutlier(v, kpi));
                       if (values.length > 0) {
                         globalMinMax[kpi] = {
                           min: Math.min(...values),
@@ -331,6 +331,33 @@ export default function MatchDetails() {
                         };
                       }
                     });
+
+                    // Helper to check if value is outlier
+                    function isOutlier(value: number, metric: string): boolean {
+                      if (!Number.isFinite(value)) return true;
+                      if (value < 0) return true;
+                      const maxThresholds: Record<string, number> = {
+                        kda_last_10: 20,
+                        kda_last_20: 20,
+                        earned_gpm_avg_last_10: 800,
+                        earned_gpm_avg_last_20: 800,
+                        earned_gpm_avg_last_365d: 800,
+                        cspm_avg_last_10: 15,
+                        cspm_avg_last_20: 15,
+                        cspm_avg_last_365d: 15,
+                        vspm_avg_last_10: 6,
+                        vspm_avg_last_20: 6,
+                        vspm_avg_last_365d: 6,
+                        dpm_avg_last_10: 1200,
+                        dpm_avg_last_20: 1200,
+                        dpm_avg_last_365d: 1200,
+                      };
+                      const maxThreshold = maxThresholds[metric];
+                      if (maxThreshold && value > maxThreshold) {
+                        return true;
+                      }
+                      return false;
+                    }
 
                     return (["top", "jungle", "mid", "bot", "support"] as const).map((position) => {
                       const playerA = teamA.players.find(
@@ -361,7 +388,12 @@ export default function MatchDetails() {
                         kpis.forEach((kpi) => {
                           const valA = Number((playerA as any)[kpi]);
                           const valB = Number((playerB as any)[kpi]);
-                          if (Number.isFinite(valA) && Number.isFinite(valB)) {
+                          if (
+                            Number.isFinite(valA) &&
+                            Number.isFinite(valB) &&
+                            !isOutlier(valA, kpi) &&
+                            !isOutlier(valB, kpi)
+                          ) {
                             totalDiff += valA - valB;
                             count++;
                           }

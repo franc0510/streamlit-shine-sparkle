@@ -34,6 +34,36 @@ const LABELS: Record<string, string> = {
   dpm_avg_last_365d: "DPM",
 };
 
+/** Seuils maximums réalistes par métrique pour League of Legends */
+const MAX_THRESHOLDS: Record<string, number> = {
+  kda_last_10: 20,
+  kda_last_20: 20,
+  earned_gpm_avg_last_10: 800,
+  earned_gpm_avg_last_20: 800,
+  earned_gpm_avg_last_365d: 800,
+  cspm_avg_last_10: 15,
+  cspm_avg_last_20: 15,
+  cspm_avg_last_365d: 15,
+  vspm_avg_last_10: 6,
+  vspm_avg_last_20: 6,
+  vspm_avg_last_365d: 6,
+  dpm_avg_last_10: 1200,
+  dpm_avg_last_20: 1200,
+  dpm_avg_last_365d: 1200,
+};
+
+/** Vérifie si une valeur est aberrante */
+function isOutlier(value: number, metric: string): boolean {
+  if (!Number.isFinite(value)) return true;
+  if (value < 0) return true;
+  const maxThreshold = MAX_THRESHOLDS[metric];
+  if (maxThreshold && value > maxThreshold) {
+    console.warn(`Outlier detected for ${metric}: ${value} (max: ${maxThreshold})`);
+    return true;
+  }
+  return false;
+}
+
 /** Axes stricts par fenêtre (5 axes pour 10/20, 4 axes pour 365d sans KDA) */
 const AXES_BY_WINDOW: Record<TimeWindow, string[]> = {
   last_10: ["kda_last_10", "earned_gpm_avg_last_10", "cspm_avg_last_10", "vspm_avg_last_10", "dpm_avg_last_10"],
@@ -57,7 +87,9 @@ const PlayerRadarChart: React.FC<Props> = ({
 
   const rawPoints = useMemo(() => {
     if (!player) return [];
-    return axes.map((k) => ({ key: k, value: Number((player as any)[k]) })).filter((x) => Number.isFinite(x.value));
+    return axes
+      .map((k) => ({ key: k, value: Number((player as any)[k]) }))
+      .filter((x) => Number.isFinite(x.value) && !isOutlier(x.value, x.key));
   }, [player, axes]);
 
   const chartData = useMemo(() => {
