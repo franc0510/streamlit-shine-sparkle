@@ -94,7 +94,7 @@ const PlayerRadarChart: React.FC<Props> = ({
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+    <div className="rounded-2xl border border-white/10 bg-white/5 p-3 animate-fade-in hover-scale">
       {/* header */}
       <div className="flex items-center gap-3 mb-2">
         <img
@@ -113,15 +113,16 @@ const PlayerRadarChart: React.FC<Props> = ({
       <div style={{ width: "100%", height }}>
         <ResponsiveContainer>
           <RadarChart data={chartData} margin={{ top: 8, right: 16, bottom: 8, left: 16 }}>
-            <PolarGrid stroke="rgba(255,255,255,0.2)" />
+            <PolarGrid stroke="rgba(255,255,255,0.2)" strokeDasharray="3 3" />
             <PolarAngleAxis dataKey="metric" tick={{ fill: "#ffffff", fontSize: 12 }} />
-            <PolarRadiusAxis tick={{ fill: "#ffffff", fontSize: 10 }} axisLine={false} tickLine={false} />
+            <PolarRadiusAxis tick={{ fill: "#ffffff", fontSize: 10 }} axisLine={false} tickLine={false} domain={scaleMode === "minmax" ? [0, 1] : undefined} tickCount={5} />
             <Radar
               name={playerName}
               dataKey="value"
               stroke={accentColor}
+              strokeWidth={2}
               fill={accentColor}
-              fillOpacity={0.35}
+              fillOpacity={0.5}
               isAnimationActive={false}
             />
             <Tooltip
@@ -134,8 +135,11 @@ const PlayerRadarChart: React.FC<Props> = ({
                 const raw = (ctx?.payload && (ctx.payload as any).raw) ?? v;
                 const num = Number(v as any);
                 const rawNum = Number(raw as any);
+                const valueText = scaleMode === "minmax"
+                  ? `${Number.isFinite(num) ? (num * 100).toFixed(0) : "-"}%`
+                  : `${Number.isFinite(num) ? num.toFixed(2) : "-"}`;
                 return [
-                  `${Number.isFinite(num) ? num.toFixed(2) : "-"} (raw: ${Number.isFinite(rawNum) ? rawNum.toFixed(2) : "-"})`,
+                  `${valueText} (raw: ${Number.isFinite(rawNum) ? rawNum.toFixed(2) : "-"})`,
                   (ctx?.payload as any)?.metric ?? "",
                 ];
               }}

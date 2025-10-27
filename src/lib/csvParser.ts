@@ -83,10 +83,17 @@ export const parsePredictionsHistoryCSV = async (): Promise<Match[]> => {
 };
 
 export const getTeamLogo = (teamName: string): string => {
-  // Normalize team name to match file naming
-  const normalized = teamName
-    .replace(/ /g, '_')
-    .replace(/\./g, '');
-  
+  // Build a robust file name: Title Case words joined by underscores. Keep dots (e.g., Gen.G)
+  const canonical = (teamName || "")
+    .replace(/-/g, " ")
+    .replace(/_/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const normalized = canonical
+    .split(" ")
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : ""))
+    .join("_");
+
   return `/Documents/teams/${normalized}.png`;
 };

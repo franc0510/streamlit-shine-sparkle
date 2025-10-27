@@ -60,6 +60,17 @@ function TeamSummary({ team, winrate, power }: { team: string; winrate?: number;
   );
 }
 
+/* ===================== utils ===================== */
+const normalizePos = (pos?: string) => {
+  const p = (pos || "").toLowerCase().trim();
+  if (["top", "toplane", "top lane"].includes(p)) return "top";
+  if (["jg", "jng", "jungle"].includes(p)) return "jungle";
+  if (["mid", "middle", "midlane", "mid lane"].includes(p)) return "mid";
+  if (["bot", "bottom", "adc", "ad carry", "marksman"].includes(p)) return "bot";
+  if (["sup", "support", "supp"].includes(p)) return "support";
+  return p as any;
+};
+
 /* ===================== Page ===================== */
 
 export default function MatchDetails() {
@@ -127,6 +138,11 @@ export default function MatchDetails() {
     return t.meta.team_winrate_last_year;
   };
 
+  const logo1 = teamA?.team ? getTeamLogo(teamA.team) : getTeamLogo(initialTeam1);
+  const logo2 = teamB?.team ? getTeamLogo(teamB.team) : getTeamLogo(initialTeam2);
+  const logo1Alt = logo1.replace(/_/g, " ");
+  const logo2Alt = logo2.replace(/_/g, " ");
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -147,14 +163,20 @@ export default function MatchDetails() {
           <div className="flex items-center justify-center gap-8 mb-4">
             <div className="flex flex-col items-center gap-3">
               <img
-                src={getTeamLogo(initialTeam1)}
-                alt={initialTeam1}
+                src={logo1}
+                alt={teamA?.team || initialTeam1}
                 className="w-24 h-24 object-contain"
                 onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.opacity = "0.3";
+                  const img = e.currentTarget as HTMLImageElement;
+                  if (img.dataset.fallbackTried !== '1') {
+                    img.dataset.fallbackTried = '1';
+                    img.src = logo1Alt;
+                  } else {
+                    img.src = '/Documents/teams/TBD.png';
+                  }
                 }}
               />
-              <div className="text-xl font-bold text-white">{initialTeam1}</div>
+              <div className="text-xl font-bold text-white">{teamA?.team || initialTeam1}</div>
             </div>
 
             <div className="flex flex-col items-center gap-2">
@@ -175,14 +197,20 @@ export default function MatchDetails() {
 
             <div className="flex flex-col items-center gap-3">
               <img
-                src={getTeamLogo(initialTeam2)}
-                alt={initialTeam2}
+                src={logo2}
+                alt={teamB?.team || initialTeam2}
                 className="w-24 h-24 object-contain"
                 onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.opacity = "0.3";
+                  const img = e.currentTarget as HTMLImageElement;
+                  if (img.dataset.fallbackTried !== '1') {
+                    img.dataset.fallbackTried = '1';
+                    img.src = logo2Alt;
+                  } else {
+                    img.src = '/Documents/teams/TBD.png';
+                  }
                 }}
               />
-              <div className="text-xl font-bold text-white">{initialTeam2}</div>
+              <div className="text-xl font-bold text-white">{teamB?.team || initialTeam2}</div>
             </div>
           </div>
 
@@ -243,10 +271,10 @@ export default function MatchDetails() {
                 <div className="space-y-6">
                   {(["top", "jungle", "mid", "bot", "support"] as const).map((position) => {
                     const playerA = teamA.players.find(
-                      (p) => p.position?.toLowerCase() === position
+                      (p) => normalizePos(p.position) === position
                     );
                     const playerB = teamB.players.find(
-                      (p) => p.position?.toLowerCase() === position
+                      (p) => normalizePos(p.position) === position
                     );
 
                     if (!playerA && !playerB) return null;
