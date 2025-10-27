@@ -100,7 +100,7 @@ export default function MatchDetails() {
   const [error, setError] = useState<string | null>(null);
 
   const [scale, setScale] = useState<ScaleMode>("none");
-  const [windowSel, setWindowSel] = useState<TimeWindow>("last_10");
+  const [windowSel, setWindowSel] = useState<TimeWindow>("last_20");
 
   const [teamA, setTeamA] = useState<TeamStats | null>(null);
   const [teamB, setTeamB] = useState<TeamStats | null>(null);
@@ -151,7 +151,7 @@ export default function MatchDetails() {
         {/* Back Button */}
         <Button
           variant="ghost"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
           className="mb-6 gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -294,7 +294,7 @@ export default function MatchDetails() {
                 <div className="flex gap-2 flex-wrap">
                   {(["last_10", "last_20", "last_365d"] as TimeWindow[]).map((w) => (
                     <Chip key={w} active={windowSel === w} onClick={() => setWindowSel(w)}>
-                      {w === "last_10" ? "10 derniers" : w === "last_20" ? "20 derniers" : "365 jours"}
+                      {w === "last_10" ? "10 derniers series" : w === "last_20" ? "20 derniers series" : "365 jours"}
                     </Chip>
                   ))}
                 </div>
@@ -409,20 +409,21 @@ export default function MatchDetails() {
                           </h4>
                           <div className="grid md:grid-cols-3 gap-4 items-center">
                             {/* Player A (left) */}
-                            <div>
-                              {playerA ? (
-                                <PlayerRadarChart
-                                  player={playerA}
-                                  timeWindow={windowSel}
-                                  globalMinMax={globalMinMax}
-                                  accentColor="#50B4FF"
-                                />
-                              ) : (
-                                <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
-                                  Pas de joueur
-                                </div>
-                              )}
-                            </div>
+                          <div>
+                            {playerA ? (
+                              <PlayerRadarChart
+                                player={playerA}
+                                timeWindow={windowSel}
+                                globalMinMax={globalMinMax}
+                                accentColor="#50B4FF"
+                              />
+                            ) : (
+                              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
+                                <div className="mb-2">Pas de joueur</div>
+                                <div className="text-xs text-white/30">(Position: {position})</div>
+                              </div>
+                            )}
+                          </div>
 
                             {/* Difference (middle) */}
                             <div className="flex flex-col items-center justify-center gap-2">
@@ -442,20 +443,21 @@ export default function MatchDetails() {
                             </div>
 
                             {/* Player B (right) */}
-                            <div>
-                              {playerB ? (
-                                <PlayerRadarChart
-                                  player={playerB}
-                                  timeWindow={windowSel}
-                                  globalMinMax={globalMinMax}
-                                  accentColor="#00D2AA"
-                                />
-                              ) : (
-                                <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
-                                  Pas de joueur
-                                </div>
-                              )}
-                            </div>
+                          <div>
+                            {playerB ? (
+                              <PlayerRadarChart
+                                player={playerB}
+                                timeWindow={windowSel}
+                                globalMinMax={globalMinMax}
+                                accentColor="#00D2AA"
+                              />
+                            ) : (
+                              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
+                                <div className="mb-2">Pas de joueur</div>
+                                <div className="text-xs text-white/30">(Position: {position})</div>
+                              </div>
+                            )}
+                          </div>
                           </div>
                         </div>
                       );
