@@ -179,29 +179,73 @@ export default function MatchDetails() {
               <div className="text-xl font-bold text-white">{teamA?.team || initialTeam1}</div>
             </div>
 
-            <div className="flex flex-col items-center gap-3">
-              <div className="text-4xl font-black text-white/70">VS</div>
+            <div className="flex flex-col items-center gap-3 relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-green-500/10 blur-xl"></div>
+              <div className="relative text-5xl font-black text-white animate-pulse">VS</div>
               {teamA && teamB && (
-                <div className="grid grid-cols-2 gap-4 mt-2">
-                  <div className="text-center">
-                    <div className="text-white/60 text-xs mb-1">Winrate</div>
-                    <div className="text-white font-bold">
-                      {typeof winrateFor(teamA, windowSel) === "number" ? `${(winrateFor(teamA, windowSel)! * 100).toFixed(1)}%` : "—"}
+                <div className="relative bg-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-4 space-y-3">
+                  {/* Winrate comparison */}
+                  <div className="flex items-center justify-between gap-6">
+                    <div className="text-center min-w-[80px]">
+                      <div className="text-white/60 text-xs mb-1">Winrate</div>
+                      <div className="text-white font-bold text-lg">
+                        {typeof winrateFor(teamA, windowSel) === "number" 
+                          ? `${(winrateFor(teamA, windowSel)! * 100).toFixed(1)}%` 
+                          : "—"}
+                      </div>
+                    </div>
+                    <div className="flex-1 text-center">
+                      <div className="text-white/40 text-xs mb-1">Δ WR</div>
+                      <div className={clsx("text-xl font-black", 
+                        ((winrateFor(teamA, windowSel) || 0) - (winrateFor(teamB, windowSel) || 0)) > 0
+                          ? "text-green-400"
+                          : ((winrateFor(teamA, windowSel) || 0) - (winrateFor(teamB, windowSel) || 0)) < 0
+                          ? "text-red-400"
+                          : "text-white/50"
+                      )}>
+                        {((winrateFor(teamA, windowSel) || 0) - (winrateFor(teamB, windowSel) || 0)) > 0 ? "+" : ""}
+                        {(((winrateFor(teamA, windowSel) || 0) - (winrateFor(teamB, windowSel) || 0)) * 100).toFixed(1)}%
+                      </div>
+                    </div>
+                    <div className="text-center min-w-[80px]">
+                      <div className="text-white/60 text-xs mb-1">Winrate</div>
+                      <div className="text-white font-bold text-lg">
+                        {typeof winrateFor(teamB, windowSel) === "number" 
+                          ? `${(winrateFor(teamB, windowSel)! * 100).toFixed(1)}%` 
+                          : "—"}
+                      </div>
                     </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-white/60 text-xs mb-1">Winrate</div>
-                    <div className="text-white font-bold">
-                      {typeof winrateFor(teamB, windowSel) === "number" ? `${(winrateFor(teamB, windowSel)! * 100).toFixed(1)}%` : "—"}
+                  
+                  <div className="h-px bg-white/10"></div>
+                  
+                  {/* Power comparison */}
+                  <div className="flex items-center justify-between gap-6">
+                    <div className="text-center min-w-[80px]">
+                      <div className="text-white/60 text-xs mb-1">Power</div>
+                      <div className="text-white font-bold text-lg">
+                        {(teamA.meta.power_team || 0).toFixed(2)}
+                      </div>
                     </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-white/60 text-xs mb-1">Power</div>
-                    <div className="text-white font-bold">{(teamA.meta.power_team || 0).toFixed(2)}</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-white/60 text-xs mb-1">Power</div>
-                    <div className="text-white font-bold">{(teamB.meta.power_team || 0).toFixed(2)}</div>
+                    <div className="flex-1 text-center">
+                      <div className="text-white/40 text-xs mb-1">Δ Power</div>
+                      <div className={clsx("text-xl font-black",
+                        ((teamA.meta.power_team || 0) - (teamB.meta.power_team || 0)) > 0
+                          ? "text-green-400"
+                          : ((teamA.meta.power_team || 0) - (teamB.meta.power_team || 0)) < 0
+                          ? "text-red-400"
+                          : "text-white/50"
+                      )}>
+                        {((teamA.meta.power_team || 0) - (teamB.meta.power_team || 0)) > 0 ? "+" : ""}
+                        {((teamA.meta.power_team || 0) - (teamB.meta.power_team || 0)).toFixed(2)}
+                      </div>
+                    </div>
+                    <div className="text-center min-w-[80px]">
+                      <div className="text-white/60 text-xs mb-1">Power</div>
+                      <div className="text-white font-bold text-lg">
+                        {(teamB.meta.power_team || 0).toFixed(2)}
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
@@ -291,6 +335,17 @@ export default function MatchDetails() {
                       const playerB = teamB.players.find(
                         (p) => normalizePos(p.position) === position
                       );
+
+                      // Debug: log positions
+                      if (position === "jungle") {
+                        console.log("Looking for jungle:", {
+                          position,
+                          teamAPositions: teamA.players.map(p => ({ name: p.player, pos: p.position, normalized: normalizePos(p.position) })),
+                          teamBPositions: teamB.players.map(p => ({ name: p.player, pos: p.position, normalized: normalizePos(p.position) })),
+                          foundA: playerA?.player,
+                          foundB: playerB?.player
+                        });
+                      }
 
                       if (!playerA && !playerB) return null;
 
