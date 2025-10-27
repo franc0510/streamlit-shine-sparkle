@@ -1,9 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
+import { ArrowLeft } from "lucide-react";
 
 import { parsePlayerDataParquet, type TeamStats, type ScaleMode, type TimeWindow } from "@/lib/parquetParser";
+import { getTeamLogo } from "@/lib/csvParser";
 import PlayerRadarChart from "@/components/PlayerRadarChart";
+import { Navbar } from "@/components/Navbar";
+import { Button } from "@/components/ui/button";
 
 /* ===================== helpers ===================== */
 function useQuery() {
@@ -60,6 +64,7 @@ function TeamSummary({ team, winrate, power }: { team: string; winrate?: number;
 
 export default function MatchDetails() {
   const location = useLocation();
+  const navigate = useNavigate();
   const q = useQuery();
 
   // /match/<league>/<date>/<time>/<team1>-vs-<team2>
@@ -123,16 +128,68 @@ export default function MatchDetails() {
   };
 
   return (
-    <div className="px-4 md:px-8 lg:px-12 py-4">
-      {/* Header */}
-      <div className="text-center mb-4">
-        <div className="text-2xl md:text-3xl font-black text-white">
-          {initialTeam1} <span className="text-white/70">vs</span> {initialTeam2}
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      
+      <div className="px-4 md:px-8 lg:px-12 py-6">
+        {/* Back Button */}
+        <Button
+          variant="ghost"
+          onClick={() => navigate(-1)}
+          className="mb-6 gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Retour
+        </Button>
+
+        {/* Teams VS Header */}
+        <div className="mb-8">
+          <div className="flex items-center justify-center gap-8 mb-4">
+            <div className="flex flex-col items-center gap-3">
+              <img
+                src={getTeamLogo(initialTeam1)}
+                alt={initialTeam1}
+                className="w-24 h-24 object-contain"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.opacity = "0.3";
+                }}
+              />
+              <div className="text-xl font-bold text-white">{initialTeam1}</div>
+            </div>
+
+            <div className="flex flex-col items-center gap-2">
+              <div className="text-4xl font-black text-white/70">VS</div>
+              {teamA && teamB && (
+                <div className="text-sm text-white/60">
+                  Power Δ:{" "}
+                  <span className={clsx("font-bold", 
+                    (teamA.meta.power_team || 0) > (teamB.meta.power_team || 0) 
+                      ? "text-green-400" 
+                      : "text-red-400"
+                  )}>
+                    {((teamA.meta.power_team || 0) - (teamB.meta.power_team || 0)).toFixed(2)}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col items-center gap-3">
+              <img
+                src={getTeamLogo(initialTeam2)}
+                alt={initialTeam2}
+                className="w-24 h-24 object-contain"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.opacity = "0.3";
+                }}
+              />
+              <div className="text-xl font-bold text-white">{initialTeam2}</div>
+            </div>
+          </div>
+
+          <div className="text-center text-white/70 font-semibold">
+            {league ? `${league} • ` : ""} {bo} {when ? `• ${when}` : ""}
+          </div>
         </div>
-        <div className="text-white/70 font-semibold">
-          {league ? `${league} • ` : ""} {bo} {when ? `• ${when}` : ""}
-        </div>
-      </div>
 
       {/* Controls */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
@@ -169,44 +226,119 @@ export default function MatchDetails() {
       {loading && <div className="text-white/80">Chargement des données…</div>}
       {error && <div className="text-red-300 bg-red-900/30 border border-red-700/40 rounded-md p-3">{error}</div>}
 
-      {/* Contenu */}
-      {!loading && !error && teamA && teamB && (
-        <>
-          {/* Résumé équipes (PAS de radar d'équipe) */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <TeamSummary team={teamA.team} winrate={winrateFor(teamA, windowSel)} power={teamA.meta.power_team} />
-            <TeamSummary team={teamB.team} winrate={winrateFor(teamB, windowSel)} power={teamB.meta.power_team} />
-          </div>
+        {/* Contenu */}
+        {!loading && !error && teamA && teamB && (
+          <>
+            {/* Résumé équipes */}
+            <div className="grid md:grid-cols-2 gap-4">
+              <TeamSummary team={teamA.team} winrate={winrateFor(teamA, windowSel)} power={teamA.meta.power_team} />
+              <TeamSummary team={teamB.team} winrate={winrateFor(teamB, windowSel)} power={teamB.meta.power_team} />
+            </div>
 
-          {/* Radars joueurs */}
-          <Section title="Comparaison joueurs (5v5)">
-            {!teamA.players.length || !teamB.players.length ? (
-              <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
-            ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {teamA.players.map((p, i) => (
-                  <PlayerRadarChart
-                    key={`A-${p.player}-${i}`}
-                    player={p}
-                    timeWindow={windowSel}
-                    scaleMode={scale}
-                    accentColor="#50B4FF"
-                  />
-                ))}
-                {teamB.players.map((p, i) => (
-                  <PlayerRadarChart
-                    key={`B-${p.player}-${i}`}
-                    player={p}
-                    timeWindow={windowSel}
-                    scaleMode={scale}
-                    accentColor="#00D2AA"
-                  />
-                ))}
-              </div>
-            )}
-          </Section>
-        </>
-      )}
+            {/* Comparaison joueurs par position */}
+            <Section title="Comparaison joueurs (5v5)">
+              {!teamA.players.length || !teamB.players.length ? (
+                <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
+              ) : (
+                <div className="space-y-6">
+                  {(["top", "jungle", "mid", "bot", "support"] as const).map((position) => {
+                    const playerA = teamA.players.find(
+                      (p) => p.position?.toLowerCase() === position
+                    );
+                    const playerB = teamB.players.find(
+                      (p) => p.position?.toLowerCase() === position
+                    );
+
+                    if (!playerA && !playerB) return null;
+
+                    // Calculate KPI difference for the selected window
+                    const KPI_BY_WINDOW: Record<TimeWindow, string[]> = {
+                      last_10: ["kda_last_10", "earned_gpm_avg_last_10", "cspm_avg_last_10", "vspm_avg_last_10", "dpm_avg_last_10"],
+                      last_20: ["kda_last_20", "earned_gpm_avg_last_20", "cspm_avg_last_20", "vspm_avg_last_20", "dpm_avg_last_20"],
+                      last_365d: ["earned_gpm_avg_last_365d", "cspm_avg_last_365d", "vspm_avg_last_365d", "dpm_avg_last_365d"],
+                    };
+
+                    const kpis = KPI_BY_WINDOW[windowSel];
+                    let totalDiff = 0;
+                    let count = 0;
+
+                    if (playerA && playerB) {
+                      kpis.forEach((kpi) => {
+                        const valA = Number((playerA as any)[kpi]);
+                        const valB = Number((playerB as any)[kpi]);
+                        if (Number.isFinite(valA) && Number.isFinite(valB)) {
+                          totalDiff += valA - valB;
+                          count++;
+                        }
+                      });
+                    }
+
+                    const avgDiff = count > 0 ? totalDiff / count : 0;
+
+                    return (
+                      <div key={position} className="rounded-xl border border-white/10 bg-white/5 p-4">
+                        <h4 className="text-center text-white/80 font-bold uppercase text-sm mb-4">
+                          {position}
+                        </h4>
+                        <div className="grid md:grid-cols-3 gap-4 items-center">
+                          {/* Player A (left) */}
+                          <div>
+                            {playerA ? (
+                              <PlayerRadarChart
+                                player={playerA}
+                                timeWindow={windowSel}
+                                scaleMode={scale}
+                                accentColor="#50B4FF"
+                              />
+                            ) : (
+                              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
+                                Pas de joueur
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Difference (middle) */}
+                          <div className="flex flex-col items-center justify-center gap-2">
+                            <div className="text-white/60 text-xs uppercase">Δ Moyenne</div>
+                            <div
+                              className={clsx(
+                                "text-3xl font-black",
+                                avgDiff > 0 ? "text-green-400" : avgDiff < 0 ? "text-red-400" : "text-white/50"
+                              )}
+                            >
+                              {avgDiff > 0 ? "+" : ""}
+                              {avgDiff.toFixed(2)}
+                            </div>
+                            <div className="text-white/40 text-xs text-center">
+                              (basé sur les KPIs sélectionnés)
+                            </div>
+                          </div>
+
+                          {/* Player B (right) */}
+                          <div>
+                            {playerB ? (
+                              <PlayerRadarChart
+                                player={playerB}
+                                timeWindow={windowSel}
+                                scaleMode={scale}
+                                accentColor="#00D2AA"
+                              />
+                            ) : (
+                              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
+                                Pas de joueur
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </Section>
+          </>
+        )}
+      </div>
     </div>
   );
 }
