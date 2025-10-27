@@ -31,7 +31,7 @@ export const Navbar = () => {
     await supabase.auth.signOut();
     toast({
       title: "Déconnecté",
-      description: "À bientôt sur PredicteSport",
+      description: "À bientôt sur PredictEsport",
     });
     navigate("/");
   };
@@ -60,7 +60,7 @@ export const Navbar = () => {
           <Link to="/" className="flex items-center gap-2 group">
             <Gamepad2 className="w-8 h-8 text-primary transition-transform group-hover:scale-110" />
             <span className="font-display text-2xl font-bold bg-gradient-gaming bg-clip-text text-transparent">
-              PredicteSport
+              PredictEsport
             </span>
           </Link>
 

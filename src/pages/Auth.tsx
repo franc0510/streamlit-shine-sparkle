@@ -48,7 +48,7 @@ const Auth = () => {
       } else {
         toast({
           title: "Connexion réussie !",
-          description: "Bienvenue sur PredicteSport",
+          description: "Bienvenue sur PredictEsport",
         });
         // Forcer un rechargement pour garantir la persistance de session dans tous les contextes
         setTimeout(() => {
@@ -414,7 +414,10 @@ const Auth = () => {
 
       <footer className="border-t border-border mt-20 py-8">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>&copy; 2025 PredicteSport. Tous droits réservés.</p>
+          <p>&copy; 2025 PredictEsport. Tous droits réservés.</p>
+          <p className="mt-2 text-xs max-w-3xl mx-auto">
+            Les prédictions sont alimentées par PredictEsport. Le système utilise une approche purement mathématique basée sur les statistiques historiques des joueurs et des équipes pour estimer les probabilités de victoire en série. Il s'agit uniquement d'un outil d'analyse et de statistiques — il n'encourage pas les paris sur les matchs.
+          </p>
         </div>
       </footer>
     </div>

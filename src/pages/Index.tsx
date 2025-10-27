@@ -9,7 +9,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 
 const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-");
-const buildMatchUrl = (m: Match) => `/match/${slugify(m.tournament)}/${m.date}/${m.time}/${slugify(m.team1)}-vs-${slugify(m.team2)}`;
+const buildMatchUrl = (m: Match) => `/match/${slugify(m.tournament)}/${m.date}/${m.time}/${slugify(m.team1)}-vs-${slugify(m.team2)}?bo=${m.format}`;
+
 
 const Index = () => {
   const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
@@ -203,7 +204,10 @@ const Index = () => {
 
       <footer className="border-t border-border mt-20 py-8">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>&copy; 2025 PredicteSport. Tous droits réservés.</p>
+          <p>&copy; 2025 PredictEsport. Tous droits réservés.</p>
+          <p className="mt-2 text-xs max-w-3xl mx-auto">
+            Les prédictions sont alimentées par PredictEsport. Le système utilise une approche purement mathématique basée sur les statistiques historiques des joueurs et des équipes pour estimer les probabilités de victoire en série. Il s'agit uniquement d'un outil d'analyse et de statistiques — il n'encourage pas les paris sur les matchs.
+          </p>
         </div>
       </footer>
     </div>

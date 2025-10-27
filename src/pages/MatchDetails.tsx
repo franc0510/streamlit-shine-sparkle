@@ -93,7 +93,7 @@ export default function MatchDetails() {
     initialTeam2 = q.get("team2") || "";
   }
   const league = pathParts[1] || q.get("league") || "";
-  const bo = q.get("bo") || "BO3";
+  const bo = q.get("bo") || "BO5";
   const when = decodeURIComponent(pathParts[2] || "") || q.get("date") || "";
 
   const [loading, setLoading] = useState(false);
@@ -155,7 +155,7 @@ export default function MatchDetails() {
           className="mb-6 gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
-          Retour
+          Retour à League of Legends
         </Button>
 
         {/* Teams VS Header */}
