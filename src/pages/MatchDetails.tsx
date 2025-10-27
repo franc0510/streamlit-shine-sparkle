@@ -162,20 +162,25 @@ export default function MatchDetails() {
         <div className="mb-8">
           <div className="flex items-center justify-center gap-8 mb-4">
             <div className="flex flex-col items-center gap-3">
-              <img
-                src={logo1}
-                alt={teamA?.team || initialTeam1}
-                className="w-24 h-24 object-contain"
-                onError={(e) => {
-                  const img = e.currentTarget as HTMLImageElement;
-                  if (img.dataset.fallbackTried !== '1') {
-                    img.dataset.fallbackTried = '1';
-                    img.src = logo1Alt;
-                  } else {
-                    img.src = '/Documents/teams/TBD.png';
-                  }
-                }}
-              />
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+                <div className="relative bg-white rounded-2xl p-4 shadow-2xl">
+                  <img
+                    src={logo1}
+                    alt={teamA?.team || initialTeam1}
+                    className="w-24 h-24 object-contain"
+                    onError={(e) => {
+                      const img = e.currentTarget as HTMLImageElement;
+                      if (img.dataset.fallbackTried !== '1') {
+                        img.dataset.fallbackTried = '1';
+                        img.src = logo1Alt;
+                      } else {
+                        img.src = '/Documents/teams/TBD.png';
+                      }
+                    }}
+                  />
+                </div>
+              </div>
               <div className="text-xl font-bold text-white">{teamA?.team || initialTeam1}</div>
             </div>
 
@@ -252,20 +257,25 @@ export default function MatchDetails() {
             </div>
 
             <div className="flex flex-col items-center gap-3">
-              <img
-                src={logo2}
-                alt={teamB?.team || initialTeam2}
-                className="w-24 h-24 object-contain"
-                onError={(e) => {
-                  const img = e.currentTarget as HTMLImageElement;
-                  if (img.dataset.fallbackTried !== '1') {
-                    img.dataset.fallbackTried = '1';
-                    img.src = logo2Alt;
-                  } else {
-                    img.src = '/Documents/teams/TBD.png';
-                  }
-                }}
-              />
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-br from-green-400/20 to-emerald-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+                <div className="relative bg-white rounded-2xl p-4 shadow-2xl">
+                  <img
+                    src={logo2}
+                    alt={teamB?.team || initialTeam2}
+                    className="w-24 h-24 object-contain"
+                    onError={(e) => {
+                      const img = e.currentTarget as HTMLImageElement;
+                      if (img.dataset.fallbackTried !== '1') {
+                        img.dataset.fallbackTried = '1';
+                        img.src = logo2Alt;
+                      } else {
+                        img.src = '/Documents/teams/TBD.png';
+                      }
+                    }}
+                  />
+                </div>
+              </div>
               <div className="text-xl font-bold text-white">{teamB?.team || initialTeam2}</div>
             </div>
           </div>
