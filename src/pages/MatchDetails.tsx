@@ -1,37 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import clsx from "clsx";
-import {
-  ResponsiveContainer,
-  RadarChart,
-  Radar,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Legend,
-  Tooltip,
-} from "recharts";
 
-import {
-  parsePlayerDataParquet,
-  type TeamStats,
-  type PlayerStats,
-  type ScaleMode,
-  type TimeWindow,
-} from "@/lib/parquetParser";
+import { parsePlayerDataParquet, type TeamStats, type ScaleMode, type TimeWindow } from "@/lib/parquetParser";
 import PlayerRadarChart from "@/components/PlayerRadarChart";
 
 /* ===================== helpers ===================== */
 function useQuery() {
   const { search } = useLocation();
   return useMemo(() => new URLSearchParams(search), [search]);
-}
-
-function titleCase(s: string) {
-  return (s || "")
-    .toLowerCase()
-    .replace(/\b\w/g, (c) => c.toUpperCase())
-    .replace(/_/g, " ");
 }
 
 function Chip({ active, children, onClick }: { active?: boolean; children: React.ReactNode; onClick?: () => void }) {
@@ -58,10 +35,6 @@ function Section({ title, children }: { title: string; children: React.ReactNode
     </div>
   );
 }
-
-/* === Axes joueurs : gérés dans PlayerRadarChart === */
-
-/* ===================== Composants ===================== */
 
 function TeamSummary({ team, winrate, power }: { team: string; winrate?: number; power?: number }) {
   return (
@@ -205,7 +178,7 @@ export default function MatchDetails() {
             <TeamSummary team={teamB.team} winrate={winrateFor(teamB, windowSel)} power={teamB.meta.power_team} />
           </div>
 
-          {/* Radars joueurs (5 axes pour 10/20, 4 pour 365d) */}
+          {/* Radars joueurs */}
           <Section title="Comparaison joueurs (5v5)">
             {!teamA.players.length || !teamB.players.length ? (
               <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
