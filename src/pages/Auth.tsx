@@ -195,109 +195,126 @@ const Auth = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 bg-gradient-card border-border/50 animate-slide-up">
-              <Tabs defaultValue="login" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6">
-                  <TabsTrigger value="login">Connexion</TabsTrigger>
-                  <TabsTrigger value="signup">Inscription</TabsTrigger>
-                </TabsList>
+            {!user ? (
+              <Card className="p-8 bg-gradient-card border-border/50 animate-slide-up">
+                <Tabs defaultValue="login" className="w-full">
+                  <TabsList className="grid w-full grid-cols-2 mb-6">
+                    <TabsTrigger value="login">Connexion</TabsTrigger>
+                    <TabsTrigger value="signup">Inscription</TabsTrigger>
+                  </TabsList>
 
-                <TabsContent value="login">
-                  <form onSubmit={handleLogin} className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="login-email">Email</Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
-                        <Input
-                          id="login-email"
-                          type="email"
-                          placeholder="votre@email.com"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          className="pl-10 bg-background/50 border-border/50 focus:border-primary"
-                        />
+                  <TabsContent value="login">
+                    <form onSubmit={handleLogin} className="space-y-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="login-email">Email</Label>
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
+                          <Input
+                            id="login-email"
+                            type="email"
+                            placeholder="votre@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="pl-10 bg-background/50 border-border/50 focus:border-primary"
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="login-password">Mot de passe</Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
-                        <Input
-                          id="login-password"
-                          type="password"
-                          placeholder="••••••••"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          required
-                          className="pl-10 bg-background/50 border-border/50 focus:border-primary"
-                        />
+                      <div className="space-y-2">
+                        <Label htmlFor="login-password">Mot de passe</Label>
+                        <div className="relative">
+                          <Lock className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
+                          <Input
+                            id="login-password"
+                            type="password"
+                            placeholder="••••••••"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="pl-10 bg-background/50 border-border/50 focus:border-primary"
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                      {loading ? "Connexion..." : "Se connecter"}
-                    </Button>
-                  </form>
-                </TabsContent>
+                      <Button type="submit" size="lg" className="w-full" disabled={loading}>
+                        {loading ? "Connexion..." : "Se connecter"}
+                      </Button>
+                    </form>
+                  </TabsContent>
 
-                <TabsContent value="signup">
-                  <form onSubmit={handleSignup} className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-name">Nom</Label>
-                      <div className="relative">
-                        <User className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
-                        <Input
-                          id="signup-name"
-                          placeholder="Votre nom"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          required
-                          className="pl-10 bg-background/50 border-border/50 focus:border-primary"
-                        />
+                  <TabsContent value="signup">
+                    <form onSubmit={handleSignup} className="space-y-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="signup-name">Nom</Label>
+                        <div className="relative">
+                          <User className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
+                          <Input
+                            id="signup-name"
+                            placeholder="Votre nom"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            className="pl-10 bg-background/50 border-border/50 focus:border-primary"
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-email">Email</Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
-                        <Input
-                          id="signup-email"
-                          type="email"
-                          placeholder="votre@email.com"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          className="pl-10 bg-background/50 border-border/50 focus:border-primary"
-                        />
+                      <div className="space-y-2">
+                        <Label htmlFor="signup-email">Email</Label>
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
+                          <Input
+                            id="signup-email"
+                            type="email"
+                            placeholder="votre@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="pl-10 bg-background/50 border-border/50 focus:border-primary"
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-password">Mot de passe</Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
-                        <Input
-                          id="signup-password"
-                          type="password"
-                          placeholder="••••••••"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          required
-                          className="pl-10 bg-background/50 border-border/50 focus:border-primary"
-                        />
+                      <div className="space-y-2">
+                        <Label htmlFor="signup-password">Mot de passe</Label>
+                        <div className="relative">
+                          <Lock className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
+                          <Input
+                            id="signup-password"
+                            type="password"
+                            placeholder="••••••••"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="pl-10 bg-background/50 border-border/50 focus:border-primary"
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                      {loading ? "Création..." : "Créer mon compte"}
-                    </Button>
-                  </form>
-                </TabsContent>
-              </Tabs>
-            </Card>
+                      <Button type="submit" size="lg" className="w-full" disabled={loading}>
+                        {loading ? "Création..." : "Créer mon compte"}
+                      </Button>
+                    </form>
+                  </TabsContent>
+                </Tabs>
+              </Card>
+            ) : (
+              <Card className="p-8 bg-gradient-card border-border/50 animate-slide-up flex flex-col items-center justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <Check className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">Vous êtes connecté</h3>
+                  <p className="text-muted-foreground mb-4">
+                    {user.email}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Découvrez notre offre Premium ci-contre →
+                  </p>
+                </div>
+              </Card>
+            )}
 
             <Card className="p-8 bg-gradient-card border-border/50 relative overflow-hidden animate-slide-up" style={{ animationDelay: "0.1s" }}>
               {isPremium ? (
