@@ -50,23 +50,37 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
 
 export const createCheckoutSession = async (): Promise<string | null> => {
   try {
+    console.log('[createCheckoutSession] Starting checkout session creation');
     const { data: { session } } = await supabase.auth.getSession();
     
     if (!session) {
+      console.error('[createCheckoutSession] No session found');
       throw new Error('User not authenticated');
     }
 
+    console.log('[createCheckoutSession] Session found, calling edge function');
     const { data, error } = await supabase.functions.invoke('create-checkout', {
       headers: {
         Authorization: `Bearer ${session.access_token}`,
       },
     });
 
-    if (error) throw error;
+    console.log('[createCheckoutSession] Edge function response:', { data, error });
+
+    if (error) {
+      console.error('[createCheckoutSession] Edge function error:', error);
+      throw error;
+    }
+
+    if (!data?.url) {
+      console.error('[createCheckoutSession] No URL in response:', data);
+      throw new Error('No checkout URL returned');
+    }
     
+    console.log('[createCheckoutSession] Checkout URL created:', data.url);
     return data.url;
   } catch (error) {
-    console.error('Error creating checkout session:', error);
+    console.error('[createCheckoutSession] Error creating checkout session:', error);
     return null;
   }
 };
