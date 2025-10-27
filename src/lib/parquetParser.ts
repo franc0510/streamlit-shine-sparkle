@@ -4,69 +4,33 @@ import * as duckdb from "@duckdb/duckdb-wasm";
 export type TimeWindow = "last_10" | "last_20" | "last_365d";
 export type ScaleMode = "none" | "minmax" | "zscore";
 
-/* ======================= Types ======================= */
 export type PlayerStats = {
   team: string;
   teamname?: string;
   player: string;
   player_name?: string;
   position?: string;
-
-  // === Joueur: colonnes exactes ===
+  // KPIs (toujours number | undefined après parsing)
   kda_last_10?: number;
   kda_last_20?: number;
-
   earned_gpm_avg_last_10?: number;
-  earned_gpm_avg_last_20?: number;
   earned_gpm_avg_last_365d?: number;
-
-  cspm_avg_last_10?: number;
-  cspm_avg_last_20?: number;
-  cspm_avg_last_365d?: number;
-
-  vspm_avg_last_10?: number;
-  vspm_avg_last_20?: number;
-  vspm_avg_last_365d?: number;
-
-  dpm_avg_last_10?: number;
-  dpm_avg_last_20?: number;
   dpm_avg_last_365d?: number;
+  wcpm_avg_last_365d?: number;
+  vspm_avg_last_365d?: number;
 };
 
 export type TeamAggregates = Record<string, number>;
-
-export type TeamMeta = {
-  team_winrate_last_10?: number;
-  team_winrate_last_20?: number;
-  team_winrate_last_year?: number; // (365d)
-  power_team?: number;
-};
-
 export type TeamStats = {
   team: string;
-  players: PlayerStats[]; // 5 joueurs sélectionnés
+  players: PlayerStats[];
   aggregates: TeamAggregates;
-  meta: TeamMeta; // winrates + power_team
   resolvedFrom: string;
 };
-
 export type ParseResult = [TeamStats, TeamStats];
 
-/* ======================= URL helper ======================= */
-function assetUrl(relPath: string): string {
-  const rel = relPath.replace(/^\/+/, "");
-  const baseTagHref = document.querySelector("base")?.getAttribute("href") || "";
-  const baseFromTag = baseTagHref ? new URL(baseTagHref, window.location.origin).pathname : "";
-  // @ts-ignore
-  const baseFromVite: string = (import.meta as any)?.env?.BASE_URL || "";
-  const base = (baseFromTag || baseFromVite || "/").toString();
-  const normBase = (base.startsWith("/") ? base : "/" + base).replace(/\/+$/, "");
-  return new URL(`${normBase}/${rel}`, window.location.origin).toString();
-}
+const PARQUET_URL = "/Documents/DF_filtered.parquet"; // le fichier doit être servi par le site (place-le dans /public/Documents)
 
-const PARQUET_URL = assetUrl("Documents/DF_filtered.parquet");
-
-/* ======================= Aliases équipes ======================= */
 const TEAM_ALIASES: Record<string, string> = {
   "GEN G": "Gen.G",
   "GEN.G": "Gen.G",
@@ -113,18 +77,24 @@ function applyAlias(s: string) {
   const k = normKey(s);
   return TEAM_ALIASES[k] ?? s;
 }
+
+// Helper cast → number | undefined
 function toNum(v: any): number | undefined {
   const n = Number(v);
   return Number.isFinite(n) ? n : undefined;
 }
 
-/* ======================= duckdb-wasm ======================= */
+/* ---------------- duckdb-wasm init ---------------- */
+
 let _db: duckdb.AsyncDuckDB | null = null;
+
 async function getDB(): Promise<duckdb.AsyncDuckDB> {
   if (_db) return _db;
+
   const DUCKDB_BUNDLES = duckdb.getJsDelivrBundles();
   const bundle = await duckdb.selectBundle(DUCKDB_BUNDLES);
 
+  // Create worker with proper CORS handling
   const workerUrl = new URL(bundle.mainWorker!);
   const response = await fetch(workerUrl);
   const blob = await response.blob();
@@ -145,7 +115,8 @@ async function getDB(): Promise<duckdb.AsyncDuckDB> {
   return db;
 }
 
-/* ======================= Introspection table ======================= */
+/* --------------- lecture & introspection --------------- */
+
 async function fetchAllTeams(conn: duckdb.AsyncDuckDBConnection, table: string, teamCol: string) {
   const escapedCol = `"${teamCol.replace(/"/g, '""')}"`;
   const rs = await conn.query(`SELECT DISTINCT ${escapedCol} as team FROM ${table} WHERE ${escapedCol} IS NOT NULL`);
@@ -159,6 +130,7 @@ async function detectTeamCol(conn: duckdb.AsyncDuckDBConnection, table: string):
   const cols = await conn.query(`PRAGMA table_info('${table}')`);
   const names = cols.toArray().map((r: any) => String(r.name).toLowerCase());
   const orig = cols.toArray().map((r: any) => String(r.name));
+
   const want = ["teamname", "team_name", "team"];
   for (const w of want) {
     const idx = names.indexOf(w);
@@ -172,9 +144,14 @@ async function detectTeamCol(conn: duckdb.AsyncDuckDBConnection, table: string):
 function resolveTeam(wanted: string, candidates: string[]): { found?: string; why: string } {
   const wantAliased = applyAlias(wanted);
   const key = normKey(wantAliased);
+
   const index = new Map<string, string>();
-  for (const c of candidates) index.set(normKey(applyAlias(c)), c);
+  for (const c of candidates) {
+    index.set(normKey(applyAlias(c)), c);
+  }
+
   if (index.has(key)) return { found: index.get(key), why: "equal(norm+alias)" };
+
   for (const [k, v] of index.entries()) {
     if (k.includes(key) || key.includes(k)) return { found: v, why: "contains" };
   }
@@ -185,33 +162,35 @@ function resolveTeam(wanted: string, candidates: string[]): { found?: string; wh
   return { why: "not_found" };
 }
 
-/* ======================= KPI map (colonnes) ======================= */
+function aggregatesFrom(players: PlayerStats[]): TeamAggregates {
+  const keys = [
+    "kda_last_10",
+    "kda_last_20",
+    "earned_gpm_avg_last_10",
+    "earned_gpm_avg_last_365d",
+    "dpm_avg_last_365d",
+    "wcpm_avg_last_365d",
+    "vspm_avg_last_365d",
+  ] as const;
+
+  const out: TeamAggregates = {};
+  for (const k of keys) {
+    const vals = players.map((p) => toNum((p as any)[k])).filter((x): x is number => typeof x === "number");
+    out[k] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+  }
+  return out;
+}
+
+/* -------------- mapping colonnes KPI (souple) -------------- */
+
 const KPI_MAP: Record<string, string[]> = {
-  // Joueur
-  kda_last_10: ["kda_last_10"],
-  kda_last_20: ["kda_last_20"],
-
-  earned_gpm_avg_last_10: ["earned_gpm_avg_last_10"],
-  earned_gpm_avg_last_20: ["earned_gpm_avg_last_20"],
-  earned_gpm_avg_last_365d: ["earned_gpm_avg_last_365d"],
-
-  cspm_avg_last_10: ["cspm_avg_last_10"],
-  cspm_avg_last_20: ["cspm_avg_last_20"],
-  cspm_avg_last_365d: ["cspm_avg_last_365d"],
-
-  vspm_avg_last_10: ["vspm_avg_last_10"],
-  vspm_avg_last_20: ["vspm_avg_last_20"],
-  vspm_avg_last_365d: ["vspm_avg_last_365d"],
-
-  dpm_avg_last_10: ["dpm_avg_last_10"],
-  dpm_avg_last_20: ["dpm_avg_last_20"],
-  dpm_avg_last_365d: ["dpm_avg_last_365d"],
-
-  // Équipe
-  team_winrate_last_10: ["team_winrate_last_10"],
-  team_winrate_last_20: ["team_winrate_last_20"],
-  team_winrate_last_year: ["team_winrate_last_year", "team_winrate_last_365d"],
-  power_team: ["power_team"],
+  kda_last_10: ["kda_last_10", "kda10"],
+  kda_last_20: ["kda_last_20", "kda20"],
+  earned_gpm_avg_last_10: ["earned_gpm_avg_last_10", "egpm10"],
+  earned_gpm_avg_last_365d: ["earned_gpm_avg_last_365d", "egpm365"],
+  dpm_avg_last_365d: ["dpm_avg_last_365d", "dpm365"],
+  wcpm_avg_last_365d: ["wcpm_avg_last_365d", "wcpm365"],
+  vspm_avg_last_365d: ["vspm_avg_last_365d", "vspm365"],
 };
 
 function pickColName(existing: string[], candidates: string[]): string | null {
@@ -223,39 +202,16 @@ function pickColName(existing: string[], candidates: string[]): string | null {
   return null;
 }
 
-/* ======================= API export: image joueurs ======================= */
+/* ============ image joueurs (export demandée par tes composants) ============ */
 export function getPlayerImage(playerName: string): string {
-  return assetUrl(`Documents/teams/${String(playerName || "").trim()}.png`);
+  // On ne change pas le nom du fichier (tu as déjà les .png exacts)
+  // Si besoin, applique une normalisation légère :
+  const clean = String(playerName || "").trim();
+  return `/Documents/teams/${clean}.png`;
 }
 
-/* ======================= Helpers agrégats ======================= */
-function aggregatesFrom(players: PlayerStats[]): TeamAggregates {
-  const keys = [
-    "kda_last_10",
-    "kda_last_20",
-    "earned_gpm_avg_last_10",
-    "earned_gpm_avg_last_20",
-    "earned_gpm_avg_last_365d",
-    "cspm_avg_last_10",
-    "cspm_avg_last_20",
-    "cspm_avg_last_365d",
-    "vspm_avg_last_10",
-    "vspm_avg_last_20",
-    "vspm_avg_last_365d",
-    "dpm_avg_last_10",
-    "dpm_avg_last_20",
-    "dpm_avg_last_365d",
-  ] as const;
+/* ========================= API PRINCIPALE ========================= */
 
-  const out: TeamAggregates = {};
-  for (const k of keys) {
-    const vals = players.map((p) => toNum((p as any)[k])).filter((x): x is number => typeof x === "number");
-    out[k] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
-  }
-  return out;
-}
-
-/* ======================= Main ======================= */
 export async function parsePlayerDataParquet(
   team1: string,
   team2: string,
@@ -274,7 +230,10 @@ export async function parsePlayerDataParquet(
     const r2 = resolveTeam(team2, allTeams);
     if (!r1.found || !r2.found) {
       const sample = allTeams.slice(0, 60).join(", ");
-      throw new Error(`Team resolution failed: (${team1} → ${r1.why}) / (${team2} → ${r2.why}). Sample: ${sample}`);
+      throw new Error(
+        `Team resolution failed: (${team1} → ${r1.why}) / (${team2} → ${r2.why}). ` +
+          `Sample teams in parquet: ${sample}`,
+      );
     }
 
     const info = await conn.query(`PRAGMA table_info('t')`);
@@ -296,137 +255,68 @@ export async function parsePlayerDataParquet(
       `${JSON.stringify(teamCol)} as team_col`,
       `${JSON.stringify(playerCol)} as player_col`,
       posCol ? `${JSON.stringify(posCol)} as pos_col` : null,
-
-      // joueur KPIs
-      ...[
-        "kda_last_10",
-        "kda_last_20",
-        "earned_gpm_avg_last_10",
-        "earned_gpm_avg_last_20",
-        "earned_gpm_avg_last_365d",
-        "cspm_avg_last_10",
-        "cspm_avg_last_20",
-        "cspm_avg_last_365d",
-        "vspm_avg_last_10",
-        "vspm_avg_last_20",
-        "vspm_avg_last_365d",
-        "dpm_avg_last_10",
-        "dpm_avg_last_20",
-        "dpm_avg_last_365d",
-      ].map((k) => (kpiCols[k] ? `${JSON.stringify(kpiCols[k])} as "${k}"` : null)),
-
-      // équipe (mêmes lignes, on lira la 1ère non-nulle)
-      ...["team_winrate_last_10", "team_winrate_last_20", "team_winrate_last_year", "power_team"].map((k) =>
-        kpiCols[k] ? `${JSON.stringify(kpiCols[k])} as "${k}"` : null,
-      ),
+      ...Object.values(kpiCols).map((c) => `${JSON.stringify(c)} as "${c}"`),
     ].filter(Boolean) as string[];
 
-    const esc = (v: string) => v.replace(/'/g, "''");
-    const qFor = (team: string) => `
+    // Simple SQL escaping
+    const escapeSql = (val: string) => val.replace(/'/g, "''");
+
+    const q1 = `
       SELECT ${selectCols.join(", ")}
       FROM t
-      WHERE "${teamCol}" = '${esc(team)}'
+      WHERE "${teamCol}" = '${escapeSql(r1.found!)}'
+    `;
+    const q2 = `
+      SELECT ${selectCols.join(", ")}
+      FROM t
+      WHERE "${teamCol}" = '${escapeSql(r2.found!)}'
     `;
 
-    const [rs1, rs2] = await Promise.all([conn.query(qFor(r1.found!)), conn.query(qFor(r2.found!))]);
+    const rs1 = await conn.query(q1);
+    const rs2 = await conn.query(q2);
+
     const rows1 = rs1.toArray();
     const rows2 = rs2.toArray();
 
-    // === 1 joueur par rôle
     function toPlayers(rows: any[], team: string): PlayerStats[] {
-      const keyPlayer = (r: any) => String(r.player_col ?? "").trim();
-      const egpm10 = (r: any) => Number(r["earned_gpm_avg_last_10"]) ?? -1e9;
-
-      const bestRowByPlayer = new Map<string, any>();
-      for (const r of rows) {
-        const name = keyPlayer(r);
-        if (!name) continue;
-        const cur = bestRowByPlayer.get(name);
-        if (!cur || egpm10(r) > egpm10(cur)) bestRowByPlayer.set(name, r);
-      }
-
-      const asPlayer = (r: any): PlayerStats => ({
-        team,
-        teamname: team,
-        player: String(r.player_col ?? "").trim(),
-        position: posCol ? String(r.pos_col ?? "") : undefined,
-
-        kda_last_10: toNum(r["kda_last_10"]),
-        kda_last_20: toNum(r["kda_last_20"]),
-
-        earned_gpm_avg_last_10: toNum(r["earned_gpm_avg_last_10"]),
-        earned_gpm_avg_last_20: toNum(r["earned_gpm_avg_last_20"]),
-        earned_gpm_avg_last_365d: toNum(r["earned_gpm_avg_last_365d"]),
-
-        cspm_avg_last_10: toNum(r["cspm_avg_last_10"]),
-        cspm_avg_last_20: toNum(r["cspm_avg_last_20"]),
-        cspm_avg_last_365d: toNum(r["cspm_avg_last_365d"]),
-
-        vspm_avg_last_10: toNum(r["vspm_avg_last_10"]),
-        vspm_avg_last_20: toNum(r["vspm_avg_last_20"]),
-        vspm_avg_last_365d: toNum(r["vspm_avg_last_365d"]),
-
-        dpm_avg_last_10: toNum(r["dpm_avg_last_10"]),
-        dpm_avg_last_20: toNum(r["dpm_avg_last_20"]),
-        dpm_avg_last_365d: toNum(r["dpm_avg_last_365d"]),
+      const players = rows.map((r) => {
+        const p: PlayerStats = {
+          team,
+          teamname: team,
+          player: String(r.player_col ?? "").trim(),
+          position: posCol ? String(r.pos_col ?? "") : undefined,
+          // force number | undefined
+          kda_last_10: toNum(r["kda_last_10"]),
+          kda_last_20: toNum(r["kda_last_20"]),
+          earned_gpm_avg_last_10: toNum(r["earned_gpm_avg_last_10"]),
+          earned_gpm_avg_last_365d: toNum(r["earned_gpm_avg_last_365d"]),
+          dpm_avg_last_365d: toNum(r["dpm_avg_last_365d"]),
+          wcpm_avg_last_365d: toNum(r["wcpm_avg_last_365d"]),
+          vspm_avg_last_365d: toNum(r["vspm_avg_last_365d"]),
+        };
+        return p;
       });
 
-      const normRole = (s?: string) => {
+      const roleOrder = (s?: string) => {
         const u = String(s || "").toUpperCase();
-        if (/\bTOP\b/.test(u)) return "TOP";
-        if (/\b(JGL|JUNG|JUNGLE|JUNGLER)\b/.test(u)) return "JGL";
-        if (/\bMID\b/.test(u)) return "MID";
-        if (/\b(ADC|BOT|BOTTOM)\b/.test(u)) return "ADC";
-        if (/\b(SUP|SUPP|SUPPORT)\b/.test(u)) return "SUP";
-        return "UNK";
+        if (u.includes("TOP")) return 1;
+        if (u.includes("JGL") || u.includes("JUNG")) return 2;
+        if (u.includes("MID")) return 3;
+        if (u.includes("ADC") || u.includes("BOT")) return 4;
+        if (u.includes("SUP")) return 5;
+        return 99;
       };
 
-      const unique = Array.from(bestRowByPlayer.values()).map(asPlayer);
-      const order = ["TOP", "JGL", "MID", "ADC", "SUP"] as const;
-      const score = (p: PlayerStats) =>
-        (p.earned_gpm_avg_last_10 ?? -1e9) * 1e6 +
-        (p.earned_gpm_avg_last_365d ?? -1e9) * 1e3 +
-        (p.kda_last_10 ?? p.kda_last_20 ?? -1e9);
+      players.sort((a, b) => {
+        const ra = roleOrder(a.position);
+        const rb = roleOrder(b.position);
+        if (ra !== rb) return ra - rb;
+        const ea = a.earned_gpm_avg_last_10 ?? -1e9;
+        const eb = b.earned_gpm_avg_last_10 ?? -1e9;
+        return eb - ea;
+      });
 
-      const bestByRole = new Map<string, PlayerStats>();
-      for (const p of unique) {
-        const role = normRole(p.position);
-        if (role === "UNK") continue;
-        const cur = bestByRole.get(role);
-        if (!cur || score(p) > score(cur)) bestByRole.set(role, p);
-      }
-
-      const picked: PlayerStats[] = [];
-      for (const r of order) {
-        const p = bestByRole.get(r);
-        if (p) picked.push(p);
-      }
-      if (picked.length < 5) {
-        const already = new Set(picked.map((p) => p.player));
-        unique
-          .filter((p) => !already.has(p.player))
-          .sort((a, b) => score(b) - score(a))
-          .slice(0, 5 - picked.length)
-          .forEach((p) => picked.push(p));
-      }
-      return picked.slice(0, 5);
-    }
-
-    // === méta équipe (winrates/power) : on prend la 1ère valeur non-nulle sur les lignes
-    function extractTeamMeta(rows: any[]): TeamMeta {
-      const first = (key: string) => {
-        for (const r of rows) {
-          const v = toNum(r[key]);
-          if (typeof v === "number") return v;
-        }
-        return undefined;
-      };
-      return {
-        team_winrate_last_10: first("team_winrate_last_10"),
-        team_winrate_last_20: first("team_winrate_last_20"),
-        team_winrate_last_year: first("team_winrate_last_year"),
-        power_team: first("power_team"),
-      };
+      return players.slice(0, 5);
     }
 
     const players1 = toPlayers(rows1, r1.found!);
@@ -436,14 +326,12 @@ export async function parsePlayerDataParquet(
       team: r1.found!,
       players: players1,
       aggregates: aggregatesFrom(players1),
-      meta: extractTeamMeta(rows1),
       resolvedFrom: r1.found!,
     };
     const teamB: TeamStats = {
       team: r2.found!,
       players: players2,
       aggregates: aggregatesFrom(players2),
-      meta: extractTeamMeta(rows2),
       resolvedFrom: r2.found!,
     };
 
