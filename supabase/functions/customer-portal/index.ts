@@ -8,7 +8,7 @@ const corsHeaders = {
 };
 
 const logStep = (step: string, details?: any) => {
-  const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
+  const detailsStr = details ? ` - ${JSON.stringify(details)}` : "";
   console.log(`[CUSTOMER-PORTAL] ${step}${detailsStr}`);
 };
 
@@ -20,13 +20,10 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-    if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY_2");
+    if (!stripeKey) throw new Error("STRIPE_SECRET_KEY_2 is not set");
 
-    const supabaseClient = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
-    );
+    const supabaseClient = createClient(Deno.env.get("SUPABASE_URL") ?? "", Deno.env.get("SUPABASE_ANON_KEY") ?? "");
 
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) throw new Error("No authorization header provided");
@@ -36,7 +33,7 @@ serve(async (req) => {
     if (userError) throw new Error(`Authentication error: ${userError.message}`);
     const user = userData.user;
     if (!user?.email) throw new Error("User not authenticated or email not available");
-    
+
     logStep("User authenticated", { userId: user.id, email: user.email });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
