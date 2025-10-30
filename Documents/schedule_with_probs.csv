@@ -1,8 +1,7 @@
 match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last_proba_team1_pct,last_proba_team2_pct,status,used_team1,used_team2,roster1_size,roster2_size,as_of,league_like,debug_error,symmetry_check,order_key,flip_applied
-2025-10-29T07:00:00+00:00,Worlds,BO5,kt Rolster,CTBC Flying Oyster,41.5,58.5,23.8,76.2,ok,KT Rolster,CTBC Flying Oyster,5,5,2025-10-29,WLDs,,ok,CTBC Flying Oyster|KT Rolster,yes
-2025-10-30T07:00:00+00:00,Worlds,BO5,G2 Esports,TOPESPORTS,44.1,55.9,27.4,7.8,ok,G2 Esports,Top Esports,5,5,2025-10-30,WLDs,,ok,G2 Esports|Top Esports,no
-2025-10-31T07:00:00+00:00,Worlds,BO5,Anyone's Legend,T1,43.9,56.1,47.1,16.5,ok,Anyone's Legend,T1,5,5,2025-10-31,WLDs,,ok,Anyone's Legend|T1,no
-2025-11-01T07:00:00+00:00,Worlds,BO5,TBD,Gen.G Esports,50.0,50.0,50.0,47.5,no_roster:TBD,TBD,Gen.G,0,5,2025-11-01,WLDs,,skipped,,
+2025-10-30T07:00:00+00:00,Worlds,BO5,G2 Esports,TOPESPORTS,54.7,45.3,27.4,7.8,ok,G2 Esports,Top Esports,5,5,2025-10-30,WLDs,,ok,G2 Esports|Top Esports,no
+2025-10-31T07:00:00+00:00,Worlds,BO5,Anyone's Legend,T1,55.5,44.5,47.1,16.5,ok,Anyone's Legend,T1,5,5,2025-10-31,WLDs,,ok,Anyone's Legend|T1,no
+2025-11-01T07:00:00+00:00,Worlds,BO5,Gen.G Esports,kt Rolster,48.3,51.7,47.5,23.8,ok,Gen.G,KT Rolster,5,5,2025-11-01,WLDs,,ok,Gen.G|KT Rolster,no
 2025-11-02T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-11-02,WLDs,,skipped,,
 2025-11-02T18:00:00+00:00,EMEA Masters,BO5,Karmine Corp Blue,Los Heretics,50.0,50.0,71.3,50.0,no_roster:Los Heretics,Karmine Corp,Los Heretics,5,0,2025-11-02,EMEA MASTERS,,skipped,,
 2025-11-09T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-11-09,WLDs,,skipped,,
