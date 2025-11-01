@@ -1,6 +1,5 @@
 match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last_proba_team1_pct,last_proba_team2_pct,status,used_team1,used_team2,roster1_size,roster2_size,as_of,league_like,debug_error,symmetry_check,order_key,flip_applied
-2025-10-31T07:00:00+00:00,Worlds,BO5,Anyone's Legend,T1,46.8,53.2,47.1,16.5,ok,Anyone's Legend,T1,5,5,2025-10-31,WLDs,,ok,Anyone's Legend|T1,no
-2025-11-01T07:00:00+00:00,Worlds,BO5,Gen.G Esports,kt Rolster,68.7,31.3,47.5,51.7,ok,Gen.G,KT Rolster,5,5,2025-11-01,WLDs,,ok,Gen.G|KT Rolster,no
-2025-11-02T07:00:00+00:00,Worlds,BO5,TBD,TOPESPORTS,50.0,50.0,50.0,7.8,no_roster:TBD,TBD,Top Esports,0,5,2025-11-02,WLDs,,skipped,,
+2025-11-01T07:00:00+00:00,Worlds,BO5,Gen.G Esports,kt Rolster,63.4,36.6,50.0,51.7,ok,Gen.G,KT Rolster,5,5,2025-11-01,WLDs,,ok,Gen.G|KT Rolster,no
+2025-11-02T07:00:00+00:00,Worlds,BO5,T1,TOPESPORTS,45.0,55.0,16.5,7.8,ok,T1,Top Esports,5,5,2025-11-02,WLDs,,ok,T1|Top Esports,no
 2025-11-02T18:00:00+00:00,EMEA Masters,BO5,Karmine Corp Blue,Los Heretics,50.0,50.0,71.3,50.0,no_roster:Los Heretics,Karmine Corp,Los Heretics,5,0,2025-11-02,EMEA MASTERS,,skipped,,
 2025-11-09T07:00:00+00:00,Worlds,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2025-11-09,WLDs,,skipped,,
