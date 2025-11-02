@@ -100,12 +100,21 @@ export const createCheckoutSession = async (
     updateDiagnostic(1, { status: "loading", message: "Appel de la fonction create-checkout" });
     console.log('[createCheckoutSession] Calling edge function with token');
 
+    const waitingTimer = setTimeout(() => {
+      updateDiagnostic(1, {
+        status: "loading",
+        message: "Toujours en attente de la réponse... (possible blocage réseau)",
+      });
+    }, 12000);
+
     const { data, error } = await supabase.functions.invoke('create-checkout', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
       body: { priceId: PREMIUM_PRICE_ID },
     });
+
+    clearTimeout(waitingTimer);
     
     if (error) {
       updateDiagnostic(1, {

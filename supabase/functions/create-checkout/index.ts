@@ -15,6 +15,9 @@ serve(async (req) => {
 
   try {
     log("Function started");
+    // Small ping to confirm function is reached
+    // Note: Detailed logs available via function logs
+
 
     const supabase = createClient(Deno.env.get("SUPABASE_URL") ?? "", Deno.env.get("SUPABASE_ANON_KEY") ?? "");
 
@@ -48,14 +51,25 @@ serve(async (req) => {
 
     const origin = req.headers.get("origin") || Deno.env.get("FRONTEND_URL") || "http://localhost:5173";
 
+    const withTimeout = async <T>(promise: Promise<T>, ms = 15000, step = "Stripe call"): Promise<T> => {
+      return Promise.race([
+        promise,
+        new Promise<never>((_, reject) => setTimeout(() => reject(new Error(`${step} timeout`)), ms)),
+      ]) as Promise<T>;
+    };
+
     // Create checkout session directly with customer_email
-    const session: Stripe.Checkout.Session = await stripe.checkout.sessions.create({
-      customer_email: user.email,
-      mode: "subscription",
-      line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${origin}/?subscription=success`,
-      cancel_url: `${origin}/?subscription=cancelled`,
-    });
+    const session: Stripe.Checkout.Session = await withTimeout(
+      stripe.checkout.sessions.create({
+        customer_email: user.email,
+        mode: "subscription",
+        line_items: [{ price: priceId, quantity: 1 }],
+        success_url: `${origin}/?subscription=success`,
+        cancel_url: `${origin}/?subscription=cancelled`,
+      }),
+      15000,
+      "Création de la session Stripe"
+    );
 
     log("Checkout session created", { sessionId: session.id });
 
