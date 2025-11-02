@@ -13,6 +13,24 @@ import { useNavigate } from "react-router-dom";
 import { createCheckoutSession, openCustomerPortal } from "@/lib/subscription";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { z } from "zod";
+
+const loginSchema = z.object({
+  email: z.string()
+    .trim()
+    .email({ message: "Email invalide" })
+    .max(255, { message: "Email trop long" }),
+  password: z.string()
+    .min(8, { message: "Mot de passe d'au moins 8 caractères" })
+    .max(100, { message: "Mot de passe trop long" }),
+});
+
+const signupSchema = loginSchema.extend({
+  name: z.string()
+    .trim()
+    .min(2, { message: "Nom trop court" })
+    .max(100, { message: "Nom trop long" }),
+});
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,9 +52,22 @@ const Auth = () => {
     setLoading(true);
 
     try {
+      const validationResult = loginSchema.safeParse({ email, password });
+      
+      if (!validationResult.success) {
+        const firstError = validationResult.error.errors[0];
+        toast({
+          title: "Validation échouée",
+          description: firstError.message,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
       const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+        email: validationResult.data.email,
+        password: validationResult.data.password,
       });
 
       if (error) {
@@ -50,11 +81,9 @@ const Auth = () => {
           title: "Connexion réussie !",
           description: "Bienvenue sur PredictEsport",
         });
-        // Forcer un rechargement pour garantir la persistance de session dans tous les contextes
         setTimeout(() => {
           window.location.assign("/");
         }, 150);
-
       }
     } catch (error) {
       toast({
@@ -72,15 +101,28 @@ const Auth = () => {
     setLoading(true);
 
     try {
+      const validationResult = signupSchema.safeParse({ email, password, name });
+      
+      if (!validationResult.success) {
+        const firstError = validationResult.error.errors[0];
+        toast({
+          title: "Validation échouée",
+          description: firstError.message,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
       const redirectUrl = `${window.location.origin}/`;
       
       const { error } = await supabase.auth.signUp({
-        email,
-        password,
+        email: validationResult.data.email,
+        password: validationResult.data.password,
         options: {
           emailRedirectTo: redirectUrl,
           data: {
-            name: name,
+            name: validationResult.data.name,
           },
         },
       });
