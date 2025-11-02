@@ -56,7 +56,8 @@ export interface DiagnosticStep {
 }
 
 export const createCheckoutSession = async (
-  onDiagnostic?: (steps: DiagnosticStep[]) => void
+  onDiagnostic?: (steps: DiagnosticStep[]) => void,
+  accessToken?: string
 ): Promise<string> => {
   const diagnostics: DiagnosticStep[] = [
     { name: "1. Vérification de la session utilisateur", status: "loading" },
@@ -72,20 +73,27 @@ export const createCheckoutSession = async (
 
   try {
     // Étape 1: Vérifier la session
-    const { data: { session } } = await supabase.auth.getSession();
-    
-    if (!session) {
-      updateDiagnostic(0, {
-        status: "error",
-        message: "Aucune session active trouvée",
-        details: "Vous devez être connecté pour vous abonner. Essayez de vous déconnecter puis vous reconnecter.",
-      });
-      throw new Error('Vous devez être connecté pour vous abonner');
+    let token = accessToken;
+    let email: string | undefined;
+
+    if (!token) {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        updateDiagnostic(0, {
+          status: "error",
+          message: "Aucune session active trouvée",
+          details: "Vous devez être connecté pour vous abonner. Essayez de vous déconnecter puis vous reconnecter.",
+        });
+        throw new Error('Vous devez être connecté pour vous abonner');
+      }
+      token = session.access_token;
+      email = session.user.email ?? undefined;
     }
 
     updateDiagnostic(0, {
       status: "success",
-      message: `Session active pour ${session.user.email}`,
+      message: email ? `Session active pour ${email}` : "Session active",
     });
 
     // Étape 2: Appeler la fonction edge
@@ -94,7 +102,7 @@ export const createCheckoutSession = async (
 
     const invokePromise = supabase.functions.invoke('create-checkout', {
       headers: {
-        Authorization: `Bearer ${session.access_token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 

@@ -36,7 +36,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const { user } = useAuth();
+  const { user, session } = useAuth();
   const [loading, setLoading] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [diagnosticOpen, setDiagnosticOpen] = useState(false);
@@ -175,7 +175,7 @@ const Auth = () => {
     try {
       const url = await createCheckoutSession((steps) => {
         setDiagnostics([...steps]);
-      });
+      }, session?.access_token || undefined);
 
       if (url) {
         setTimeout(() => {
