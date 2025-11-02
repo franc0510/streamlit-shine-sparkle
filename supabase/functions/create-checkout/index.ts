@@ -33,7 +33,7 @@ serve(async (req) => {
 
     const stripe = new Stripe(stripeSecret, { apiVersion: "2024-06-20" });
 
-    const priceId = Deno.env.get("STRIPE_PRICE_ID") ?? "price_1SLgwBHrSrokKrOmY8qkwqpk";
+    const priceId = Deno.env.get("STRIPE_PRICE_ID") ?? "price_1SMsMzH8e5UibDVFCDSViYXR";
     const origin = req.headers.get("origin") || Deno.env.get("FRONTEND_URL") || "http://localhost:5173";
 
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
