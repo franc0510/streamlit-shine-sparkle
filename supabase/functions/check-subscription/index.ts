@@ -28,8 +28,8 @@ serve(async (req) => {
     const user = userData.user;
     if (!user?.email) throw new Error("User not authenticated or missing email");
 
-    const stripeSecret = Deno.env.get("STRIPE_SECRET_KEY_2");
-    if (!stripeSecret) throw new Error("STRIPE_SECRET_KEY_2 is not set");
+    const stripeSecret = Deno.env.get("STRIPE_SECRET_KEY");
+    if (!stripeSecret) throw new Error("STRIPE_SECRET_KEY is not set");
 
     const stripe = new Stripe(stripeSecret, { apiVersion: "2024-06-20" });
 
@@ -51,7 +51,7 @@ serve(async (req) => {
       limit: 5,
     });
 
-    const activeSub = subs.data.find((s) => s.status === "active" || s.status === "trialing");
+    const activeSub = subs.data.find((s: Stripe.Subscription) => s.status === "active" || s.status === "trialing");
 
     if (!activeSub) {
       log("No active subscription found");

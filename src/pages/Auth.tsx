@@ -122,16 +122,8 @@ const Auth = () => {
     try {
       const url = await createCheckoutSession();
       if (url) {
-        window.open(url, '_blank');
-        toast({
-          title: "Redirection vers le paiement",
-          description: "Une nouvelle fenêtre s'est ouverte pour finaliser votre abonnement",
-        });
-        
-        // Refresh subscription after a delay to check for updates
-        setTimeout(() => {
-          refreshSubscription();
-        }, 3000);
+        window.location.href = url;
+        return;
       } else {
         throw new Error("Impossible de créer la session de paiement");
       }
