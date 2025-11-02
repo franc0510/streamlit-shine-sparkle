@@ -10,10 +10,11 @@ import { Lock, Mail, User, CreditCard, Check, ExternalLink } from "lucide-react"
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-import { createCheckoutSession, openCustomerPortal } from "@/lib/subscription";
+import { createCheckoutSession, openCustomerPortal, type DiagnosticStep } from "@/lib/subscription";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { z } from "zod";
+import { SubscriptionErrorDialog } from "@/components/SubscriptionErrorDialog";
 
 const loginSchema = z.object({
   email: z.string()
@@ -38,6 +39,8 @@ const Auth = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [diagnosticOpen, setDiagnosticOpen] = useState(false);
+  const [diagnostics, setDiagnostics] = useState<DiagnosticStep[]>([]);
   const { toast } = useToast();
   const navigate = useNavigate();
   const { isPremium, subscriptionStatus, refreshSubscription } = useSubscription();
@@ -161,20 +164,28 @@ const Auth = () => {
     }
 
     setCheckoutLoading(true);
+    setDiagnosticOpen(true);
+    setDiagnostics([
+      { name: "1. Vérification de la session utilisateur", status: "loading" },
+      { name: "2. Appel de la fonction Stripe", status: "pending" },
+      { name: "3. Création de la session de paiement", status: "pending" },
+      { name: "4. Récupération de l'URL de redirection", status: "pending" },
+    ]);
+
     try {
-      const url = await createCheckoutSession();
+      const url = await createCheckoutSession((steps) => {
+        setDiagnostics([...steps]);
+      });
+
       if (url) {
-        window.location.href = url;
+        setTimeout(() => {
+          window.location.href = url;
+        }, 500);
         return;
-      } else {
-        throw new Error("Impossible de créer la session de paiement");
       }
     } catch (error) {
-      toast({
-        title: "Erreur",
-        description: error instanceof Error ? error.message : "Impossible de créer la session de paiement",
-        variant: "destructive",
-      });
+      // Les erreurs sont déjà affichées dans le diagnostic
+      console.error("Subscription error:", error);
     } finally {
       setCheckoutLoading(false);
     }
@@ -454,6 +465,13 @@ const Auth = () => {
           </p>
         </div>
       </footer>
+
+      <SubscriptionErrorDialog
+        open={diagnosticOpen}
+        onOpenChange={setDiagnosticOpen}
+        diagnostics={diagnostics}
+        onRetry={handleSubscribe}
+      />
     </div>
   );
 };

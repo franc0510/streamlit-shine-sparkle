@@ -48,16 +48,49 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
   }
 };
 
-export const createCheckoutSession = async (): Promise<string> => {
-  const { data: { session } } = await supabase.auth.getSession();
-  
-  if (!session) {
-    console.error('[createCheckoutSession] No session found');
-    throw new Error('Vous devez être connecté pour vous abonner');
-  }
+export interface DiagnosticStep {
+  name: string;
+  status: "pending" | "success" | "error" | "loading";
+  message?: string;
+  details?: string;
+}
+
+export const createCheckoutSession = async (
+  onDiagnostic?: (steps: DiagnosticStep[]) => void
+): Promise<string> => {
+  const diagnostics: DiagnosticStep[] = [
+    { name: "1. Vérification de la session utilisateur", status: "loading" },
+    { name: "2. Appel de la fonction Stripe", status: "pending" },
+    { name: "3. Création de la session de paiement", status: "pending" },
+    { name: "4. Récupération de l'URL de redirection", status: "pending" },
+  ];
+
+  const updateDiagnostic = (index: number, update: Partial<DiagnosticStep>) => {
+    diagnostics[index] = { ...diagnostics[index], ...update };
+    onDiagnostic?.(diagnostics);
+  };
 
   try {
-    console.log('[createCheckoutSession] Session found, calling edge function');
+    // Étape 1: Vérifier la session
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session) {
+      updateDiagnostic(0, {
+        status: "error",
+        message: "Aucune session active trouvée",
+        details: "Vous devez être connecté pour vous abonner. Essayez de vous déconnecter puis vous reconnecter.",
+      });
+      throw new Error('Vous devez être connecté pour vous abonner');
+    }
+
+    updateDiagnostic(0, {
+      status: "success",
+      message: `Session active pour ${session.user.email}`,
+    });
+
+    // Étape 2: Appeler la fonction edge
+    updateDiagnostic(1, { status: "loading" });
+    console.log('[createCheckoutSession] Calling edge function with token');
 
     const invokePromise = supabase.functions.invoke('create-checkout', {
       headers: {
@@ -65,32 +98,75 @@ export const createCheckoutSession = async (): Promise<string> => {
       },
     });
 
-    const timeoutMs = 20000; // 20s timeout to avoid infinite loading
+    const timeoutMs = 20000;
     const response = await Promise.race([
       invokePromise,
       new Promise<never>((_, reject) =>
-        setTimeout(() => reject(new Error('Le service de paiement ne répond pas (timeout). Réessayez dans quelques secondes.')),
-        timeoutMs)
+        setTimeout(() => {
+          updateDiagnostic(1, {
+            status: "error",
+            message: "Timeout de 20 secondes dépassé",
+            details: "La fonction Stripe ne répond pas. Le service pourrait être temporairement indisponible.",
+          });
+          reject(new Error('Le service de paiement ne répond pas (timeout).'));
+        }, timeoutMs)
       ),
     ]);
 
     const { data, error } = response as { data?: { url?: string }; error?: { message?: string } };
-    console.log('[createCheckoutSession] Edge function response:', { data, error });
-
+    
     if (error) {
-      console.error('[createCheckoutSession] Edge function error:', error);
+      updateDiagnostic(1, {
+        status: "error",
+        message: "Erreur renvoyée par la fonction Stripe",
+        details: error.message || "Erreur inconnue",
+      });
       throw new Error(error.message || 'Erreur lors de la création de la session Stripe');
     }
 
-    if (!data?.url) {
-      console.error('[createCheckoutSession] No URL in response:', data);
-      throw new Error("La session Stripe n'a pas retourné d'URL");
+    updateDiagnostic(1, {
+      status: "success",
+      message: "Fonction Stripe appelée avec succès",
+    });
+
+    // Étape 3: Vérifier la réponse
+    updateDiagnostic(2, { status: "loading" });
+
+    if (!data) {
+      updateDiagnostic(2, {
+        status: "error",
+        message: "Aucune donnée retournée",
+        details: "La fonction a répondu mais sans données. Vérifiez la configuration Stripe.",
+      });
+      throw new Error("Aucune donnée retournée par Stripe");
     }
-    
-    console.log('[createCheckoutSession] Checkout URL created:', data.url);
+
+    updateDiagnostic(2, {
+      status: "success",
+      message: "Données reçues de Stripe",
+    });
+
+    // Étape 4: Vérifier l'URL
+    updateDiagnostic(3, { status: "loading" });
+
+    if (!data.url) {
+      updateDiagnostic(3, {
+        status: "error",
+        message: "URL de paiement manquante",
+        details: "La session Stripe a été créée mais l'URL de redirection est manquante. Contactez le support.",
+      });
+      throw new Error("URL de paiement manquante");
+    }
+
+    updateDiagnostic(3, {
+      status: "success",
+      message: "URL de redirection obtenue",
+    });
+
+    console.log('[createCheckoutSession] Checkout URL:', data.url);
     return data.url;
   } catch (error) {
-    console.error('[createCheckoutSession] Error creating checkout session:', error);
+    console.error('[createCheckoutSession] Error:', error);
     if (error instanceof Error) throw error;
     throw new Error('Erreur inconnue lors de la création du paiement');
   }
