@@ -1,6 +1,8 @@
+// src/lib/subscription.ts
 import { supabase } from "@/integrations/supabase/client";
 
 export const PREMIUM_PRODUCT_ID = "prod_TIHVR9Og97Sd0W";
+// garde-le si tu l'utilises ailleurs, mais on ne s'y fie pas côté backend
 export const PREMIUM_PRICE_ID = "price_1SLgwBHrSrokKrOmY8qkwqpk";
 
 export interface SubscriptionStatus {
@@ -11,187 +13,151 @@ export interface SubscriptionStatus {
 
 export const checkSubscription = async (): Promise<SubscriptionStatus> => {
   try {
-    const { data: { session } } = await supabase.auth.getSession();
-    
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
     if (!session) {
+      console.log("[checkSubscription] no session -> not subscribed");
       return { subscribed: false, product_id: null, subscription_end: null };
     }
 
-    // First check if user has manual premium access
-    const { data: premiumUser } = await supabase
-      .from('premium_users')
-      .select('*')
-      .eq('user_id', session.user.id)
+    // 1️⃣ accès manuel
+    const { data: premiumUser, error: premiumErr } = await supabase
+      .from("premium_users")
+      .select("*")
+      .eq("user_id", session.user.id)
       .maybeSingle();
 
+    if (premiumErr) {
+      console.warn("[checkSubscription] premium_users error:", premiumErr);
+    }
+
     if (premiumUser) {
+      console.log("[checkSubscription] user has manual premium");
       return {
         subscribed: true,
         product_id: PREMIUM_PRODUCT_ID,
-        subscription_end: null, // Manual premium has no expiration
+        subscription_end: null,
       };
     }
 
-    // If not manual premium, check Stripe subscription
-    const { data, error } = await supabase.functions.invoke('check-subscription', {
+    // 2️⃣ appel edge function
+    const { data, error } = await supabase.functions.invoke("check-subscription", {
       headers: {
         Authorization: `Bearer ${session.access_token}`,
       },
     });
 
-    if (error) throw error;
-    
+    console.log("[checkSubscription] edge response:", { data, error });
+
+    if (error) {
+      // cas: la fonction renvoie 500
+      console.error("[checkSubscription] edge error:", error);
+      return { subscribed: false, product_id: null, subscription_end: null };
+    }
+
+    // cas: la fonction a répondu 200 mais avec { error: "..."}
+    if (data && typeof data === "object" && "error" in data) {
+      console.error("[checkSubscription] edge returned error field:", data);
+      return { subscribed: false, product_id: null, subscription_end: null };
+    }
+
     return data as SubscriptionStatus;
   } catch (error) {
-    console.error('Error checking subscription:', error);
+    console.error("Error checking subscription:", error);
     return { subscribed: false, product_id: null, subscription_end: null };
   }
 };
 
-export interface DiagnosticStep {
-  name: string;
-  status: "pending" | "success" | "error" | "loading";
-  message?: string;
-  details?: string;
-}
-
-export const createCheckoutSession = async (
-  onDiagnostic?: (steps: DiagnosticStep[]) => void,
-  accessToken?: string
-): Promise<string> => {
-  const diagnostics: DiagnosticStep[] = [
-    { name: "1. Vérification de la session utilisateur", status: "loading" },
-    { name: "2. Appel de la fonction Stripe", status: "pending" },
-    { name: "3. Création de la session de paiement", status: "pending" },
-    { name: "4. Récupération de l'URL de redirection", status: "pending" },
-  ];
-
-  const updateDiagnostic = (index: number, update: Partial<DiagnosticStep>) => {
-    diagnostics[index] = { ...diagnostics[index], ...update };
-    onDiagnostic?.(diagnostics);
-  };
-
+/**
+ * Appelle l'edge function "create-checkout" et renvoie l'URL stripe
+ * - si tout va bien -> string (l'URL)
+ * - si ça plante -> null (et tout est loggué)
+ */
+export const createCheckoutSession = async (): Promise<string | null> => {
   try {
-    // Étape 1: Vérifier la session
-    let token = accessToken;
-    let email: string | undefined;
+    console.log("[createCheckoutSession] start");
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-    if (!token) {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        updateDiagnostic(0, {
-          status: "error",
-          message: "Aucune session active trouvée",
-          details: "Vous devez être connecté pour vous abonner. Essayez de vous déconnecter puis vous reconnecter.",
-        });
-        throw new Error('Vous devez être connecté pour vous abonner');
-      }
-      token = session.access_token;
-      email = session.user.email ?? undefined;
-    }
-
-    updateDiagnostic(0, {
-      status: "success",
-      message: email ? `Session active pour ${email}` : "Session active",
-    });
-
-    // Étape 2: Appeler la fonction edge
-    updateDiagnostic(1, { status: "loading", message: "Appel de la fonction create-checkout" });
-    console.log('[createCheckoutSession] Calling edge function with token');
-
-    const waitingTimer = setTimeout(() => {
-      updateDiagnostic(1, {
-        status: "loading",
-        message: "Toujours en attente de la réponse... (possible blocage réseau)",
-      });
-    }, 12000);
-
-    const { data, error } = await supabase.functions.invoke('create-checkout', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: { priceId: PREMIUM_PRICE_ID },
-    });
-
-    clearTimeout(waitingTimer);
-    
-    if (error) {
-      updateDiagnostic(1, {
-        status: "error",
-        message: "Erreur renvoyée par la fonction Stripe",
-        details: error.message || "Erreur inconnue",
-      });
-      throw new Error(error.message || 'Erreur lors de la création de la session Stripe');
-    }
-
-    updateDiagnostic(1, {
-      status: "success",
-      message: "Fonction Stripe appelée avec succès",
-    });
-
-    // Étape 3: Vérifier la réponse
-    updateDiagnostic(2, { status: "loading" });
-
-    if (!data) {
-      updateDiagnostic(2, {
-        status: "error",
-        message: "Aucune donnée retournée",
-        details: "La fonction a répondu mais sans données. Vérifiez la configuration Stripe.",
-      });
-      throw new Error("Aucune donnée retournée par Stripe");
-    }
-
-    updateDiagnostic(2, {
-      status: "success",
-      message: "Données reçues de Stripe",
-    });
-
-    // Étape 4: Vérifier l'URL
-    updateDiagnostic(3, { status: "loading" });
-
-    if (!data.url) {
-      updateDiagnostic(3, {
-        status: "error",
-        message: "URL de paiement manquante",
-        details: "La session Stripe a été créée mais l'URL de redirection est manquante. Contactez le support.",
-      });
-      throw new Error("URL de paiement manquante");
-    }
-
-    updateDiagnostic(3, {
-      status: "success",
-      message: "URL de redirection obtenue",
-    });
-
-    console.log('[createCheckoutSession] Checkout URL:', data.url);
-    return data.url;
-  } catch (error) {
-    console.error('[createCheckoutSession] Error:', error);
-    if (error instanceof Error) throw error;
-    throw new Error('Erreur inconnue lors de la création du paiement');
-  }
-};
-
-export const openCustomerPortal = async (): Promise<string | null> => {
-  try {
-    const { data: { session } } = await supabase.auth.getSession();
-    
     if (!session) {
-      throw new Error('User not authenticated');
+      console.error("[createCheckoutSession] no session -> user not authenticated");
+      return null;
     }
 
-    const { data, error } = await supabase.functions.invoke('customer-portal', {
+    console.log("[createCheckoutSession] calling edge function create-checkout…");
+
+    const { data, error } = await supabase.functions.invoke("create-checkout", {
       headers: {
         Authorization: `Bearer ${session.access_token}`,
       },
     });
 
-    if (error) throw error;
-    
-    return data.url;
+    console.log("[createCheckoutSession] edge returned:", { data, error });
+
+    // 1️⃣ erreur réseau / edge
+    if (error) {
+      console.error("[createCheckoutSession] edge function error:", error);
+      return null;
+    }
+
+    // 2️⃣ la fonction a bien répondu mais avec { error: "..." }
+    if (data && typeof data === "object" && "error" in data) {
+      console.error("[createCheckoutSession] edge returned error object:", data);
+      return null;
+    }
+
+    // 3️⃣ pas d'URL
+    if (!data?.url) {
+      console.error("[createCheckoutSession] no url in edge response:", data);
+      return null;
+    }
+
+    console.log("[createCheckoutSession] success, url =", data.url);
+    return data.url as string;
   } catch (error) {
-    console.error('Error opening customer portal:', error);
+    console.error("[createCheckoutSession] exception:", error);
+    return null;
+  }
+};
+
+/**
+ * Ouvre le portal client Stripe
+ */
+export const openCustomerPortal = async (): Promise<string | null> => {
+  try {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session) {
+      console.error("[openCustomerPortal] no session");
+      return null;
+    }
+
+    const { data, error } = await supabase.functions.invoke("customer-portal", {
+      headers: {
+        Authorization: `Bearer ${session.access_token}`,
+      },
+    });
+
+    console.log("[openCustomerPortal] edge response:", { data, error });
+
+    if (error) {
+      console.error("[openCustomerPortal] edge error:", error);
+      return null;
+    }
+
+    if (!data?.url) {
+      console.error("[openCustomerPortal] no url in response", data);
+      return null;
+    }
+
+    return data.url as string;
+  } catch (error) {
+    console.error("Error opening customer portal:", error);
     return null;
   }
 };
