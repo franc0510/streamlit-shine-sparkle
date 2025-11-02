@@ -130,7 +130,7 @@ const Auth = () => {
     } catch (error) {
       toast({
         title: "Erreur",
-        description: "Impossible de créer la session de paiement",
+        description: error instanceof Error ? error.message : "Impossible de créer la session de paiement",
         variant: "destructive",
       });
     } finally {

@@ -48,40 +48,51 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
   }
 };
 
-export const createCheckoutSession = async (): Promise<string | null> => {
-  try {
-    console.log('[createCheckoutSession] Starting checkout session creation');
-    const { data: { session } } = await supabase.auth.getSession();
-    
-    if (!session) {
-      console.error('[createCheckoutSession] No session found');
-      throw new Error('User not authenticated');
-    }
+export const createCheckoutSession = async (): Promise<string> => {
+  const { data: { session } } = await supabase.auth.getSession();
+  
+  if (!session) {
+    console.error('[createCheckoutSession] No session found');
+    throw new Error('Vous devez être connecté pour vous abonner');
+  }
 
+  try {
     console.log('[createCheckoutSession] Session found, calling edge function');
-    const { data, error } = await supabase.functions.invoke('create-checkout', {
+
+    const invokePromise = supabase.functions.invoke('create-checkout', {
       headers: {
         Authorization: `Bearer ${session.access_token}`,
       },
     });
 
+    const timeoutMs = 20000; // 20s timeout to avoid infinite loading
+    const response = await Promise.race([
+      invokePromise,
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error('Le service de paiement ne répond pas (timeout). Réessayez dans quelques secondes.')),
+        timeoutMs)
+      ),
+    ]);
+
+    const { data, error } = response as { data?: { url?: string }; error?: { message?: string } };
     console.log('[createCheckoutSession] Edge function response:', { data, error });
 
     if (error) {
       console.error('[createCheckoutSession] Edge function error:', error);
-      throw error;
+      throw new Error(error.message || 'Erreur lors de la création de la session Stripe');
     }
 
     if (!data?.url) {
       console.error('[createCheckoutSession] No URL in response:', data);
-      throw new Error('No checkout URL returned');
+      throw new Error("La session Stripe n'a pas retourné d'URL");
     }
     
     console.log('[createCheckoutSession] Checkout URL created:', data.url);
     return data.url;
   } catch (error) {
     console.error('[createCheckoutSession] Error creating checkout session:', error);
-    return null;
+    if (error instanceof Error) throw error;
+    throw new Error('Erreur inconnue lors de la création du paiement');
   }
 };
 
