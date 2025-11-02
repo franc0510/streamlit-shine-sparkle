@@ -97,31 +97,15 @@ export const createCheckoutSession = async (
     });
 
     // Étape 2: Appeler la fonction edge
-    updateDiagnostic(1, { status: "loading" });
+    updateDiagnostic(1, { status: "loading", message: "Appel de la fonction create-checkout" });
     console.log('[createCheckoutSession] Calling edge function with token');
 
-    const invokePromise = supabase.functions.invoke('create-checkout', {
+    const { data, error } = await supabase.functions.invoke('create-checkout', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      body: { priceId: PREMIUM_PRICE_ID },
     });
-
-    const timeoutMs = 20000;
-    const response = await Promise.race([
-      invokePromise,
-      new Promise<never>((_, reject) =>
-        setTimeout(() => {
-          updateDiagnostic(1, {
-            status: "error",
-            message: "Timeout de 20 secondes dépassé",
-            details: "La fonction Stripe ne répond pas. Le service pourrait être temporairement indisponible.",
-          });
-          reject(new Error('Le service de paiement ne répond pas (timeout).'));
-        }, timeoutMs)
-      ),
-    ]);
-
-    const { data, error } = response as { data?: { url?: string }; error?: { message?: string } };
     
     if (error) {
       updateDiagnostic(1, {

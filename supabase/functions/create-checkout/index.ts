@@ -33,29 +33,29 @@ serve(async (req) => {
 
     const stripe = new Stripe(stripeSecret, { apiVersion: "2025-08-27.basil" });
 
-    const priceId = Deno.env.get("STRIPE_PRICE_ID") ?? "price_1SMsMzH8e5UibDVFCDSViYXR";
+    // Try to read priceId from body, then env
+    let priceId: string | null = null;
+    try {
+      const body = await req.json().catch(() => ({}));
+      if (body && typeof body.priceId === 'string') {
+        priceId = body.priceId;
+      }
+    } catch {}
+    if (!priceId) {
+      priceId = Deno.env.get("STRIPE_PRICE_ID") ?? null;
+    }
+    if (!priceId) throw new Error("No Stripe price configured (missing priceId)");
+
     const origin = req.headers.get("origin") || Deno.env.get("FRONTEND_URL") || "http://localhost:5173";
 
-    // Wrap Stripe calls with a timeout to avoid hanging requests
-    const withTimeout = async <T>(promise: Promise<T>, ms = 15000, step = "Stripe call"): Promise<T> => {
-      return Promise.race([
-        promise,
-        new Promise<never>((_, reject) => setTimeout(() => reject(new Error(`${step} timeout`)), ms)),
-      ]) as Promise<T>;
-    };
-
-    // Create checkout session directly with customer_email to avoid slow customer lookups
-    const session = await withTimeout<Stripe.Checkout.Session>(
-      stripe.checkout.sessions.create({
-        customer_email: user.email,
-        mode: "subscription",
-        line_items: [{ price: priceId, quantity: 1 }],
-        success_url: `${origin}/?subscription=success`,
-        cancel_url: `${origin}/?subscription=cancelled`,
-      }),
-      15000,
-      "Création de la session Stripe"
-    );
+    // Create checkout session directly with customer_email
+    const session: Stripe.Checkout.Session = await stripe.checkout.sessions.create({
+      customer_email: user.email,
+      mode: "subscription",
+      line_items: [{ price: priceId, quantity: 1 }],
+      success_url: `${origin}/?subscription=success`,
+      cancel_url: `${origin}/?subscription=cancelled`,
+    });
 
     log("Checkout session created", { sessionId: session.id });
 
