@@ -28,24 +28,34 @@ serve(async (req) => {
     const user = userData.user;
     if (!user?.email) throw new Error("User not authenticated or missing email");
 
-    const stripeSecret = Deno.env.get("STRIPE_SECRET_KEY_2");
-    if (!stripeSecret) throw new Error("STRIPE_SECRET_KEY_2 is not set");
+    const stripeSecret = Deno.env.get("STRIPE_SECRET_KEY") || Deno.env.get("STRIPE_SECRET_KEY_2");
+    if (!stripeSecret) throw new Error("STRIPE secret key not configured");
 
-    const stripe = new Stripe(stripeSecret, { apiVersion: "2024-06-20" });
+    const stripe = new Stripe(stripeSecret, { apiVersion: "2025-08-27.basil" });
 
     const priceId = Deno.env.get("STRIPE_PRICE_ID") ?? "price_1SMsMzH8e5UibDVFCDSViYXR";
     const origin = req.headers.get("origin") || Deno.env.get("FRONTEND_URL") || "http://localhost:5173";
 
-    const customers = await stripe.customers.list({ email: user.email, limit: 1 });
-    const customerId = customers.data[0]?.id;
+    // Wrap Stripe calls with a timeout to avoid hanging requests
+    const withTimeout = async <T>(promise: Promise<T>, ms = 15000, step = "Stripe call"): Promise<T> => {
+      return Promise.race([
+        promise,
+        new Promise<never>((_, reject) => setTimeout(() => reject(new Error(`${step} timeout`)), ms)),
+      ]) as Promise<T>;
+    };
 
-    const session = await stripe.checkout.sessions.create({
-      ...(customerId ? { customer: customerId } : { customer_email: user.email }),
-      mode: "subscription",
-      line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${origin}/?subscription=success`,
-      cancel_url: `${origin}/?subscription=cancelled`,
-    });
+    // Create checkout session directly with customer_email to avoid slow customer lookups
+    const session = await withTimeout<Stripe.Checkout.Session>(
+      stripe.checkout.sessions.create({
+        customer_email: user.email,
+        mode: "subscription",
+        line_items: [{ price: priceId, quantity: 1 }],
+        success_url: `${origin}/?subscription=success`,
+        cancel_url: `${origin}/?subscription=cancelled`,
+      }),
+      15000,
+      "Création de la session Stripe"
+    );
 
     log("Checkout session created", { sessionId: session.id });
 
