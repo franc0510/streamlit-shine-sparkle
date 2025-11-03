@@ -90,17 +90,26 @@ export const createCheckoutSession = async (): Promise<string | null> => {
     const headers: Record<string, string> = {};
     if (session?.access_token) {
       headers.Authorization = `Bearer ${session.access_token}`;
-      console.log("[createCheckoutSession] session OK, Authorization header set");
+      console.log("[createCheckoutSession] session OK, Authorization set");
     } else {
-      console.warn("[createCheckoutSession] NO session, call edge WITHOUT auth header (debug)");
+      console.warn("[createCheckoutSession] NO session, call edge WITHOUT auth (debug)");
     }
 
     const { data, error } = await supabase.functions.invoke("create-checkout", { headers, body: { priceId: PREMIUM_PRICE_ID } });
     console.log("[createCheckoutSession] edge returned:", { data, error });
 
-    if (error) return null;
-    if (data && typeof data === "object" && "error" in data) return null;
-    if (!data?.url) return null;
+    if (error) {
+      console.error("[createCheckoutSession] edge error:", error);
+      return null;
+    }
+    if (data && typeof data === "object" && "error" in data) {
+      console.error("[createCheckoutSession] edge returned error:", data.error);
+      return null;
+    }
+    if (!data?.url) {
+      console.error("[createCheckoutSession] no url in response");
+      return null;
+    }
 
     return data.url as string;
   } catch (e) {

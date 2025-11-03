@@ -168,19 +168,13 @@ const Auth = () => {
     }
 
     setCheckoutLoading(true);
-    setDiagnosticOpen(true);
-    setDiagnostics([
-      { name: "1. Vérification de la session utilisateur", status: "loading" },
-      { name: "2. Appel de la fonction Stripe", status: "pending" },
-      { name: "3. Création de la session de paiement", status: "pending" },
-      { name: "4. Récupération de l'URL de redirection", status: "pending" },
-    ]);
 
     try {
-      // TEMP DEBUG: test d'appel direct de l'edge function (doit répondre 401 en JSON)
+      // TEMP DEBUG: test d'appel direct de l'edge function
       const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
       if (SUPABASE_URL) {
         const edgeBase = SUPABASE_URL.replace('.supabase.co', '.functions.supabase.co');
+        console.log('[DEBUG] Testing raw edge call to:', `${edgeBase}/create-checkout`);
         fetch(`${edgeBase}/create-checkout`, { method: 'POST' })
           .then(async r => console.log('[raw fetch edge]', r.status, await r.text()))
           .catch(e => console.error('[raw fetch edge] error', e));
@@ -191,14 +185,23 @@ const Auth = () => {
       const url = await createCheckoutSession();
 
       if (url) {
-        setTimeout(() => {
-          window.location.href = url;
-        }, 500);
+        console.log('[handleSubscribe] Redirecting to Stripe:', url);
+        window.location.href = url;
         return;
+      } else {
+        toast({
+          title: "Erreur",
+          description: "Impossible de créer la session de paiement. Consultez la console.",
+          variant: "destructive",
+        });
       }
     } catch (error) {
-      // Les erreurs sont déjà affichées dans le diagnostic
       console.error("Subscription error:", error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur s'est produite lors de la création de la session",
+        variant: "destructive",
+      });
     } finally {
       setCheckoutLoading(false);
     }
