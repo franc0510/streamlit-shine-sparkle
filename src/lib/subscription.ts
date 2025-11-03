@@ -92,10 +92,14 @@ export const createCheckoutSession = async (): Promise<string | null> => {
       headers.Authorization = `Bearer ${session.access_token}`;
       console.log("[createCheckoutSession] session OK, Authorization set");
     } else {
-      console.warn("[createCheckoutSession] NO session, call edge WITHOUT auth (debug)");
+      console.warn("[createCheckoutSession] no session, calling edge without auth (debug)");
     }
 
-    const { data, error } = await supabase.functions.invoke("create-checkout", { headers, body: { priceId: PREMIUM_PRICE_ID } });
+    // Timeout pour ne pas spinner à l'infini
+    const invoke = supabase.functions.invoke("create-checkout", { headers, body: { priceId: PREMIUM_PRICE_ID } });
+    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 20000));
+
+    const { data, error } = (await Promise.race([invoke, timeout])) as any;
     console.log("[createCheckoutSession] edge returned:", { data, error });
 
     if (error) {
