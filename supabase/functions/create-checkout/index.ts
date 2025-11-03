@@ -73,13 +73,24 @@ serve(async (req) => {
 
     const origin = req.headers.get("origin") || FRONTEND_URL;
 
+    // Parse optional body to allow passing priceId from client
+    let priceFromClient: string | undefined = undefined;
+    try {
+      const body = await req.json();
+      if (body && typeof body.priceId === 'string') priceFromClient = body.priceId;
+    } catch (_) {
+      // no body provided
+    }
+    const priceToUse = priceFromClient || STRIPE_PRICE_ID;
+    log("Using price", { priceToUse });
+
     // 4. création de la session
     const session = await stripe.checkout.sessions.create({
       ...(customerId ? { customer: customerId } : { customer_email: user.email }),
       mode: "subscription",
       line_items: [
         {
-          price: STRIPE_PRICE_ID,
+          price: priceToUse,
           quantity: 1,
         },
       ],

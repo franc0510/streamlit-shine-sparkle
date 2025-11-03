@@ -119,6 +119,7 @@ export const createCheckoutSession = async (
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      body: { priceId: PREMIUM_PRICE_ID },
     });
 
     console.log("[createCheckoutSession] edge returned:", { data, error });

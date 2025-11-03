@@ -8,7 +8,7 @@ const corsHeaders = {
 };
 
 const log = (step: string, details?: unknown) =>
-  console.log(`[CREATE-CHECKOUT] ${step}${details ? " - " + JSON.stringify(details) : ""}`);
+  console.log(`[CUSTOMER-PORTAL] ${step}${details ? " - " + JSON.stringify(details) : ""}`);
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
