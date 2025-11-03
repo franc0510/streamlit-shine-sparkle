@@ -82,90 +82,29 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
  * - si tout va bien -> string (l'URL)
  * - si ça plante -> null (et tout est loggué)
  */
-export const createCheckoutSession = async (
-  onProgress?: (steps: DiagnosticStep[]) => void,
-  accessToken?: string
-): Promise<string | null> => {
-  const steps: DiagnosticStep[] = [
-    { name: "1. Vérification de la session utilisateur", status: "loading" },
-    { name: "2. Appel de la fonction Stripe", status: "pending" },
-    { name: "3. Création de la session de paiement", status: "pending" },
-    { name: "4. Récupération de l'URL de redirection", status: "pending" },
-  ];
-  const update = () => onProgress?.(steps);
-
+export const createCheckoutSession = async (): Promise<string | null> => {
   try {
     console.log("[createCheckoutSession] start");
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    const { data: { session } } = await supabase.auth.getSession();
 
-    if (!session && !accessToken) {
-      console.error("[createCheckoutSession] no session -> user not authenticated");
-      steps[0] = { ...steps[0], status: "error", message: "Utilisateur non connecté" };
-      update();
-      return null;
+    const headers: Record<string, string> = {};
+    if (session?.access_token) {
+      headers.Authorization = `Bearer ${session.access_token}`;
+      console.log("[createCheckoutSession] session OK, Authorization header set");
+    } else {
+      console.warn("[createCheckoutSession] NO session, call edge WITHOUT auth header (debug)");
     }
 
-    steps[0] = { ...steps[0], status: "success" };
-    update();
-
-    console.log("[createCheckoutSession] calling edge function create-checkout…");
-    steps[1] = { ...steps[1], status: "loading", message: "Appel en cours..." };
-    update();
-
-    const token = accessToken ?? session?.access_token ?? "";
-    const { data, error } = await supabase.functions.invoke("create-checkout", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: { priceId: PREMIUM_PRICE_ID },
-    });
-
+    const { data, error } = await supabase.functions.invoke("create-checkout", { headers, body: { priceId: PREMIUM_PRICE_ID } });
     console.log("[createCheckoutSession] edge returned:", { data, error });
 
-    if (error) {
-      console.error("[createCheckoutSession] edge function error:", error);
-      steps[1] = { ...steps[1], status: "error", message: "La fonction ne répond pas", details: JSON.stringify(error) };
-      update();
-      return null;
-    }
+    if (error) return null;
+    if (data && typeof data === "object" && "error" in data) return null;
+    if (!data?.url) return null;
 
-    if (data && typeof data === "object" && "error" in data) {
-      console.error("[createCheckoutSession] edge returned error object:", data);
-      steps[2] = { ...steps[2], status: "error", message: "Erreur Stripe côté serveur", details: JSON.stringify(data) };
-      update();
-      return null;
-    }
-
-    steps[1] = { ...steps[1], status: "success" };
-    steps[2] = { ...steps[2], status: "success" };
-    update();
-
-    if (!data?.url) {
-      console.error("[createCheckoutSession] no url in edge response:", data);
-      steps[3] = { ...steps[3], status: "error", message: "URL de redirection manquante", details: JSON.stringify(data) };
-      update();
-      return null;
-    }
-
-    steps[3] = { ...steps[3], status: "success" };
-    update();
-
-    console.log("[createCheckoutSession] success, url =", data.url);
     return data.url as string;
-  } catch (error) {
-    console.error("[createCheckoutSession] exception:", error);
-    if (onProgress) {
-      const message = error instanceof Error ? error.message : String(error);
-      if (steps[1].status === "loading" || steps[1].status === "pending") {
-        steps[1] = { ...steps[1], status: "error", message: "Exception lors de l'appel", details: message };
-      } else {
-        const idx = steps.findIndex((s) => s.status === "pending" || s.status === "loading");
-        if (idx >= 0) steps[idx] = { ...steps[idx], status: "error", message: "Erreur inattendue", details: message };
-      }
-      update();
-    }
+  } catch (e) {
+    console.error("[createCheckoutSession] exception:", e);
     return null;
   }
 };
@@ -175,32 +114,22 @@ export const createCheckoutSession = async (
  */
 export const openCustomerPortal = async (): Promise<string | null> => {
   try {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    const { data: { session } } = await supabase.auth.getSession();
 
-    if (!session) {
-      console.error("[openCustomerPortal] no session");
-      return null;
+    const headers: Record<string, string> = {};
+    if (session?.access_token) {
+      headers.Authorization = `Bearer ${session.access_token}`;
+      console.log("[openCustomerPortal] session OK, Authorization header set");
+    } else {
+      console.warn("[openCustomerPortal] NO session, call edge WITHOUT auth header (debug)");
     }
 
-    const { data, error } = await supabase.functions.invoke("customer-portal", {
-      headers: {
-        Authorization: `Bearer ${session.access_token}`,
-      },
-    });
+    const { data, error } = await supabase.functions.invoke("customer-portal", { headers });
 
     console.log("[openCustomerPortal] edge response:", { data, error });
 
-    if (error) {
-      console.error("[openCustomerPortal] edge error:", error);
-      return null;
-    }
-
-    if (!data?.url) {
-      console.error("[openCustomerPortal] no url in response", data);
-      return null;
-    }
+    if (error) return null;
+    if (!data?.url) return null;
 
     return data.url as string;
   } catch (error) {

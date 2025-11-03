@@ -84,6 +84,8 @@ const Auth = () => {
           title: "Connexion réussie !",
           description: "Bienvenue sur PredictEsport",
         });
+        // Force une récupération immédiate de la session
+        await supabase.auth.getSession();
         setTimeout(() => {
           window.location.assign("/");
         }, 150);
@@ -141,6 +143,8 @@ const Auth = () => {
           title: "Compte créé !",
           description: "Connexion automatique en cours...",
         });
+        // Force une récupération immédiate de la session même si elle peut être nulle en cas d'email de confirmation
+        await supabase.auth.getSession();
       }
     } catch (error) {
       toast({
@@ -173,13 +177,18 @@ const Auth = () => {
     ]);
 
     try {
-      // Récupère un jeton "frais" pour éviter les soucis de session non à jour
-      const { data: { session: freshSession } } = await supabase.auth.getSession();
-      const token = freshSession?.access_token || session?.access_token || undefined;
+      // TEMP DEBUG: test d'appel direct de l'edge function (doit répondre 401 en JSON)
+      const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+      if (SUPABASE_URL) {
+        const edgeBase = SUPABASE_URL.replace('.supabase.co', '.functions.supabase.co');
+        fetch(`${edgeBase}/create-checkout`, { method: 'POST' })
+          .then(async r => console.log('[raw fetch edge]', r.status, await r.text()))
+          .catch(e => console.error('[raw fetch edge] error', e));
+      } else {
+        console.warn('[raw fetch edge] VITE_SUPABASE_URL manquant');
+      }
 
-      const url = await createCheckoutSession((steps) => {
-        setDiagnostics([...steps]);
-      }, token);
+      const url = await createCheckoutSession();
 
       if (url) {
         setTimeout(() => {
