@@ -173,9 +173,13 @@ const Auth = () => {
     ]);
 
     try {
+      // Récupère un jeton "frais" pour éviter les soucis de session non à jour
+      const { data: { session: freshSession } } = await supabase.auth.getSession();
+      const token = freshSession?.access_token || session?.access_token || undefined;
+
       const url = await createCheckoutSession((steps) => {
         setDiagnostics([...steps]);
-      }, session?.access_token || undefined);
+      }, token);
 
       if (url) {
         setTimeout(() => {
