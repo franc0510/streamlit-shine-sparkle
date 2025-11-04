@@ -32,7 +32,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const { user, session } = useAuth();
+  const { user, session, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [diagnosticOpen, setDiagnosticOpen] = useState(false);
@@ -80,10 +80,8 @@ const Auth = () => {
           title: "Connexion réussie !",
           description: "Vous pouvez maintenant vous abonner",
         });
-        // Force une récupération immédiate de la session
-        await supabase.auth.getSession();
-        // Recharger la page pour mettre à jour l'état de connexion
-        window.location.reload();
+        // La session sera mise à jour automatiquement par onAuthStateChange
+        // Pas besoin de recharger la page
       }
     } catch (error) {
       toast({
@@ -155,7 +153,22 @@ const Auth = () => {
   };
 
   const handleSubscribe = async () => {
-    if (!user) {
+    console.log("[handleSubscribe] Called with:", {
+      hasUser: !!user,
+      hasSession: !!session,
+      userId: user?.id,
+      authLoading,
+    });
+
+    if (authLoading) {
+      toast({
+        title: "Chargement en cours",
+        description: "Veuillez patienter...",
+      });
+      return;
+    }
+
+    if (!user || !session) {
       toast({
         title: "Connexion requise",
         description: "Veuillez vous connecter pour vous abonner",
@@ -442,10 +455,16 @@ const Auth = () => {
                     className="w-full gap-2"
                     variant="default"
                     onClick={handleSubscribe}
-                    disabled={!user || checkoutLoading}
+                    disabled={authLoading || !user || checkoutLoading}
                   >
                     <CreditCard className="w-4 h-4" />
-                    {checkoutLoading ? "Chargement..." : !user ? "Connectez-vous d'abord" : "S'abonner maintenant"}
+                    {checkoutLoading
+                      ? "Chargement..."
+                      : authLoading
+                        ? "Vérification..."
+                        : !user
+                          ? "Connectez-vous d'abord"
+                          : "S'abonner maintenant"}
                   </Button>
 
                   <p className="text-xs text-muted-foreground text-center mt-4">Annulation possible à tout moment</p>
