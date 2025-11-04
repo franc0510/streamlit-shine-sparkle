@@ -6,7 +6,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 // CORS pour que le front puisse appeler
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-user-email",
 };
 
 // 🟣 on met TOUT en dur pour que ça marche même si Lovable ne passe pas les env
@@ -16,7 +16,7 @@ const STRIPE_SECRET_KEY_2 =
 // ⚠️ mets ici le price que tu as créé dans Stripe (mode test)
 const STRIPE_PRICE_ID = "price_1SLgwBHrSrokKrOmY8qkwqpk"; // remplace si tu en as un nouveau
 
-// ⚠️ mets ici l’URL de ton site lovable
+// ⚠️ mets ici l'URL de ton site lovable
 const FRONTEND_URL = "https://ton-site.lovable.app"; // remplace par ton vrai domaine lovable
 
 const log = (step: string, details?: unknown) =>
@@ -31,34 +31,38 @@ serve(async (req) => {
   try {
     log("Function started");
 
-    // 1. récupérer l’utilisateur supabase
-    const supabase = createClient(Deno.env.get("SUPABASE_URL") ?? "", Deno.env.get("SUPABASE_ANON_KEY") ?? "");
+    // 1. Récupérer l'email utilisateur (soit via Supabase Auth, soit via header custom)
+    let userEmail: string | null = null;
 
+    // Tentative 1: via header custom x-user-email (pour systèmes sans Supabase Auth)
+    const customEmailHeader = req.headers.get("x-user-email");
+    if (customEmailHeader) {
+      userEmail = customEmailHeader;
+      log("Email from x-user-email header", { email: userEmail });
+    }
+
+    // Tentative 2: via Supabase Auth (si Authorization header présent)
     const authHeader = req.headers.get("Authorization");
-    if (!authHeader) {
-      log("No auth header");
-      return new Response(JSON.stringify({ error: "No authorization header provided" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 401,
-      });
+    if (!userEmail && authHeader) {
+      log("Trying Supabase Auth");
+      const supabase = createClient(Deno.env.get("SUPABASE_URL") ?? "", Deno.env.get("SUPABASE_ANON_KEY") ?? "");
+      const token = authHeader.replace("Bearer ", "");
+      const { data: userData, error: userError } = await supabase.auth.getUser(token);
+      
+      if (!userError && userData.user?.email) {
+        userEmail = userData.user.email;
+        log("Email from Supabase Auth", { email: userEmail });
+      } else {
+        log("Supabase Auth failed or no email", userError);
+      }
     }
 
-    const token = authHeader.replace("Bearer ", "");
-    const { data: userData, error: userError } = await supabase.auth.getUser(token);
-    if (userError) {
-      log("Auth error", userError);
-      return new Response(JSON.stringify({ error: `Auth error: ${userError.message}` }), {
+    // Vérification finale: on doit avoir un email d'une façon ou d'une autre
+    if (!userEmail) {
+      log("No email available from any source");
+      return new Response(JSON.stringify({ error: "No user email provided (use x-user-email header or Supabase Auth)" }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 401,
-      });
-    }
-
-    const user = userData.user;
-    if (!user?.email) {
-      log("No user email");
-      return new Response(JSON.stringify({ error: "User not authenticated or missing email" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 401,
+        status: 400,
       });
     }
 
@@ -68,7 +72,7 @@ serve(async (req) => {
     });
 
     // 3. on essaye de réutiliser le customer
-    const customers = await stripe.customers.list({ email: user.email, limit: 1 });
+    const customers = await stripe.customers.list({ email: userEmail, limit: 1 });
     const customerId = customers.data[0]?.id;
 
     const origin = req.headers.get("origin") || FRONTEND_URL;
@@ -86,7 +90,7 @@ serve(async (req) => {
 
     // 4. création de la session
     const session = await stripe.checkout.sessions.create({
-      ...(customerId ? { customer: customerId } : { customer_email: user.email }),
+      ...(customerId ? { customer: customerId } : { customer_email: userEmail }),
       mode: "subscription",
       line_items: [
         {

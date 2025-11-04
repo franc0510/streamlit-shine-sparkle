@@ -81,22 +81,37 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
  * Appelle l'edge function "create-checkout" et renvoie l'URL stripe
  * - si tout va bien -> string (l'URL)
  * - si ça plante -> null (et tout est loggué)
+ * @param userEmail - Email optionnel de l'utilisateur (pour système auth custom)
  */
-export const createCheckoutSession = async (): Promise<string | null> => {
+export const createCheckoutSession = async (userEmail?: string): Promise<string | null> => {
   try {
     console.log('[createCheckoutSession] start');
     const { data: { session } } = await supabase.auth.getSession();
     console.log("[DEBUG] user_id=", session?.user?.id, "token_len=", session?.access_token?.length || 0);
 
+    // Récupérer l'email depuis: paramètre > session Supabase > rien
+    const emailToUse = userEmail || session?.user?.email;
+    console.log("[DEBUG] email to use=", emailToUse);
+
     const headers: Record<string, string> = {};
+    
+    // Ajouter Authorization si session Supabase existe
     if (session?.access_token) {
       headers.Authorization = `Bearer ${session.access_token}`;
       console.log('[createCheckoutSession] Authorization set');
-    } else {
-      console.warn('[createCheckoutSession] NO session — call edge WITHOUT auth (debug)');
+    }
+    
+    // Ajouter x-user-email si on a un email (fallback pour systèmes sans Supabase Auth)
+    if (emailToUse) {
+      headers["x-user-email"] = emailToUse;
+      console.log('[createCheckoutSession] x-user-email set');
     }
 
-    // PROBE direct vers l’Edge pour vérifier l’URL (s’affiche en console Network)
+    if (!session?.access_token && !emailToUse) {
+      console.warn('[createCheckoutSession] NO session AND NO email — call may fail');
+    }
+
+    // PROBE direct vers l'Edge pour vérifier l'URL (s'affiche en console Network)
     const supabaseUrl = (import.meta as any).env.VITE_SUPABASE_URL as string;
     if (supabaseUrl) {
       const edgeBase = supabaseUrl.replace('.supabase.co', '.functions.supabase.co');
@@ -105,7 +120,7 @@ export const createCheckoutSession = async (): Promise<string | null> => {
         .catch(e => console.error('[DEBUG raw edge] error', e));
     }
 
-    // Timeout dur (20s) pour ne pas spinner à l’infini
+    // Timeout dur (20s) pour ne pas spinner à l'infini
     const invoke = supabase.functions.invoke('create-checkout', { headers });
     const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 20000));
     const { data, error } = (await Promise.race([invoke, timeout])) as any;
