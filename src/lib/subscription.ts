@@ -84,40 +84,30 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
  */
 export const createCheckoutSession = async (): Promise<string | null> => {
   try {
-    console.log("[createCheckoutSession] start");
+    console.log('[createCheckoutSession] start');
     const { data: { session } } = await supabase.auth.getSession();
 
     const headers: Record<string, string> = {};
     if (session?.access_token) {
       headers.Authorization = `Bearer ${session.access_token}`;
-      console.log("[createCheckoutSession] session OK, Authorization set");
+      console.log('[createCheckoutSession] session OK, Authorization set');
     } else {
-      console.warn("[createCheckoutSession] no session, calling edge without auth (debug)");
+      console.warn('[createCheckoutSession] NO session, calling edge WITHOUT auth (debug)');
     }
 
-    // Timeout pour ne pas spinner à l'infini
-    const invoke = supabase.functions.invoke("create-checkout", { headers, body: { priceId: PREMIUM_PRICE_ID } });
-    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 20000));
-
+    // Timeout pour éviter spinner infini
+    const invoke = supabase.functions.invoke('create-checkout', { headers });
+    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 20000));
     const { data, error } = (await Promise.race([invoke, timeout])) as any;
-    console.log("[createCheckoutSession] edge returned:", { data, error });
 
-    if (error) {
-      console.error("[createCheckoutSession] edge error:", error);
-      return null;
-    }
-    if (data && typeof data === "object" && "error" in data) {
-      console.error("[createCheckoutSession] edge returned error:", data.error);
-      return null;
-    }
-    if (!data?.url) {
-      console.error("[createCheckoutSession] no url in response");
-      return null;
-    }
+    console.log('[createCheckoutSession] edge returned:', { data, error });
+    if (error) return null;
+    if (data && typeof data === 'object' && 'error' in data) return null;
+    if (!data?.url) return null;
 
     return data.url as string;
   } catch (e) {
-    console.error("[createCheckoutSession] exception:", e);
+    console.error('[createCheckoutSession] exception:', e);
     return null;
   }
 };
