@@ -3,27 +3,27 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 
-// CORS pour que le front puisse appeler
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-user-email",
 };
 
-// 🟣 on met TOUT en dur pour que ça marche même si Lovable ne passe pas les env
-const STRIPE_SECRET_KEY_2 =
+// Clé Stripe en dur (à remplacer par variable d'environnement en production)
+const STRIPE_SECRET_KEY =
+  Deno.env.get("STRIPE_SECRET_KEY_2") ||
   "sk_test_51SLgmFH8e5UibDVFHRG5MixpaN0uSRfXpumKiz1yIeTyjHAFleywuplbTf6sohCfE9GWVIHN9ZLJDpfws8UvUKdE00Q4Mv5PpZ";
 
-// ⚠️ mets ici le price que tu as créé dans Stripe (mode test)
-const STRIPE_PRICE_ID = "price_1SLgwBHrSrokKrOmY8qkwqpk"; // remplace si tu en as un nouveau
+// Price ID de votre abonnement Stripe
+const STRIPE_PRICE_ID = "price_1SLgwBHrSrokKrOmY8qkwqpk";
 
-// ⚠️ mets ici l'URL de ton site lovable
-const FRONTEND_URL = "https://ton-site.lovable.app"; // remplace par ton vrai domaine lovable
+// URL de votre site (IMPORTANT: remplacez par votre vraie URL)
+const FRONTEND_URL = "https://predict-esport.lovable.app";
 
 const log = (step: string, details?: unknown) =>
   console.log(`[CREATE-CHECKOUT] ${step}${details ? " - " + JSON.stringify(details) : ""}`);
 
 serve(async (req) => {
-  // prévol
+  // Gestion CORS preflight
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -31,64 +31,78 @@ serve(async (req) => {
   try {
     log("Function started");
 
-    // 1. Récupérer l'email utilisateur (soit via Supabase Auth, soit via header custom)
+    // 1. Récupérer l'email utilisateur
     let userEmail: string | null = null;
 
-    // Tentative 1: via header custom x-user-email (pour systèmes sans Supabase Auth)
+    // Tentative 1: via header custom x-user-email
     const customEmailHeader = req.headers.get("x-user-email");
     if (customEmailHeader) {
       userEmail = customEmailHeader;
       log("Email from x-user-email header", { email: userEmail });
     }
 
-    // Tentative 2: via Supabase Auth (si Authorization header présent)
+    // Tentative 2: via Supabase Auth
     const authHeader = req.headers.get("Authorization");
     if (!userEmail && authHeader) {
       log("Trying Supabase Auth");
-      const supabase = createClient(Deno.env.get("SUPABASE_URL") ?? "", Deno.env.get("SUPABASE_ANON_KEY") ?? "");
-      const token = authHeader.replace("Bearer ", "");
-      const { data: userData, error: userError } = await supabase.auth.getUser(token);
-      
-      if (!userError && userData.user?.email) {
-        userEmail = userData.user.email;
-        log("Email from Supabase Auth", { email: userEmail });
+      const supabaseUrl = Deno.env.get("SUPABASE_URL");
+      const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY");
+
+      if (!supabaseUrl || !supabaseKey) {
+        log("Missing Supabase credentials");
       } else {
-        log("Supabase Auth failed or no email", userError);
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        const token = authHeader.replace("Bearer ", "");
+        const { data: userData, error: userError } = await supabase.auth.getUser(token);
+
+        if (!userError && userData.user?.email) {
+          userEmail = userData.user.email;
+          log("Email from Supabase Auth", { email: userEmail });
+        } else {
+          log("Supabase Auth failed", userError?.message);
+        }
       }
     }
 
-    // Vérification finale: on doit avoir un email d'une façon ou d'une autre
+    // Vérification: on doit avoir un email
     if (!userEmail) {
-      log("No email available from any source");
-      return new Response(JSON.stringify({ error: "No user email provided (use x-user-email header or Supabase Auth)" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 400,
-      });
+      log("No email available");
+      return new Response(
+        JSON.stringify({ error: "No user email provided (use x-user-email header or Supabase Auth)" }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
+        },
+      );
     }
 
-    // 2. Stripe (en dur)
-    const stripe = new Stripe(STRIPE_SECRET_KEY_2, {
+    // 2. Initialiser Stripe
+    const stripe = new Stripe(STRIPE_SECRET_KEY, {
       apiVersion: "2024-06-20",
     });
 
-    // 3. on essaye de réutiliser le customer
+    // 3. Vérifier si le client existe déjà
     const customers = await stripe.customers.list({ email: userEmail, limit: 1 });
     const customerId = customers.data[0]?.id;
+    log("Customer lookup", { customerId: customerId || "new" });
 
+    // 4. Obtenir l'origine pour les URLs de redirection
     const origin = req.headers.get("origin") || FRONTEND_URL;
+    log("Using origin", { origin });
 
-    // Parse optional body to allow passing priceId from client
-    let priceFromClient: string | undefined = undefined;
+    // 5. Vérifier si un priceId est fourni dans le body
+    let priceToUse = STRIPE_PRICE_ID;
     try {
       const body = await req.json();
-      if (body && typeof body.priceId === 'string') priceFromClient = body.priceId;
-    } catch (_) {
-      // no body provided
+      if (body && typeof body.priceId === "string") {
+        priceToUse = body.priceId;
+      }
+    } catch {
+      // Pas de body, on utilise le price par défaut
     }
-    const priceToUse = priceFromClient || STRIPE_PRICE_ID;
-    log("Using price", { priceToUse });
+    log("Using price", { priceId: priceToUse });
 
-    // 4. création de la session
+    // 6. Créer la session de checkout
     const session = await stripe.checkout.sessions.create({
       ...(customerId ? { customer: customerId } : { customer_email: userEmail }),
       mode: "subscription",
@@ -102,7 +116,7 @@ serve(async (req) => {
       cancel_url: `${origin}/?subscription=cancelled`,
     });
 
-    log("Checkout session created", { sessionId: session.id });
+    log("Checkout session created", { sessionId: session.id, url: session.url });
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
