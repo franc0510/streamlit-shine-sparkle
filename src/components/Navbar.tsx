@@ -28,12 +28,36 @@ export const Navbar = () => {
   const { isPremium } = useSubscription();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Déconnecté",
-      description: "À bientôt sur PredictEsport",
-    });
-    navigate("/");
+    try {
+      console.log("[Navbar] Logging out...");
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.error("[Navbar] Logout error:", error);
+        toast({
+          title: "Erreur de déconnexion",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      console.log("[Navbar] Logout successful");
+      toast({
+        title: "Déconnecté",
+        description: "À bientôt sur PredictEsport",
+      });
+      
+      // Force reload to clear all state
+      window.location.href = "/";
+    } catch (e) {
+      console.error("[Navbar] Logout exception:", e);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue lors de la déconnexion",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleOpenPortal = async () => {
