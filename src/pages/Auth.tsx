@@ -17,21 +17,17 @@ import { z } from "zod";
 import { SubscriptionErrorDialog } from "@/components/SubscriptionErrorDialog";
 
 const loginSchema = z.object({
-  email: z.string()
-    .trim()
-    .email({ message: "Email invalide" })
-    .max(255, { message: "Email trop long" }),
-  password: z.string()
+  email: z.string().trim().email({ message: "Email invalide" }).max(255, { message: "Email trop long" }),
+  password: z
+    .string()
     .min(8, { message: "Mot de passe d'au moins 8 caractères" })
     .max(100, { message: "Mot de passe trop long" }),
 });
 
 const signupSchema = loginSchema.extend({
-  name: z.string()
-    .trim()
-    .min(2, { message: "Nom trop court" })
-    .max(100, { message: "Nom trop long" }),
+  name: z.string().trim().min(2, { message: "Nom trop court" }).max(100, { message: "Nom trop long" }),
 });
+
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,7 +52,7 @@ const Auth = () => {
 
     try {
       const validationResult = loginSchema.safeParse({ email, password });
-      
+
       if (!validationResult.success) {
         const firstError = validationResult.error.errors[0];
         toast({
@@ -107,7 +103,7 @@ const Auth = () => {
 
     try {
       const validationResult = signupSchema.safeParse({ email, password, name });
-      
+
       if (!validationResult.success) {
         const firstError = validationResult.error.errors[0];
         toast({
@@ -120,7 +116,7 @@ const Auth = () => {
       }
 
       const redirectUrl = `${window.location.origin}/`;
-      
+
       const { error } = await supabase.auth.signUp({
         email: validationResult.data.email,
         password: validationResult.data.password,
@@ -170,20 +166,13 @@ const Auth = () => {
     setCheckoutLoading(true);
 
     try {
-      // TEMP DEBUG: test d'appel direct de l'edge function
-      const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-      if (SUPABASE_URL) {
-        const edgeBase = SUPABASE_URL.replace('.supabase.co', '.functions.supabase.co');
-        console.log('[DEBUG] Testing raw edge call to:', `${edgeBase}/create-checkout`);
-        fetch(`${edgeBase}/create-checkout`, { method: 'POST' })
-          .then(async r => console.log('[raw edge]', r.status, await r.text()))
-          .catch(e => console.error('[raw edge] error', e));
-      }
+      console.log("[createCheckoutSession] start");
 
+      // Appel de la fonction createCheckoutSession qui gère déjà l'authentification
       const url = await createCheckoutSession();
 
       if (url) {
-        console.log('[handleSubscribe] Redirecting to Stripe:', url);
+        console.log("[handleSubscribe] Redirecting to Stripe:", url);
         window.location.href = url; // redirection directe vers Stripe
       } else {
         console.error("[subscribe] no checkout url");
@@ -197,11 +186,11 @@ const Auth = () => {
       console.error("[subscribe] exception:", e);
       toast({
         title: "Erreur",
-        description: "Une erreur s'est produite. Consultez la console.",
+        description: "Une erreur s'est produite lors de la création de la session de paiement.",
         variant: "destructive",
       });
     } finally {
-      setCheckoutLoading(false); // toujours arrêter le chargement
+      setCheckoutLoading(false);
     }
   };
 
@@ -210,7 +199,7 @@ const Auth = () => {
     try {
       const url = await openCustomerPortal();
       if (url) {
-        window.open(url, '_blank');
+        window.open(url, "_blank");
         toast({
           title: "Portail client ouvert",
           description: "Gérez votre abonnement dans la nouvelle fenêtre",
@@ -241,7 +230,7 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
@@ -365,17 +354,16 @@ const Auth = () => {
                     <Check className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Vous êtes connecté</h3>
-                  <p className="text-muted-foreground mb-4">
-                    {user.email}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Découvrez notre offre Premium ci-contre →
-                  </p>
+                  <p className="text-muted-foreground mb-4">{user.email}</p>
+                  <p className="text-sm text-muted-foreground">Découvrez notre offre Premium ci-contre →</p>
                 </div>
               </Card>
             )}
 
-            <Card className="p-8 bg-gradient-card border-border/50 relative overflow-hidden animate-slide-up" style={{ animationDelay: "0.1s" }}>
+            <Card
+              className="p-8 bg-gradient-card border-border/50 relative overflow-hidden animate-slide-up"
+              style={{ animationDelay: "0.1s" }}
+            >
               {isPremium ? (
                 <>
                   <div className="absolute top-4 right-4">
@@ -392,7 +380,7 @@ const Auth = () => {
                     </div>
                     {subscriptionStatus.subscription_end && (
                       <p className="text-sm text-muted-foreground mt-2">
-                        Renouvellement le {new Date(subscriptionStatus.subscription_end).toLocaleDateString('fr-FR')}
+                        Renouvellement le {new Date(subscriptionStatus.subscription_end).toLocaleDateString("fr-FR")}
                       </p>
                     )}
                   </div>
@@ -408,9 +396,9 @@ const Auth = () => {
                     ))}
                   </div>
 
-                  <Button 
-                    size="lg" 
-                    className="w-full gap-2" 
+                  <Button
+                    size="lg"
+                    className="w-full gap-2"
                     variant="outline"
                     onClick={handleManageSubscription}
                     disabled={checkoutLoading}
@@ -419,9 +407,7 @@ const Auth = () => {
                     {checkoutLoading ? "Ouverture..." : "Gérer mon abonnement"}
                   </Button>
 
-                  <p className="text-xs text-muted-foreground text-center mt-4">
-                    Annulation possible à tout moment
-                  </p>
+                  <p className="text-xs text-muted-foreground text-center mt-4">Annulation possible à tout moment</p>
                 </>
               ) : (
                 <>
@@ -450,9 +436,9 @@ const Auth = () => {
                     ))}
                   </div>
 
-                  <Button 
-                    size="lg" 
-                    className="w-full gap-2" 
+                  <Button
+                    size="lg"
+                    className="w-full gap-2"
                     variant="default"
                     onClick={handleSubscribe}
                     disabled={!user || checkoutLoading}
@@ -461,9 +447,7 @@ const Auth = () => {
                     {checkoutLoading ? "Chargement..." : !user ? "Connectez-vous d'abord" : "S'abonner maintenant"}
                   </Button>
 
-                  <p className="text-xs text-muted-foreground text-center mt-4">
-                    Annulation possible à tout moment
-                  </p>
+                  <p className="text-xs text-muted-foreground text-center mt-4">Annulation possible à tout moment</p>
                 </>
               )}
             </Card>
@@ -475,7 +459,10 @@ const Auth = () => {
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
           <p>&copy; 2025 PredictEsport. Tous droits réservés.</p>
           <p className="mt-2 text-xs max-w-3xl mx-auto">
-            Les prédictions sont alimentées par PredictEsport. Le système utilise une approche purement mathématique basée sur les statistiques historiques des joueurs et des équipes pour estimer les probabilités de victoire en série. Il s'agit uniquement d'un outil d'analyse et de statistiques — il n'encourage pas les paris sur les matchs.
+            Les prédictions sont alimentées par PredictEsport. Le système utilise une approche purement mathématique
+            basée sur les statistiques historiques des joueurs et des équipes pour estimer les probabilités de victoire
+            en série. Il s'agit uniquement d'un outil d'analyse et de statistiques — il n'encourage pas les paris sur
+            les matchs.
           </p>
         </div>
       </footer>
