@@ -29,34 +29,30 @@ export const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      console.log("[Navbar] Logging out...");
-      const { error } = await supabase.auth.signOut();
-      
+      console.log("[Navbar] Logging out (global)...");
+      const { error } = await supabase.auth.signOut({ scope: 'global' });
       if (error) {
-        console.error("[Navbar] Logout error:", error);
-        toast({
-          title: "Erreur de déconnexion",
-          description: error.message,
-          variant: "destructive",
-        });
-        return;
+        console.warn("[Navbar] signOut returned error, will fallback:", error);
       }
-      
-      console.log("[Navbar] Logout successful");
+    } catch (e) {
+      console.warn("[Navbar] signOut threw, will fallback:", e);
+    } finally {
+      // Hard fallback: purge any cached auth tokens
+      try {
+        Object.keys(localStorage).forEach((k) => {
+          if (k.startsWith('sb-') && k.endsWith('-auth-token')) {
+            localStorage.removeItem(k);
+          }
+        });
+        localStorage.removeItem('supabase.auth.token');
+      } catch {}
+
+      // Notify user and force a full reload
       toast({
         title: "Déconnecté",
         description: "À bientôt sur PredictEsport",
       });
-      
-      // Force reload to clear all state
-      window.location.href = "/";
-    } catch (e) {
-      console.error("[Navbar] Logout exception:", e);
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue lors de la déconnexion",
-        variant: "destructive",
-      });
+      window.location.replace('/');
     }
   };
 
