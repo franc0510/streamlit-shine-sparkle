@@ -86,6 +86,7 @@ export const createCheckoutSession = async (): Promise<string | null> => {
   try {
     console.log('[createCheckoutSession] start');
     const { data: { session } } = await supabase.auth.getSession();
+    console.log("[DEBUG] user_id=", session?.user?.id, "token_len=", session?.access_token?.length || 0);
 
     const headers: Record<string, string> = {};
     if (session?.access_token) {
