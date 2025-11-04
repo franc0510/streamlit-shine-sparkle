@@ -1,21 +1,20 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
 
-// ⚠️ Remplace <PROJECT-REF> et <ANON_KEY> par tes vraies valeurs pour tester,
-// puis enlève les fallback quand les secrets Lovable sont bien injectés.
-const FALLBACK_URL = "https://<PROJECT-REF>.supabase.co";
-const FALLBACK_ANON = "<ANON_KEY>";
+// ⚠️ Fallback temporaire pour débloquer si Lovable n'injecte pas les env
+const FALLBACK_URL = "https://obivwrnbupnbcqzxvztp.supabase.co";
+const FALLBACK_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1uZG96eXF2cm1oY2hxemF0eHNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxODIyNzUsImV4cCI6MjA3Nzc1ODI3NX0.Vl3bNsbAyxX4ko47qE5y3PJJdTCjyoPKJGT0VmaMZ1I";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || FALLBACK_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || FALLBACK_ANON;
 
-console.log("[DEBUG] VITE_SUPABASE_URL set?", !!import.meta.env.VITE_SUPABASE_URL);
-console.log("[DEBUG] VITE_SUPABASE_ANON_KEY set?", !!import.meta.env.VITE_SUPABASE_ANON_KEY);
+console.log("[DEBUG] VITE_SUPABASE_URL set?", !!import.meta.env.VITE_SUPABASE_URL, "=>", SUPABASE_URL);
+console.log("[DEBUG] VITE_SUPABASE_ANON_KEY set?", !!import.meta.env.VITE_SUPABASE_ANON_KEY, "len=", (SUPABASE_ANON_KEY?.length || 0));
 
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  console.error("[Supabase] Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY (and no fallback)");
-  // On évite de créer le client si vide -> l’erreur “supabaseKey is required” disparaît
-  throw new Error("Supabase env not set");
+// Petit test pour afficher l'URL des Edge Functions
+if (SUPABASE_URL) {
+  const edgeBase = SUPABASE_URL.replace('.supabase.co', '.functions.supabase.co');
+  console.log('[DEBUG] Edge base =', edgeBase);
 }
 
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
