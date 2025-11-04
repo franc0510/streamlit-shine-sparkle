@@ -84,32 +84,38 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
  */
 export const createCheckoutSession = async (): Promise<string | null> => {
   try {
-    console.log("[createCheckoutSession] start");
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    console.log('[createCheckoutSession] start');
+    const { data: { session } } = await supabase.auth.getSession();
 
     const headers: Record<string, string> = {};
     if (session?.access_token) {
       headers.Authorization = `Bearer ${session.access_token}`;
-      console.log("[createCheckoutSession] session OK, Authorization set");
+      console.log('[createCheckoutSession] Authorization set');
     } else {
-      console.warn("[createCheckoutSession] NO session, calling edge WITHOUT auth (debug)");
+      console.warn('[createCheckoutSession] NO session — call edge WITHOUT auth (debug)');
     }
 
-    // Timeout dur pour éviter le spinner infini
-    const invoke = supabase.functions.invoke("create-checkout", { headers });
-    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 20000));
+    // PROBE direct vers l’Edge pour vérifier l’URL (s’affiche en console Network)
+    const supabaseUrl = (import.meta as any).env.VITE_SUPABASE_URL as string;
+    if (supabaseUrl) {
+      const edgeBase = supabaseUrl.replace('.supabase.co', '.functions.supabase.co');
+      fetch(`${edgeBase}/create-checkout`, { method: 'POST' })
+        .then(async r => console.log('[DEBUG raw edge]', r.status, await r.text()))
+        .catch(e => console.error('[DEBUG raw edge] error', e));
+    }
+
+    // Timeout dur (20s) pour ne pas spinner à l’infini
+    const invoke = supabase.functions.invoke('create-checkout', { headers });
+    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 20000));
     const { data, error } = (await Promise.race([invoke, timeout])) as any;
 
-    console.log("[createCheckoutSession] edge returned:", { data, error });
+    console.log('[createCheckoutSession] edge returned:', { data, error });
     if (error) return null;
-    if (data && typeof data === "object" && "error" in data) return null;
+    if (data && typeof data === 'object' && 'error' in data) return null;
     if (!data?.url) return null;
-
     return data.url as string;
   } catch (e) {
-    console.error("[createCheckoutSession] exception:", e);
+    console.error('[createCheckoutSession] exception:', e);
     return null;
   }
 };
