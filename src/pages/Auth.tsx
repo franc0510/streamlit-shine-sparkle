@@ -78,13 +78,12 @@ const Auth = () => {
       } else {
         toast({
           title: "Connexion réussie !",
-          description: "Bienvenue sur PredictEsport",
+          description: "Vous pouvez maintenant vous abonner",
         });
         // Force une récupération immédiate de la session
         await supabase.auth.getSession();
-        setTimeout(() => {
-          window.location.assign("/");
-        }, 150);
+        // Recharger la page pour mettre à jour l'état de connexion
+        window.location.reload();
       }
     } catch (error) {
       toast({
@@ -137,10 +136,12 @@ const Auth = () => {
       } else {
         toast({
           title: "Compte créé !",
-          description: "Connexion automatique en cours...",
+          description: "Vous pouvez maintenant vous abonner",
         });
         // Force une récupération immédiate de la session même si elle peut être nulle en cas d'email de confirmation
         await supabase.auth.getSession();
+        // Recharger la page pour mettre à jour l'état de connexion
+        window.location.reload();
       }
     } catch (error) {
       toast({
