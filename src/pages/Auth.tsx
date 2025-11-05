@@ -153,56 +153,22 @@ const Auth = () => {
   };
 
   const handleSubscribe = async () => {
-    console.log("[handleSubscribe] Called with:", {
-      hasUser: !!user,
-      hasSession: !!session,
-      userId: user?.id,
-      authLoading,
-    });
-
-    if (authLoading) {
-      toast({
-        title: "Chargement en cours",
-        description: "Veuillez patienter...",
-      });
-      return;
-    }
-
-    if (!user || !session) {
-      toast({
-        title: "Connexion requise",
-        description: "Veuillez vous connecter pour vous abonner",
-        variant: "destructive",
-      });
+    if (!user) {
+      toast({ title: "Connexion requise", description: "Veuillez vous connecter", variant: "destructive" });
       return;
     }
 
     setCheckoutLoading(true);
-
     try {
-      console.log("[createCheckoutSession] start");
-
-      // Appel de la fonction createCheckoutSession qui gère déjà l'authentification
-      const url = await createCheckoutSession();
-
+      const url = await createCheckoutSession(user.email); // 👈 on passe l'email
       if (url) {
-        console.log("[handleSubscribe] Redirecting to Stripe:", url);
-        window.location.href = url; // redirection directe vers Stripe
+        window.location.href = url; // redirection directe
       } else {
-        console.error("[subscribe] no checkout url");
-        toast({
-          title: "Erreur",
-          description: "Impossible de créer la session de paiement. Vérifiez que vous êtes connecté.",
-          variant: "destructive",
-        });
+        toast({ title: "Erreur", description: "Impossible de créer la session de paiement", variant: "destructive" });
       }
     } catch (e) {
       console.error("[subscribe] exception:", e);
-      toast({
-        title: "Erreur",
-        description: "Une erreur s'est produite lors de la création de la session de paiement.",
-        variant: "destructive",
-      });
+      toast({ title: "Erreur", description: "Une erreur s'est produite", variant: "destructive" });
     } finally {
       setCheckoutLoading(false);
     }

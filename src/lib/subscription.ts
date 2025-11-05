@@ -79,78 +79,40 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
  * @param userEmail - Email optionnel de l'utilisateur (pour système auth custom)
  * @returns L'URL de checkout Stripe ou null en cas d'erreur
  */
-export const createCheckoutSession = async (userEmail?: string): Promise<string | null> => {
+import { supabase } from "@/integrations/supabase/client";
+
+export const createCheckoutSession = async (email?: string): Promise<string | null> => {
   try {
     console.log("[createCheckoutSession] start");
-
-    // Récupérer la session Supabase
     const {
       data: { session },
     } = await supabase.auth.getSession();
-
-    if (!session?.access_token) {
-      console.error("[createCheckoutSession] NO session - user must be logged in");
-      return null;
-    }
-
-    console.log("[createCheckoutSession] user_id=", session.user.id);
-    console.log("[createCheckoutSession] token present:", !!session.access_token);
-
-    // Préparer les headers avec authentification
-    const headers: Record<string, string> = {
-      Authorization: `Bearer ${session.access_token}`,
-      "Content-Type": "application/json",
-    };
-
-    // Email de l'utilisateur (optionnel, fallback)
-    const emailToUse = userEmail || session.user.email;
-    if (emailToUse) {
-      headers["x-user-email"] = emailToUse;
-      console.log("[createCheckoutSession] email:", emailToUse);
-    }
-
-    // Appel de la fonction Edge avec timeout de 20s
-    console.log("[createCheckoutSession] Calling edge function...");
-
-    const invokePromise = supabase.functions.invoke("create-checkout", {
-      headers,
-      body: {}, // Corps vide mais présent pour POST
-    });
-
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Timeout après 20 secondes")), 20000),
+    console.log(
+      "[DEBUG] user_id=",
+      session?.user?.id,
+      "token_len=",
+      session?.access_token?.length || 0,
+      "emailParam=",
+      email,
     );
 
-    const { data, error } = (await Promise.race([invokePromise, timeoutPromise])) as any;
+    const headers: Record<string, string> = {};
+    if (session?.access_token) headers.Authorization = `Bearer ${session.access_token}`;
+    if (email) headers["x-user-email"] = email; // 👈 IMPORTANT: fallback sans Supabase Auth
 
-    console.log("[createCheckoutSession] Response:", {
-      hasData: !!data,
-      hasError: !!error,
-      dataUrl: data?.url,
-    });
+    // Timeout anti-spinner
+    const invoke = supabase.functions.invoke("create-checkout", { headers });
+    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 20000));
+    const { data, error } = (await Promise.race([invoke, timeout])) as any;
 
-    // Gestion des erreurs
-    if (error) {
-      console.error("[createCheckoutSession] Edge function error:", error);
-      return null;
-    }
+    console.log("[createCheckoutSession] edge returned:", { data, error });
+    if (error) return null;
+    if (data && typeof data === "object" && "error" in data) return null;
+    if (!data?.url) return null;
 
-    // Si la réponse contient un champ error
-    if (data && typeof data === "object" && "error" in data) {
-      console.error("[createCheckoutSession] Response contains error:", data.error);
-      return null;
-    }
-
-    // Vérifier que l'URL est présente
-    if (!data?.url) {
-      console.error("[createCheckoutSession] No URL in response");
-      return null;
-    }
-
-    console.log("[createCheckoutSession] Success! URL:", data.url);
     return data.url as string;
-  } catch (error) {
-    console.error("[createCheckoutSession] Exception:", error);
+  } catch (e) {
+    console.error("[createCheckoutSession] exception:", e);
     return null;
   }
 };
