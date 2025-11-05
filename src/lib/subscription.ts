@@ -2,7 +2,7 @@
 import { supabase } from "@/integrations/supabase/client";
 
 export const PREMIUM_PRODUCT_ID = "prod_TIHVR9Og97Sd0W";
-export const PREMIUM_PRICE_ID = "price_1SLgwBHrSrokKrOmY8qkwqpk";
+export const PREMIUM_PRICE_ID = "price_1SMsMzH8e5UibDVFCDSViYXR";
 
 export interface SubscriptionStatus {
   subscribed: boolean;

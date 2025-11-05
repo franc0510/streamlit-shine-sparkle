@@ -7,8 +7,8 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-user-email",
 };
 
-const STRIPE_PRICE_ID = "price_1QkCCTKvdwCbAxfXnH9zn1DT"; // Your actual price ID
-
+const STRIPE_PRICE_ID = "price_1SMsMzH8e5UibDVFCDSViYXR"; // ✅ ton price
+const FRONTEND_URL = "https://preview--predict-esport.lovable.app"; // ton domaine
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
