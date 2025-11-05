@@ -79,7 +79,6 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
  * @param userEmail - Email optionnel de l'utilisateur (pour système auth custom)
  * @returns L'URL de checkout Stripe ou null en cas d'erreur
  */
-import { supabase } from "@/integrations/supabase/client";
 
 export const createCheckoutSession = async (email?: string): Promise<string | null> => {
   try {
