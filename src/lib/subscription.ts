@@ -82,29 +82,9 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
 
 export const createCheckoutSession = async (email?: string): Promise<string | null> => {
   try {
-    console.log("[createCheckoutSession] start");
-
-    // optionnel: si un jour tu actives Supabase Auth
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    console.log("[DEBUG] token_len=", session?.access_token?.length || 0, "emailParam=", email);
-
-    const headers: Record<string, string> = {};
-    if (session?.access_token) headers.Authorization = `Bearer ${session.access_token}`;
-    if (email) headers["x-user-email"] = email; // 👈 IMPORTANT
-
-    // timeout anti-spinner
-    const invoke = supabase.functions.invoke("create-checkout", { headers });
-    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 20000));
-    const { data, error } = (await Promise.race([invoke, timeout])) as any;
-
-    console.log("[createCheckoutSession] edge returned:", { data, error });
-    if (error) return null;
-    if (data && typeof data === "object" && "error" in data) return null;
-    if (!data?.url) return null;
-
-    return data.url as string;
+    console.log("[createCheckoutSession] Using direct Stripe payment link");
+    // Lien de paiement Stripe direct
+    return "https://buy.stripe.com/fZu9AT1RF6p54YHfv4ak001";
   } catch (e) {
     console.error("[createCheckoutSession] exception:", e);
     return null;
