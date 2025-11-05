@@ -52,19 +52,8 @@ export const Navbar = () => {
     } finally {
       // Purge totale des tokens (localStorage + sessionStorage)
       try {
-        const clearStorage = (storage: Storage) => {
-          const keysToRemove: string[] = [];
-          for (let i = 0; i < storage.length; i++) {
-            const k = storage.key(i);
-            if (!k) continue;
-            if (k.startsWith('sb-') || k.includes('supabase')) {
-              keysToRemove.push(k);
-            }
-          }
-          keysToRemove.forEach((k) => storage.removeItem(k));
-        };
-        clearStorage(localStorage);
-        clearStorage(sessionStorage);
+        localStorage.clear();
+        sessionStorage.clear();
       } catch (err) {
         console.warn('[Navbar] storage clear error:', err);
       }
@@ -74,13 +63,11 @@ export const Navbar = () => {
         description: "À bientôt sur PredictEsport",
       });
 
-      // Redirection + reload dur pour vider l'état en mémoire
-      const target = '/auth';
-      if (location.pathname !== target) {
-        window.location.assign(target);
-      } else {
-        window.location.reload();
-      }
+      // Redirection + reload dur pour vider l'état en mémoire et l'URL
+      try {
+        window.history.replaceState({}, '', '/auth');
+      } catch {}
+      window.location.reload();
     }
   };
 
@@ -96,19 +83,8 @@ export const Navbar = () => {
     } finally {
       // Purge totale des tokens
       try {
-        const clearStorage = (storage: Storage) => {
-          const keysToRemove: string[] = [];
-          for (let i = 0; i < storage.length; i++) {
-            const k = storage.key(i);
-            if (!k) continue;
-            if (k.startsWith('sb-') || k.includes('supabase')) {
-              keysToRemove.push(k);
-            }
-          }
-          keysToRemove.forEach((k) => storage.removeItem(k));
-        };
-        clearStorage(localStorage);
-        clearStorage(sessionStorage);
+        localStorage.clear();
+        sessionStorage.clear();
       } catch (err) {
         console.warn('[Navbar] storage clear error:', err);
       }
@@ -118,12 +94,10 @@ export const Navbar = () => {
         description: "Vous avez été déconnecté de toutes vos sessions",
       });
 
-      const target = '/auth';
-      if (location.pathname !== target) {
-        window.location.assign(target);
-      } else {
-        window.location.reload();
-      }
+      try {
+        window.history.replaceState({}, '', '/auth');
+      } catch {}
+      window.location.reload();
     }
   };
 
