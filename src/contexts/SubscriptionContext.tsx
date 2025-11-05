@@ -19,8 +19,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  const isPremium = subscriptionStatus.subscribed && 
-                    subscriptionStatus.product_id === PREMIUM_PRODUCT_ID;
+  const isPremium = subscriptionStatus.subscribed;
 
   const refreshSubscription = async () => {
     console.log('[SubscriptionContext] refreshSubscription called');
