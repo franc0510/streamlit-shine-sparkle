@@ -23,24 +23,28 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
                     subscriptionStatus.product_id === PREMIUM_PRODUCT_ID;
 
   const refreshSubscription = async () => {
+    console.log('[SubscriptionContext] refreshSubscription called');
     setIsLoading(true);
     try {
       const status = await checkSubscription();
+      console.log('[SubscriptionContext] checkSubscription returned:', status);
       setSubscriptionStatus(status);
     } catch (error) {
-      console.error('Error refreshing subscription:', error);
+      console.error('[SubscriptionContext] Error refreshing subscription:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
+    console.log('[SubscriptionContext] Initializing...');
     // Check subscription on mount
     refreshSubscription();
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('[SubscriptionContext] Auth state changed:', event);
         if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           await refreshSubscription();
         } else if (event === 'SIGNED_OUT') {
