@@ -5,8 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import { AuthProvider } from "./contexts/AuthContext";
-import { useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -19,26 +17,6 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  // TEMPORARY: Force logout on mount
-  useEffect(() => {
-    const forceLogout = async () => {
-      console.log("[App] FORCE LOGOUT - clearing all auth data");
-      try {
-        await supabase.auth.signOut({ scope: 'global' });
-      } catch (e) {
-        console.warn("signOut error:", e);
-      }
-      // Clear all localStorage auth tokens
-      Object.keys(localStorage).forEach((k) => {
-        if (k.startsWith('sb-') || k.includes('supabase')) {
-          localStorage.removeItem(k);
-        }
-      });
-      console.log("[App] Auth cleared, reloading...");
-      setTimeout(() => window.location.replace('/'), 500);
-    };
-    forceLogout();
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
