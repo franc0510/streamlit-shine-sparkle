@@ -1,14 +1,25 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Gamepad2, User, LogOut, CreditCard, ExternalLink } from "lucide-react";
+import { Gamepad2, User, LogOut, CreditCard, ExternalLink, AlertTriangle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { openCustomerPortal } from "@/lib/subscription";
@@ -26,6 +37,7 @@ export const Navbar = () => {
   const { toast } = useToast();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
+  const [showLogoutAllDialog, setShowLogoutAllDialog] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -71,6 +83,50 @@ export const Navbar = () => {
       }
     }
   };
+
+  const handleLogoutAll = async () => {
+    try {
+      console.log("[Navbar] Logging out from all devices...");
+      const { error } = await supabase.auth.signOut({ scope: 'global' });
+      if (error) {
+        console.warn("[Navbar] global signOut error:", error);
+      }
+    } catch (e) {
+      console.warn("[Navbar] global signOut threw:", e);
+    } finally {
+      // Purge totale des tokens
+      try {
+        const clearStorage = (storage: Storage) => {
+          const keysToRemove: string[] = [];
+          for (let i = 0; i < storage.length; i++) {
+            const k = storage.key(i);
+            if (!k) continue;
+            if (k.startsWith('sb-') || k.includes('supabase')) {
+              keysToRemove.push(k);
+            }
+          }
+          keysToRemove.forEach((k) => storage.removeItem(k));
+        };
+        clearStorage(localStorage);
+        clearStorage(sessionStorage);
+      } catch (err) {
+        console.warn('[Navbar] storage clear error:', err);
+      }
+
+      toast({
+        title: "Déconnecté de tous les appareils",
+        description: "Vous avez été déconnecté de toutes vos sessions",
+      });
+
+      const target = '/auth';
+      if (location.pathname !== target) {
+        window.location.assign(target);
+      } else {
+        window.location.reload();
+      }
+    }
+  };
+
 
   const handleOpenPortal = async () => {
     try {
@@ -152,9 +208,17 @@ export const Navbar = () => {
                         S'abonner Premium
                       </DropdownMenuItem>
                     )}
+                    <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={handleLogout} className="gap-2 cursor-pointer">
                       <LogOut className="w-4 h-4" />
                       Déconnexion
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => setShowLogoutAllDialog(true)} 
+                      className="gap-2 cursor-pointer text-destructive focus:text-destructive"
+                    >
+                      <AlertTriangle className="w-4 h-4" />
+                      Se déconnecter partout
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -170,6 +234,27 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
+
+      <AlertDialog open={showLogoutAllDialog} onOpenChange={setShowLogoutAllDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Se déconnecter de tous les appareils ?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Cette action révoquera toutes vos sessions actives sur tous vos appareils.
+              Vous devrez vous reconnecter partout où vous utilisez PredictEsport.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Annuler</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={handleLogoutAll}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Confirmer la déconnexion globale
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </nav>
   );
 };
