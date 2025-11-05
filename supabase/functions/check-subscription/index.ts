@@ -9,6 +9,7 @@ const corsHeaders = {
 };
 
 const STRIPE_SECRET_KEY =
+  Deno.env.get("STRIPE_SECRET_KEY") ||
   Deno.env.get("STRIPE_SECRET_KEY_2") ||
   "sk_test_51SLgmFH8e5UibDVFHRG5MixpaN0uSRfXpumKiz1yIeTyjHAFleywuplbTf6sohCfE9GWVIHN9ZLJDpfws8UvUKdE00Q4Mv5PpZ";
 
