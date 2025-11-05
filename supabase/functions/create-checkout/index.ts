@@ -7,9 +7,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-user-email",
 };
 
-const STRIPE_SECRET_KEY_2 = "sk_test_..."; // ta clé test
-const STRIPE_PRICE_ID = "price_..."; // ton vrai price test
-const FRONTEND_URL = "https://preview--predict-esport.lovable.app"; // ton domaine
+const STRIPE_PRICE_ID = "price_1QkCCTKvdwCbAxfXnH9zn1DT"; // Your actual price ID
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
@@ -32,7 +30,7 @@ serve(async (req) => {
       userEmail = req.headers.get("x-user-email");
     }
 
-    const stripe = new Stripe(STRIPE_SECRET_KEY_2, { apiVersion: "2024-06-20" });
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { apiVersion: "2025-08-27.basil" });
 
     // Réutiliser le customer si email connu
     let customerId: string | undefined;
@@ -41,7 +39,7 @@ serve(async (req) => {
       customerId = customers.data[0]?.id;
     }
 
-    const origin = req.headers.get("origin") || FRONTEND_URL;
+    const origin = req.headers.get("origin") || "http://localhost:8080";
 
     const session = await stripe.checkout.sessions.create({
       ...(customerId ? { customer: customerId } : {}),
