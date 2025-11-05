@@ -1,8 +1,8 @@
 // src/lib/subscription.ts
 import { supabase } from "@/integrations/supabase/client";
 
-export const PREMIUM_PRODUCT_ID = "prod_TIHVR9Og97Sd0W";
-export const PREMIUM_PRICE_ID = "price_1SMsMzH8e5UibDVFCDSViYXR";
+export const PREMIUM_PRODUCT_ID = "prod_TJVNCl5roSeR21";
+export const PREMIUM_PRICE_ID = "prod_TJVNCl5roSeR21";
 
 export interface SubscriptionStatus {
   subscribed: boolean;
@@ -83,8 +83,8 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
 export const createCheckoutSession = async (email?: string): Promise<string | null> => {
   try {
     console.log("[createCheckoutSession] Using direct Stripe payment link");
-    // Lien de paiement Stripe direct
-    return "https://buy.stripe.com/fZu9AT1RF6p54YHfv4ak001";
+    // Lien de paiement Stripe direct de test
+    return "https://buy.stripe.com/test_cNibJ1aob00Hcr9dmWak000";
   } catch (e) {
     console.error("[createCheckoutSession] exception:", e);
     return null;
