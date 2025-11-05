@@ -2,11 +2,12 @@ import { Navbar } from "@/components/Navbar";
 import { MatchCard } from "@/components/MatchCard";
 import { Button } from "@/components/ui/button";
 import { Lock, Check } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/contexts/SubscriptionContext";
+import { useToast } from "@/hooks/use-toast";
 
 const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-");
 const buildMatchUrl = (m: Match) => `/match/${slugify(m.tournament)}/${m.date}/${m.time}/${slugify(m.team1)}-vs-${slugify(m.team2)}?bo=${m.format}`;
@@ -17,7 +18,9 @@ const Index = () => {
   const [pastMatches, setPastMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
-  const { isPremium } = useSubscription();
+  const { isPremium, refreshSubscription } = useSubscription();
+  const [searchParams] = useSearchParams();
+  const { toast } = useToast();
 
   useEffect(() => {
     const loadMatches = async () => {
@@ -44,6 +47,35 @@ const Index = () => {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Rafraîchir l'abonnement au retour de Stripe
+  useEffect(() => {
+    const checkPaymentReturn = async () => {
+      // Vérifier si on revient de Stripe (présence de paramètres success/cancel dans l'URL)
+      const isReturnFromStripe = window.location.href.includes('stripe') || 
+                                  searchParams.get('session_id') || 
+                                  document.referrer.includes('stripe');
+      
+      if (isReturnFromStripe && user) {
+        console.log("[Index] Retour de paiement détecté - rafraîchissement de l'abonnement");
+        toast({
+          title: "Vérification du paiement...",
+          description: "Nous vérifions votre abonnement.",
+        });
+        
+        await refreshSubscription();
+        
+        toast({
+          title: "Statut mis à jour",
+          description: isPremium ? "Vous avez maintenant accès Premium!" : "Vérification en cours...",
+        });
+      }
+    };
+    
+    if (user) {
+      checkPaymentReturn();
+    }
+  }, [user, searchParams, refreshSubscription]);
 
   const calculateMinOdds = (proba: number) => {
     return (100 / proba).toFixed(2);
