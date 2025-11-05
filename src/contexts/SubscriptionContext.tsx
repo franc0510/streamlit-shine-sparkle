@@ -56,18 +56,41 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
       }
     );
 
-    // Refresh every 60 seconds when user is active
+    // Refresh every 15 seconds when user is active
     const interval = setInterval(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
         if (session) {
           refreshSubscription();
         }
       });
-    }, 60000);
+    }, 15000);
 
     return () => {
       subscription.unsubscribe();
       clearInterval(interval);
+    };
+  }, []);
+
+  // Extra: refresh on window focus/visibility change
+  useEffect(() => {
+    const onFocus = () => {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session) {
+          refreshSubscription();
+        }
+      });
+    };
+
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') onFocus();
+    };
+
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisibility);
+
+    return () => {
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 

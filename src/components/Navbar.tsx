@@ -29,13 +29,13 @@ export const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      console.log("[Navbar] Logging out (global)...");
-      const { error } = await supabase.auth.signOut({ scope: 'global' });
+      console.log("[Navbar] Logging out...");
+      const { error } = await supabase.auth.signOut();
       if (error) {
-        console.warn("[Navbar] signOut returned error, will fallback:", error);
+        console.warn("[Navbar] signOut error:", error);
       }
     } catch (e) {
-      console.warn("[Navbar] signOut threw, will fallback:", e);
+      console.warn("[Navbar] signOut threw:", e);
     } finally {
       // Hard fallback: purge any cached auth tokens
       try {
@@ -47,7 +47,6 @@ export const Navbar = () => {
         localStorage.removeItem('supabase.auth.token');
       } catch {}
 
-      // Notify user and force a full reload
       toast({
         title: "Déconnecté",
         description: "À bientôt sur PredictEsport",

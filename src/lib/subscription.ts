@@ -49,11 +49,12 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
     }
 
     // 2️⃣ appel edge function
-    const { data, error } = await supabase.functions.invoke("check-subscription", {
-      headers: {
-        Authorization: `Bearer ${session.access_token}`,
-      },
-    });
+     const { data, error } = await supabase.functions.invoke("check-subscription", {
+       headers: {
+         Authorization: `Bearer ${session.access_token}`,
+       },
+       body: {},
+     });
 
     console.log("[checkSubscription] edge response:", { data, error });
 
