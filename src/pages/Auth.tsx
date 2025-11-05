@@ -154,21 +154,33 @@ const Auth = () => {
 
   const handleSubscribe = async () => {
     if (!user) {
-      toast({ title: "Connexion requise", description: "Veuillez vous connecter", variant: "destructive" });
+      toast({
+        title: "Connexion requise",
+        description: "Veuillez vous connecter pour vous abonner",
+        variant: "destructive",
+      });
       return;
     }
 
     setCheckoutLoading(true);
     try {
-      const url = await createCheckoutSession(user.email); // 👈 on passe l'email
+      const url = await createCheckoutSession(user.email); // 👈 passe l'email
       if (url) {
-        window.location.href = url; // redirection directe
+        window.location.href = url; // 👈 redirection directe
       } else {
-        toast({ title: "Erreur", description: "Impossible de créer la session de paiement", variant: "destructive" });
+        toast({
+          title: "Erreur",
+          description: "Impossible de créer la session de paiement",
+          variant: "destructive",
+        });
       }
     } catch (e) {
       console.error("[subscribe] exception:", e);
-      toast({ title: "Erreur", description: "Une erreur s'est produite", variant: "destructive" });
+      toast({
+        title: "Erreur",
+        description: "Une erreur s'est produite",
+        variant: "destructive",
+      });
     } finally {
       setCheckoutLoading(false);
     }
