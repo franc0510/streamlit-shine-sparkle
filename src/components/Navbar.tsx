@@ -30,28 +30,45 @@ export const Navbar = () => {
   const handleLogout = async () => {
     try {
       console.log("[Navbar] Logging out...");
-      const { error } = await supabase.auth.signOut();
+      // Sign out global pour révoquer les refresh tokens
+      const { error } = await supabase.auth.signOut({ scope: 'global' });
       if (error) {
         console.warn("[Navbar] signOut error:", error);
       }
     } catch (e) {
       console.warn("[Navbar] signOut threw:", e);
     } finally {
-      // Hard fallback: purge any cached auth tokens
+      // Purge totale des tokens (localStorage + sessionStorage)
       try {
-        Object.keys(localStorage).forEach((k) => {
-          if (k.startsWith('sb-') && k.endsWith('-auth-token')) {
-            localStorage.removeItem(k);
+        const clearStorage = (storage: Storage) => {
+          const keysToRemove: string[] = [];
+          for (let i = 0; i < storage.length; i++) {
+            const k = storage.key(i);
+            if (!k) continue;
+            if (k.startsWith('sb-') || k.includes('supabase')) {
+              keysToRemove.push(k);
+            }
           }
-        });
-        localStorage.removeItem('supabase.auth.token');
-      } catch {}
+          keysToRemove.forEach((k) => storage.removeItem(k));
+        };
+        clearStorage(localStorage);
+        clearStorage(sessionStorage);
+      } catch (err) {
+        console.warn('[Navbar] storage clear error:', err);
+      }
 
       toast({
         title: "Déconnecté",
         description: "À bientôt sur PredictEsport",
       });
-      window.location.replace('/');
+
+      // Redirection + reload dur pour vider l'état en mémoire
+      const target = '/auth';
+      if (location.pathname !== target) {
+        window.location.assign(target);
+      } else {
+        window.location.reload();
+      }
     }
   };
 
