@@ -79,26 +79,23 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
  * @param userEmail - Email optionnel de l'utilisateur (pour système auth custom)
  * @returns L'URL de checkout Stripe ou null en cas d'erreur
  */
+import { supabase } from "@/integrations/supabase/client";
+
 export const createCheckoutSession = async (email?: string): Promise<string | null> => {
   try {
     console.log("[createCheckoutSession] start");
+
+    // optionnel: si un jour tu actives Supabase Auth
     const {
       data: { session },
     } = await supabase.auth.getSession();
-    console.log(
-      "[DEBUG] user_id=",
-      session?.user?.id,
-      "token_len=",
-      session?.access_token?.length || 0,
-      "emailParam=",
-      email,
-    );
+    console.log("[DEBUG] token_len=", session?.access_token?.length || 0, "emailParam=", email);
 
     const headers: Record<string, string> = {};
     if (session?.access_token) headers.Authorization = `Bearer ${session.access_token}`;
-    if (email) headers["x-user-email"] = email; // 👈 IMPORTANT: fallback sans Supabase Auth
+    if (email) headers["x-user-email"] = email; // 👈 IMPORTANT
 
-    // Timeout anti-spinner
+    // timeout anti-spinner
     const invoke = supabase.functions.invoke("create-checkout", { headers });
     const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 20000));
     const { data, error } = (await Promise.race([invoke, timeout])) as any;
