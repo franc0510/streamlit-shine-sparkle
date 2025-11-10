@@ -24,6 +24,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { openCustomerPortal } from "@/lib/subscription";
 import { useAuth } from "@/contexts/AuthContext";
+import { Badge } from "@/components/ui/badge";
+import { Crown } from "lucide-react";
 
 const games = [
   { id: "lol", name: "League of Legends", path: "/", active: true },
@@ -123,12 +125,26 @@ export const Navbar = () => {
     <nav className="border-b border-border bg-card/50 backdrop-blur-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2 group">
-            <Gamepad2 className="w-8 h-8 text-primary transition-transform group-hover:scale-110" />
-            <span className="font-display text-2xl font-bold bg-gradient-gaming bg-clip-text text-transparent">
-              PredictEsport
-            </span>
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link to="/" className="flex items-center gap-2 group">
+              <Gamepad2 className="w-8 h-8 text-primary transition-transform group-hover:scale-110" />
+              <span className="font-display text-2xl font-bold bg-gradient-gaming bg-clip-text text-transparent">
+                PredictEsport
+              </span>
+            </Link>
+            {user && (
+              <Badge variant={isPremium ? "default" : "secondary"} className="gap-1">
+                {isPremium ? (
+                  <>
+                    <Crown className="w-3 h-3" />
+                    Premium
+                  </>
+                ) : (
+                  "Free"
+                )}
+              </Badge>
+            )}
+          </div>
 
           <div className="flex items-center gap-6">
             <div className="hidden md:flex items-center gap-1 bg-secondary/50 rounded-lg p-1">

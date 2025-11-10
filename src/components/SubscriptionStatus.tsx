@@ -32,10 +32,10 @@ export const SubscriptionStatus = () => {
     try {
       const checkoutUrl = await createCheckoutSession(user.email);
       if (checkoutUrl) {
-        window.open(checkoutUrl, "_blank");
+        window.location.href = checkoutUrl;
         toast({
           title: "Redirection vers Stripe",
-          description: "Complétez votre paiement dans le nouvel onglet",
+          description: "Vous allez être redirigé...",
         });
       }
     } catch (error) {

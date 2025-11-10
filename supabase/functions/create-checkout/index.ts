@@ -11,11 +11,9 @@ const corsHeaders = {
 const log = (step: string, details?: unknown) =>
   console.log(`[CREATE-CHECKOUT] ${step}${details ? " - " + JSON.stringify(details) : ""}`);
 
-// ⚠️ mets tes vraies valeurs ici pour TESTER (tu remettras les env après)
-const STRIPE_SECRET_KEY_2 =
-  "sk_test_51SLgmFH8e5UibDVFHRG5MixpaN0uSRfXpumKiz1yIeTyjHAFleywuplbTf6sohCfE9GWVIHN9ZLJDpfws8UvUKdE00Q4Mv5PpZ"; // ta clé test
-const STRIPE_PRICE_ID = "price_1SMsMzH8e5UibDVFCDSViYXR"; // ✅ ton price
-const FRONTEND_URL = "https://preview--predict-esport.lovable.app"; // ton domaine Lovable
+const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY_2") || Deno.env.get("STRIPE_SECRET_KEY") || "";
+const STRIPE_PRICE_ID = Deno.env.get("STRIPE_PRICE_ID") || "price_1SMsMzH8e5UibDVFCDSViYXR";
+const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "https://preview--predict-esport.lovable.app";
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
@@ -45,7 +43,7 @@ serve(async (req) => {
     }
 
     // 3) Stripe
-    const stripe = new Stripe(STRIPE_SECRET_KEY_2, { apiVersion: "2024-06-20" });
+    const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" });
 
     // Réutiliser customer si on a un email
     let customerId: string | undefined;

@@ -47,10 +47,10 @@ export const PremiumGate = ({
     try {
       const checkoutUrl = await createCheckoutSession(user.email);
       if (checkoutUrl) {
-        window.open(checkoutUrl, "_blank");
+        window.location.href = checkoutUrl;
         toast({
           title: "Redirection vers Stripe",
-          description: "Vous allez être redirigé vers la page de paiement",
+          description: "Vous allez être redirigé...",
         });
       } else {
         toast({

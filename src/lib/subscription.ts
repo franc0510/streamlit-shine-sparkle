@@ -83,9 +83,44 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
 
 export const createCheckoutSession = async (email?: string): Promise<string | null> => {
   try {
-    console.log("[createCheckoutSession] Using direct Stripe payment link");
-    // Lien de paiement Stripe direct de test
-    return "https://buy.stripe.com/test_cNibJ1aob00Hcr9dmWak000";
+    console.log("[createCheckoutSession] Calling create-checkout edge function");
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.access_token) {
+      console.error("[createCheckoutSession] NO session - user must be logged in");
+      return null;
+    }
+
+    const headers: Record<string, string> = {
+      Authorization: `Bearer ${session.access_token}`,
+      "Content-Type": "application/json",
+    };
+
+    if (email) {
+      headers["x-user-email"] = email;
+    }
+
+    const { data, error } = await supabase.functions.invoke("create-checkout", {
+      headers,
+      body: {},
+    });
+
+    console.log("[createCheckoutSession] Response:", { hasData: !!data, hasError: !!error, dataUrl: data?.url });
+
+    if (error) {
+      console.error("[createCheckoutSession] Edge function error:", error);
+      return null;
+    }
+
+    if (!data?.url) {
+      console.error("[createCheckoutSession] No URL in response");
+      return null;
+    }
+
+    return data.url as string;
   } catch (e) {
     console.error("[createCheckoutSession] exception:", e);
     return null;
