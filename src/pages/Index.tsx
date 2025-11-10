@@ -8,6 +8,9 @@ import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useToast } from "@/hooks/use-toast";
+import { SubscriptionStatus } from "@/components/SubscriptionStatus";
+import { PremiumGate } from "@/components/PremiumGate";
+import { useMatchAccess } from "@/hooks/useMatchAccess";
 
 const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-");
 const buildMatchUrl = (m: Match) => `/match/${slugify(m.tournament)}/${m.date}/${m.time}/${slugify(m.team1)}-vs-${slugify(m.team2)}?bo=${m.format}`;

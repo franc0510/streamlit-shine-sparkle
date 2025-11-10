@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import clsx from "clsx";
 import { ArrowLeft } from "lucide-react";
 
@@ -8,6 +8,8 @@ import { getTeamLogo } from "@/lib/csvParser";
 import PlayerRadarChart from "@/components/PlayerRadarChart";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
+import { PremiumGate } from "@/components/PremiumGate";
+import { useMatchAccess } from "@/hooks/useMatchAccess";
 
 /* ===================== helpers ===================== */
 function useQuery() {
@@ -77,6 +79,7 @@ export default function MatchDetails() {
   const location = useLocation();
   const navigate = useNavigate();
   const q = useQuery();
+  const { viewedCount, canViewMatch, markMatchAsViewed } = useMatchAccess();
 
   // /match/<league>/<date>/<time>/<team1>-vs-<team2>
   const pathParts = location.pathname.split("/").filter(Boolean);
@@ -95,6 +98,16 @@ export default function MatchDetails() {
   const league = pathParts[1] || q.get("league") || "";
   const bo = q.get("bo") || "BO5";
   const when = decodeURIComponent(pathParts[2] || "") || q.get("date") || "";
+
+  // Créer un ID unique pour ce match
+  const matchId = `${league}_${when}_${initialTeam1}_${initialTeam2}`;
+
+  // Marquer le match comme consulté si l'utilisateur peut y accéder
+  useEffect(() => {
+    if (canViewMatch(matchId)) {
+      markMatchAsViewed(matchId);
+    }
+  }, [matchId, canViewMatch, markMatchAsViewed]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -147,7 +160,12 @@ export default function MatchDetails() {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <div className="px-4 md:px-8 lg:px-12 py-6">
+      <PremiumGate
+        freeLimit={1}
+        currentCount={viewedCount}
+        featureName="matchs"
+      >
+        <div className="px-4 md:px-8 lg:px-12 py-6">
         {/* Back Button */}
         <Button
           variant="ghost"
@@ -468,7 +486,8 @@ export default function MatchDetails() {
             </Section>
           </>
         )}
-      </div>
+        </div>
+      </PremiumGate>
     </div>
   );
 }
