@@ -57,6 +57,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.log("[AuthProvider] Cleaning up subscription");
       subscription.unsubscribe();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Log l'état actuel à chaque changement (utile pour debug)

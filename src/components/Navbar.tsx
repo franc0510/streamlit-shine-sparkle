@@ -44,20 +44,16 @@ export const Navbar = () => {
   const handleLogout = async () => {
     try {
       console.log("[Navbar] Logging out...");
-      // Sign out global pour révoquer les refresh tokens
-      const { error } = await supabase.auth.signOut({ scope: 'global' });
+      const { error } = await supabase.auth.signOut();
+      
       if (error) {
-        console.warn("[Navbar] signOut error:", error);
-      }
-    } catch (e) {
-      console.warn("[Navbar] signOut threw:", e);
-    } finally {
-      // Purge totale des tokens (localStorage + sessionStorage)
-      try {
-        localStorage.clear();
-        sessionStorage.clear();
-      } catch (err) {
-        console.warn('[Navbar] storage clear error:', err);
+        console.error("[Navbar] Logout error:", error);
+        toast({
+          title: "Erreur",
+          description: "Impossible de se déconnecter",
+          variant: "destructive",
+        });
+        return;
       }
 
       toast({
@@ -65,11 +61,14 @@ export const Navbar = () => {
         description: "À bientôt sur PredictEsport",
       });
 
-      // Redirection + reload dur pour vider l'état en mémoire et l'URL
-      try {
-        window.history.replaceState({}, '', '/auth');
-      } catch {}
-      window.location.reload();
+      navigate('/auth');
+    } catch (e) {
+      console.error("[Navbar] Logout exception:", e);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue",
+        variant: "destructive",
+      });
     }
   };
 
@@ -77,18 +76,15 @@ export const Navbar = () => {
     try {
       console.log("[Navbar] Logging out from all devices...");
       const { error } = await supabase.auth.signOut({ scope: 'global' });
+      
       if (error) {
-        console.warn("[Navbar] global signOut error:", error);
-      }
-    } catch (e) {
-      console.warn("[Navbar] global signOut threw:", e);
-    } finally {
-      // Purge totale des tokens
-      try {
-        localStorage.clear();
-        sessionStorage.clear();
-      } catch (err) {
-        console.warn('[Navbar] storage clear error:', err);
+        console.error("[Navbar] Global logout error:", error);
+        toast({
+          title: "Erreur",
+          description: "Impossible de se déconnecter",
+          variant: "destructive",
+        });
+        return;
       }
 
       toast({
@@ -96,10 +92,15 @@ export const Navbar = () => {
         description: "Vous avez été déconnecté de toutes vos sessions",
       });
 
-      try {
-        window.history.replaceState({}, '', '/auth');
-      } catch {}
-      window.location.reload();
+      setShowLogoutAllDialog(false);
+      navigate('/auth');
+    } catch (e) {
+      console.error("[Navbar] Global logout exception:", e);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue",
+        variant: "destructive",
+      });
     }
   };
 
