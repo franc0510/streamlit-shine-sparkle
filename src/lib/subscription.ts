@@ -19,6 +19,8 @@ export type DiagnosticStep = {
 
 export const checkSubscription = async (): Promise<SubscriptionStatus> => {
   try {
+    console.log("[checkSubscription] START");
+    
     const {
       data: { session },
     } = await supabase.auth.getSession();
@@ -28,7 +30,10 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
       return { subscribed: false, product_id: null, subscription_end: null };
     }
 
-    // 1️⃣ accès manuel
+    console.log("[checkSubscription] session found, user_id:", session.user.id);
+
+    // 1️⃣ Vérifier accès manuel dans premium_users
+    console.log("[checkSubscription] Checking premium_users table...");
     const { data: premiumUser, error: premiumErr } = await supabase
       .from("premium_users")
       .select("*")
@@ -37,10 +42,12 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
 
     if (premiumErr) {
       console.warn("[checkSubscription] premium_users error:", premiumErr);
+    } else {
+      console.log("[checkSubscription] premium_users query result:", premiumUser);
     }
 
     if (premiumUser) {
-      console.log("[checkSubscription] user has manual premium");
+      console.log("[checkSubscription] ✅ User has manual premium access");
       return {
         subscribed: true,
         product_id: PREMIUM_PRODUCT_ID,
@@ -48,13 +55,14 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
       };
     }
 
-    // 2️⃣ appel edge function
-     const { data, error } = await supabase.functions.invoke("check-subscription", {
-       headers: {
-         Authorization: `Bearer ${session.access_token}`,
-       },
-       body: {},
-     });
+    // 2️⃣ Si pas dans premium_users, vérifier Stripe via edge function
+    console.log("[checkSubscription] Not in premium_users, calling check-subscription edge function...");
+    const { data, error } = await supabase.functions.invoke("check-subscription", {
+      headers: {
+        Authorization: `Bearer ${session.access_token}`,
+      },
+      body: {},
+    });
 
     console.log("[checkSubscription] edge response:", { data, error });
 
@@ -70,7 +78,7 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
 
     return data as SubscriptionStatus;
   } catch (error) {
-    console.error("Error checking subscription:", error);
+    console.error("[checkSubscription] EXCEPTION:", error);
     return { subscribed: false, product_id: null, subscription_end: null };
   }
 };
