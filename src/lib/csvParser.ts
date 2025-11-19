@@ -83,6 +83,20 @@ export const parsePredictionsHistoryCSV = async (): Promise<Match[]> => {
 };
 
 export const getTeamLogo = (teamName: string): string => {
+  // Special mappings for teams with non-standard file names
+  const specialMappings: Record<string, string> = {
+    "Gen.G Esports": "Gen.G Esports.png",
+    "kt Rolster": "kt_Rolster.png",
+    "TOPESPORTS": "TOPESPORT.png",
+    "Top Esports": "TOPESPORT.png",
+    "Anyone's Legend": "Anyone_s_Legend.png",
+  };
+
+  // Check for special mapping first
+  if (specialMappings[teamName]) {
+    return `/Documents/teams/${specialMappings[teamName]}`;
+  }
+
   // Build a robust file name: Title Case words joined by underscores. Keep dots (e.g., Gen.G)
   const canonical = (teamName || "")
     .replace(/-/g, " ")

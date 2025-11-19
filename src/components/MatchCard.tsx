@@ -45,7 +45,14 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
         <div className="grid grid-cols-[1fr_auto_1fr] gap-6 items-center">
           <div className="flex flex-col items-center gap-3">
             <div className="w-20 h-20 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform">
-              <img src={team1.logo} alt={team1.name} className="w-16 h-16 object-contain" />
+              <img 
+                src={team1.logo} 
+                alt={team1.name} 
+                className="w-16 h-16 object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = '/Documents/teams/shaco.png';
+                }}
+              />
             </div>
             <h3 className="font-semibold text-center text-sm">{team1.name}</h3>
             <div className="flex flex-col items-center gap-1">
@@ -67,7 +74,14 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
 
           <div className="flex flex-col items-center gap-3">
             <div className="w-20 h-20 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform">
-              <img src={team2.logo} alt={team2.name} className="w-16 h-16 object-contain" />
+              <img 
+                src={team2.logo} 
+                alt={team2.name} 
+                className="w-16 h-16 object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = '/Documents/teams/shaco.png';
+                }}
+              />
             </div>
             <h3 className="font-semibold text-center text-sm">{team2.name}</h3>
             <div className="flex flex-col items-center gap-1">
