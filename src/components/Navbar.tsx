@@ -56,12 +56,16 @@ export const Navbar = () => {
         return;
       }
 
+      // Nettoyer le localStorage des matchs vus
+      localStorage.removeItem('predictesport_viewed_matches');
+
       toast({
         title: "Déconnecté",
         description: "À bientôt sur PredictEsport",
       });
 
-      navigate('/auth');
+      // Forcer un rechargement complet pour nettoyer l'état
+      window.location.href = '/auth';
     } catch (e) {
       console.error("[Navbar] Logout exception:", e);
       toast({
@@ -87,13 +91,18 @@ export const Navbar = () => {
         return;
       }
 
+      // Nettoyer le localStorage
+      localStorage.removeItem('predictesport_viewed_matches');
+
       toast({
         title: "Déconnecté de tous les appareils",
         description: "Vous avez été déconnecté de toutes vos sessions",
       });
 
       setShowLogoutAllDialog(false);
-      navigate('/auth');
+      
+      // Forcer un rechargement complet
+      window.location.href = '/auth';
     } catch (e) {
       console.error("[Navbar] Global logout exception:", e);
       toast({
