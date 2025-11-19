@@ -42,41 +42,23 @@ export const Navbar = () => {
   const [showLogoutAllDialog, setShowLogoutAllDialog] = useState(false);
 
   const handleLogout = async () => {
+    console.log("[Navbar] Logout initiated");
+    
     try {
-      console.log("[Navbar] Logging out...");
-      console.log("[Navbar] Clearing localStorage...");
+      // Nettoyer d'abord le localStorage
       localStorage.clear();
-      console.log("[Navbar] Calling signOut...");
-      const { error } = await supabase.auth.signOut();
-      
-      if (error) {
-        console.error("[Navbar] SignOut error:", error);
-        toast({
-          title: "Erreur",
-          description: "Impossible de se déconnecter",
-          variant: "destructive",
-        });
-        return;
-      }
+      console.log("[Navbar] localStorage cleared");
 
-      console.log("[Navbar] SignOut success");
-      toast({
-        title: "Déconnecté",
-        description: "À bientôt sur PredictEsport",
-      });
+      // Puis se déconnecter
+      await supabase.auth.signOut();
+      console.log("[Navbar] signOut completed");
 
-      console.log("[Navbar] Redirecting to /auth...");
-      // Utiliser replace pour forcer un rechargement complet
+      // Redirection immédiate
       window.location.replace('/auth');
-    } catch (e) {
-      console.error("[Navbar] Logout exception:", e);
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue",
-        variant: "destructive",
-      });
-      // Forcer la redirection même en cas d'erreur
-      setTimeout(() => window.location.replace('/auth'), 500);
+    } catch (error) {
+      console.error("[Navbar] Logout error:", error);
+      // Forcer la redirection même si erreur
+      window.location.replace('/auth');
     }
   };
 

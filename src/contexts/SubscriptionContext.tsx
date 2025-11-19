@@ -18,21 +18,28 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
     subscription_end: null,
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const isPremium = subscriptionStatus.subscribed;
 
   const refreshSubscription = async () => {
+    // Éviter les appels multiples simultanés
+    if (isRefreshing) {
+      console.log('[SubscriptionContext] Already refreshing, skipping...');
+      return;
+    }
+
     console.log('[SubscriptionContext] refreshSubscription called');
+    setIsRefreshing(true);
+    setIsLoading(true);
     
     try {
-      setIsLoading(true);
       console.log('[SubscriptionContext] Getting session...');
-      
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-      console.log('[SubscriptionContext] Session result:', { hasSession: !!session, error: sessionError });
+      const { data: { session } } = await supabase.auth.getSession();
+      console.log('[SubscriptionContext] Session result:', { hasSession: !!session, userId: session?.user?.id });
       
       if (!session) {
-        console.log('[SubscriptionContext] No session, skipping refresh');
+        console.log('[SubscriptionContext] No session, setting to free');
         setSubscriptionStatus({
           subscribed: false,
           product_id: null,
@@ -43,32 +50,46 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
 
       console.log('[SubscriptionContext] Calling checkSubscription...');
       const status = await checkSubscription();
-      console.log('[SubscriptionContext] checkSubscription returned:', status);
+      console.log('[SubscriptionContext] checkSubscription result:', status);
       setSubscriptionStatus(status);
     } catch (error) {
-      console.error('[SubscriptionContext] Error refreshing subscription:', error);
+      console.error('[SubscriptionContext] Error:', error);
       setSubscriptionStatus({
         subscribed: false,
         product_id: null,
         subscription_end: null,
       });
     } finally {
-      console.log('[SubscriptionContext] Refresh complete, setting loading to false');
+      console.log('[SubscriptionContext] Refresh complete');
       setIsLoading(false);
+      setIsRefreshing(false);
     }
   };
 
   useEffect(() => {
     console.log('[SubscriptionContext] Initializing...');
+    
+    let mounted = true;
+
     // Check subscription on mount
-    refreshSubscription();
+    const initSubscription = async () => {
+      if (mounted) {
+        await refreshSubscription();
+      }
+    };
+    initSubscription();
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         console.log('[SubscriptionContext] Auth state changed:', event);
-        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-          await refreshSubscription();
+        if (!mounted) return;
+        
+        if (event === 'SIGNED_IN') {
+          // Attendre un peu pour éviter les appels simultanés
+          setTimeout(() => {
+            if (mounted) refreshSubscription();
+          }, 500);
         } else if (event === 'SIGNED_OUT') {
           setSubscriptionStatus({
             subscribed: false,
@@ -79,42 +100,21 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
       }
     );
 
-    // Refresh every 15 seconds when user is active
-    const interval = setInterval(() => {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        if (session) {
-          refreshSubscription();
-        }
-      });
-    }, 15000);
-
     return () => {
+      mounted = false;
       subscription.unsubscribe();
-      clearInterval(interval);
     };
   }, []);
 
-  // Extra: refresh on window focus/visibility change
+  // Refresh on window focus
   useEffect(() => {
     const onFocus = () => {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        if (session) {
-          refreshSubscription();
-        }
-      });
-    };
-
-    const onVisibility = () => {
-      if (document.visibilityState === 'visible') onFocus();
+      console.log('[SubscriptionContext] Window focused');
+      refreshSubscription();
     };
 
     window.addEventListener('focus', onFocus);
-    document.addEventListener('visibilitychange', onVisibility);
-
-    return () => {
-      window.removeEventListener('focus', onFocus);
-      document.removeEventListener('visibilitychange', onVisibility);
-    };
+    return () => window.removeEventListener('focus', onFocus);
   }, []);
 
   return (
