@@ -44,10 +44,13 @@ export const Navbar = () => {
   const handleLogout = async () => {
     try {
       console.log("[Navbar] Logging out...");
+      console.log("[Navbar] Clearing localStorage...");
+      localStorage.clear();
+      console.log("[Navbar] Calling signOut...");
       const { error } = await supabase.auth.signOut();
       
       if (error) {
-        console.error("[Navbar] Logout error:", error);
+        console.error("[Navbar] SignOut error:", error);
         toast({
           title: "Erreur",
           description: "Impossible de se déconnecter",
@@ -56,16 +59,15 @@ export const Navbar = () => {
         return;
       }
 
-      // Nettoyer le localStorage des matchs vus
-      localStorage.removeItem('predictesport_viewed_matches');
-
+      console.log("[Navbar] SignOut success");
       toast({
         title: "Déconnecté",
         description: "À bientôt sur PredictEsport",
       });
 
-      // Forcer un rechargement complet pour nettoyer l'état
-      window.location.href = '/auth';
+      console.log("[Navbar] Redirecting to /auth...");
+      // Utiliser replace pour forcer un rechargement complet
+      window.location.replace('/auth');
     } catch (e) {
       console.error("[Navbar] Logout exception:", e);
       toast({
@@ -73,12 +75,17 @@ export const Navbar = () => {
         description: "Une erreur est survenue",
         variant: "destructive",
       });
+      // Forcer la redirection même en cas d'erreur
+      setTimeout(() => window.location.replace('/auth'), 500);
     }
   };
 
   const handleLogoutAll = async () => {
     try {
       console.log("[Navbar] Logging out from all devices...");
+      console.log("[Navbar] Clearing localStorage...");
+      localStorage.clear();
+      console.log("[Navbar] Calling global signOut...");
       const { error } = await supabase.auth.signOut({ scope: 'global' });
       
       if (error) {
@@ -91,9 +98,7 @@ export const Navbar = () => {
         return;
       }
 
-      // Nettoyer le localStorage
-      localStorage.removeItem('predictesport_viewed_matches');
-
+      console.log("[Navbar] Global signOut success");
       toast({
         title: "Déconnecté de tous les appareils",
         description: "Vous avez été déconnecté de toutes vos sessions",
@@ -101,8 +106,9 @@ export const Navbar = () => {
 
       setShowLogoutAllDialog(false);
       
-      // Forcer un rechargement complet
-      window.location.href = '/auth';
+      console.log("[Navbar] Redirecting to /auth...");
+      // Utiliser replace pour forcer un rechargement complet
+      window.location.replace('/auth');
     } catch (e) {
       console.error("[Navbar] Global logout exception:", e);
       toast({
@@ -110,6 +116,7 @@ export const Navbar = () => {
         description: "Une erreur est survenue",
         variant: "destructive",
       });
+      setTimeout(() => window.location.replace('/auth'), 500);
     }
   };
 
