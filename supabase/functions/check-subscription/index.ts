@@ -53,12 +53,43 @@ serve(async (req) => {
 
     log("User authenticated", { email: user.email });
 
-    // Initialiser Stripe
+    // 1️⃣ VÉRIFIER D'ABORD LA TABLE premium_users (accès manuel)
+    const supabaseAdmin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    );
+
+    const { data: premiumUser, error: premiumError } = await supabaseAdmin
+      .from("premium_users")
+      .select("*")
+      .eq("user_id", user.id)
+      .maybeSingle();
+
+    if (premiumError) {
+      log("Error checking premium_users", { error: premiumError.message });
+    }
+
+    if (premiumUser) {
+      log("User has manual premium access via premium_users");
+      return new Response(
+        JSON.stringify({
+          subscribed: true,
+          product_id: "manual_premium",
+          subscription_end: null, // Pas de date de fin pour accès manuel
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 200,
+        }
+      );
+    }
+
+    // 2️⃣ SINON, VÉRIFIER STRIPE
+    log("Checking Stripe subscription");
     const stripe = new Stripe(STRIPE_SECRET_KEY, {
       apiVersion: "2024-06-20",
     });
 
-    // Chercher le customer Stripe
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
 
     if (customers.data.length === 0) {
