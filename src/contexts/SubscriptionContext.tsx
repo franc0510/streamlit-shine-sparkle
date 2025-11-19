@@ -23,6 +23,20 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
 
   const refreshSubscription = async () => {
     console.log('[SubscriptionContext] refreshSubscription called');
+    
+    // Ne pas appeler check-subscription si pas de session
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      console.log('[SubscriptionContext] No session, skipping refresh');
+      setSubscriptionStatus({
+        subscribed: false,
+        product_id: null,
+        subscription_end: null,
+      });
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     try {
       const status = await checkSubscription();
@@ -30,6 +44,12 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
       setSubscriptionStatus(status);
     } catch (error) {
       console.error('[SubscriptionContext] Error refreshing subscription:', error);
+      // En cas d'erreur, ne pas bloquer, juste mettre non-premium
+      setSubscriptionStatus({
+        subscribed: false,
+        product_id: null,
+        subscription_end: null,
+      });
     } finally {
       setIsLoading(false);
     }
