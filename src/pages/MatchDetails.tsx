@@ -191,7 +191,7 @@ export default function MatchDetails() {
                       img.dataset.fallbackTried = '1';
                       img.src = logo1Alt;
                     } else {
-                      img.src = '/Documents/teams/TBD.png';
+                      img.src = '/Documents/teams/shaco.png';
                     }
                   }}
                 />
@@ -283,7 +283,7 @@ export default function MatchDetails() {
                       img.dataset.fallbackTried = '1';
                       img.src = logo2Alt;
                     } else {
-                      img.src = '/Documents/teams/TBD.png';
+                      img.src = '/Documents/teams/shaco.png';
                     }
                   }}
                 />
