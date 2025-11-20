@@ -91,6 +91,10 @@
       "text1": "PredictEsport est né d'une passion commune pour l'esport et la data science. En tant que fan de longue date de League of Legends et autres jeux compétitifs, j'ai toujours été fasciné par la complexité stratégique de ces matchs.",
       "text2": "Avec une expertise en analyse de données et en machine learning, j'ai décidé de créer un outil qui permettrait aux fans et aux parieurs de prendre des décisions plus éclairées. Notre algorithme analyse des milliers de données de matchs pour identifier les tendances et prédire les résultats avec une précision impressionnante.",
       "text3": "Notre mission est simple : rendre l'analyse esport accessible à tous et aider notre communauté à mieux comprendre le jeu qu'ils aiment."
+    },
+    "footer": {
+      "rights": "Tous droits réservés.",
+      "disclaimer": "Les prédictions sont alimentées par PredictEsport. Le système utilise une approche purement mathématique basée sur les statistiques historiques des joueurs et des équipes pour estimer les probabilités de victoire en série. Il s'agit uniquement d'un outil d'analyse et de statistiques — il n'encourage pas les paris sur les matchs."
     }
   },
   "contact": {
