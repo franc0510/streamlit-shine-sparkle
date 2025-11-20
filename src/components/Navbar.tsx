@@ -168,7 +168,7 @@ export const Navbar = () => {
             <div className="flex items-center gap-3">
               <Link to="/about">
                 <Button variant="ghost" size="sm">
-                  À propos
+                  Résultats
                 </Button>
               </Link>
               <Link to="/contact">
