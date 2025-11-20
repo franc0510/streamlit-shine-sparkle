@@ -1,15 +1,19 @@
 {
   "nav": {
+    "menu": "菜单",
     "games": {
+      "title": "游戏",
       "lol": "英雄联盟",
       "cs2": "CS2",
       "dota2": "DOTA 2"
     },
+    "results": "结果",
     "about": "关于",
     "contact": "联系",
     "login": "登录",
     "premium": "高级会员",
     "manageSubscription": "管理订阅",
+    "subscribePremium": "订阅高级版",
     "logout": "退出登录",
     "logoutAll": "退出登录（所有设备）",
     "logoutAllTitle": "从所有设备退出登录",

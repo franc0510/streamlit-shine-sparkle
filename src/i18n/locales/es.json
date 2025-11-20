@@ -1,15 +1,19 @@
 {
   "nav": {
+    "menu": "Menú",
     "games": {
+      "title": "Juegos",
       "lol": "League of Legends",
       "cs2": "CS2",
       "dota2": "DOTA 2"
     },
+    "results": "Resultados",
     "about": "Acerca de",
     "contact": "Contacto",
     "login": "Iniciar sesión",
     "premium": "Premium",
     "manageSubscription": "Gestionar suscripción",
+    "subscribePremium": "Suscribirse Premium",
     "logout": "Cerrar sesión",
     "logoutAll": "Cerrar sesión (todos los dispositivos)",
     "logoutAllTitle": "Cerrar sesión en todos los dispositivos",
