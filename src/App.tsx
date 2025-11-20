@@ -13,6 +13,7 @@ import CS2 from "./pages/CS2";
 import Dota2 from "./pages/Dota2";
 import MatchDetails from "./pages/MatchDetails";
 import NotFound from "./pages/NotFound";
+import "./i18n/config";
 
 const queryClient = new QueryClient();
 

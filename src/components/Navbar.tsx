@@ -26,12 +26,8 @@ import { openCustomerPortal } from "@/lib/subscription";
 import { useAuth } from "@/contexts/AuthContext";
 import { Badge } from "@/components/ui/badge";
 import { Crown } from "lucide-react";
-
-const games = [
-  { id: "lol", name: "League of Legends", path: "/", active: true },
-  { id: "cs2", name: "CS2", path: "/cs2", active: false },
-  { id: "dota2", name: "DOTA 2", path: "/dota2", active: false },
-];
+import { useTranslation } from "react-i18next";
+import { LanguageSelector } from "./LanguageSelector";
 
 export const Navbar = () => {
   const location = useLocation();
@@ -40,6 +36,13 @@ export const Navbar = () => {
   const { user } = useAuth();
   const { isPremium } = useSubscription();
   const [showLogoutAllDialog, setShowLogoutAllDialog] = useState(false);
+  const { t } = useTranslation();
+
+  const games = [
+    { id: "lol", name: t('nav.games.lol'), path: "/", active: true },
+    { id: "cs2", name: t('nav.games.cs2'), path: "/cs2", active: false },
+    { id: "dota2", name: t('nav.games.dota2'), path: "/dota2", active: false },
+  ];
 
   const handleLogout = async () => {
     console.log("[Navbar] Logout initiated");
@@ -227,19 +230,18 @@ export const Navbar = () => {
       <AlertDialog open={showLogoutAllDialog} onOpenChange={setShowLogoutAllDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Se déconnecter de tous les appareils ?</AlertDialogTitle>
+            <AlertDialogTitle>{t('nav.logoutAllTitle')}</AlertDialogTitle>
             <AlertDialogDescription>
-              Cette action révoquera toutes vos sessions actives sur tous vos appareils.
-              Vous devrez vous reconnecter partout où vous utilisez PredictEsport.
+              {t('nav.logoutAllDescription')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Annuler</AlertDialogCancel>
+            <AlertDialogCancel>{t('nav.cancel')}</AlertDialogCancel>
             <AlertDialogAction 
               onClick={handleLogoutAll}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Confirmer la déconnexion globale
+              {t('nav.confirm')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "games": {
+      "lol": "League of Legends",
+      "cs2": "CS2",
+      "dota2": "DOTA 2"
+    },
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "login": "Iniciar sesión",
+    "premium": "Premium",
+    "manageSubscription": "Gestionar suscripción",
+    "logout": "Cerrar sesión",
+    "logoutAll": "Cerrar sesión (todos los dispositivos)",
+    "logoutAllTitle": "Cerrar sesión en todos los dispositivos",
+    "logoutAllDescription": "¿Estás seguro de que quieres cerrar sesión en todos tus dispositivos? Tendrás que iniciar sesión nuevamente en cada uno.",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar"
+  },
+  "home": {
+    "title": "League of Legends",
+    "subtitle": "Predicciones basadas en modelos estadísticos avanzados",
+    "loadingMatches": "Cargando partidos...",
+    "upcomingMatches": "Próximos Partidos",
+    "recentPredictions": "Predicciones Recientes",
+    "noUpcomingMatches": "No hay partidos próximos en este momento",
+    "noPastMatches": "No hay predicciones recientes disponibles",
+    "premiumCta": {
+      "title": "Desbloquea todo el potencial de PredictEsport",
+      "accuracy": "70% de Precisión",
+      "accuracyDesc": "Algoritmo probado en miles de partidos",
+      "unlimited": "Acceso Ilimitado",
+      "unlimitedDesc": "Todas las predicciones sin restricciones",
+      "realtime": "Actualizaciones en Tiempo Real",
+      "realtimeDesc": "Nuevos análisis tan pronto estén disponibles",
+      "subscribe": "Suscribirse ahora",
+      "price": "9,99€/mes"
+    }
+  },
+  "about": {
+    "title": "Resultados",
+    "subtitle": "Descubre el rendimiento de nuestro algoritmo",
+    "roi": {
+      "title": "Resultados Financieros (ROI)",
+      "description": "¿Interesado en los resultados financieros de nuestras predicciones? Déjanos tu email y te enviaremos los detalles de nuestro ROI.",
+      "emailPlaceholder": "tu@email.com",
+      "submit": "Recibir resultados ROI",
+      "successTitle": "¡Solicitud enviada!",
+      "successDescription": "Te enviaremos los resultados ROI por email pronto."
+    },
+    "performance": {
+      "title": "🔍 El rendimiento de nuestro algoritmo",
+      "accuracy": {
+        "title": "Precisión — 70%",
+        "desc1": "En promedio, nuestro algoritmo predice correctamente el resultado de un partido el 70% del tiempo.",
+        "desc2": "De 10 partidos, acierta 7 correctamente."
+      },
+      "auc": {
+        "title": "AUC — 0.76",
+        "desc1": "AUC mide la capacidad del modelo para distinguir correctamente ganadores y perdedores.",
+        "desc2": "Con una puntuación de 0.76, el algoritmo es muy confiable en la detección de tendencias ganadoras."
+      },
+      "logloss": {
+        "title": "LogLoss — 0.57",
+        "desc1": "LogLoss mide la calidad de las predicciones probabilísticas de nuestro algoritmo.",
+        "desc2": "Una puntuación de 0.57 indica una excelente calibración de probabilidades."
+      }
+    },
+    "valueBet": {
+      "title": "¿Qué es una \"apuesta de valor\"?",
+      "intro": "Una apuesta de valor es simplemente una oportunidad donde las cuotas ofrecidas por la casa de apuestas son más altas que la probabilidad real que calculas (o que nuestro algoritmo calcula por ti).",
+      "formula": "Si las cuotas ofrecidas son mayores que 1 / Probabilidad estimada, ¡entonces tienes una apuesta de valor!",
+      "example": {
+        "title": "Ejemplo concreto",
+        "scenario": "Tomemos un partido ficticio de Worlds 2025:",
+        "team1": "T1 vs Gen.G",
+        "bookmaker": "La casa de apuestas ofrece una cuota de 2.20 para que gane T1.",
+        "algorithm": "Nuestro algoritmo estima que T1 tiene un 50% de probabilidad de ganar (probabilidad real = 0.50).",
+        "calculation": "Si T1 tiene un 50% de probabilidad de ganar, las \"cuotas justas\" deberían ser:",
+        "formulaCalc": "Cuotas justas = 1 / 0.50 = 2.00",
+        "conclusion": "Entonces aquí, las cuotas ofrecidas (2.20) son más altas que las cuotas justas (2.00) → ¡Es una apuesta de valor!",
+        "explanation": "Al apostar por T1 a 2.20, estás en una posición favorable a largo plazo, ya que las cuotas sobreestiman tus ganancias potenciales en comparación con el riesgo real."
+      }
+    },
+    "story": {
+      "title": "Nuestra historia",
+      "text1": "PredictEsport nació de una pasión compartida por los esports y la ciencia de datos. Como fanático de larga data de League of Legends y otros juegos competitivos, siempre me ha fascinado la complejidad estratégica de estos partidos.",
+      "text2": "Con experiencia en análisis de datos y aprendizaje automático, decidí crear una herramienta que permitiera a los fanáticos y apostadores tomar decisiones más informadas. Nuestro algoritmo analiza miles de datos de partidos para identificar tendencias y predecir resultados con una precisión impresionante.",
+      "text3": "Nuestra misión es simple: hacer que el análisis de esports sea accesible para todos y ayudar a nuestra comunidad a comprender mejor el juego que aman."
+    }
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "¿Tienes una pregunta? ¿Una sugerencia? No dudes en contactarnos, ¡estamos aquí para ayudarte!",
+    "email": "Email",
+    "discord": "Discord",
+    "support": "Soporte",
+    "supportDesc": "Disponible 24/7",
+    "form": {
+      "title": "Envíanos un mensaje",
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "email": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "message": "Mensaje",
+      "messagePlaceholder": "Tu mensaje...",
+      "send": "Enviar mensaje",
+      "successTitle": "¡Mensaje enviado!",
+      "successDescription": "Te responderemos lo antes posible.",
+      "errorTitle": "Error",
+      "errorDescription": "Ocurrió un error al enviar el mensaje."
+    }
+  },
+  "comingSoon": {
+    "cs2": {
+      "title": "CS2",
+      "subtitle": "¡Las predicciones de CS2 llegarán pronto!",
+      "description": "Actualmente estamos trabajando en la integración de Counter-Strike 2. Nuestros modelos de análisis están en desarrollo para ofrecerte las mejores predicciones posibles."
+    },
+    "dota2": {
+      "title": "DOTA 2",
+      "subtitle": "¡Las predicciones de DOTA 2 llegarán pronto!",
+      "description": "Actualmente estamos trabajando en la integración de DOTA 2. Nuestros modelos de análisis están en desarrollo para ofrecerte las mejores predicciones posibles."
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "message": "¡Ups! Página no encontrada",
+    "backHome": "Volver al inicio"
+  }
+}
