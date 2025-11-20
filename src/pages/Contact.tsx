@@ -14,17 +14,41 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    toast({
-      title: "Message envoyé !",
-      description: "Nous vous répondrons dans les plus brefs délais.",
-    });
-    
-    setName("");
-    setEmail("");
-    setMessage("");
+    try {
+      const response = await fetch('/functions/v1/send-contact-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send email');
+      }
+
+      toast({
+        title: "Message envoyé !",
+        description: "Nous vous répondrons dans les plus brefs délais.",
+      });
+      
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      toast({
+        title: "Erreur",
+        description: "Une erreur s'est produite lors de l'envoi du message.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -46,7 +70,7 @@ const Contact = () => {
             <Card className="p-6 bg-gradient-card border-border/50 text-center hover:border-primary/50 transition-all animate-slide-up">
               <Mail className="w-10 h-10 text-primary mx-auto mb-4" />
               <h3 className="font-display font-bold mb-2">Email</h3>
-              <p className="text-sm text-muted-foreground">contact@predictesport.com</p>
+              <p className="text-sm text-muted-foreground">predictesport.contact@gmail.com</p>
             </Card>
 
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
@@ -65,11 +89,6 @@ const Contact = () => {
               <p className="text-sm text-muted-foreground">Réponse sous 24h</p>
             </Card>
 
-            <Card className="p-6 bg-gradient-card border-border/50 text-center hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <Send className="w-10 h-10 text-primary mx-auto mb-4" />
-              <h3 className="font-display font-bold mb-2">Réseaux</h3>
-              <p className="text-sm text-muted-foreground">Suivez-nous en ligne</p>
-            </Card>
           </div>
 
           <Card className="p-8 bg-gradient-card border-border/50 animate-slide-up" style={{ animationDelay: "0.3s" }}>
