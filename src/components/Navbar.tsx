@@ -180,6 +180,8 @@ export const Navbar = () => {
                 </Button>
               </Link>
               
+              <LanguageSelector />
+              
               {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
