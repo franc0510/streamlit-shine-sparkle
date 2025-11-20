@@ -30,55 +30,12 @@ const About = () => {
               Résultats
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Découvrez les résultats et performances de nos prédictions
+              Découvrez les performances de notre algorithme
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-16">
-            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up">
-              <TrendingUp className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-display font-bold mb-3">Analyse Avancée</h3>
-              <p className="text-muted-foreground">
-                Nos modèles statistiques analysent des milliers de données de matchs pour prédire les résultats avec une précision exceptionnelle.
-              </p>
-            </Card>
-
-            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              <Target className="w-12 h-12 text-accent mb-4" />
-              <h3 className="text-xl font-display font-bold mb-3">Précision Maximale</h3>
-              <p className="text-muted-foreground">
-                Nos prédictions sont constamment affinées grâce à l'apprentissage automatique et l'analyse en temps réel des performances.
-              </p>
-            </Card>
-
-            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <Award className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-display font-bold mb-3">Expertise E-Sport</h3>
-              <p className="text-muted-foreground">
-                Une équipe d'analystes passionnés par l'e-sport, combinant expertise du jeu et science des données.
-              </p>
-            </Card>
-
-            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.3s" }}>
-              <Users className="w-12 h-12 text-accent mb-4" />
-              <h3 className="text-xl font-display font-bold mb-3">Communauté Active</h3>
-              <p className="text-muted-foreground">
-                Rejoignez des milliers d'utilisateurs qui font confiance à nos prédictions pour leurs analyses e-sport.
-              </p>
-            </Card>
-          </div>
-
-          <div className="bg-gradient-card border border-border/50 rounded-xl p-8 animate-slide-up mb-8" style={{ animationDelay: "0.4s" }}>
-            <h2 className="text-3xl font-display font-bold mb-6 text-center">Notre Mission</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-              Chez PredictEsport, nous croyons que les données peuvent transformer la façon dont les fans d'e-sport comprennent et apprécient leurs jeux favoris. Notre mission est de fournir les prédictions les plus précises et les analyses les plus approfondies pour League of Legends, CS2 et DOTA 2.
-            </p>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              En combinant l'intelligence artificielle de pointe, l'analyse statistique avancée et une passion profonde pour l'e-sport, nous créons un outil indispensable pour tous ceux qui veulent comprendre les matchs à un niveau plus profond.
-            </p>
-          </div>
-
-          <div className="bg-gradient-card border border-border/50 rounded-xl p-8 animate-slide-up" style={{ animationDelay: "0.5s" }}>
+          {/* Section Résultats Financiers (ROI) - déplacée en haut */}
+          <div className="bg-gradient-card border border-border/50 rounded-xl p-8 animate-slide-up mb-16">
             <h2 className="text-3xl font-display font-bold mb-6 text-center">Résultats Financiers (ROI)</h2>
             <p className="text-muted-foreground text-center mb-6">
               Intéressé par les résultats financiers de nos prédictions ? Laissez-nous votre email et nous vous enverrons les détails de notre ROI.
@@ -96,6 +53,83 @@ const About = () => {
                 Recevoir les résultats ROI
               </Button>
             </form>
+          </div>
+
+          {/* Titre pour les performances */}
+          <h2 className="text-3xl font-display font-bold mb-8 text-center">🔍 Les performances de notre algorithme</h2>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
+            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up">
+              <div className="text-4xl mb-4">🎯</div>
+              <h3 className="text-xl font-display font-bold mb-3">Accuracy — 69%</h3>
+              <p className="text-muted-foreground">
+                En moyenne, notre algorithme prédit correctement l'issue d'un match dans 69% des cas.
+              </p>
+              <p className="text-muted-foreground mt-2">
+                Sur 10 matchs, il en devine 7 correctement.
+              </p>
+            </Card>
+
+            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.1s" }}>
+              <div className="text-4xl mb-4">📈</div>
+              <h3 className="text-xl font-display font-bold mb-3">AUC — 0.76</h3>
+              <p className="text-muted-foreground">
+                L'AUC mesure la capacité du modèle à distinguer correctement gagnants et perdants.
+              </p>
+              <p className="text-muted-foreground mt-2">
+                Avec un score de 0.76, l'algorithme est très fiable dans la détection des tendances gagnantes.
+              </p>
+            </Card>
+
+            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.2s" }}>
+              <div className="text-4xl mb-4">🔥</div>
+              <h3 className="text-xl font-display font-bold mb-3">LogLoss — 0.57</h3>
+              <p className="text-muted-foreground">
+                Ce score indique la précision des probabilités générées.
+              </p>
+              <p className="text-muted-foreground mt-2">
+                Avec 0.57, nos prédictions sont cohérentes, stables et bien calibrées.
+              </p>
+            </Card>
+
+            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.3s" }}>
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-xl font-display font-bold mb-3">En résumé</h3>
+              <p className="text-muted-foreground">
+                Des prédictions justes (69%)
+              </p>
+              <p className="text-muted-foreground mt-2">
+                Un modèle fiable et stable (AUC 0.76)
+              </p>
+              <p className="text-muted-foreground mt-2">
+                Des probabilités calibrées comme un modèle professionnel (LogLoss 0.57)
+              </p>
+            </Card>
+          </div>
+
+          <div className="bg-gradient-card border border-border/50 rounded-xl p-8 animate-slide-up mb-8" style={{ animationDelay: "0.4s" }}>
+            <h2 className="text-3xl font-display font-bold mb-6 text-center">Notre histoire</h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+              J'ai découvert League of Legends en saison 3 et je suis tombé amoureux du jeu et de l'e-sport : les stratégies, les matchs qui basculent, l'ambiance frénétique. Depuis, je n'ai jamais arrêté de jouer, d'analyser et de vivre les compétitions. J'ai regardé l'ensemble des matchs de LEC et des Worlds tout au long de ma vie.
+            </p>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+              En parallèle, je suis devenu Data Scientist et je me suis demandé :<br />
+              « Et si je mettais mes compétences en data au service de ma passion pour l'e-sport ? »<br />
+              C'est ainsi qu'est né PredictEsport.
+            </p>
+          </div>
+
+          <div className="bg-gradient-card border border-border/50 rounded-xl p-8 animate-slide-up" style={{ animationDelay: "0.5s" }}>
+            <h2 className="text-3xl font-display font-bold mb-6 text-center">Notre mission</h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+              Mon objectif est clair : créer l'outil d'analyse que j'aurais voulu avoir, autant pour suivre l'e-sport en profondeur que pour parier intelligemment.
+            </p>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+              Chez PredictEsport, nous croyons que les données peuvent transformer la façon dont les fans d'e-sport comprennent et apprécient leurs jeux favoris. Nous offrons des prédictions ultra-précises et des analyses poussées pour League of Legends, Counter-Strike 2 et Dota 2.
+            </p>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              Grâce à l'alliance de l'IA, de la statistique avancée et de notre passion pour l'e-sport, nous donnons aux fans un outil pour regarder les matchs avec un regard nouveau.
+            </p>
           </div>
         </div>
       </main>
