@@ -61,9 +61,9 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-6 mb-16">
             <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up">
               <div className="text-4xl mb-4">🎯</div>
-              <h3 className="text-xl font-display font-bold mb-3">Accuracy — 69%</h3>
+              <h3 className="text-xl font-display font-bold mb-3">Accuracy — 70%</h3>
               <p className="text-muted-foreground">
-                En moyenne, notre algorithme prédit correctement l'issue d'un match dans 69% des cas.
+                En moyenne, notre algorithme prédit correctement l'issue d'un match dans 70% des cas.
               </p>
               <p className="text-muted-foreground mt-2">
                 Sur 10 matchs, il en devine 7 correctement.
@@ -96,7 +96,7 @@ const About = () => {
               <div className="text-4xl mb-4">⚡</div>
               <h3 className="text-xl font-display font-bold mb-3">En résumé</h3>
               <p className="text-muted-foreground">
-                Des prédictions justes (69%)
+                Des prédictions très bonnes (70%)
               </p>
               <p className="text-muted-foreground mt-2">
                 Un modèle fiable et stable (AUC 0.76)
@@ -123,6 +123,9 @@ const About = () => {
             <h2 className="text-3xl font-display font-bold mb-6 text-center">Notre mission</h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-4">
               Mon objectif est clair : créer l'outil d'analyse que j'aurais voulu avoir, autant pour suivre l'e-sport en profondeur que pour parier intelligemment.
+            </p>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+              Bien évidemment, j'utilise mon outil tous les jours.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed mb-4">
               Chez PredictEsport, nous croyons que les données peuvent transformer la façon dont les fans d'e-sport comprennent et apprécient leurs jeux favoris. Nous offrons des prédictions ultra-précises et des analyses poussées pour League of Legends, Counter-Strike 2 et Dota 2.
