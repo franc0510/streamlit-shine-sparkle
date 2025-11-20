@@ -15,20 +15,23 @@ import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { z } from "zod";
 import { SubscriptionErrorDialog } from "@/components/SubscriptionErrorDialog";
-
-const loginSchema = z.object({
-  email: z.string().trim().email({ message: "Email invalide" }).max(255, { message: "Email trop long" }),
-  password: z
-    .string()
-    .min(8, { message: "Mot de passe d'au moins 8 caractères" })
-    .max(100, { message: "Mot de passe trop long" }),
-});
-
-const signupSchema = loginSchema.extend({
-  name: z.string().trim().min(2, { message: "Nom trop court" }).max(100, { message: "Nom trop long" }),
-});
+import { useTranslation } from "react-i18next";
 
 const Auth = () => {
+  const { t } = useTranslation();
+  
+  const loginSchema = z.object({
+    email: z.string().trim().email({ message: t('auth.invalidEmail') }).max(255, { message: t('auth.emailTooLong') }),
+    password: z
+      .string()
+      .min(8, { message: t('auth.passwordMin') })
+      .max(100, { message: t('auth.passwordMax') }),
+  });
+
+  const signupSchema = loginSchema.extend({
+    name: z.string().trim().min(2, { message: t('auth.nameTooShort') }).max(100, { message: t('auth.nameTooLong') }),
+  });
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -56,7 +59,7 @@ const Auth = () => {
       if (!validationResult.success) {
         const firstError = validationResult.error.errors[0];
         toast({
-          title: "Validation échouée",
+          title: t('auth.validationFailed'),
           description: firstError.message,
           variant: "destructive",
         });
@@ -71,22 +74,22 @@ const Auth = () => {
 
       if (error) {
         toast({
-          title: "Erreur de connexion",
+          title: t('auth.loginError'),
           description: error.message,
           variant: "destructive",
         });
       } else {
         toast({
-          title: "Connexion réussie !",
-          description: "Vous pouvez maintenant vous abonner",
+          title: t('auth.loginSuccess'),
+          description: t('auth.loginSuccessDesc'),
         });
         // La session sera mise à jour automatiquement par onAuthStateChange
         // Pas besoin de recharger la page
       }
     } catch (error) {
       toast({
-        title: "Erreur",
-        description: "Une erreur inattendue s'est produite",
+        title: t('auth.loginError'),
+        description: t('auth.unexpectedError'),
         variant: "destructive",
       });
     } finally {
@@ -104,7 +107,7 @@ const Auth = () => {
       if (!validationResult.success) {
         const firstError = validationResult.error.errors[0];
         toast({
-          title: "Validation échouée",
+          title: t('auth.validationFailed'),
           description: firstError.message,
           variant: "destructive",
         });
@@ -246,7 +249,7 @@ const Auth = () => {
                   <TabsContent value="login">
                     <form onSubmit={handleLogin} className="space-y-6">
                       <div className="space-y-2">
-                        <Label htmlFor="login-email">Email</Label>
+                        <Label htmlFor="login-email">{t('auth.email')}</Label>
                         <div className="relative">
                           <Mail className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
                           <Input
@@ -262,7 +265,7 @@ const Auth = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="login-password">Mot de passe</Label>
+                        <Label htmlFor="login-password">{t('auth.password')}</Label>
                         <div className="relative">
                           <Lock className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
                           <Input
@@ -278,7 +281,7 @@ const Auth = () => {
                       </div>
 
                       <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                        {loading ? "Connexion..." : "Se connecter"}
+                        {loading ? t('auth.subscriptionInProgress') : t('auth.loginButton')}
                       </Button>
                     </form>
                   </TabsContent>
@@ -286,7 +289,7 @@ const Auth = () => {
                   <TabsContent value="signup">
                     <form onSubmit={handleSignup} className="space-y-6">
                       <div className="space-y-2">
-                        <Label htmlFor="signup-name">Nom</Label>
+                        <Label htmlFor="signup-name">{t('auth.name')}</Label>
                         <div className="relative">
                           <User className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
                           <Input
@@ -301,7 +304,7 @@ const Auth = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="signup-email">Email</Label>
+                        <Label htmlFor="signup-email">{t('auth.email')}</Label>
                         <div className="relative">
                           <Mail className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
                           <Input
@@ -317,7 +320,7 @@ const Auth = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="signup-password">Mot de passe</Label>
+                        <Label htmlFor="signup-password">{t('auth.password')}</Label>
                         <div className="relative">
                           <Lock className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
                           <Input
@@ -333,7 +336,7 @@ const Auth = () => {
                       </div>
 
                       <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                        {loading ? "Création..." : "Créer mon compte"}
+                        {loading ? t('auth.subscriptionInProgress') : t('auth.signupButton')}
                       </Button>
                     </form>
                   </TabsContent>
@@ -345,9 +348,9 @@ const Auth = () => {
                   <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
                     <Check className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">Vous êtes connecté</h3>
+                  <h3 className="text-2xl font-bold mb-2">{t('auth.loggedInAs')}</h3>
                   <p className="text-muted-foreground mb-4">{user.email}</p>
-                  <p className="text-sm text-muted-foreground">Découvrez notre offre Premium ci-contre →</p>
+                  <p className="text-sm text-muted-foreground">{t('auth.loggedInDesc')}</p>
                 </div>
               </Card>
             )}
@@ -396,7 +399,7 @@ const Auth = () => {
                     disabled={checkoutLoading}
                   >
                     <ExternalLink className="w-4 h-4" />
-                    {checkoutLoading ? "Ouverture..." : "Gérer mon abonnement"}
+                    {checkoutLoading ? t('auth.openPortal') : t('auth.manageSubscription')}
                   </Button>
 
                   <p className="text-xs text-muted-foreground text-center mt-4">Annulation possible à tout moment</p>
@@ -437,12 +440,12 @@ const Auth = () => {
                   >
                     <CreditCard className="w-4 h-4" />
                     {checkoutLoading
-                      ? "Chargement..."
+                      ? t('auth.subscriptionInProgress')
                       : authLoading
-                        ? "Vérification..."
+                        ? t('auth.subscriptionInProgress')
                         : !user
-                          ? "Connectez-vous d'abord"
-                          : "S'abonner maintenant"}
+                          ? t('auth.loginTitle')
+                          : t('auth.subscribe')}
                   </Button>
 
                   <p className="text-xs text-muted-foreground text-center mt-4">Annulation possible à tout moment</p>
