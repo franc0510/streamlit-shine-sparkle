@@ -85,12 +85,10 @@ const About = () => {
               <div className="text-4xl mb-4">🔥</div>
               <h3 className="text-xl font-display font-bold mb-3">LogLoss — 0.57</h3>
               <p className="text-muted-foreground">
-                Ce score mesure la précision des probabilités générées par l'algorithme.
-                Plus il est bas, plus les probabilités sont réalistes et bien calibrées.
+                Ce score mesure la précision des probabilités générées : plus il est bas, plus les prédictions sont réalistes et bien calibrées.
               </p>
               <p className="text-muted-foreground mt-2">
-                Avec 0.57, nos prédictions sont suffisamment précises pour détecter les value bets : ces situations où les cotes des bookmakers ne reflètent pas les vraies chances de victoire.
-                Un indicateur clé pour parier intelligemment.
+                Avec 0.57, notre modèle détecte facilement les value bets, important pour les parieurs.
               </p>
             </Card>
 
