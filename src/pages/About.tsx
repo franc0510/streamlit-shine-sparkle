@@ -85,10 +85,12 @@ const About = () => {
               <div className="text-4xl mb-4">🔥</div>
               <h3 className="text-xl font-display font-bold mb-3">LogLoss — 0.57</h3>
               <p className="text-muted-foreground">
-                Ce score indique la précision des probabilités générées.
+                Ce score mesure la précision des probabilités générées par l'algorithme.
+                Plus il est bas, plus les probabilités sont réalistes et bien calibrées.
               </p>
               <p className="text-muted-foreground mt-2">
-                Avec 0.57, nos prédictions sont cohérentes, stables et bien calibrées.
+                Avec 0.57, nos prédictions sont suffisamment précises pour détecter les value bets : ces situations où les cotes des bookmakers ne reflètent pas les vraies chances de victoire.
+                Un indicateur clé pour parier intelligemment.
               </p>
             </Card>
 
@@ -105,6 +107,76 @@ const About = () => {
                 Des probabilités calibrées comme un modèle professionnel (LogLoss 0.57)
               </p>
             </Card>
+          </div>
+
+          <div className="bg-gradient-card border border-border/50 rounded-xl p-8 animate-slide-up mb-8" style={{ animationDelay: "0.4s" }}>
+            <h2 className="text-3xl font-display font-bold mb-6">💰 Qu'est-ce qu'un "value bet" ?</h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+              Un value bet apparaît quand la probabilité réelle estimée par notre modèle est plus élevée que celle qu'implique la cote du bookmaker.
+            </p>
+            <div className="mb-6">
+              <p className="text-muted-foreground text-lg leading-relaxed mb-2">
+                <strong>Exemple simple :</strong>
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-2">
+                Si notre modèle estime 60% de chances de victoire,
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-2">
+                mais que la cote du bookmaker correspond à 40% de chances,
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                👉 il y a une valeur cachée à exploiter : c'est un value bet.
+              </p>
+            </div>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+              Plus le LogLoss est bas, plus ces probabilités sont fiables et bien calibrées — et donc meilleures pour détecter ces écarts.
+            </p>
+            
+            <div className="border-t border-border/30 pt-6">
+              <h3 className="text-2xl font-display font-bold mb-4">📌 Exemple concret (avec conversion des cotes en %)</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+                Lors de la demi-finale des Worlds 2025, les cotes étaient :
+              </p>
+              <div className="mb-4 space-y-2">
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  GenG → cote 1.12
+                </p>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  KT Rolster → cote 5.26
+                </p>
+              </div>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+                <strong>Transformées en probabilités implicites :</strong>
+              </p>
+              <div className="mb-4 space-y-2">
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  GenG : 1 / 1.12 ≈ 89.3%
+                </p>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  KT Rolster : 1 / 5.26 ≈ 19.0%
+                </p>
+              </div>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+                <strong>Mais notre modèle donnait :</strong>
+              </p>
+              <div className="mb-4 space-y-2">
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  GenG : 70%
+                </p>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  KT Rolster : 30%
+                </p>
+              </div>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-2">
+                👉 Les bookmakers estimaient KT à 19%, alors que notre modèle voyait 30%.
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+                ➡️ Différence de +11 points : un value bet clair sur KT Rolster.
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                J'ai donc parié sur KT Rolster… et le résultat a confirmé l'analyse.
+              </p>
+            </div>
           </div>
 
           <div className="bg-gradient-card border border-border/50 rounded-xl p-8 animate-slide-up mb-8" style={{ animationDelay: "0.4s" }}>
