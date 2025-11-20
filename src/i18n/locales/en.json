@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "games": {
+      "lol": "League of Legends",
+      "cs2": "CS2",
+      "dota2": "DOTA 2"
+    },
+    "about": "About",
+    "contact": "Contact",
+    "login": "Log in",
+    "premium": "Premium",
+    "manageSubscription": "Manage subscription",
+    "logout": "Logout",
+    "logoutAll": "Logout (all devices)",
+    "logoutAllTitle": "Logout from all devices",
+    "logoutAllDescription": "Are you sure you want to logout from all your devices? You will need to log in again on each one.",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "home": {
+    "title": "League of Legends",
+    "subtitle": "Predictions based on advanced statistical models",
+    "loadingMatches": "Loading matches...",
+    "upcomingMatches": "Upcoming Matches",
+    "recentPredictions": "Recent Predictions",
+    "noUpcomingMatches": "No upcoming matches at the moment",
+    "noPastMatches": "No recent predictions available",
+    "premiumCta": {
+      "title": "Unlock the full potential of PredictEsport",
+      "accuracy": "70% Accuracy",
+      "accuracyDesc": "Algorithm tested on thousands of matches",
+      "unlimited": "Unlimited Access",
+      "unlimitedDesc": "All predictions without restrictions",
+      "realtime": "Real-time Updates",
+      "realtimeDesc": "New analyses as soon as they're available",
+      "subscribe": "Subscribe now",
+      "price": "$9.99/month"
+    }
+  },
+  "about": {
+    "title": "Results",
+    "subtitle": "Discover our algorithm's performance",
+    "roi": {
+      "title": "Financial Results (ROI)",
+      "description": "Interested in the financial results of our predictions? Leave us your email and we'll send you our ROI details.",
+      "emailPlaceholder": "your@email.com",
+      "submit": "Receive ROI results",
+      "successTitle": "Request sent!",
+      "successDescription": "We'll send you the ROI results by email soon."
+    },
+    "performance": {
+      "title": "🔍 Our algorithm's performance",
+      "accuracy": {
+        "title": "Accuracy — 70%",
+        "desc1": "On average, our algorithm correctly predicts the outcome of a match 70% of the time.",
+        "desc2": "Out of 10 matches, it gets 7 right."
+      },
+      "auc": {
+        "title": "AUC — 0.76",
+        "desc1": "AUC measures the model's ability to correctly distinguish winners and losers.",
+        "desc2": "With a score of 0.76, the algorithm is very reliable in detecting winning trends."
+      },
+      "logloss": {
+        "title": "LogLoss — 0.57",
+        "desc1": "LogLoss measures the quality of our algorithm's probabilistic predictions.",
+        "desc2": "A score of 0.57 indicates excellent probability calibration."
+      }
+    },
+    "valueBet": {
+      "title": "What is a \"value bet\"?",
+      "intro": "A value bet is simply an opportunity where the odds offered by the bookmaker are higher than the true probability you calculate (or our algorithm calculates for you).",
+      "formula": "If the offered odds are greater than 1 / Estimated probability, then you have a value bet!",
+      "example": {
+        "title": "Concrete example",
+        "scenario": "Let's take a fictional Worlds 2025 match:",
+        "team1": "T1 vs Gen.G",
+        "bookmaker": "The bookmaker gives odds of 2.20 for T1 to win.",
+        "algorithm": "Our algorithm estimates T1 has a 50% chance of winning (real probability = 0.50).",
+        "calculation": "If T1 has a 50% chance of winning, the \"fair odds\" should be:",
+        "formulaCalc": "Fair odds = 1 / 0.50 = 2.00",
+        "conclusion": "So here, the offered odds (2.20) are higher than the fair odds (2.00) → This is a value bet!",
+        "explanation": "By betting on T1 at 2.20, you're in a favorable position in the long run, as the odds overestimate your potential winnings compared to the real risk."
+      }
+    },
+    "story": {
+      "title": "Our story",
+      "text1": "PredictEsport was born from a shared passion for esports and data science. As a long-time fan of League of Legends and other competitive games, I've always been fascinated by the strategic complexity of these matches.",
+      "text2": "With expertise in data analysis and machine learning, I decided to create a tool that would allow fans and bettors to make more informed decisions. Our algorithm analyzes thousands of match data points to identify trends and predict results with impressive accuracy.",
+      "text3": "Our mission is simple: make esports analysis accessible to everyone and help our community better understand the game they love."
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Have a question? A suggestion? Don't hesitate to contact us, we're here to help!",
+    "email": "Email",
+    "discord": "Discord",
+    "support": "Support",
+    "supportDesc": "Available 24/7",
+    "form": {
+      "title": "Send us a message",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "message": "Message",
+      "messagePlaceholder": "Your message...",
+      "send": "Send message",
+      "successTitle": "Message sent!",
+      "successDescription": "We'll get back to you as soon as possible.",
+      "errorTitle": "Error",
+      "errorDescription": "An error occurred while sending the message."
+    }
+  },
+  "comingSoon": {
+    "cs2": {
+      "title": "CS2",
+      "subtitle": "CS2 predictions coming soon!",
+      "description": "We are currently working on Counter-Strike 2 integration. Our analysis models are being developed to provide you with the best possible predictions."
+    },
+    "dota2": {
+      "title": "DOTA 2",
+      "subtitle": "DOTA 2 predictions coming soon!",
+      "description": "We are currently working on DOTA 2 integration. Our analysis models are being developed to provide you with the best possible predictions."
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Oops! Page not found",
+    "backHome": "Return to Home"
+  }
+}

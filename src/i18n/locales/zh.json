@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "games": {
+      "lol": "英雄联盟",
+      "cs2": "CS2",
+      "dota2": "DOTA 2"
+    },
+    "about": "关于",
+    "contact": "联系",
+    "login": "登录",
+    "premium": "高级会员",
+    "manageSubscription": "管理订阅",
+    "logout": "退出登录",
+    "logoutAll": "退出登录（所有设备）",
+    "logoutAllTitle": "从所有设备退出登录",
+    "logoutAllDescription": "您确定要从所有设备退出登录吗？您需要在每台设备上重新登录。",
+    "cancel": "取消",
+    "confirm": "确认"
+  },
+  "home": {
+    "title": "英雄联盟",
+    "subtitle": "基于高级统计模型的预测",
+    "loadingMatches": "加载比赛中...",
+    "upcomingMatches": "即将到来的比赛",
+    "recentPredictions": "最近的预测",
+    "noUpcomingMatches": "暂无即将进行的比赛",
+    "noPastMatches": "暂无最近的预测",
+    "premiumCta": {
+      "title": "解锁 PredictEsport 的全部潜力",
+      "accuracy": "70% 准确率",
+      "accuracyDesc": "在数千场比赛中测试的算法",
+      "unlimited": "无限访问",
+      "unlimitedDesc": "所有预测无限制",
+      "realtime": "实时更新",
+      "realtimeDesc": "新分析即刻可用",
+      "subscribe": "立即订阅",
+      "price": "9.99€/月"
+    }
+  },
+  "about": {
+    "title": "结果",
+    "subtitle": "发现我们算法的性能",
+    "roi": {
+      "title": "财务结果（投资回报率）",
+      "description": "对我们预测的财务结果感兴趣？留下您的电子邮件，我们将向您发送投资回报率详情。",
+      "emailPlaceholder": "your@email.com",
+      "submit": "接收投资回报率结果",
+      "successTitle": "请求已发送！",
+      "successDescription": "我们很快会通过电子邮件向您发送投资回报率结果。"
+    },
+    "performance": {
+      "title": "🔍 我们算法的性能",
+      "accuracy": {
+        "title": "准确率 — 70%",
+        "desc1": "平均而言，我们的算法在70%的时间内正确预测比赛结果。",
+        "desc2": "在10场比赛中，它能正确预测7场。"
+      },
+      "auc": {
+        "title": "AUC — 0.76",
+        "desc1": "AUC衡量模型正确区分胜者和败者的能力。",
+        "desc2": "得分为0.76，该算法在检测获胜趋势方面非常可靠。"
+      },
+      "logloss": {
+        "title": "LogLoss — 0.57",
+        "desc1": "LogLoss衡量我们算法概率预测的质量。",
+        "desc2": "0.57的分数表明概率校准非常出色。"
+      }
+    },
+    "valueBet": {
+      "title": "什么是价值投注？",
+      "intro": "价值投注就是博彩公司提供的赔率高于您计算的真实概率（或我们的算法为您计算的）的机会。",
+      "formula": "如果提供的赔率大于 1 / 估计概率，那么您就有了价值投注！",
+      "example": {
+        "title": "具体例子",
+        "scenario": "让我们以2025年全球总决赛的一场虚构比赛为例：",
+        "team1": "T1 vs Gen.G",
+        "bookmaker": "博彩公司为T1获胜提供2.20的赔率。",
+        "algorithm": "我们的算法估计T1有50%的获胜机会（真实概率 = 0.50）。",
+        "calculation": "如果T1有50%的获胜机会，公平赔率应该是：",
+        "formulaCalc": "公平赔率 = 1 / 0.50 = 2.00",
+        "conclusion": "所以在这里，提供的赔率（2.20）高于公平赔率（2.00）→ 这是一个价值投注！",
+        "explanation": "通过以2.20的赔率投注T1，从长远来看您处于有利位置，因为赔率高估了您相对于真实风险的潜在收益。"
+      }
+    },
+    "story": {
+      "title": "我们的故事",
+      "text1": "PredictEsport诞生于对电子竞技和数据科学的共同热情。作为英雄联盟和其他竞技游戏的长期粉丝，我一直对这些比赛的战略复杂性着迷。",
+      "text2": "凭借数据分析和机器学习方面的专业知识，我决定创建一个工具，让粉丝和投注者做出更明智的决定。我们的算法分析数千场比赛数据以识别趋势并以令人印象深刻的准确度预测结果。",
+      "text3": "我们的使命很简单：让电子竞技分析对所有人开放，并帮助我们的社区更好地理解他们喜爱的游戏。"
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "有问题？有建议？请随时联系我们，我们随时为您提供帮助！",
+    "email": "电子邮件",
+    "discord": "Discord",
+    "support": "支持",
+    "supportDesc": "全天候可用",
+    "form": {
+      "title": "给我们发送消息",
+      "name": "姓名",
+      "namePlaceholder": "您的姓名",
+      "email": "电子邮件",
+      "emailPlaceholder": "your@email.com",
+      "message": "消息",
+      "messagePlaceholder": "您的消息...",
+      "send": "发送消息",
+      "successTitle": "消息已发送！",
+      "successDescription": "我们会尽快回复您。",
+      "errorTitle": "错误",
+      "errorDescription": "发送消息时发生错误。"
+    }
+  },
+  "comingSoon": {
+    "cs2": {
+      "title": "CS2",
+      "subtitle": "CS2预测即将推出！",
+      "description": "我们目前正在进行Counter-Strike 2的集成工作。我们的分析模型正在开发中，为您提供最佳预测。"
+    },
+    "dota2": {
+      "title": "DOTA 2",
+      "subtitle": "DOTA 2预测即将推出！",
+      "description": "我们目前正在进行DOTA 2的集成工作。我们的分析模型正在开发中，为您提供最佳预测。"
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "message": "哎呀！页面未找到",
+    "backHome": "返回首页"
+  }
+}
