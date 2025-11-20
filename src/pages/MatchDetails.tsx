@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { parsePlayerDataParquet, type TeamStats, type ScaleMode, type TimeWindow } from "@/lib/parquetParser";
 import { getTeamLogo } from "@/lib/csvParser";
@@ -50,6 +51,7 @@ const normalizePos = (pos?: string) => {
 };
 
 export default function MatchDetails() {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const q = useQuery();
@@ -210,25 +212,25 @@ export default function MatchDetails() {
               </div>
             </div>
 
-            {loading && <div className="text-white/80">Chargement des données…</div>}
+            {loading && <div className="text-white/80">{t('matchDetails.loading')}</div>}
             {error && <div className="text-red-300 bg-red-900/30 border border-red-700/40 rounded-md p-3">{error}</div>}
 
             {!loading && !error && teamA && teamB && (
               <>
                 <div className="mb-6">
                   <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                    <div className="font-bold text-white mb-3">Fenêtre temporelle</div>
+                    <div className="font-bold text-white mb-3">{t('matchDetails.statsFor')}</div>
                     <div className="flex gap-2 flex-wrap">
                       {(["last_10", "last_20", "last_365d"] as TimeWindow[]).map((w) => (
                         <Chip key={w} active={windowSel === w} onClick={() => setWindowSel(w)}>
-                          {w === "last_10" ? "10 derniers series" : w === "last_20" ? "20 derniers series" : "365 jours"}
+                          {w === "last_10" ? t('matchDetails.last10') : w === "last_20" ? t('matchDetails.last20') : t('matchDetails.last5')}
                         </Chip>
                       ))}
                     </div>
                   </div>
                 </div>
 
-                <Section title="Comparaison joueurs (5v5)">
+                <Section title={t('matchDetails.playerComparison')}>
                   {!teamA.players.length || !teamB.players.length ? (
                     <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
                   ) : (
@@ -258,17 +260,17 @@ export default function MatchDetails() {
                             <div key={position} className="space-y-3">
                               <div className="flex items-center justify-center gap-4 mb-2">
                                 <div className="text-white/60 text-xs uppercase tracking-wider font-bold">
-                                  {position === "top" ? "TOP" : position === "jungle" ? "JUNGLE" : position === "mid" ? "MID" : position === "bot" ? "ADC" : "SUPPORT"}
+                                  {position === "top" ? t('matchDetails.topLane').toUpperCase() : position === "jungle" ? t('matchDetails.jungle').toUpperCase() : position === "mid" ? t('matchDetails.midLane').toUpperCase() : position === "bot" ? t('matchDetails.botLane').toUpperCase() : t('matchDetails.support').toUpperCase()}
                                 </div>
                               </div>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                   <div className="text-center text-white/80 font-semibold text-sm">{playerA?.player || "—"}</div>
-                                  {playerA ? (
+                                   {playerA ? (
                                     <PlayerRadarChart player={playerA} timeWindow={windowSel} globalMinMax={globalMinMax} accentColor="#00D2FF" />
                                   ) : (
                                     <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
-                                      <div className="mb-2">Pas de joueur</div>
+                                      <div className="mb-2">{t('matchDetails.noDataTop')}</div>
                                       <div className="text-xs text-white/30">(Position: {position})</div>
                                     </div>
                                   )}
@@ -279,7 +281,7 @@ export default function MatchDetails() {
                                     <PlayerRadarChart player={playerB} timeWindow={windowSel} globalMinMax={globalMinMax} accentColor="#00D2AA" />
                                   ) : (
                                     <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
-                                      <div className="mb-2">Pas de joueur</div>
+                                      <div className="mb-2">{t('matchDetails.noDataTop')}</div>
                                       <div className="text-xs text-white/30">(Position: {position})</div>
                                     </div>
                                   )}
