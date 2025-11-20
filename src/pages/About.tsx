@@ -112,37 +112,37 @@ const About = () => {
           <div className="bg-gradient-card border border-border/50 rounded-xl p-8 animate-slide-up mb-8" style={{ animationDelay: "0.4s" }}>
             <h2 className="text-3xl font-display font-bold mb-6">💰 Qu'est-ce qu'un "value bet" ?</h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-              Un value bet apparaît quand la probabilité réelle estimée par notre modèle est plus élevée que celle qu'implique la cote du bookmaker.
+              Un <strong>value bet</strong> apparaît quand la <strong>probabilité réelle</strong> estimée par notre modèle est <strong>plus élevée</strong> que celle qu'implique la <strong>cote du bookmaker</strong>.
             </p>
             <div className="mb-6">
               <p className="text-muted-foreground text-lg leading-relaxed mb-2">
                 <strong>Exemple simple :</strong>
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed mb-2">
-                Si notre modèle estime 60% de chances de victoire,
+                Si notre modèle estime <strong>60% de chances de victoire</strong>,
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed mb-2">
-                mais que la cote du bookmaker correspond à 40% de chances,
+                mais que la cote du bookmaker correspond à <strong>40% de chances</strong>,
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                👉 il y a une valeur cachée à exploiter : c'est un value bet.
+                👉 il y a une <strong>valeur cachée</strong> à exploiter : c'est un <strong>value bet</strong>.
               </p>
             </div>
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              Plus le LogLoss est bas, plus ces probabilités sont fiables et bien calibrées — et donc meilleures pour détecter ces écarts.
+              Plus le <strong>LogLoss</strong> est bas, plus ces probabilités sont <strong>fiables et bien calibrées</strong> — et donc meilleures pour détecter ces écarts.
             </p>
             
             <div className="border-t border-border/30 pt-6">
               <h3 className="text-2xl font-display font-bold mb-4">📌 Exemple concret (avec conversion des cotes en %)</h3>
               <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                Lors de la demi-finale des Worlds 2025, les cotes étaient :
+                Lors de la demi-finale des <strong>Worlds 2025</strong>, les cotes étaient :
               </p>
               <div className="mb-4 space-y-2">
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  GenG → cote 1.12
+                  GenG → cote <strong>1.12</strong>
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  KT Rolster → cote 5.26
+                  KT Rolster → cote <strong>5.26</strong>
                 </p>
               </div>
               <p className="text-muted-foreground text-lg leading-relaxed mb-4">
@@ -150,10 +150,10 @@ const About = () => {
               </p>
               <div className="mb-4 space-y-2">
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  GenG : 1 / 1.12 ≈ 89.3%
+                  GenG : 1 / 1.12 ≈ <strong>89.3%</strong>
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  KT Rolster : 1 / 5.26 ≈ 19.0%
+                  KT Rolster : 1 / 5.26 ≈ <strong>19.0%</strong>
                 </p>
               </div>
               <p className="text-muted-foreground text-lg leading-relaxed mb-4">
@@ -161,20 +161,20 @@ const About = () => {
               </p>
               <div className="mb-4 space-y-2">
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  GenG : 70%
+                  GenG : <strong>70%</strong>
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  KT Rolster : 30%
+                  KT Rolster : <strong>30%</strong>
                 </p>
               </div>
               <p className="text-muted-foreground text-lg leading-relaxed mb-2">
-                👉 Les bookmakers estimaient KT à 19%, alors que notre modèle voyait 30%.
+                👉 Les bookmakers estimaient KT à <strong>19%</strong>, alors que notre modèle voyait <strong>30%</strong>.
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                ➡️ Différence de +11 points : un value bet clair sur KT Rolster.
+                ➡️ <strong>Différence de +11 points</strong> : un <strong>value bet clair</strong> sur KT Rolster.
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                J'ai donc parié sur KT Rolster… et le résultat a confirmé l'analyse.
+                J'ai donc parié sur KT Rolster… et <strong>le résultat a confirmé l'analyse</strong>.
               </p>
             </div>
           </div>
