@@ -23,13 +23,13 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-16">
+      <main className="container mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-16">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 bg-gradient-gaming bg-clip-text text-transparent">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16 animate-fade-in">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 sm:mb-6 bg-gradient-gaming bg-clip-text text-transparent">
               Résultats
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
               Découvrez les performances de notre algorithme
             </p>
           </div>

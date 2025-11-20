@@ -26,8 +26,8 @@ export const LanguageSelector = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
-          <Globe className="h-5 w-5" />
+        <Button variant="ghost" size="sm" className="gap-1.5 sm:gap-2 px-2 sm:px-3">
+          <Globe className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-background border-border z-50">

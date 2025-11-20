@@ -95,12 +95,12 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-5xl md:text-6xl font-display font-bold mb-4 bg-gradient-gaming bg-clip-text text-transparent">
+      <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+        <div className="text-center mb-8 sm:mb-12 animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-3 sm:mb-4 bg-gradient-gaming bg-clip-text text-transparent">
             League of Legends
           </h1>
-          <p className="text-xl text-muted-foreground mb-6">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-4 sm:mb-6 px-4">
             Prédictions basées sur des modèles statistiques avancés
           </p>
           
