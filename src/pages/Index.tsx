@@ -126,15 +126,24 @@ const Index = () => {
           )}
         </div>
 
-        <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-2xl font-display font-bold">
-            Calendrier à venir
-          </h2>
-          {!isPremium && (
-            <p className="text-sm text-muted-foreground">
-              1 match gratuit • {upcomingMatches.length - 1} matchs Premium
-            </p>
-          )}
+        <div className="mb-6">
+          <div className="flex items-center justify-center mb-4">
+            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-lg px-4 py-2">
+              <span className="text-sm font-semibold text-primary">
+                Cote {'>'} EV = pari statistiquement avantageux
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-display font-bold">
+              Calendrier à venir
+            </h2>
+            {!isPremium && (
+              <p className="text-sm text-muted-foreground">
+                1 match gratuit • {upcomingMatches.length - 1} matchs Premium
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -157,7 +166,7 @@ const Index = () => {
                   </div>
                 </div>
               )}
-              <Link to={buildMatchUrl(match)} className="block">
+              <Link to={`${buildMatchUrl(match)}&proba1=${match.proba1}&proba2=${match.proba2}&ev1=${calculateMinOdds(match.proba1)}&ev2=${calculateMinOdds(match.proba2)}`} className="block">
                 <MatchCard
                   tournament={match.tournament}
                   date={match.date}
@@ -194,7 +203,7 @@ const Index = () => {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {pastMatches.map((match, index) => (
-            <Link key={index} to={buildMatchUrl(match)} className="block">
+            <Link key={index} to={`${buildMatchUrl(match)}&proba1=${match.proba1}&proba2=${match.proba2}&ev1=${calculateMinOdds(match.proba1)}&ev2=${calculateMinOdds(match.proba2)}`} className="block">
               <MatchCard
                 tournament={match.tournament}
                 date={match.date}

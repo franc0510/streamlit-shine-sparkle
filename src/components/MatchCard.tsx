@@ -59,12 +59,15 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
               <span className="text-lg sm:text-xl md:text-2xl font-display font-bold text-primary">
                 {team1.winProbability}%
               </span>
-              <div className="w-full bg-secondary rounded-full h-1.5 sm:h-2">
+              <div className="w-full bg-secondary rounded-full h-1.5 sm:h-2 mb-1">
                 <div
                   className="bg-primary h-1.5 sm:h-2 rounded-full transition-all duration-500"
                   style={{ width: `${team1.winProbability}%` }}
                 />
               </div>
+              <span className="text-[10px] sm:text-xs text-muted-foreground">
+                EV ≥ {minOdds.team1.toFixed(2)}
+              </span>
             </div>
           </div>
 
@@ -88,23 +91,22 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
               <span className="text-lg sm:text-xl md:text-2xl font-display font-bold text-accent">
                 {team2.winProbability}%
               </span>
-              <div className="w-full bg-secondary rounded-full h-1.5 sm:h-2">
+              <div className="w-full bg-secondary rounded-full h-1.5 sm:h-2 mb-1">
                 <div
                   className="bg-accent h-1.5 sm:h-2 rounded-full transition-all duration-500"
                   style={{ width: `${team2.winProbability}%` }}
                 />
               </div>
+              <span className="text-[10px] sm:text-xs text-muted-foreground">
+                EV ≥ {minOdds.team2.toFixed(2)}
+              </span>
             </div>
           </div>
         </div>
 
         <div className="mt-3 sm:mt-4 md:mt-6 pt-3 sm:pt-4 md:pt-6 border-t border-border/50">
-          <p className="text-[10px] sm:text-xs text-muted-foreground mb-1 sm:mb-2 font-medium">
+          <p className="text-[10px] sm:text-xs text-muted-foreground text-center leading-relaxed">
             Probabilité de victoire de série ({format})
-          </p>
-          <p className="text-[10px] sm:text-xs text-foreground/80 leading-relaxed">
-            Cotes minimum +EV — {team1.name}: ≥ {minOdds.team1.toFixed(2)} • {team2.name}: ≥{" "}
-            {minOdds.team2.toFixed(2)}
           </p>
         </div>
       </div>
