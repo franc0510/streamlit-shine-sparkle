@@ -73,6 +73,11 @@ export default function MatchDetails() {
   const league = pathParts[1] || q.get("league") || "";
   const bo = q.get("bo") || "BO5";
   const when = decodeURIComponent(pathParts[2] || "") || q.get("date") || "";
+  
+  const proba1 = parseFloat(q.get("proba1") || "0");
+  const proba2 = parseFloat(q.get("proba2") || "0");
+  const ev1 = parseFloat(q.get("ev1") || "0");
+  const ev2 = parseFloat(q.get("ev2") || "0");
 
   const matchId = `${league}_${when}_${initialTeam1}_${initialTeam2}`;
   const hasAccessToThisMatch = canViewMatch(matchId);
@@ -163,26 +168,42 @@ export default function MatchDetails() {
                 <div className="flex flex-col items-center gap-3 relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-green-500/10 blur-xl"></div>
                   <div className="relative text-5xl font-black text-white animate-pulse">VS</div>
-                  {teamA && teamB && (
-                    <div className="relative bg-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-4 space-y-3">
-                      <div className="flex items-center justify-between gap-6">
-                        <div className="text-center min-w-[80px]">
-                          <div className="text-white/60 text-xs mb-1">Winrate</div>
-                          <div className="text-white font-bold text-lg">
-                            {typeof winrateFor(teamA, windowSel) === "number" ? `${(winrateFor(teamA, windowSel)! * 100).toFixed(1)}%` : "—"}
+                  {proba1 > 0 && proba2 > 0 && (
+                    <div className="relative bg-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-6 space-y-4 min-w-[400px]">
+                      <div className="grid grid-cols-2 gap-8">
+                        <div className="space-y-2">
+                          <div className="text-center text-white/60 text-xs mb-1">% Victoire</div>
+                          <div className="text-center">
+                            <span className="text-2xl font-display font-bold text-primary">
+                              {Math.round(proba1)}%
+                            </span>
+                          </div>
+                          <div className="w-full bg-secondary rounded-full h-2">
+                            <div
+                              className="bg-primary h-2 rounded-full transition-all duration-500"
+                              style={{ width: `${Math.round(proba1)}%` }}
+                            />
+                          </div>
+                          <div className="text-center text-white/50 text-xs mt-2">
+                            EV ≥ {ev1.toFixed(2)}
                           </div>
                         </div>
-                        <div className="flex-1 text-center">
-                          <div className="text-white/40 text-xs mb-1">Δ WR</div>
-                          <div className={clsx("text-xl font-black", ((winrateFor(teamA, windowSel) || 0) - (winrateFor(teamB, windowSel) || 0)) > 0 ? "text-green-400" : "text-red-400")}>
-                            {typeof winrateFor(teamA, windowSel) === "number" && typeof winrateFor(teamB, windowSel) === "number"
-                              ? (((winrateFor(teamA, windowSel)! - winrateFor(teamB, windowSel)!) * 100).toFixed(1)) : "—"}%
+                        
+                        <div className="space-y-2">
+                          <div className="text-center text-white/60 text-xs mb-1">% Victoire</div>
+                          <div className="text-center">
+                            <span className="text-2xl font-display font-bold text-accent">
+                              {Math.round(proba2)}%
+                            </span>
                           </div>
-                        </div>
-                        <div className="text-center min-w-[80px]">
-                          <div className="text-white/60 text-xs mb-1">Winrate</div>
-                          <div className="text-white font-bold text-lg">
-                            {typeof winrateFor(teamB, windowSel) === "number" ? `${(winrateFor(teamB, windowSel)! * 100).toFixed(1)}%` : "—"}
+                          <div className="w-full bg-secondary rounded-full h-2">
+                            <div
+                              className="bg-accent h-2 rounded-full transition-all duration-500"
+                              style={{ width: `${Math.round(proba2)}%` }}
+                            />
+                          </div>
+                          <div className="text-center text-white/50 text-xs mt-2">
+                            EV ≥ {ev2.toFixed(2)}
                           </div>
                         </div>
                       </div>
