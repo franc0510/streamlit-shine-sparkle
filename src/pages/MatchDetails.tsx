@@ -150,7 +150,7 @@ export default function MatchDetails() {
               {/* Teams with VS centered */}
               <div className="flex items-center justify-center gap-4 sm:gap-6 lg:gap-12 mb-6">
                 <div className="flex flex-col items-center gap-2 sm:gap-3">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg bg-secondary/50 border-2 border-primary flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
                     <img src={logo1} alt={teamA?.team || initialTeam1} className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain"
                       onError={(e) => {
                         const img = e.currentTarget as HTMLImageElement;
@@ -172,7 +172,7 @@ export default function MatchDetails() {
                 </div>
 
                 <div className="flex flex-col items-center gap-2 sm:gap-3">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg bg-secondary/50 border-2 border-accent flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
                     <img src={logo2} alt={teamB?.team || initialTeam2} className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain"
                       onError={(e) => {
                         const img = e.currentTarget as HTMLImageElement;
