@@ -193,6 +193,13 @@ export default function MatchDetails() {
               {proba1 > 0 && proba2 > 0 && (
                 <div className="w-full max-w-2xl mx-auto mb-4">
                   <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/20 p-4 sm:p-6 lg:p-8 shadow-xl">
+                    <div className="text-center mb-4">
+                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30">
+                        <span className="text-xs sm:text-sm font-bold text-white/90 uppercase tracking-wider">
+                          ✨ {t('matchDetails.aiPrediction')}
+                        </span>
+                      </div>
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                       <div className="space-y-3">
                         <div className="text-center">
