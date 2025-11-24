@@ -130,14 +130,14 @@ const Auth = () => {
 
       if (error) {
         toast({
-          title: "Erreur d'inscription",
+          title: t('auth.signupError'),
           description: error.message,
           variant: "destructive",
         });
       } else {
         toast({
-          title: "Compte créé !",
-          description: "Vous pouvez maintenant vous abonner",
+          title: t('auth.signupSuccess'),
+          description: t('auth.signupSuccessDesc'),
         });
         // Force une récupération immédiate de la session même si elle peut être nulle en cas d'email de confirmation
         await supabase.auth.getSession();
@@ -146,8 +146,8 @@ const Auth = () => {
       }
     } catch (error) {
       toast({
-        title: "Erreur",
-        description: "Une erreur inattendue s'est produite",
+        title: t('auth.signupError'),
+        description: t('auth.unexpectedError'),
         variant: "destructive",
       });
     } finally {
@@ -158,8 +158,8 @@ const Auth = () => {
   const handleSubscribe = async () => {
     if (!user) {
       toast({
-        title: "Connexion requise",
-        description: "Veuillez vous connecter pour vous abonner",
+        title: t('auth.loginRequired'),
+        description: t('auth.loginRequiredDesc'),
         variant: "destructive",
       });
       return;
@@ -167,21 +167,21 @@ const Auth = () => {
 
     setCheckoutLoading(true);
     try {
-      const url = await createCheckoutSession(user.email); // 👈 passe l'email
+      const url = await createCheckoutSession(user.email);
       if (url) {
-        window.location.href = url; // 👈 redirection directe
+        window.location.href = url;
       } else {
         toast({
-          title: "Erreur",
-          description: "Impossible de créer la session de paiement",
+          title: t('auth.checkoutError'),
+          description: t('auth.checkoutErrorDesc'),
           variant: "destructive",
         });
       }
     } catch (e) {
       console.error("[subscribe] exception:", e);
       toast({
-        title: "Erreur",
-        description: "Une erreur s'est produite",
+        title: t('auth.checkoutError'),
+        description: t('auth.checkoutErrorGeneric'),
         variant: "destructive",
       });
     } finally {
@@ -196,16 +196,16 @@ const Auth = () => {
       if (url) {
         window.open(url, "_blank");
         toast({
-          title: "Portail client ouvert",
-          description: "Gérez votre abonnement dans la nouvelle fenêtre",
+          title: t('auth.portalOpenSuccess'),
+          description: t('auth.portalOpenSuccessDesc'),
         });
       } else {
         throw new Error("Impossible d'ouvrir le portail client");
       }
     } catch (error) {
       toast({
-        title: "Erreur",
-        description: "Impossible d'ouvrir le portail de gestion",
+        title: t('auth.portalError'),
+        description: t('auth.portalErrorDesc'),
         variant: "destructive",
       });
     } finally {
@@ -214,12 +214,12 @@ const Auth = () => {
   };
 
   const pricingFeatures = [
-    "Accès à toutes les prédictions LoL",
-    "Analyses détaillées des matchs",
-    "Statistiques avancées",
-    "Notifications des nouveaux matchs",
-    "Support prioritaire",
-    "Accès anticipé aux nouveaux jeux (CS2, DOTA2)",
+    t('auth.premiumFeatures.feature1'),
+    t('auth.premiumFeatures.feature2'),
+    t('auth.premiumFeatures.feature3'),
+    t('auth.premiumFeatures.feature4'),
+    t('auth.premiumFeatures.feature5'),
+    t('auth.premiumFeatures.feature6'),
   ];
 
   return (
@@ -230,10 +230,10 @@ const Auth = () => {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
             <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 bg-gradient-gaming bg-clip-text text-transparent">
-              Accès Premium
+              {t('auth.accessPremium')}
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Créez votre compte et accédez aux meilleures prédictions e-sport
+              {t('auth.createAccount')}
             </p>
           </div>
 
@@ -242,8 +242,8 @@ const Auth = () => {
               <Card className="p-8 bg-gradient-card border-border/50 animate-slide-up">
                 <Tabs defaultValue="login" className="w-full">
                   <TabsList className="grid w-full grid-cols-2 mb-6">
-                    <TabsTrigger value="login">Connexion</TabsTrigger>
-                    <TabsTrigger value="signup">Inscription</TabsTrigger>
+                    <TabsTrigger value="login">{t('auth.connectionTab')}</TabsTrigger>
+                    <TabsTrigger value="signup">{t('auth.registrationTab')}</TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="login">
@@ -255,7 +255,7 @@ const Auth = () => {
                           <Input
                             id="login-email"
                             type="email"
-                            placeholder="votre@email.com"
+                            placeholder={t('auth.emailPlaceholder')}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -271,7 +271,7 @@ const Auth = () => {
                           <Input
                             id="login-password"
                             type="password"
-                            placeholder="••••••••"
+                            placeholder={t('auth.passwordPlaceholder')}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
@@ -294,7 +294,7 @@ const Auth = () => {
                           <User className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
                           <Input
                             id="signup-name"
-                            placeholder="Votre nom"
+                            placeholder={t('auth.namePlaceholder')}
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
@@ -310,7 +310,7 @@ const Auth = () => {
                           <Input
                             id="signup-email"
                             type="email"
-                            placeholder="votre@email.com"
+                            placeholder={t('auth.emailPlaceholder')}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -326,7 +326,7 @@ const Auth = () => {
                           <Input
                             id="signup-password"
                             type="password"
-                            placeholder="••••••••"
+                            placeholder={t('auth.passwordPlaceholder')}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
@@ -360,13 +360,13 @@ const Auth = () => {
               style={{ animationDelay: "0.1s" }}
             >
               {isPremium ? (
-                <>
+              <>
                   <div className="absolute top-4 right-4">
-                    <Badge className="bg-primary text-primary-foreground">Actif</Badge>
+                    <Badge className="bg-primary text-primary-foreground">{t('auth.activeBadge')}</Badge>
                   </div>
 
                   <div className="mb-6">
-                    <h3 className="text-3xl font-display font-bold mb-2">Abonnement Premium</h3>
+                    <h3 className="text-3xl font-display font-bold mb-2">{t('auth.premiumSubscription')}</h3>
                     <div className="flex items-baseline gap-2">
                       <span className="text-5xl font-display font-bold bg-gradient-gaming bg-clip-text text-transparent">
                         10€
@@ -375,7 +375,7 @@ const Auth = () => {
                     </div>
                     {subscriptionStatus.subscription_end && (
                       <p className="text-sm text-muted-foreground mt-2">
-                        Renouvellement le {new Date(subscriptionStatus.subscription_end).toLocaleDateString("fr-FR")}
+                        {t('auth.renewalDate')} {new Date(subscriptionStatus.subscription_end).toLocaleDateString("fr-FR")}
                       </p>
                     )}
                   </div>
@@ -402,16 +402,16 @@ const Auth = () => {
                     {checkoutLoading ? t('auth.openPortal') : t('auth.manageSubscription')}
                   </Button>
 
-                  <p className="text-xs text-muted-foreground text-center mt-4">Annulation possible à tout moment</p>
+                  <p className="text-xs text-muted-foreground text-center mt-4">{t('auth.cancelAnytime')}</p>
                 </>
               ) : (
                 <>
                   <div className="absolute top-4 right-4">
-                    <Badge className="bg-accent text-accent-foreground">Populaire</Badge>
+                    <Badge className="bg-accent text-accent-foreground">{t('auth.popularBadge')}</Badge>
                   </div>
 
                   <div className="mb-6">
-                    <h3 className="text-3xl font-display font-bold mb-2">Abonnement Premium</h3>
+                    <h3 className="text-3xl font-display font-bold mb-2">{t('auth.premiumSubscription')}</h3>
                     <div className="flex items-baseline gap-2">
                       <span className="text-5xl font-display font-bold bg-gradient-gaming bg-clip-text text-transparent">
                         10€

@@ -60,6 +60,19 @@ const About = () => {
           {/* Performances */}
           <h2 className="text-3xl font-display font-bold mb-8 text-center">{t('about.performance.title')}</h2>
 
+          {/* Encadré résumé */}
+          <div className="bg-primary/10 border border-primary/30 rounded-xl p-6 mb-8 animate-slide-up">
+            <div className="text-center">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-xl font-display font-bold mb-4">En résumé</h3>
+              <div className="space-y-2 text-foreground/90">
+                <p>Des prédictions très bonnes (70%)</p>
+                <p>Un modèle fiable et stable (AUC 0.76)</p>
+                <p>Des probabilités calibrées comme un modèle professionnel (LogLoss 0.57)</p>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-6 mb-16">
             <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up">
               <div className="text-4xl mb-4">🎯</div>
