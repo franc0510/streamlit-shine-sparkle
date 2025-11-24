@@ -134,10 +134,10 @@ export default function MatchDetails() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <div className="px-4 md:px-8 lg:px-12 py-6">
-        <Button variant="ghost" onClick={() => navigate("/")} className="mb-6 gap-2">
+      <div className="px-3 sm:px-4 md:px-8 lg:px-12 py-4 sm:py-6">
+        <Button variant="ghost" onClick={() => navigate("/")} className="mb-4 sm:mb-6 gap-2">
           <ArrowLeft className="w-4 h-4" />
-          Retour à League of Legends
+          {t('matchDetails.back')}
         </Button>
 
         {!hasAccessToThisMatch ? (
@@ -146,11 +146,11 @@ export default function MatchDetails() {
           </PremiumGate>
         ) : (
           <>
-            <div className="mb-8">
-              <div className="flex items-center justify-center gap-8 mb-4">
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-24 h-24 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
-                    <img src={logo1} alt={teamA?.team || initialTeam1} className="w-20 h-20 object-contain"
+            <div className="mb-6 sm:mb-8">
+              <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-8 mb-4">
+                <div className="flex flex-col items-center gap-2 sm:gap-3">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
+                    <img src={logo1} alt={teamA?.team || initialTeam1} className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain"
                       onError={(e) => {
                         const img = e.currentTarget as HTMLImageElement;
                         if (img.dataset.fallbackTried !== '1') {
@@ -162,19 +162,19 @@ export default function MatchDetails() {
                       }}
                     />
                   </div>
-                  <div className="text-xl font-bold text-white">{teamA?.team || initialTeam1}</div>
+                  <div className="text-lg sm:text-xl font-bold text-white text-center">{teamA?.team || initialTeam1}</div>
                 </div>
 
-                <div className="flex flex-col items-center gap-3 relative">
+                <div className="flex flex-col items-center gap-2 sm:gap-3 relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-green-500/10 blur-xl"></div>
-                  <div className="relative text-5xl font-black text-white animate-pulse">VS</div>
+                  <div className="relative text-3xl sm:text-4xl lg:text-5xl font-black text-white animate-pulse">{t('matchDetails.vs')}</div>
                   {proba1 > 0 && proba2 > 0 && (
-                    <div className="relative bg-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-6 space-y-4 min-w-[400px]">
-                      <div className="grid grid-cols-2 gap-8">
+                    <div className="relative bg-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-4 sm:p-6 space-y-3 sm:space-y-4 w-full max-w-[90vw] sm:max-w-md lg:min-w-[400px]">
+                      <div className="grid grid-cols-2 gap-4 sm:gap-8">
                         <div className="space-y-2">
-                          <div className="text-center text-white/60 text-xs mb-1">% Victoire</div>
+                          <div className="text-center text-white/60 text-xs mb-1">{t('matchDetails.winProbability')}</div>
                           <div className="text-center">
-                            <span className="text-2xl font-display font-bold text-primary">
+                            <span className="text-xl sm:text-2xl font-display font-bold text-primary">
                               {Math.round(proba1)}%
                             </span>
                           </div>
@@ -190,9 +190,9 @@ export default function MatchDetails() {
                         </div>
                         
                         <div className="space-y-2">
-                          <div className="text-center text-white/60 text-xs mb-1">% Victoire</div>
+                          <div className="text-center text-white/60 text-xs mb-1">{t('matchDetails.winProbability')}</div>
                           <div className="text-center">
-                            <span className="text-2xl font-display font-bold text-accent">
+                            <span className="text-xl sm:text-2xl font-display font-bold text-accent">
                               {Math.round(proba2)}%
                             </span>
                           </div>
@@ -211,9 +211,9 @@ export default function MatchDetails() {
                   )}
                 </div>
 
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-24 h-24 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
-                    <img src={logo2} alt={teamB?.team || initialTeam2} className="w-20 h-20 object-contain"
+                <div className="flex flex-col items-center gap-2 sm:gap-3">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg bg-secondary/50 flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
+                    <img src={logo2} alt={teamB?.team || initialTeam2} className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain"
                       onError={(e) => {
                         const img = e.currentTarget as HTMLImageElement;
                         if (img.dataset.fallbackTried !== '1') {
@@ -225,22 +225,22 @@ export default function MatchDetails() {
                       }}
                     />
                   </div>
-                  <div className="text-xl font-bold text-white">{teamB?.team || initialTeam2}</div>
+                  <div className="text-lg sm:text-xl font-bold text-white text-center">{teamB?.team || initialTeam2}</div>
                 </div>
               </div>
-              <div className="text-center text-white/70 font-semibold">
+              <div className="text-center text-white/70 font-semibold text-sm sm:text-base">
                 {league ? `${league} • ` : ""} {bo} {when ? `• ${when}` : ""}
               </div>
             </div>
 
-            {loading && <div className="text-white/80">{t('matchDetails.loading')}</div>}
+            {loading && <div className="text-white/80 text-center">{t('matchDetails.loading')}</div>}
             {error && <div className="text-red-300 bg-red-900/30 border border-red-700/40 rounded-md p-3">{error}</div>}
 
             {!loading && !error && teamA && teamB && (
               <>
                 <div className="mb-6">
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                    <div className="font-bold text-white mb-3">{t('matchDetails.statsFor')}</div>
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4">
+                    <div className="font-bold text-white mb-3 text-sm sm:text-base">{t('matchDetails.statsFor')}</div>
                     <div className="flex gap-2 flex-wrap">
                       {(["last_10", "last_20", "last_365d"] as TimeWindow[]).map((w) => (
                         <Chip key={w} active={windowSel === w} onClick={() => setWindowSel(w)}>
@@ -253,7 +253,7 @@ export default function MatchDetails() {
 
                 <Section title={t('matchDetails.playerComparison')}>
                   {!teamA.players.length || !teamB.players.length ? (
-                    <div className="text-white/70">Joueurs manquants pour construire les radars.</div>
+                    <div className="text-white/70">{t('matchDetails.missingPlayers')}</div>
                   ) : (
                     <div className="space-y-6">
                       {(() => {
