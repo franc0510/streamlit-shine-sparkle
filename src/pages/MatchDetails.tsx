@@ -301,10 +301,10 @@ export default function MatchDetails() {
                                 </div>
                               </div>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                  <div className="text-center text-white/80 font-semibold text-sm">{playerA?.player || "—"}</div>
+                                 <div className="space-y-2">
+                                   <div className="text-center text-white/80 font-semibold text-sm">{playerA?.player || "—"}</div>
                                    {playerA ? (
-                                    <PlayerRadarChart player={playerA} timeWindow={windowSel} globalMinMax={globalMinMax} accentColor="#00D2FF" />
+                                    <PlayerRadarChart player={playerA} timeWindow={windowSel} globalMinMax={globalMinMax} accentColor="#D9A134" />
                                   ) : (
                                     <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
                                       <div className="mb-2">{t('matchDetails.noDataTop')}</div>
@@ -313,9 +313,9 @@ export default function MatchDetails() {
                                   )}
                                 </div>
                                 <div className="space-y-2">
-                                  <div className="text-center text-white/80 font-semibold text-sm">{playerB?.player || "—"}</div>
-                                  {playerB ? (
-                                    <PlayerRadarChart player={playerB} timeWindow={windowSel} globalMinMax={globalMinMax} accentColor="#00D2AA" />
+                                   <div className="text-center text-white/80 font-semibold text-sm">{playerB?.player || "—"}</div>
+                                   {playerB ? (
+                                    <PlayerRadarChart player={playerB} timeWindow={windowSel} globalMinMax={globalMinMax} accentColor="#00D6D6" />
                                   ) : (
                                     <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center text-white/50">
                                       <div className="mb-2">{t('matchDetails.noDataTop')}</div>
