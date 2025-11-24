@@ -58,6 +58,12 @@
     },
     "performance": {
       "title": "🔍 El rendimiento de nuestro algoritmo",
+      "summary": {
+        "title": "En resumen",
+        "accuracy": "Predicciones muy buenas (70%)",
+        "auc": "Modelo confiable y estable (AUC 0.76)",
+        "logloss": "Probabilidades calibradas (LogLoss 0.57)"
+      },
       "accuracy": {
         "title": "Precisión — 70%",
         "desc1": "En promedio, nuestro algoritmo predice correctamente el resultado de un partido el 70% del tiempo.",

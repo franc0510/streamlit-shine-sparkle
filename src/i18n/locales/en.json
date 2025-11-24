@@ -58,6 +58,12 @@
     },
     "performance": {
       "title": "🔍 Our algorithm's performance",
+      "summary": {
+        "title": "Summary",
+        "accuracy": "Very good predictions (70%)",
+        "auc": "Reliable and stable model (AUC 0.76)",
+        "logloss": "Calibrated probabilities (LogLoss 0.57)"
+      },
       "accuracy": {
         "title": "Accuracy — 70%",
         "desc1": "On average, our algorithm correctly predicts the outcome of a match 70% of the time.",

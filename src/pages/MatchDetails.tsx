@@ -165,45 +165,57 @@ export default function MatchDetails() {
                   <div className="text-lg sm:text-xl font-bold text-white text-center">{teamA?.team || initialTeam1}</div>
                 </div>
 
-                <div className="flex flex-col items-center gap-2 sm:gap-3 relative">
+                <div className="flex flex-col items-center gap-3 sm:gap-4 relative w-full">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-green-500/10 blur-xl"></div>
                   <div className="relative text-3xl sm:text-4xl lg:text-5xl font-black text-white animate-pulse">{t('matchDetails.vs')}</div>
                   {proba1 > 0 && proba2 > 0 && (
-                    <div className="relative bg-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-4 sm:p-6 space-y-3 sm:space-y-4 w-full max-w-[90vw] sm:max-w-md lg:min-w-[400px]">
-                      <div className="grid grid-cols-2 gap-4 sm:gap-8">
-                        <div className="space-y-2">
-                          <div className="text-center text-white/60 text-xs mb-1">{t('matchDetails.winProbability')}</div>
-                          <div className="text-center">
-                            <span className="text-xl sm:text-2xl font-display font-bold text-primary">
-                              {Math.round(proba1)}%
-                            </span>
+                    <div className="relative w-full max-w-2xl mx-auto">
+                      <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/20 p-4 sm:p-6 lg:p-8 shadow-xl">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                          <div className="space-y-3">
+                            <div className="text-center">
+                              <div className="text-xs sm:text-sm text-white/60 uppercase tracking-wider mb-2 font-semibold">
+                                {t('matchDetails.winProbability')}
+                              </div>
+                              <div className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-primary mb-3">
+                                {Math.round(proba1)}%
+                              </div>
+                            </div>
+                            <div className="w-full bg-secondary/50 rounded-full h-3 overflow-hidden">
+                              <div
+                                className="bg-gradient-to-r from-primary to-primary/80 h-3 rounded-full transition-all duration-500 shadow-lg"
+                                style={{ width: `${Math.round(proba1)}%` }}
+                              />
+                            </div>
+                            <div className="text-center pt-2">
+                              <span className="text-white/70 text-xs sm:text-sm">Expected Value</span>
+                              <div className="text-lg sm:text-xl font-bold text-primary/90 mt-1">
+                                ≥ {ev1.toFixed(2)}
+                              </div>
+                            </div>
                           </div>
-                          <div className="w-full bg-secondary rounded-full h-2">
-                            <div
-                              className="bg-primary h-2 rounded-full transition-all duration-500"
-                              style={{ width: `${Math.round(proba1)}%` }}
-                            />
-                          </div>
-                          <div className="text-center text-white/50 text-xs mt-2">
-                            EV ≥ {ev1.toFixed(2)}
-                          </div>
-                        </div>
                         
-                        <div className="space-y-2">
-                          <div className="text-center text-white/60 text-xs mb-1">{t('matchDetails.winProbability')}</div>
-                          <div className="text-center">
-                            <span className="text-xl sm:text-2xl font-display font-bold text-accent">
-                              {Math.round(proba2)}%
-                            </span>
-                          </div>
-                          <div className="w-full bg-secondary rounded-full h-2">
-                            <div
-                              className="bg-accent h-2 rounded-full transition-all duration-500"
-                              style={{ width: `${Math.round(proba2)}%` }}
-                            />
-                          </div>
-                          <div className="text-center text-white/50 text-xs mt-2">
-                            EV ≥ {ev2.toFixed(2)}
+                          <div className="space-y-3">
+                            <div className="text-center">
+                              <div className="text-xs sm:text-sm text-white/60 uppercase tracking-wider mb-2 font-semibold">
+                                {t('matchDetails.winProbability')}
+                              </div>
+                              <div className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-accent mb-3">
+                                {Math.round(proba2)}%
+                              </div>
+                            </div>
+                            <div className="w-full bg-secondary/50 rounded-full h-3 overflow-hidden">
+                              <div
+                                className="bg-gradient-to-r from-accent to-accent/80 h-3 rounded-full transition-all duration-500 shadow-lg"
+                                style={{ width: `${Math.round(proba2)}%` }}
+                              />
+                            </div>
+                            <div className="text-center pt-2">
+                              <span className="text-white/70 text-xs sm:text-sm">Expected Value</span>
+                              <div className="text-lg sm:text-xl font-bold text-accent/90 mt-1">
+                                ≥ {ev2.toFixed(2)}
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>

@@ -58,6 +58,12 @@
     },
     "performance": {
       "title": "🔍 我们算法的性能",
+      "summary": {
+        "title": "总结",
+        "accuracy": "非常好的预测（70%）",
+        "auc": "可靠且稳定的模型（AUC 0.76）",
+        "logloss": "校准的概率（LogLoss 0.57）"
+      },
       "accuracy": {
         "title": "准确率 — 70%",
         "desc1": "平均而言，我们的算法在70%的时间内正确预测比赛结果。",
