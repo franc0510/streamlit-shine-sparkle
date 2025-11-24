@@ -60,21 +60,19 @@ const About = () => {
           {/* Performances */}
           <h2 className="text-3xl font-display font-bold mb-8 text-center">{t('about.performance.title')}</h2>
 
-          {/* Encadré résumé */}
-          <div className="bg-primary/10 border border-primary/30 rounded-xl p-6 mb-8 animate-slide-up">
-            <div className="text-center">
-              <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-xl font-display font-bold mb-4">En résumé</h3>
-              <div className="space-y-2 text-foreground/90">
-                <p>Des prédictions très bonnes (70%)</p>
-                <p>Un modèle fiable et stable (AUC 0.76)</p>
-                <p>Des probabilités calibrées comme un modèle professionnel (LogLoss 0.57)</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {/* Encadré résumé */}
             <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.summary.title')}</h3>
+              <div className="space-y-2 text-muted-foreground text-sm">
+                <p>✓ {t('about.performance.summary.accuracy')}</p>
+                <p>✓ {t('about.performance.summary.auc')}</p>
+                <p>✓ {t('about.performance.summary.logloss')}</p>
+              </div>
+            </Card>
+
+            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.1s" }}>
               <div className="text-4xl mb-4">🎯</div>
               <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.accuracy.title')}</h3>
               <p className="text-muted-foreground">
@@ -85,7 +83,7 @@ const About = () => {
               </p>
             </Card>
 
-            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.1s" }}>
+            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.2s" }}>
               <div className="text-4xl mb-4">📈</div>
               <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.auc.title')}</h3>
               <p className="text-muted-foreground">
@@ -96,7 +94,7 @@ const About = () => {
               </p>
             </Card>
 
-            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.2s" }}>
+            <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.3s" }}>
               <div className="text-4xl mb-4">🔥</div>
               <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.logloss.title')}</h3>
               <p className="text-muted-foreground">
