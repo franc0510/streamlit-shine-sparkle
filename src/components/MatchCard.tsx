@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
 
 interface MatchCardProps {
   tournament: string;
@@ -23,6 +24,8 @@ interface MatchCardProps {
 }
 
 export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdds }: MatchCardProps) => {
+  const { t } = useTranslation();
+  
   return (
     <Card className="group relative overflow-hidden bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 animate-slide-up">
       <div className="absolute inset-0 bg-gradient-gaming opacity-0 group-hover:opacity-5 transition-opacity" />
@@ -40,6 +43,14 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
           <Badge className="bg-primary/20 text-primary border-primary/30 text-xs w-fit">
             {format}
           </Badge>
+        </div>
+
+        <div className="text-center mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30">
+            <span className="text-[10px] sm:text-xs font-bold text-white/90 uppercase tracking-wider">
+              ✨ {t('matchDetails.aiPrediction')}
+            </span>
+          </div>
         </div>
 
         <div className="grid grid-cols-[1fr_auto_1fr] gap-2 sm:gap-4 md:gap-6 items-center">
