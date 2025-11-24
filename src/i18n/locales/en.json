@@ -223,6 +223,7 @@
     "support": "Support",
     "noDataTop": "No player",
     "vs": "VS",
+    "aiPrediction": "AI Prediction",
     "winProbability": "Win %",
     "missingPlayers": "Missing players to build radars."
   }

@@ -223,6 +223,7 @@
     "support": "辅助",
     "noDataTop": "无选手",
     "vs": "VS",
+    "aiPrediction": "AI预测",
     "winProbability": "胜率%",
     "missingPlayers": "缺少选手来构建雷达图。"
   }
