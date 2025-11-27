@@ -37,7 +37,7 @@ const handler = async (req: Request): Promise<Response> => {
     const emailResponse = await resend.emails.send({
       from: "PredictEsport <onboarding@resend.dev>",
       to: [email],
-      subject: "Your Worlds 2025 Results Recap 🎮",
+      subject: "+700 euros on Worlds 2025 💰",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #1a1a2e; color: #ffffff;">
           <h1 style="color: #00D6D6; text-align: center;">Your Worlds 2025 Results Recap 🎮</h1>
