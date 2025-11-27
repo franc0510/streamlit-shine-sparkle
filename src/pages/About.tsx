@@ -2,23 +2,44 @@ import { Navbar } from "@/components/Navbar";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Target, Award, Users } from "lucide-react";
+import { TrendingUp, Target, Award, Users, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
+import { supabase } from "@/integrations/supabase/client";
 
 const About = () => {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { t } = useTranslation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: t('about.roi.successTitle'),
-      description: t('about.roi.successDescription'),
-    });
-    setEmail("");
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('send-roi-results', {
+        body: { email }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: t('about.roi.successTitle'),
+        description: t('about.roi.successDescription'),
+      });
+      setEmail("");
+    } catch (error: any) {
+      console.error('Error sending ROI results:', error);
+      toast({
+        title: t('about.roi.errorTitle'),
+        description: t('about.roi.errorDescription'),
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -51,8 +72,15 @@ const About = () => {
                 required
                 className="bg-background/50"
               />
-              <Button type="submit" className="w-full">
-                {t('about.roi.submit')}
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {t('about.roi.sending')}
+                  </>
+                ) : (
+                  t('about.roi.submit')
+                )}
               </Button>
             </form>
           </div>
