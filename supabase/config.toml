@@ -11,3 +11,6 @@ enable_anonymous_sign_ins = false
 enable_signup = true
 double_confirm_changes = true
 enable_confirmations = false
+
+[functions.send-roi-results]
+verify_jwt = false

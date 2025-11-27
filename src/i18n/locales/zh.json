@@ -53,8 +53,11 @@
       "description": "对我们预测的财务结果感兴趣？留下您的电子邮件，我们将向您发送投资回报率详情。",
       "emailPlaceholder": "your@email.com",
       "submit": "接收投资回报率结果",
-      "successTitle": "请求已发送！",
-      "successDescription": "我们很快会通过电子邮件向您发送投资回报率结果。"
+      "sending": "发送中...",
+      "successTitle": "邮件已发送！",
+      "successDescription": "请查看您的收件箱以查看投资回报率结果。",
+      "errorTitle": "发送错误",
+      "errorDescription": "无法发送邮件。请重试。"
     },
     "performance": {
       "title": "🔍 我们算法的性能",

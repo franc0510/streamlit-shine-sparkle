@@ -53,8 +53,11 @@
       "description": "Intéressé par les résultats financiers de nos prédictions ? Laissez-nous votre email et nous vous enverrons les détails de notre ROI.",
       "emailPlaceholder": "votre@email.com",
       "submit": "Recevoir les résultats ROI",
-      "successTitle": "Demande envoyée !",
-      "successDescription": "Nous vous enverrons les résultats ROI par email bientôt."
+      "sending": "Envoi en cours...",
+      "successTitle": "Email envoyé !",
+      "successDescription": "Vérifiez votre boîte de réception pour voir les résultats ROI.",
+      "errorTitle": "Erreur d'envoi",
+      "errorDescription": "Impossible d'envoyer l'email. Veuillez réessayer."
     },
     "performance": {
       "title": "🔍 Les performances de notre algorithme",
