@@ -60,7 +60,7 @@ const About = () => {
           {/* Performances */}
           <h2 className="text-3xl font-display font-bold mb-8 text-center">{t('about.performance.title')}</h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
             {/* Encadré résumé */}
             <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up">
               <div className="text-4xl mb-4">⚡</div>
