@@ -219,6 +219,8 @@
     "portalOpenSuccessDesc": "在新窗口中管理您的订阅",
     "portalError": "错误",
     "portalErrorDesc": "无法打开管理门户",
+    "noSubscription": "无订阅",
+    "noSubscriptionDesc": "您需要先订阅",
     "popularBadge": "热门",
     "activeBadge": "活跃",
     "premiumSubscription": "高级订阅",

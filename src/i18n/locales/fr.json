@@ -219,6 +219,8 @@
     "portalOpenSuccessDesc": "Gérez votre abonnement dans la nouvelle fenêtre",
     "portalError": "Erreur",
     "portalErrorDesc": "Impossible d'ouvrir le portail de gestion",
+    "noSubscription": "Pas d'abonnement",
+    "noSubscriptionDesc": "Vous devez d'abord souscrire à un abonnement",
     "popularBadge": "Populaire",
     "activeBadge": "Actif",
     "premiumSubscription": "Abonnement Premium",

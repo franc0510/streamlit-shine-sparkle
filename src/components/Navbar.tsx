@@ -70,9 +70,18 @@ export const Navbar = () => {
 
   const handleOpenPortal = async () => {
     try {
-      const url = await openCustomerPortal();
-      if (url) {
-        window.open(url, '_blank');
+      const result = await openCustomerPortal();
+      if (result.noSubscription) {
+        // User has no subscription, redirect to subscription page
+        navigate('/auth');
+        toast({
+          title: "Pas d'abonnement",
+          description: "Vous devez d'abord souscrire à un abonnement",
+        });
+        return;
+      }
+      if (result.url) {
+        window.open(result.url, '_blank');
       } else {
         throw new Error('No portal URL');
       }
