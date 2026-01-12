@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "npm:resend@2.0.0";
+import { Resend } from "https://esm.sh/resend@2.0.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
@@ -8,6 +9,36 @@ const corsHeaders = {
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",
 };
+
+// Rate limiting: max 3 emails per email address per hour
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const RATE_LIMIT_MAX_REQUESTS = 3;
+
+// In-memory rate limiting store (resets on function cold start)
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+function isRateLimited(email: string): boolean {
+  const now = Date.now();
+  const record = rateLimitStore.get(email);
+  
+  if (!record || now > record.resetTime) {
+    rateLimitStore.set(email, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  
+  if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return true;
+  }
+  
+  record.count++;
+  return false;
+}
+
+// Email validation with proper regex
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email) && email.length <= 254;
+}
 
 interface ROIEmailRequest {
   email: string;
@@ -21,14 +52,29 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { email }: ROIEmailRequest = await req.json();
-    console.log("[send-roi-results] Sending to:", email);
+    const body = await req.json();
+    const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+    
+    console.log("[send-roi-results] Processing request for email");
 
-    if (!email || !email.includes("@")) {
+    // Validate email format
+    if (!isValidEmail(email)) {
       return new Response(
         JSON.stringify({ error: "Invalid email address" }),
         {
           status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Check rate limit
+    if (isRateLimited(email)) {
+      console.log("[send-roi-results] Rate limit exceeded for email");
+      return new Response(
+        JSON.stringify({ error: "Too many requests. Please try again later." }),
+        {
+          status: 429,
           headers: { "Content-Type": "application/json", ...corsHeaders },
         }
       );
@@ -117,10 +163,11 @@ const handler = async (req: Request): Promise<Response> => {
         ...corsHeaders,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[send-roi-results] Error:", error);
+    // Return generic error message to avoid leaking internal details
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "An error occurred. Please try again." }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
