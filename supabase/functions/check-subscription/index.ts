@@ -8,10 +8,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const STRIPE_SECRET_KEY =
-  Deno.env.get("STRIPE_SECRET_KEY") ||
-  Deno.env.get("STRIPE_SECRET_KEY_2") ||
-  "sk_test_51SLgmFH8e5UibDVFHRG5MixpaN0uSRfXpumKiz1yIeTyjHAFleywuplbTf6sohCfE9GWVIHN9ZLJDpfws8UvUKdE00Q4Mv5PpZ";
+const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY") || Deno.env.get("STRIPE_SECRET_KEY_2") || "";
 
 const log = (step: string, details?: unknown) =>
   console.log(`[CHECK-SUBSCRIPTION] ${step}${details ? " - " + JSON.stringify(details) : ""}`);
@@ -23,6 +20,11 @@ serve(async (req) => {
 
   try {
     log("Function started");
+
+    // Verify Stripe key is configured
+    if (!STRIPE_SECRET_KEY) {
+      throw new Error("Stripe configuration missing");
+    }
 
     // Vérifier l'authentification
     const authHeader = req.headers.get("Authorization");
