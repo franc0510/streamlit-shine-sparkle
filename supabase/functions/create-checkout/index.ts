@@ -12,7 +12,7 @@ const log = (step: string, details?: unknown) =>
   console.log(`[CREATE-CHECKOUT] ${step}${details ? " - " + JSON.stringify(details) : ""}`);
 
 const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY_2") || Deno.env.get("STRIPE_SECRET_KEY") || "";
-const STRIPE_PRICE_ID = Deno.env.get("STRIPE_PRICE_ID") || "price_1SMsMzH8e5UibDVFCDSViYXR";
+const STRIPE_PRICE_ID = Deno.env.get("STRIPE_PRICE_ID") || "price_1SoliXH8e5UibDVFmAQG9kIm";
 const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "https://preview--predict-esport.lovable.app";
 
 serve(async (req) => {
