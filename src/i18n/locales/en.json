@@ -136,13 +136,28 @@
     "cs2": {
       "title": "CS2",
       "subtitle": "CS2 predictions coming soon!",
-      "description": "We are currently working on Counter-Strike 2 integration. Our analysis models are being developed to provide you with the best possible predictions."
+      "description": "Coming soon"
     },
     "dota2": {
       "title": "DOTA 2",
       "subtitle": "DOTA 2 predictions coming soon!",
-      "description": "We are currently working on DOTA 2 integration. Our analysis models are being developed to provide you with the best possible predictions."
+      "description": "Coming soon"
+    },
+    "features": {
+      "aiPredictions": "AI Predictions",
+      "aiPredictionsDesc": "Advanced statistical models for accurate predictions",
+      "tournaments": "All Tournaments",
+      "tournamentsDesc": "Coverage of major global competitions",
+      "realtime": "Real-time",
+      "realtimeDesc": "Instant updates for upcoming matches"
     }
+  },
+  "filters": {
+    "allLeagues": "All leagues",
+    "allDates": "All dates",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "thisWeek": "This week"
   },
   "notFound": {
     "title": "404",
