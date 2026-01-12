@@ -136,13 +136,28 @@
     "cs2": {
       "title": "CS2",
       "subtitle": "CS2预测即将推出！",
-      "description": "我们目前正在进行Counter-Strike 2的集成工作。我们的分析模型正在开发中，为您提供最佳预测。"
+      "description": "即将推出"
     },
     "dota2": {
       "title": "DOTA 2",
       "subtitle": "DOTA 2预测即将推出！",
-      "description": "我们目前正在进行DOTA 2的集成工作。我们的分析模型正在开发中，为您提供最佳预测。"
+      "description": "即将推出"
+    },
+    "features": {
+      "aiPredictions": "AI预测",
+      "aiPredictionsDesc": "先进的统计模型提供精准预测",
+      "tournaments": "所有赛事",
+      "tournamentsDesc": "覆盖全球主要比赛",
+      "realtime": "实时更新",
+      "realtimeDesc": "即时更新即将到来的比赛"
     }
+  },
+  "filters": {
+    "allLeagues": "所有联赛",
+    "allDates": "所有日期",
+    "today": "今天",
+    "tomorrow": "明天",
+    "thisWeek": "本周"
   },
   "notFound": {
     "title": "404",

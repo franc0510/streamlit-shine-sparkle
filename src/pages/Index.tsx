@@ -1,21 +1,48 @@
 import { Navbar } from "@/components/Navbar";
 import { MatchCard } from "@/components/MatchCard";
+import { MatchFilters } from "@/components/MatchFilters";
 import { Button } from "@/components/ui/button";
 import { Lock, Check } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useToast } from "@/hooks/use-toast";
-import { SubscriptionStatus } from "@/components/SubscriptionStatus";
-import { PremiumGate } from "@/components/PremiumGate";
-import { useMatchAccess } from "@/hooks/useMatchAccess";
 import { useTranslation } from "react-i18next";
 
 const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-");
 const buildMatchUrl = (m: Match) => `/match/${slugify(m.tournament)}/${m.date}/${m.time}/${slugify(m.team1)}-vs-${slugify(m.team2)}?bo=${m.format}`;
 
+// Parse date from format "DD mmm" (e.g., "15 janv.")
+const parseMatchDate = (dateStr: string): Date | null => {
+  const months: Record<string, number> = {
+    'janv': 0, 'jan': 0, 'janv.': 0,
+    'févr': 1, 'fev': 1, 'févr.': 1, 'feb': 1,
+    'mars': 2, 'mar': 2,
+    'avr': 3, 'avr.': 3, 'apr': 3,
+    'mai': 4, 'may': 4,
+    'juin': 5, 'jun': 5,
+    'juil': 6, 'juil.': 6, 'jul': 6,
+    'août': 7, 'aug': 7,
+    'sept': 8, 'sept.': 8, 'sep': 8,
+    'oct': 9, 'oct.': 9,
+    'nov': 10, 'nov.': 10,
+    'déc': 11, 'déc.': 11, 'dec': 11
+  };
+  
+  const parts = dateStr.toLowerCase().trim().split(' ');
+  if (parts.length < 2) return null;
+  
+  const day = parseInt(parts[0], 10);
+  const monthStr = parts[1].replace('.', '');
+  const month = months[monthStr];
+  
+  if (isNaN(day) || month === undefined) return null;
+  
+  const now = new Date();
+  return new Date(now.getFullYear(), month, day);
+};
 
 const Index = () => {
   const { t } = useTranslation();
@@ -26,6 +53,10 @@ const Index = () => {
   const { isPremium, refreshSubscription } = useSubscription();
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
+  
+  // Filter states
+  const [selectedLeague, setSelectedLeague] = useState("all");
+  const [selectedDate, setSelectedDate] = useState("all");
 
   useEffect(() => {
     const loadMatches = async () => {
@@ -82,6 +113,54 @@ const Index = () => {
     }
   }, [user, searchParams, refreshSubscription]);
 
+  // Get unique leagues from matches
+  const leagues = useMemo(() => {
+    const uniqueLeagues = [...new Set(upcomingMatches.map(m => m.tournament))];
+    return uniqueLeagues.sort();
+  }, [upcomingMatches]);
+
+  // Filter matches
+  const filteredMatches = useMemo(() => {
+    let filtered = upcomingMatches;
+    
+    // Filter by league
+    if (selectedLeague !== "all") {
+      filtered = filtered.filter(m => m.tournament === selectedLeague);
+    }
+    
+    // Filter by date
+    if (selectedDate !== "all") {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      
+      const weekEnd = new Date(today);
+      weekEnd.setDate(weekEnd.getDate() + 7);
+      
+      filtered = filtered.filter(m => {
+        const matchDate = parseMatchDate(m.date);
+        if (!matchDate) return true; // Keep matches we can't parse
+        
+        matchDate.setHours(0, 0, 0, 0);
+        
+        switch (selectedDate) {
+          case "today":
+            return matchDate.getTime() === today.getTime();
+          case "tomorrow":
+            return matchDate.getTime() === tomorrow.getTime();
+          case "week":
+            return matchDate >= today && matchDate <= weekEnd;
+          default:
+            return true;
+        }
+      });
+    }
+    
+    return filtered;
+  }, [upcomingMatches, selectedLeague, selectedDate]);
+
   const calculateMinOdds = (proba: number) => {
     return (100 / proba).toFixed(2);
   };
@@ -136,63 +215,78 @@ const Index = () => {
               </span>
             </div>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
             <h2 className="text-2xl font-display font-bold">
               {t('home.upcomingMatches')}
             </h2>
             {!isPremium && (
               <p className="text-sm text-muted-foreground">
-                {t('home.freeMatchInfo').replace('{count}', String(upcomingMatches.length - 1))}
+                {t('home.freeMatchInfo').replace('{count}', String(filteredMatches.length - 1))}
               </p>
             )}
           </div>
+          
+          {/* Filters */}
+          <MatchFilters
+            leagues={leagues}
+            selectedLeague={selectedLeague}
+            onLeagueChange={setSelectedLeague}
+            selectedDate={selectedDate}
+            onDateChange={setSelectedDate}
+          />
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {upcomingMatches.map((match, index) => (
-            <div key={index} className="relative animate-slide-up">
-              {!isPremium && index > 0 && (
-                <div className="absolute inset-0 backdrop-blur-sm bg-background/60 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
-                  <Lock className="w-12 h-12 text-accent animate-glow-pulse" />
-                  <div className="text-center px-4">
-                    <p className="font-semibold text-lg mb-2">{t('home.premiumContent')}</p>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      {t('home.unlockPredictions')}
-                    </p>
-                    <Link to="/auth">
-                      <Button variant="default" size="sm" className="gap-2">
-                        {t('home.subscribeButton')}
-                        <Lock className="w-3 h-3" />
-                      </Button>
-                    </Link>
+        {filteredMatches.length === 0 ? (
+          <div className="text-center py-12 bg-gradient-card border border-border/50 rounded-xl">
+            <p className="text-muted-foreground">{t('home.noUpcomingMatches')}</p>
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredMatches.map((match, index) => (
+              <div key={index} className="relative animate-slide-up">
+                {!isPremium && index > 0 && (
+                  <div className="absolute inset-0 backdrop-blur-sm bg-background/60 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
+                    <Lock className="w-12 h-12 text-accent animate-glow-pulse" />
+                    <div className="text-center px-4">
+                      <p className="font-semibold text-lg mb-2">{t('home.premiumContent')}</p>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        {t('home.unlockPredictions')}
+                      </p>
+                      <Link to="/auth">
+                        <Button variant="default" size="sm" className="gap-2">
+                          {t('home.subscribeButton')}
+                          <Lock className="w-3 h-3" />
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              )}
-              <Link to={`${buildMatchUrl(match)}&proba1=${match.proba1}&proba2=${match.proba2}&ev1=${calculateMinOdds(match.proba1)}&ev2=${calculateMinOdds(match.proba2)}`} className="block">
-                <MatchCard
-                  tournament={match.tournament}
-                  date={match.date}
-                  time={match.time}
-                  format={match.format}
-                  team1={{
-                    name: match.team1,
-                    logo: getTeamLogo(match.team1),
-                    winProbability: Math.round(match.proba1)
-                  }}
-                  team2={{
-                    name: match.team2,
-                    logo: getTeamLogo(match.team2),
-                    winProbability: Math.round(match.proba2)
-                  }}
-                  minOdds={{
-                    team1: parseFloat(calculateMinOdds(match.proba1)),
-                    team2: parseFloat(calculateMinOdds(match.proba2))
-                  }}
-                />
-              </Link>
-            </div>
-          ))}
-        </div>
+                )}
+                <Link to={`${buildMatchUrl(match)}&proba1=${match.proba1}&proba2=${match.proba2}&ev1=${calculateMinOdds(match.proba1)}&ev2=${calculateMinOdds(match.proba2)}`} className="block">
+                  <MatchCard
+                    tournament={match.tournament}
+                    date={match.date}
+                    time={match.time}
+                    format={match.format}
+                    team1={{
+                      name: match.team1,
+                      logo: getTeamLogo(match.team1),
+                      winProbability: Math.round(match.proba1)
+                    }}
+                    team2={{
+                      name: match.team2,
+                      logo: getTeamLogo(match.team2),
+                      winProbability: Math.round(match.proba2)
+                    }}
+                    minOdds={{
+                      team1: parseFloat(calculateMinOdds(match.proba1)),
+                      team2: parseFloat(calculateMinOdds(match.proba2))
+                    }}
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="mt-16 mb-8">
           <h2 className="text-2xl font-display font-bold">
