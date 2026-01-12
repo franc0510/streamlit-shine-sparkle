@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Gamepad2, User, LogOut, CreditCard, ExternalLink, AlertTriangle, Menu } from "lucide-react";
+import { Gamepad2, User, LogOut, CreditCard, ExternalLink, Menu } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import {
@@ -10,16 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import {
   Drawer,
   DrawerClose,
@@ -44,7 +34,7 @@ export const Navbar = () => {
   const { toast } = useToast();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  const [showLogoutAllDialog, setShowLogoutAllDialog] = useState(false);
+  
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useTranslation();
   const isMobile = useIsMobile();
@@ -76,45 +66,6 @@ export const Navbar = () => {
     }
   };
 
-  const handleLogoutAll = async () => {
-    try {
-      console.log("[Navbar] Logging out from all devices...");
-      console.log("[Navbar] Clearing localStorage...");
-      localStorage.clear();
-      console.log("[Navbar] Calling global signOut...");
-      const { error } = await supabase.auth.signOut({ scope: 'global' });
-      
-      if (error) {
-        console.error("[Navbar] Global logout error:", error);
-        toast({
-          title: "Erreur",
-          description: "Impossible de se déconnecter",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      console.log("[Navbar] Global signOut success");
-      toast({
-        title: "Déconnecté de tous les appareils",
-        description: "Vous avez été déconnecté de toutes vos sessions",
-      });
-
-      setShowLogoutAllDialog(false);
-      
-      console.log("[Navbar] Redirecting to /auth...");
-      // Utiliser replace pour forcer un rechargement complet
-      window.location.replace('/auth');
-    } catch (e) {
-      console.error("[Navbar] Global logout exception:", e);
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue",
-        variant: "destructive",
-      });
-      setTimeout(() => window.location.replace('/auth'), 500);
-    }
-  };
 
 
   const handleOpenPortal = async () => {
@@ -221,12 +172,11 @@ export const Navbar = () => {
                     <div className="pt-2 border-t space-y-2">
                       {user ? (
                         <>
-                          {isPremium ? (
-                            <Button variant="outline" className="w-full justify-start gap-2" onClick={() => { handleOpenPortal(); setMobileMenuOpen(false); }}>
-                              <ExternalLink className="w-4 h-4" />
-                              {t('nav.manageSubscription')}
-                            </Button>
-                          ) : (
+                          <Button variant="outline" className="w-full justify-start gap-2" onClick={() => { handleOpenPortal(); setMobileMenuOpen(false); }}>
+                            <ExternalLink className="w-4 h-4" />
+                            {t('nav.manageSubscription')}
+                          </Button>
+                          {!isPremium && (
                             <Button variant="outline" className="w-full justify-start gap-2" onClick={() => { navigate('/auth'); setMobileMenuOpen(false); }}>
                               <CreditCard className="w-4 h-4" />
                               {t('nav.subscribePremium')}
@@ -235,10 +185,6 @@ export const Navbar = () => {
                           <Button variant="outline" className="w-full justify-start gap-2" onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>
                             <LogOut className="w-4 h-4" />
                             {t('nav.logout')}
-                          </Button>
-                          <Button variant="outline" className="w-full justify-start gap-2 text-destructive" onClick={() => { setShowLogoutAllDialog(true); setMobileMenuOpen(false); }}>
-                            <AlertTriangle className="w-4 h-4" />
-                            {t('nav.logoutAll')}
                           </Button>
                         </>
                       ) : (
@@ -299,12 +245,11 @@ export const Navbar = () => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      {isPremium ? (
-                        <DropdownMenuItem onClick={handleOpenPortal} className="gap-2 cursor-pointer">
-                          <ExternalLink className="w-4 h-4" />
-                          {t('nav.manageSubscription')}
-                        </DropdownMenuItem>
-                      ) : (
+                      <DropdownMenuItem onClick={handleOpenPortal} className="gap-2 cursor-pointer">
+                        <ExternalLink className="w-4 h-4" />
+                        {t('nav.manageSubscription')}
+                      </DropdownMenuItem>
+                      {!isPremium && (
                         <DropdownMenuItem onClick={() => navigate('/auth')} className="gap-2 cursor-pointer">
                           <CreditCard className="w-4 h-4" />
                           {t('nav.subscribePremium')}
@@ -314,13 +259,6 @@ export const Navbar = () => {
                       <DropdownMenuItem onClick={handleLogout} className="gap-2 cursor-pointer">
                         <LogOut className="w-4 h-4" />
                         {t('nav.logout')}
-                      </DropdownMenuItem>
-                      <DropdownMenuItem 
-                        onClick={() => setShowLogoutAllDialog(true)} 
-                        className="gap-2 cursor-pointer text-destructive focus:text-destructive"
-                      >
-                        <AlertTriangle className="w-4 h-4" />
-                        {t('nav.logoutAll')}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -337,26 +275,6 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
-
-      <AlertDialog open={showLogoutAllDialog} onOpenChange={setShowLogoutAllDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{t('nav.logoutAllTitle')}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {t('nav.logoutAllDescription')}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>{t('nav.cancel')}</AlertDialogCancel>
-            <AlertDialogAction 
-              onClick={handleLogoutAll}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
-              {t('nav.confirm')}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </nav>
   );
 };
