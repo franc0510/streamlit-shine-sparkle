@@ -192,9 +192,17 @@ const Auth = () => {
   const handleManageSubscription = async () => {
     setCheckoutLoading(true);
     try {
-      const url = await openCustomerPortal();
-      if (url) {
-        window.open(url, "_blank");
+      const result = await openCustomerPortal();
+      if (result.noSubscription) {
+        toast({
+          title: t('auth.noSubscription'),
+          description: t('auth.noSubscriptionDesc'),
+        });
+        setCheckoutLoading(false);
+        return;
+      }
+      if (result.url) {
+        window.open(result.url, "_blank");
         toast({
           title: t('auth.portalOpenSuccess'),
           description: t('auth.portalOpenSuccessDesc'),

@@ -219,6 +219,8 @@
     "portalOpenSuccessDesc": "Manage your subscription in the new window",
     "portalError": "Error",
     "portalErrorDesc": "Unable to open management portal",
+    "noSubscription": "No subscription",
+    "noSubscriptionDesc": "You need to subscribe first",
     "popularBadge": "Popular",
     "activeBadge": "Active",
     "premiumSubscription": "Premium Subscription",

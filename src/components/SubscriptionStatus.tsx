@@ -50,9 +50,16 @@ export const SubscriptionStatus = () => {
 
   const handleManageSubscription = async () => {
     try {
-      const portalUrl = await openCustomerPortal();
-      if (portalUrl) {
-        window.open(portalUrl, "_blank");
+      const result = await openCustomerPortal();
+      if (result.noSubscription) {
+        toast({
+          title: "Pas d'abonnement",
+          description: "Vous devez d'abord souscrire à un abonnement",
+        });
+        return;
+      }
+      if (result.url) {
+        window.open(result.url, "_blank");
         toast({
           title: "Portail client ouvert",
           description: "Gérez votre abonnement dans le nouvel onglet",

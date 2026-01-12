@@ -139,7 +139,7 @@ export const createCheckoutSession = async (email?: string): Promise<string | nu
  * Ouvre le portal client Stripe
  * @returns L'URL du portail client ou null en cas d'erreur
  */
-export const openCustomerPortal = async (): Promise<string | null> => {
+export const openCustomerPortal = async (): Promise<{ url: string | null; noSubscription?: boolean }> => {
   try {
     console.log("[openCustomerPortal] start");
 
@@ -149,7 +149,7 @@ export const openCustomerPortal = async (): Promise<string | null> => {
 
     if (!session?.access_token) {
       console.error("[openCustomerPortal] NO session - user must be logged in");
-      return null;
+      return { url: null };
     }
 
     const headers: Record<string, string> = {
@@ -172,18 +172,24 @@ export const openCustomerPortal = async (): Promise<string | null> => {
 
     if (error) {
       console.error("[openCustomerPortal] Edge function error:", error);
-      return null;
+      return { url: null };
+    }
+
+    // Check if user has no subscription
+    if (data?.error === "no_subscription") {
+      console.log("[openCustomerPortal] User has no subscription");
+      return { url: null, noSubscription: true };
     }
 
     if (!data?.url) {
       console.error("[openCustomerPortal] No URL in response");
-      return null;
+      return { url: null };
     }
 
     console.log("[openCustomerPortal] Success! URL:", data.url);
-    return data.url as string;
+    return { url: data.url as string };
   } catch (error) {
     console.error("[openCustomerPortal] Exception:", error);
-    return null;
+    return { url: null };
   }
 };
