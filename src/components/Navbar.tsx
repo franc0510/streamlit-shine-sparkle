@@ -166,6 +166,11 @@ export const Navbar = () => {
                         </Link>
                       </DrawerClose>
                       <DrawerClose asChild>
+                        <Link to="/reviews" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
+                          {t('nav.reviews')}
+                        </Link>
+                      </DrawerClose>
+                      <DrawerClose asChild>
                         <Link to="/contact" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
                           {t('nav.contact')}
                         </Link>
@@ -235,6 +240,11 @@ export const Navbar = () => {
                 <Link to="/about">
                   <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
                     {t('nav.results')}
+                  </Button>
+                </Link>
+                <Link to="/reviews">
+                  <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
+                    {t('nav.reviews')}
                   </Button>
                 </Link>
                 <Link to="/contact">
