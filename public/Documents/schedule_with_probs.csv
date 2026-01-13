@@ -206,8 +206,8 @@ match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last
 2026-01-24T19:00:00+00:00,LEC,BO1,SK Gaming,Karmine Corp,44.4,55.6,21.5,56.8,ok,SK Gaming,Karmine Corp,5,5,2026-01-24,LEC,,ok,Karmine Corp|SK Gaming,yes
 2026-01-24T19:45:00+00:00,LEC,BO1,Movistar KOI,Fnatic,39.9,60.1,50.0,62.3,ok,Movistar KOI,Fnatic,5,5,2026-01-24,LEC,,ok,Fnatic|Movistar KOI,yes
 2026-01-24T20:00:00+00:00,CBLOL,BO1,Fluxo,paiN Gaming,53.0,47.0,60.0,36.3,ok,Fluxo,paiN Gaming,5,5,2026-01-24,CBLOL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Fluxo|paiN Gaming,no
-2026-01-24T21:00:00+00:00,LCS,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-01-24,LCS,,skipped,,
-2026-01-25T00:00:00+00:00,LCS,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-01-25,LCS,,skipped,,
+2026-01-24T21:00:00+00:00,LCS,BO3,Cloud9 Kia,Team Liquid,50.0,50.0,,,no_roster:Cloud9 Kia,Cloud9 Kia,Team Liquid,0,5,2026-01-24,LCS,,skipped,,
+2026-01-25T00:00:00+00:00,LCS,BO3,Sentinels,Disguised,50.0,50.0,,,no_roster:Sentinels,Sentinels,Disguised,0,5,2026-01-25,LCS,,skipped,,
 2026-01-25T06:00:00+00:00,LCP,BO3,MVK Esports,CTBC Flying Oyster,34.1,65.9,24.3,86.0,ok,MGN Vikings Esports,CTBC Flying Oyster,5,5,2026-01-25,LCP,,ok,CTBC Flying Oyster|MGN Vikings Esports,yes
 2026-01-25T08:00:00+00:00,LCK,BO3,T1,BNK FEARX,18.7,81.3,24.1,61.3,ok,T1,BNK FEARX,5,5,2026-01-25,LCK,,ok,BNK FEARX|T1,yes
 2026-01-25T08:30:00+00:00,LCP,BO3,DetonatioN FocusMe,GAM Esports,81.6,18.4,14.0,75.7,ok,DetonatioN FocusMe,GAM Esports,5,5,2026-01-25,LCP,,ok,DetonatioN FocusMe|GAM Esports,no
@@ -225,8 +225,8 @@ match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last
 2026-01-25T19:00:00+00:00,LEC,BO1,Fnatic,GIANTX,47.0,53.0,60.1,44.9,ok,Fnatic,GiantX,5,5,2026-01-25,LEC,,ok,Fnatic|GiantX,no
 2026-01-25T19:45:00+00:00,LEC,BO1,Karmine Corp,G2 Esports,39.3,60.7,55.6,50.0,ok,Karmine Corp,G2 Esports,5,5,2026-01-25,LEC,,ok,G2 Esports|Karmine Corp,yes
 2026-01-25T20:00:00+00:00,CBLOL,BO1,LOS,FURIA,50.0,50.0,50.0,50.0,no_roster:LOS,LOS,FURIA,0,5,2026-01-25,CBLOL,,skipped,,
-2026-01-25T21:00:00+00:00,LCS,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-01-25,LCS,,skipped,,
-2026-01-26T00:00:00+00:00,LCS,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-01-26,LCS,,skipped,,
+2026-01-25T21:00:00+00:00,LCS,BO3,FlyQuest,Shopify Rebellion,62.3,37.7,72.6,,ok,FlyQuest,Shopify Rebellion,5,5,2026-01-25,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,FlyQuest|Shopify Rebellion,no
+2026-01-26T00:00:00+00:00,LCS,BO3,LYON,Dignitas,29.0,71.0,,,ok,LYON,Dignitas,5,5,2026-01-26,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dignitas|LYON,yes
 2026-01-26T05:00:00+00:00,LCK Challengers,BO5,T1 Esports Academy,DK Challengers,50.0,50.0,50.0,50.0,no_roster:T1 Esports Academy+DK Challengers,T1 Esports Academy,DK Challengers,0,0,2026-01-26,LCK,,skipped,,
 2026-01-26T08:00:00+00:00,LCK Challengers,BO5,NS Challengers,HLE Challengers,50.0,50.0,50.0,50.0,no_roster:NS Challengers+HLE Challengers,NS Challengers,HLE Challengers,0,0,2026-01-26,LCK,,skipped,,
 2026-01-26T09:00:00+00:00,LPL,BO3,THUNDERTALKGAMING,Xi'an Team WE,50.0,50.0,50.0,50.0,no_roster:Xi'an Team WE,ThunderTalk Gaming,Xi'an Team WE,5,0,2026-01-26,LPL,,skipped,,
