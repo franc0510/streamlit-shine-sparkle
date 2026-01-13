@@ -1,4 +1,7 @@
 {
+  "reviews": {
+    "nameFromProfile": "Username from your account"
+  },
   "nav": {
     "menu": "Menu",
     "games": {
