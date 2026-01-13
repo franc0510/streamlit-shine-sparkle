@@ -6,8 +6,8 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Admin email - only this user can approve reviews
-const ADMIN_EMAIL = "ludoprs13@gmail.com";
+// Admin emails - these users can approve reviews
+const ADMIN_EMAILS = ["ludoprs13@gmail.com", "gillot33@gmail.com"];
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -42,7 +42,7 @@ serve(async (req) => {
     }
 
     // Check if user is admin
-    if (user.email !== ADMIN_EMAIL) {
+    if (!user.email || !ADMIN_EMAILS.includes(user.email)) {
       return new Response(JSON.stringify({ error: "Forbidden - Admin only" }), {
         status: 403,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
