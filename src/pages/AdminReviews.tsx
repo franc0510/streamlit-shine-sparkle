@@ -17,7 +17,7 @@ interface Review {
   user_id: string;
 }
 
-const ADMIN_EMAIL = "ludoprs13@gmail.com";
+const ADMIN_EMAILS = ["ludoprs13@gmail.com", "gillot33@gmail.com"];
 
 const StarRating = ({ rating }: { rating: number }) => (
   <div className="flex gap-1">
@@ -38,7 +38,7 @@ const AdminReviews = () => {
   const queryClient = useQueryClient();
 
   // Check admin access
-  const isAdmin = user?.email === ADMIN_EMAIL;
+  const isAdmin = user?.email && ADMIN_EMAILS.includes(user.email);
 
   // Fetch pending reviews
   const { data: reviews = [], isLoading, refetch } = useQuery({
