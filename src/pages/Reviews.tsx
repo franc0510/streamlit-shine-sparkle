@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Star, Loader2, MessageSquare } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
@@ -55,6 +55,31 @@ const Reviews = () => {
   const [authorName, setAuthorName] = useState("");
   const [rating, setRating] = useState(5);
   const [content, setContent] = useState("");
+
+  // Fetch user's display name from profile
+  const { data: profile } = useQuery({
+    queryKey: ["profile", user?.id],
+    queryFn: async () => {
+      if (!user) return null;
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("display_name, email")
+        .eq("user_id", user.id)
+        .single();
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!user,
+  });
+
+  // Set author name from profile when loaded
+  useEffect(() => {
+    if (profile) {
+      const displayName = profile.display_name || profile.email?.split('@')[0] || "";
+      setAuthorName(displayName);
+    }
+  }, [profile]);
 
   // Fetch approved reviews
   const { data: reviews = [], isLoading } = useQuery({
@@ -161,7 +186,9 @@ const Reviews = () => {
                     maxLength={50}
                     required
                     className="bg-background/50"
+                    disabled
                   />
+                  <p className="text-xs text-muted-foreground mt-1">{t("reviews.nameFromProfile")}</p>
                 </div>
                 
                 <div>
