@@ -13,10 +13,31 @@ export interface Match {
   matchDate?: Date;
 }
 
+// GitHub raw URLs for CSV files (updated by GitHub Actions)
+const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/franc0510/streamlit-shine-sparkle/main/public/Documents';
+
+const fetchCSVFromGitHub = async (filename: string): Promise<string> => {
+  // Add cache-busting timestamp to avoid browser caching
+  const cacheBuster = `?t=${Date.now()}`;
+  const url = `${GITHUB_RAW_BASE}/${filename}${cacheBuster}`;
+  
+  const response = await fetch(url, {
+    cache: 'no-store', // Ensure no caching
+    headers: {
+      'Accept': 'text/plain',
+    },
+  });
+  
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${filename}: ${response.status} ${response.statusText}`);
+  }
+  
+  return response.text();
+};
+
 export const parseScheduleCSV = async (): Promise<Match[]> => {
   try {
-    const response = await fetch('/Documents/schedule_with_probs.csv');
-    const text = await response.text();
+    const text = await fetchCSVFromGitHub('schedule_with_probs.csv');
     const lines = text.split('\n').slice(1); // Skip header
     
     return lines
@@ -41,15 +62,14 @@ export const parseScheduleCSV = async (): Promise<Match[]> => {
       })
       .filter(match => match.status === 'ok');
   } catch (error) {
-    console.error('Error parsing schedule CSV:', error);
-    return [];
+    console.error('Error fetching/parsing schedule CSV from GitHub:', error);
+    throw new Error('Unable to load match schedule. Please check your connection and try again.');
   }
 };
 
 export const parsePredictionsHistoryCSV = async (): Promise<Match[]> => {
   try {
-    const response = await fetch('/Documents/predictions_history.csv');
-    const text = await response.text();
+    const text = await fetchCSVFromGitHub('predictions_history.csv');
     const lines = text.split('\n').slice(1); // Skip header
     const now = new Date();
     
@@ -77,8 +97,8 @@ export const parsePredictionsHistoryCSV = async (): Promise<Match[]> => {
       .filter(match => match.status === 'ok' && match.matchDate && match.matchDate < now)
       .reverse(); // Most recent first
   } catch (error) {
-    console.error('Error parsing predictions history CSV:', error);
-    return [];
+    console.error('Error fetching/parsing predictions history CSV from GitHub:', error);
+    throw new Error('Unable to load predictions history. Please check your connection and try again.');
   }
 };
 

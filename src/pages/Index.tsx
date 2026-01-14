@@ -49,6 +49,7 @@ const Index = () => {
   const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
   const [pastMatches, setPastMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
   const { isPremium, refreshSubscription } = useSubscription();
   const [searchParams] = useSearchParams();
@@ -60,13 +61,25 @@ const Index = () => {
 
   useEffect(() => {
     const loadMatches = async () => {
-      const [upcoming, past] = await Promise.all([
-        parseScheduleCSV(),
-        parsePredictionsHistoryCSV()
-      ]);
-      setUpcomingMatches(upcoming);
-      setPastMatches(past.slice(0, 6));
-      setLoading(false);
+      setLoadError(null);
+      try {
+        const [upcoming, past] = await Promise.all([
+          parseScheduleCSV(),
+          parsePredictionsHistoryCSV()
+        ]);
+        setUpcomingMatches(upcoming);
+        setPastMatches(past.slice(0, 6));
+      } catch (error: any) {
+        console.error('Failed to load match data:', error);
+        setLoadError(error.message || 'Failed to load match data');
+        toast({
+          title: t('matchDetails.error'),
+          description: error.message || 'Failed to load match data',
+          variant: 'destructive',
+        });
+      } finally {
+        setLoading(false);
+      }
     };
     loadMatches();
 
@@ -172,6 +185,27 @@ const Index = () => {
       </div>
     );
   }
+
+  if (loadError) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-8 max-w-lg mx-auto">
+            <h2 className="text-xl font-bold text-destructive mb-4">{t('matchDetails.error')}</h2>
+            <p className="text-muted-foreground mb-6">{loadError}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              Réessayer
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
