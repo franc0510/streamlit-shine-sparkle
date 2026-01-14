@@ -182,8 +182,11 @@ const About = () => {
             <p className="text-muted-foreground text-lg leading-relaxed mb-4">
               {t('about.story.text2')}
             </p>
-            <p className="text-muted-foreground text-lg leading-relaxed">
+            <p className="text-muted-foreground text-lg leading-relaxed mb-4">
               {t('about.story.text3')}
+            </p>
+            <p className="text-muted-foreground text-lg leading-relaxed italic">
+              {t('about.story.text4')}
             </p>
           </div>
         </div>
