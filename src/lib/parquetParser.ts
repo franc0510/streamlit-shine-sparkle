@@ -53,6 +53,15 @@ export type TeamStats = {
 export type ParseResult = [TeamStats, TeamStats];
 
 /* ======================= URL helper ======================= */
+// GitHub raw URL for dynamic loading (updated by GitHub Actions)
+const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/franc0510/streamlit-shine-sparkle/main/public/Documents';
+
+function getParquetUrl(): string {
+  // Add cache-busting timestamp to avoid browser caching
+  const cacheBuster = `?t=${Date.now()}`;
+  return `${GITHUB_RAW_BASE}/DF_filtered.parquet${cacheBuster}`;
+}
+
 function assetUrl(relPath: string): string {
   const rel = relPath.replace(/^\/+/, "");
   const baseTagHref = document.querySelector("base")?.getAttribute("href") || "";
@@ -63,8 +72,6 @@ function assetUrl(relPath: string): string {
   const normBase = (base.startsWith("/") ? base : "/" + base).replace(/\/+$/, "");
   return new URL(`${normBase}/${rel}`, window.location.origin).toString();
 }
-
-const PARQUET_URL = assetUrl("Documents/DF_filtered.parquet");
 
 /* ======================= Aliases équipes ======================= */
 const TEAM_ALIASES: Record<string, string> = {
@@ -301,7 +308,7 @@ export async function parsePlayerDataParquet(
   const conn = await db.connect();
 
   try {
-    await conn.query(`CREATE OR REPLACE TEMP TABLE t AS SELECT * FROM read_parquet('${PARQUET_URL}')`);
+    await conn.query(`CREATE OR REPLACE TEMP TABLE t AS SELECT * FROM read_parquet('${getParquetUrl()}')`);
 
     const teamCol = await detectTeamCol(conn, "t");
     const allTeams = await fetchAllTeams(conn, "t", teamCol);
