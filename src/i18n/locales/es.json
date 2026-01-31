@@ -84,24 +84,24 @@
       "title": "🔍 El rendimiento de nuestro algoritmo",
       "summary": {
         "title": "En resumen",
-        "accuracy": "Predicciones muy buenas (70%)",
-        "auc": "Modelo confiable y estable (AUC 0.76)",
-        "logloss": "Probabilidades calibradas (LogLoss 0.57)"
+        "accuracy": "Predicciones muy buenas (83%)",
+        "auc": "Modelo confiable y estable (AUC 0.89)",
+        "logloss": "Probabilidades calibradas (LogLoss 0.4)"
       },
       "accuracy": {
-        "title": "Precisión — 70%",
-        "desc1": "En promedio, nuestro algoritmo predice correctamente el resultado de un partido el 70% del tiempo.",
-        "desc2": "De 10 partidos, acierta 7 correctamente."
+        "title": "Precisión — 83%",
+        "desc1": "En promedio, nuestro algoritmo predice correctamente el resultado de un partido el 83% del tiempo.",
+        "desc2": "De 10 partidos, acierta más de 8 correctamente."
       },
       "auc": {
-        "title": "AUC — 0.76",
+        "title": "AUC — 0.89",
         "desc1": "AUC mide la capacidad del modelo para distinguir correctamente ganadores y perdedores.",
-        "desc2": "Con una puntuación de 0.76, el algoritmo es muy confiable en la detección de tendencias ganadoras."
+        "desc2": "Con una puntuación de 0.89, el algoritmo es muy confiable en la detección de tendencias ganadoras."
       },
       "logloss": {
-        "title": "LogLoss — 0.57",
+        "title": "LogLoss — 0.4",
         "desc1": "LogLoss mide la calidad de las predicciones probabilísticas de nuestro algoritmo.",
-        "desc2": "Una puntuación de 0.57 indica una excelente calibración de probabilidades."
+        "desc2": "Una puntuación de 0.4 indica una excelente calibración de probabilidades."
       }
     },
     "valueBet": {

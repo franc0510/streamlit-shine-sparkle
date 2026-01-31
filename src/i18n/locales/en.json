@@ -84,24 +84,24 @@
       "title": "🔍 Our algorithm's performance",
       "summary": {
         "title": "Summary",
-        "accuracy": "Very good predictions (70%)",
-        "auc": "Reliable and stable model (AUC 0.76)",
-        "logloss": "Calibrated probabilities (LogLoss 0.57)"
+        "accuracy": "Very good predictions (83%)",
+        "auc": "Reliable and stable model (AUC 0.89)",
+        "logloss": "Calibrated probabilities (LogLoss 0.4)"
       },
       "accuracy": {
-        "title": "Accuracy — 70%",
-        "desc1": "On average, our algorithm correctly predicts the outcome of a match 70% of the time.",
-        "desc2": "Out of 10 matches, it gets 7 right."
+        "title": "Accuracy — 83%",
+        "desc1": "On average, our algorithm correctly predicts the outcome of a match 83% of the time.",
+        "desc2": "Out of 10 matches, it gets more than 8 right."
       },
       "auc": {
-        "title": "AUC — 0.76",
+        "title": "AUC — 0.89",
         "desc1": "AUC measures the model's ability to correctly distinguish winners and losers.",
-        "desc2": "With a score of 0.76, the algorithm is very reliable in detecting winning trends."
+        "desc2": "With a score of 0.89, the algorithm is very reliable in detecting winning trends."
       },
       "logloss": {
-        "title": "LogLoss — 0.57",
+        "title": "LogLoss — 0.4",
         "desc1": "LogLoss measures the quality of our algorithm's probabilistic predictions.",
-        "desc2": "A score of 0.57 indicates excellent probability calibration."
+        "desc2": "A score of 0.4 indicates excellent probability calibration."
       }
     },
     "valueBet": {
