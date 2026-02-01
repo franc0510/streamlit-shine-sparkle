@@ -95,7 +95,7 @@ const About = () => {
               <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.summary.title')}</h3>
               <div className="space-y-2 text-muted-foreground text-sm">
                 <p>✓ {t('about.performance.summary.accuracy')}</p>
-                <p>✓ {t('about.performance.summary.auc')}</p>
+                <p>✓ {t('about.performance.summary.ece')}</p>
                 <p>✓ {t('about.performance.summary.logloss')}</p>
               </div>
             </Card>
@@ -112,13 +112,13 @@ const About = () => {
             </Card>
 
             <Card className="p-6 bg-gradient-card border-border/50 hover:border-primary/50 transition-all animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <div className="text-4xl mb-4">📈</div>
-              <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.auc.title')}</h3>
+              <div className="text-4xl mb-4">📊</div>
+              <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.ece.title')}</h3>
               <p className="text-muted-foreground">
-                {t('about.performance.auc.desc1')}
+                {t('about.performance.ece.desc1')}
               </p>
               <p className="text-muted-foreground mt-2">
-                {t('about.performance.auc.desc2')}
+                {t('about.performance.ece.desc2')}
               </p>
             </Card>
 
