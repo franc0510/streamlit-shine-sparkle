@@ -37,13 +37,6 @@ export const StatsControls = ({
             >
               20 derniers
             </Button>
-            <Button
-              size="sm"
-              variant={timeWindow === 'last_365d' ? 'default' : 'outline'}
-              onClick={() => onTimeWindowChange('last_365d')}
-            >
-              365 jours
-            </Button>
           </div>
         </div>
 

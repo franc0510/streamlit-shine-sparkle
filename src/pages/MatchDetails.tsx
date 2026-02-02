@@ -265,9 +265,9 @@ export default function MatchDetails() {
                   <div className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4">
                     <div className="font-bold text-white mb-3 text-sm sm:text-base">{t('matchDetails.statsFor')}</div>
                     <div className="flex gap-2 flex-wrap">
-                      {(["last_10", "last_20", "last_365d"] as TimeWindow[]).map((w) => (
+                      {(["last_10", "last_20"] as TimeWindow[]).map((w) => (
                         <Chip key={w} active={windowSel === w} onClick={() => setWindowSel(w)}>
-                          {w === "last_10" ? t('matchDetails.last10') : w === "last_20" ? t('matchDetails.last20') : t('matchDetails.last5')}
+                          {w === "last_10" ? t('matchDetails.last10') : t('matchDetails.last20')}
                         </Chip>
                       ))}
                     </div>
@@ -283,7 +283,7 @@ export default function MatchDetails() {
                         const KPI_BY_WINDOW: Record<TimeWindow, string[]> = {
                           last_10: ["kda_last_10", "earned_gpm_avg_last_10", "cspm_avg_last_10", "vspm_avg_last_10", "dpm_avg_last_10"],
                           last_20: ["kda_last_20", "earned_gpm_avg_last_20", "cspm_avg_last_20", "vspm_avg_last_20", "dpm_avg_last_20"],
-                          last_365d: ["earned_gpm_avg_last_365d", "cspm_avg_last_365d", "vspm_avg_last_365d", "dpm_avg_last_365d"],
+                          last_365d: [], // Disabled
                         };
                         const kpis = KPI_BY_WINDOW[windowSel];
                         const allPlayers = [...teamA.players, ...teamB.players];
