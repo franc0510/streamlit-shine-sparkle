@@ -89,7 +89,7 @@ const PlayerRadarChart: React.FC<Props> = ({
     if (!player) return [];
     return axes
       .map((k) => ({ key: k, value: Number((player as any)[k]) }))
-      .filter((x) => Number.isFinite(x.value) && !isOutlier(x.value, x.key));
+      .filter((x) => Number.isFinite(x.value) && x.value > 0 && !isOutlier(x.value, x.key));
   }, [player, axes]);
 
   const chartData = useMemo(() => {
@@ -114,11 +114,25 @@ const PlayerRadarChart: React.FC<Props> = ({
     });
   }, [rawPoints, globalMinMax]);
 
+  // Debug: log raw data for 365d window
+  React.useEffect(() => {
+    if (timeWindow === "last_365d" && player) {
+      console.log(`[PlayerRadarChart 365d] ${player.player}:`, {
+        earned_gpm_avg_last_365d: (player as any).earned_gpm_avg_last_365d,
+        cspm_avg_last_365d: (player as any).cspm_avg_last_365d,
+        vspm_avg_last_365d: (player as any).vspm_avg_last_365d,
+        dpm_avg_last_365d: (player as any).dpm_avg_last_365d,
+        rawPointsCount: rawPoints.length,
+        chartDataCount: chartData.length,
+      });
+    }
+  }, [player, timeWindow, rawPoints, chartData]);
+
   if (!player || chartData.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border border-white/10 bg-white/5 p-4">
         <div className="text-white/90 font-bold mb-1">{title || playerName}</div>
-        <div className="text-white/70 text-sm">Données insuffisantes</div>
+        <div className="text-white/70 text-sm">Données insuffisantes {timeWindow === "last_365d" ? "(365 jours)" : ""}</div>
       </div>
     );
   }
