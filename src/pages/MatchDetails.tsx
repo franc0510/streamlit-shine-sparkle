@@ -290,9 +290,12 @@ export default function MatchDetails() {
                         const globalMinMax: Record<string, { min: number; max: number }> = {};
                         
                         kpis.forEach((kpi) => {
-                          const values = allPlayers.map((p) => Number((p as any)[kpi])).filter((v) => Number.isFinite(v));
+                          const values = allPlayers.map((p) => Number((p as any)[kpi])).filter((v) => Number.isFinite(v) && v > 0);
                           if (values.length > 0) {
                             globalMinMax[kpi] = { min: Math.min(...values), max: Math.max(...values) };
+                          } else {
+                            // Fallback: provide default min/max to avoid empty charts
+                            globalMinMax[kpi] = { min: 0, max: 1 };
                           }
                         });
 
