@@ -64,11 +64,11 @@ function isOutlier(value: number, metric: string): boolean {
   return false;
 }
 
-/** Axes stricts par fenêtre (5 axes pour 10/20, 4 axes pour 365d sans KDA) */
+/** Axes stricts par fenêtre (5 axes pour 10/20) */
 const AXES_BY_WINDOW: Record<TimeWindow, string[]> = {
   last_10: ["kda_last_10", "earned_gpm_avg_last_10", "cspm_avg_last_10", "vspm_avg_last_10", "dpm_avg_last_10"],
   last_20: ["kda_last_20", "earned_gpm_avg_last_20", "cspm_avg_last_20", "vspm_avg_last_20", "dpm_avg_last_20"],
-  last_365d: ["earned_gpm_avg_last_365d", "cspm_avg_last_365d", "vspm_avg_last_365d", "dpm_avg_last_365d"],
+  last_365d: [], // Disabled - not used
 };
 
 const PlayerRadarChart: React.FC<Props> = ({
@@ -114,25 +114,12 @@ const PlayerRadarChart: React.FC<Props> = ({
     });
   }, [rawPoints, globalMinMax]);
 
-  // Debug: log raw data for 365d window
-  React.useEffect(() => {
-    if (timeWindow === "last_365d" && player) {
-      console.log(`[PlayerRadarChart 365d] ${player.player}:`, {
-        earned_gpm_avg_last_365d: (player as any).earned_gpm_avg_last_365d,
-        cspm_avg_last_365d: (player as any).cspm_avg_last_365d,
-        vspm_avg_last_365d: (player as any).vspm_avg_last_365d,
-        dpm_avg_last_365d: (player as any).dpm_avg_last_365d,
-        rawPointsCount: rawPoints.length,
-        chartDataCount: chartData.length,
-      });
-    }
-  }, [player, timeWindow, rawPoints, chartData]);
 
   if (!player || chartData.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border border-white/10 bg-white/5 p-4">
         <div className="text-white/90 font-bold mb-1">{title || playerName}</div>
-        <div className="text-white/70 text-sm">Données insuffisantes {timeWindow === "last_365d" ? "(365 jours)" : ""}</div>
+        <div className="text-white/70 text-sm">Données insuffisantes</div>
       </div>
     );
   }
