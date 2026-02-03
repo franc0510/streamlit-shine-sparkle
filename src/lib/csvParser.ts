@@ -111,31 +111,37 @@ const normalizeText = (text: string): string => {
     .trim();
 };
 
-// List of available team logo files (without extension)
-const availableLogos: string[] = [
-  "100_Thieves", "Alpha7", "Anyone_s_Legend", "BILIBILI_GAMING_DREAMSMART",
-  "BK ROG Esports", "BNK_FEARX_Youth", "Beşiktaş_Esports", "Bro Challengers", 
-  "CTBC_Flying_Oyster", "Conviction", "Crvena_zvezda_Esports", "DNF_Challengers", 
-  "DRX_Challengers", "Disguised", "Estral_Esports", "FLAMENGO_Redragon", "FN_Esports", 
-  "Farenvehn", "Flame_hard", "FlyQuest", "Fnatic", "Forsaken_Team", "French Flair",
-  "Fukuoka SoftBank HAWKS gaming", "G2_Esports", "GMBLERS_Esports", "Galions", 
-  "Gen.G Esports", "Hanwha_Life_Esports", "Invictus Gaming", "Isurus", "Joblife",
-  "Karmine_Corp", "Leviatan", "Lille Esport", "Luminosity_Gaming", "MGN_Vikings_Esports", 
-  "Movistar_KOI", "NightBirds", "PSG_Talon", "Pain Gaming", "RED Canids", "Rich_Gang", 
-  "SDM_Tigres", "SICAR_Esports", "SPIKE_Syndicate", "Saigon_Dino", "Skillcamp", "Solary",
-  "Suzhou LNG Ninebot Esports", "T1", "T1_Esports_Academy", "TBD", "TOPESPORT", 
-  "Team_Insidious", "Team_Secret_Whales", "The_Chiefs_Esports_Club", "Ultra Prime", 
-  "Unicorns_of_Love_Sexy_Edition", "Veni_Vidi_Vici", "Vitality.Bee", "Vivo_Keyd_Stars", 
-  "WeiboGaming Faw Audi", "ZYB", "ZennIT", "aNc_Legends", "beijing jdg intel esports",
-  "kt_Challengers", "kt_Rolster", "mCon_Esports", "xi'an team we"
+// List of available team logo files: [filename, extension]
+const availableLogos: [string, string][] = [
+  ["100_Thieves", "png"], ["Alpha7", "png"], ["Anyone_s_Legend", "png"], 
+  ["BILIBILI_GAMING_DREAMSMART", "png"], ["BK ROG Esports", "png"], 
+  ["BNK_FEARX_Youth", "png"], ["Beşiktaş_Esports", "png"], ["Bro Challengers", "png"], 
+  ["CTBC_Flying_Oyster", "png"], ["Conviction", "png"], ["Crvena_zvezda_Esports", "png"], 
+  ["DNF_Challengers", "png"], ["DRX_Challengers", "png"], ["Disguised", "png"], 
+  ["Estral_Esports", "png"], ["FLAMENGO_Redragon", "png"], ["FN_Esports", "png"], 
+  ["Farenvehn", "png"], ["Flame_hard", "png"], ["FlyQuest", "png"], ["Fnatic", "png"], 
+  ["Forsaken_Team", "png"], ["French Flair", "png"], ["Fukuoka SoftBank HAWKS gaming", "png"], 
+  ["G2_Esports", "png"], ["GMBLERS_Esports", "png"], ["Galions", "png"], 
+  ["Gen.G Esports", "png"], ["Hanwha_Life_Esports", "png"], ["Invictus Gaming", "png"], 
+  ["Isurus", "png"], ["Joblife", "png"], ["Karmine_Corp", "png"], ["Leviatan", "png"], 
+  ["Lille Esport", "png"], ["Luminosity_Gaming", "png"], ["MGN_Vikings_Esports", "png"], 
+  ["Movistar_KOI", "png"], ["NightBirds", "png"], ["PSG_Talon", "png"], ["Pain Gaming", "png"], 
+  ["RED Canids", "png"], ["Rich_Gang", "png"], ["SDM_Tigres", "png"], ["SICAR_Esports", "png"], 
+  ["SPIKE_Syndicate", "png"], ["Saigon_Dino", "png"], ["Skillcamp", "png"], ["Solary", "png"],
+  ["Suzhou LNG Ninebot Esports", "png"], ["T1", "png"], ["T1_Esports_Academy", "png"], 
+  ["TBD", "png"], ["TLN Pirates", "webp"], ["TOPESPORT", "png"], ["Team_Insidious", "png"], 
+  ["Team_Secret_Whales", "png"], ["The_Chiefs_Esports_Club", "png"], ["Ultra Prime", "png"], 
+  ["Unicorns_of_Love_Sexy_Edition", "png"], ["Veni_Vidi_Vici", "png"], ["Vitality.Bee", "png"], 
+  ["Vivo_Keyd_Stars", "png"], ["WeiboGaming Faw Audi", "png"], ["ZYB", "png"], ["ZennIT", "png"], 
+  ["aNc_Legends", "png"], ["beijing jdg intel esports", "png"], ["kt_Challengers", "png"], 
+  ["kt_Rolster", "png"], ["mCon_Esports", "png"], ["xi'an team we", "png"]
 ];
 
-// Create a lookup map: normalized name -> actual filename
-const logoLookup: Map<string, string> = new Map();
-availableLogos.forEach(filename => {
-  // Normalize: replace underscores with spaces, remove accents, lowercase
+// Create a lookup map: normalized name -> { filename, extension }
+const logoLookup: Map<string, { filename: string; ext: string }> = new Map();
+availableLogos.forEach(([filename, ext]) => {
   const normalized = normalizeText(filename.replace(/_/g, ' '));
-  logoLookup.set(normalized, filename);
+  logoLookup.set(normalized, { filename, ext });
 });
 
 // Manual aliases for teams with different display names
@@ -151,17 +157,21 @@ const manualAliases: Record<string, string> = {
 export const getTeamLogo = (teamName: string): string => {
   if (!teamName) return '/Documents/teams/shaco.png';
   
-  // Normalize input: remove accents, lowercase, spaces instead of underscores
   const normalized = normalizeText(teamName.replace(/_/g, ' '));
   
   // 1. Check manual aliases first
   if (manualAliases[normalized]) {
+    const aliasLookup = logoLookup.get(normalizeText(manualAliases[normalized].replace(/_/g, ' ')));
+    if (aliasLookup) {
+      return `/Documents/teams/${aliasLookup.filename}.${aliasLookup.ext}`;
+    }
     return `/Documents/teams/${manualAliases[normalized]}.png`;
   }
   
   // 2. Direct lookup in available logos (normalized)
   if (logoLookup.has(normalized)) {
-    return `/Documents/teams/${logoLookup.get(normalized)}.png`;
+    const logo = logoLookup.get(normalized)!;
+    return `/Documents/teams/${logo.filename}.${logo.ext}`;
   }
   
   // 3. Fallback to shaco
