@@ -114,11 +114,16 @@ export const getTeamLogo = (teamName: string): string => {
     "Bro Challengers": "Bro Challengers.png",
     "JDG Intel Esports Club": "JDG Intel Esports.png",
     "JDG Intel Esports": "JDG Intel Esports.png",
+    "Beijing JDG Intel Esports": "JDG Intel Esports.png",
     "Invictus Gaming": "Invictus Gaming.png",
     "Pain Gaming": "Pain Gaming.png",
+    "paiN Gaming": "Pain Gaming.png",
     "RED Canids": "RED Canids.png",
     "Suzhou LNG Ninebot Esports": "Suzhou LNG Ninebot Esports.png",
     "Ultra Prime": "Ultra Prime.png",
+    "LEVIATÁN": "Leviatan.png",
+    "Leviatan": "Leviatan.png",
+    "Leviatán": "Leviatan.png",
   };
 
   // Check for special mapping first
