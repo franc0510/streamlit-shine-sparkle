@@ -132,6 +132,20 @@ const Index = () => {
     return uniqueLeagues.sort();
   }, [upcomingMatches]);
 
+  // Identifier le PREMIER match global (celui qui sera accessible gratuitement)
+  const freeMatchId = useMemo(() => {
+    if (upcomingMatches.length === 0) return null;
+    const firstMatch = upcomingMatches[0];
+    // Créer un ID unique basé sur le match
+    return `${firstMatch.tournament}-${firstMatch.date}-${firstMatch.time}-${firstMatch.team1}-${firstMatch.team2}`;
+  }, [upcomingMatches]);
+
+  // Fonction pour vérifier si un match est le match gratuit
+  const isFreeMmatch = (match: Match) => {
+    const matchId = `${match.tournament}-${match.date}-${match.time}-${match.team1}-${match.team2}`;
+    return matchId === freeMatchId;
+  };
+
   // Filter matches
   const filteredMatches = useMemo(() => {
     let filtered = upcomingMatches;
@@ -255,7 +269,7 @@ const Index = () => {
             </h2>
             {!isPremium && (
               <p className="text-sm text-muted-foreground">
-                {t('home.freeMatchInfo').replace('{count}', String(filteredMatches.length - 1))}
+                {t('home.freeMatchInfo').replace('{count}', String(upcomingMatches.length - 1))}
               </p>
             )}
           </div>
@@ -276,9 +290,14 @@ const Index = () => {
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filteredMatches.map((match, index) => (
+            {filteredMatches.map((match, index) => {
+              // Vérifier si ce match est le match gratuit (basé sur l'ID global, pas l'index filtré)
+              const isFree = isFreeMmatch(match);
+              const shouldLock = !isPremium && !isFree;
+              
+              return (
               <div key={index} className="relative animate-slide-up">
-                {!isPremium && index > 0 && (
+                {shouldLock && (
                   <div className="absolute inset-0 backdrop-blur-sm bg-background/60 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
                     <Lock className="w-12 h-12 text-accent animate-glow-pulse" />
                     <div className="text-center px-4">
@@ -318,7 +337,8 @@ const Index = () => {
                   />
                 </Link>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
