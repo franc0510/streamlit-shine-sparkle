@@ -113,7 +113,7 @@ const normalizeText = (text: string): string => {
 
 // List of available team logo files: [filename, extension]
 const availableLogos: [string, string][] = [
-  ["100_Thieves", "png"], ["Alpha7", "png"], ["Anyone_s_Legend", "png"], 
+  ["100_Thieves", "png"], ["35", "webp"], ["Alpha7", "png"], ["Anyone_s_Legend", "png"], 
   ["BILIBILI_GAMING_DREAMSMART", "png"], ["BK ROG Esports", "png"], 
   ["BNK_FEARX_Youth", "png"], ["Beşiktaş_Esports", "png"], ["Bro Challengers", "png"], 
   ["CTBC_Flying_Oyster", "png"], ["Conviction", "png"], ["Crvena_zvezda_Esports", "png"], 
@@ -129,7 +129,7 @@ const availableLogos: [string, string][] = [
   ["RED Canids", "png"], ["Rich_Gang", "png"], ["SDM_Tigres", "png"], ["SICAR_Esports", "png"], 
   ["SPIKE_Syndicate", "png"], ["Saigon_Dino", "png"], ["Skillcamp", "png"], ["Solary", "png"],
   ["Suzhou LNG Ninebot Esports", "png"], ["T1", "png"], ["T1_Esports_Academy", "png"], 
-  ["TBD", "png"], ["TLN Pirates", "webp"], ["TOPESPORT", "png"], ["Team_Insidious", "png"], 
+  ["TBD", "png"], ["TLN Pirates", "png"], ["TOPESPORT", "png"], ["Team_Insidious", "png"], 
   ["Team_Secret_Whales", "png"], ["The_Chiefs_Esports_Club", "png"], ["Ultra Prime", "png"], 
   ["Unicorns_of_Love_Sexy_Edition", "png"], ["Veni_Vidi_Vici", "png"], ["Vitality.Bee", "png"], 
   ["Vivo_Keyd_Stars", "png"], ["WeiboGaming Faw Audi", "png"], ["ZYB", "png"], ["ZennIT", "png"], 
