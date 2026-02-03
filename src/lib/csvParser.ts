@@ -114,19 +114,20 @@ const normalizeText = (text: string): string => {
 // List of available team logo files (without extension)
 const availableLogos: string[] = [
   "100_Thieves", "Alpha7", "Anyone_s_Legend", "BILIBILI_GAMING_DREAMSMART",
-  "BNK_FEARX_Youth", "Beşiktaş_Esports", "Bro Challengers", "CTBC_Flying_Oyster",
-  "Conviction", "Crvena_zvezda_Esports", "DNF_Challengers", "DRX_Challengers",
-  "Disguised", "Estral_Esports", "FLAMENGO_Redragon", "FN_Esports", "Farenvehn",
-  "Flame_hard", "FlyQuest", "Fnatic", "Forsaken_Team", "G2_Esports",
-  "GMBLERS_Esports", "Gen.G Esports", "Hanwha_Life_Esports", "Invictus Gaming",
-  "Isurus", "Karmine_Corp", "Leviatan", "Luminosity_Gaming",
-  "MGN_Vikings_Esports", "Movistar_KOI", "NightBirds", "PSG_Talon", "Pain Gaming",
-  "RED Canids", "Rich_Gang", "SDM_Tigres", "SICAR_Esports", "SPIKE_Syndicate",
-  "Saigon_Dino", "Suzhou LNG Ninebot Esports", "T1", "T1_Esports_Academy", "TBD",
-  "TOPESPORT", "Team_Insidious", "Team_Secret_Whales", "The_Chiefs_Esports_Club",
-  "Ultra Prime", "Unicorns_of_Love_Sexy_Edition", "Veni_Vidi_Vici", "Vitality.Bee",
-  "Vivo_Keyd_Stars", "ZennIT", "aNc_Legends", "beijing jdg intel esports",
-  "kt_Challengers", "kt_Rolster", "mCon_Esports"
+  "BK ROG Esports", "BNK_FEARX_Youth", "Beşiktaş_Esports", "Bro Challengers", 
+  "CTBC_Flying_Oyster", "Conviction", "Crvena_zvezda_Esports", "DNF_Challengers", 
+  "DRX_Challengers", "Disguised", "Estral_Esports", "FLAMENGO_Redragon", "FN_Esports", 
+  "Farenvehn", "Flame_hard", "FlyQuest", "Fnatic", "Forsaken_Team", "French Flair",
+  "Fukuoka SoftBank HAWKS gaming", "G2_Esports", "GMBLERS_Esports", "Galions", 
+  "Gen.G Esports", "Hanwha_Life_Esports", "Invictus Gaming", "Isurus", "Joblife",
+  "Karmine_Corp", "Leviatan", "Lille Esport", "Luminosity_Gaming", "MGN_Vikings_Esports", 
+  "Movistar_KOI", "NightBirds", "PSG_Talon", "Pain Gaming", "RED Canids", "Rich_Gang", 
+  "SDM_Tigres", "SICAR_Esports", "SPIKE_Syndicate", "Saigon_Dino", "Skillcamp", "Solary",
+  "Suzhou LNG Ninebot Esports", "T1", "T1_Esports_Academy", "TBD", "TOPESPORT", 
+  "Team_Insidious", "Team_Secret_Whales", "The_Chiefs_Esports_Club", "Ultra Prime", 
+  "Unicorns_of_Love_Sexy_Edition", "Veni_Vidi_Vici", "Vitality.Bee", "Vivo_Keyd_Stars", 
+  "WeiboGaming Faw Audi", "ZYB", "ZennIT", "aNc_Legends", "beijing jdg intel esports",
+  "kt_Challengers", "kt_Rolster", "mCon_Esports", "xi'an team we"
 ];
 
 // Create a lookup map: normalized name -> actual filename
