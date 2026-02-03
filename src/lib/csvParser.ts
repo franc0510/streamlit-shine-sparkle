@@ -119,13 +119,14 @@ const availableLogos: string[] = [
   "Disguised", "Estral_Esports", "FLAMENGO_Redragon", "FN_Esports", "Farenvehn",
   "Flame_hard", "FlyQuest", "Fnatic", "Forsaken_Team", "G2_Esports",
   "GMBLERS_Esports", "Gen.G Esports", "Hanwha_Life_Esports", "Invictus Gaming",
-  "Isurus", "JDG Intel Esports", "Karmine_Corp", "Leviatan", "Luminosity_Gaming",
+  "Isurus", "Karmine_Corp", "Leviatan", "Luminosity_Gaming",
   "MGN_Vikings_Esports", "Movistar_KOI", "NightBirds", "PSG_Talon", "Pain Gaming",
   "RED Canids", "Rich_Gang", "SDM_Tigres", "SICAR_Esports", "SPIKE_Syndicate",
   "Saigon_Dino", "Suzhou LNG Ninebot Esports", "T1", "T1_Esports_Academy", "TBD",
   "TOPESPORT", "Team_Insidious", "Team_Secret_Whales", "The_Chiefs_Esports_Club",
   "Ultra Prime", "Unicorns_of_Love_Sexy_Edition", "Veni_Vidi_Vici", "Vitality.Bee",
-  "Vivo_Keyd_Stars", "ZennIT", "aNc_Legends", "kt_Challengers", "kt_Rolster", "mCon_Esports"
+  "Vivo_Keyd_Stars", "ZennIT", "aNc_Legends", "beijing jdg intel esports",
+  "kt_Challengers", "kt_Rolster", "mCon_Esports"
 ];
 
 // Create a lookup map: normalized name -> actual filename
