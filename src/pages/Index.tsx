@@ -298,7 +298,7 @@ const Index = () => {
               return (
               <div key={index} className="relative animate-slide-up">
                 {shouldLock && (
-                  <div className="absolute inset-0 backdrop-blur-sm bg-background/60 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
+                  <div className="absolute inset-0 backdrop-blur-md bg-background/80 z-10 rounded-xl flex flex-col items-center justify-center gap-4 border-2 border-accent/30">
                     <Lock className="w-12 h-12 text-accent animate-glow-pulse" />
                     <div className="text-center px-4">
                       <p className="font-semibold text-lg mb-2">{t('home.premiumContent')}</p>
