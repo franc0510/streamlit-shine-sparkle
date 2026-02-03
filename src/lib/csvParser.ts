@@ -115,26 +115,27 @@ const normalizeText = (text: string): string => {
 const availableLogos: [string, string][] = [
   ["100_Thieves", "png"], ["35", "webp"], ["Alpha7", "png"], ["Anyone_s_Legend", "png"], 
   ["BILIBILI_GAMING_DREAMSMART", "png"], ["BK ROG Esports", "png"], 
-  ["BNK_FEARX_Youth", "png"], ["Beşiktaş_Esports", "png"], ["Bro Challengers", "png"], 
+  ["BNK_FEARX_Youth", "png"], ["BRION", "png"], ["Beşiktaş_Esports", "png"], ["Bro Challengers", "png"], 
   ["CTBC_Flying_Oyster", "png"], ["Conviction", "png"], ["Crvena_zvezda_Esports", "png"], 
-  ["DNF_Challengers", "png"], ["DRX_Challengers", "png"], ["Disguised", "png"], 
+  ["DNF_Challengers", "png"], ["DNSoopers", "png"], ["DRX", "png"], ["DRX_Challengers", "png"], ["Disguised", "png"], 
   ["Estral_Esports", "png"], ["FLAMENGO_Redragon", "png"], ["FN_Esports", "png"], 
   ["Farenvehn", "png"], ["Flame_hard", "png"], ["FlyQuest", "png"], ["Fnatic", "png"], 
   ["Forsaken_Team", "png"], ["French Flair", "png"], ["Fukuoka SoftBank HAWKS gaming", "png"], 
-  ["G2_Esports", "png"], ["GMBLERS_Esports", "png"], ["Galions", "png"], 
+  ["G2_Esports", "png"], ["GIANTX", "png"], ["GMBLERS_Esports", "png"], ["Galions", "png"], 
   ["Gen.G Esports", "png"], ["Hanwha_Life_Esports", "png"], ["Invictus Gaming", "png"], 
   ["Isurus", "png"], ["Joblife", "png"], ["Karmine_Corp", "png"], ["Leviatan", "png"], 
   ["Lille Esport", "png"], ["Luminosity_Gaming", "png"], ["MGN_Vikings_Esports", "png"], 
   ["Movistar_KOI", "png"], ["NightBirds", "png"], ["PSG_Talon", "png"], ["Pain Gaming", "png"], 
   ["RED Canids", "png"], ["Rich_Gang", "png"], ["SDM_Tigres", "png"], ["SICAR_Esports", "png"], 
-  ["SPIKE_Syndicate", "png"], ["Saigon_Dino", "png"], ["Skillcamp", "png"], ["Solary", "png"],
+  ["SK gaming", "png"], ["SPIKE_Syndicate", "png"], ["Saigon_Dino", "png"], ["Skillcamp", "png"], ["Solary", "png"],
   ["Suzhou LNG Ninebot Esports", "png"], ["T1", "png"], ["T1_Esports_Academy", "png"], 
   ["TBD", "png"], ["TLN Pirates", "png"], ["TOPESPORT", "png"], ["Team_Insidious", "png"], 
   ["Team_Secret_Whales", "png"], ["The_Chiefs_Esports_Club", "png"], ["Ultra Prime", "png"], 
   ["Unicorns_of_Love_Sexy_Edition", "png"], ["Veni_Vidi_Vici", "png"], ["Vitality.Bee", "png"], 
   ["Vivo_Keyd_Stars", "png"], ["WeiboGaming Faw Audi", "png"], ["ZYB", "png"], ["ZennIT", "png"], 
-  ["aNc_Legends", "png"], ["beijing jdg intel esports", "png"], ["kt_Challengers", "png"], 
-  ["kt_Rolster", "png"], ["mCon_Esports", "png"], ["xi'an team we", "png"]
+  ["aNc_Legends", "png"], ["beijing jdg intel esports", "png"], ["karmine corp blue", "webp"],
+  ["kt_Challengers", "png"], ["kt_Rolster", "png"], ["los ratones", "png"], ["mCon_Esports", "png"], 
+  ["shifters", "png"], ["team heretics", "png"], ["team vitality", "png"], ["xi'an team we", "png"]
 ];
 
 // Create a lookup map: normalized name -> { filename, extension }
