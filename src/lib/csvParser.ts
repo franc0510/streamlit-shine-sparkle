@@ -102,7 +102,7 @@ export const parsePredictionsHistoryCSV = async (): Promise<Match[]> => {
   }
 };
 
-// Normalize text: remove accents, handle special characters
+// Normalize text: remove accents, lowercase
 const normalizeText = (text: string): string => {
   return text
     .normalize('NFD')
@@ -131,63 +131,37 @@ const availableLogos: string[] = [
 // Create a lookup map: normalized name -> actual filename
 const logoLookup: Map<string, string> = new Map();
 availableLogos.forEach(filename => {
-  const normalized = normalizeText(filename.replace(/_/g, ' ').replace(/\./g, ' '));
+  // Normalize: replace underscores with spaces, remove accents, lowercase
+  const normalized = normalizeText(filename.replace(/_/g, ' '));
   logoLookup.set(normalized, filename);
 });
 
-// Additional manual aliases for edge cases
+// Manual aliases for teams with different display names
 const manualAliases: Record<string, string> = {
   "topesports": "TOPESPORT",
   "top esports": "TOPESPORT",
-  "jdg intel esports club": "JDG Intel Esports",
   "beijing jdg intel esports": "JDG Intel Esports",
   "jd gaming": "JDG Intel Esports",
-  "pain gaming": "Pain Gaming",
-  "bro challengers": "Bro Challengers",
   "hanjin brion challengers": "Bro Challengers",
   "anyone's legend": "Anyone_s_Legend",
-  "anyones legend": "Anyone_s_Legend",
 };
 
 export const getTeamLogo = (teamName: string): string => {
   if (!teamName) return '/Documents/teams/shaco.png';
   
-  const normalized = normalizeText(teamName.replace(/_/g, ' ').replace(/\./g, ' '));
+  // Normalize input: remove accents, lowercase, spaces instead of underscores
+  const normalized = normalizeText(teamName.replace(/_/g, ' '));
   
   // 1. Check manual aliases first
   if (manualAliases[normalized]) {
     return `/Documents/teams/${manualAliases[normalized]}.png`;
   }
   
-  // 2. Direct lookup in available logos
+  // 2. Direct lookup in available logos (normalized)
   if (logoLookup.has(normalized)) {
     return `/Documents/teams/${logoLookup.get(normalized)}.png`;
   }
   
-  // 3. Try partial matching (team name contains or is contained in logo name)
-  for (const [logoNormalized, filename] of logoLookup.entries()) {
-    if (logoNormalized.includes(normalized) || normalized.includes(logoNormalized)) {
-      return `/Documents/teams/${filename}.png`;
-    }
-  }
-  
-  // 4. Try matching first word (e.g., "Fnatic TQ" -> "Fnatic")
-  const firstWord = normalized.split(' ')[0];
-  if (firstWord.length >= 3) {
-    for (const [logoNormalized, filename] of logoLookup.entries()) {
-      if (logoNormalized.startsWith(firstWord) || logoNormalized.split(' ')[0] === firstWord) {
-        return `/Documents/teams/${filename}.png`;
-      }
-    }
-  }
-  
-  // 5. Fallback: build filename from team name
-  const fallbackName = teamName
-    .replace(/-/g, ' ')
-    .replace(/\s+/g, '_')
-    .split('_')
-    .map(w => w ? w[0].toUpperCase() + w.slice(1).toLowerCase() : '')
-    .join('_');
-  
-  return `/Documents/teams/${fallbackName}.png`;
+  // 3. Fallback to shaco
+  return '/Documents/teams/shaco.png';
 };
