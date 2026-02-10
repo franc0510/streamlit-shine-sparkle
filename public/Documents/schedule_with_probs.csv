@@ -1,120 +1,165 @@
 match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last_proba_team1_pct,last_proba_team2_pct,status,used_team1,used_team2,roster1_size,roster2_size,as_of,league_like,debug_error,symmetry_check,order_key,flip_applied
-2026-02-09T14:30:00+00:00,TCL,BO3,Dark Passage,SU Esports,57.2,42.8,50.0,50.0,ok,Dark Passage,SU Esports,5,5,2026-02-09,TCL,,ok,Dark Passage|SU Esports,no
-2026-02-09T17:30:00+00:00,TCL,BO3,S2G Esports,PCIFIC Esports,76.6,23.4,97.0,50.0,ok,S2G Esports,PCIFIC Esports,5,5,2026-02-09,TCL,,ok,PCIFIC Esports|S2G Esports,yes
-2026-02-10T06:00:00+00:00,LPL,BO5,TOPESPORTS,Xi'an Team WE,54.2,45.8,7.8,50.0,ok,Top Esports,Team WE,5,5,2026-02-10,LPL,,ok,Team WE|Top Esports,yes
-2026-02-10T08:00:00+00:00,LCK Challengers,BO5,TBD,HLE Challengers,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,Hanwha Life Esports,0,5,2026-02-10,LCKC,,skipped,,
-2026-02-10T09:00:00+00:00,LPL,BO5,Invictus Gaming,SHENZHEN NINJAS IN PYJAMAS,44.4,55.6,50.0,50.0,ok,Invictus Gaming,Ninjas in Pyjamas,5,5,2026-02-10,LPL,,ok,Invictus Gaming|Ninjas in Pyjamas,no
-2026-02-10T14:30:00+00:00,TCL,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-10,TCL,,skipped,,
+2026-02-10T14:30:00+00:00,TCL,BO3,TBD,SU Esports,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,SU Esports,0,5,2026-02-10,TCL,,skipped,,
 2026-02-10T15:00:00+00:00,Hitpoint Masters,BO5,CITA Kaizen,Priority,50.0,50.0,50.0,50.0,no_roster:CITA Kaizen+Priority,CITA Kaizen,Priority,0,0,2026-02-10,HITPOINT MASTERS,,skipped,,
 2026-02-10T16:00:00+00:00,Hellenic Legends League,BO2,Team Insidious,Gamespace M.C.,50.0,50.0,50.0,50.0,no_roster:Team Insidious+Gamespace M.C.,Team Insidious,Gamespace M.C.,0,0,2026-02-10,HELLENIC LEGENDS LEAGUE,,skipped,,
-2026-02-10T17:00:00+00:00,La Ligue Française,BO1,Lille Esport,BK ROG Esports,29.3,70.7,46.5,46.8,ok,Lille Esport,BK ROG Esports,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BK ROG Esports|Lille Esport,yes
+2026-02-10T17:00:00+00:00,La Ligue Française,BO1,Lille Esport,BK ROG Esports,30.0,70.0,46.5,46.8,ok,Lille Esport,BK ROG Esports,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BK ROG Esports|Lille Esport,yes
 2026-02-10T17:00:00+00:00,Road of Legends,BO5,ZennIT,mCon Esports,50.0,50.0,50.0,50.0,no_roster:ZennIT,ZennIT,Top Esports,0,5,2026-02-10,ROAD OF LEGENDS,,skipped,,
-2026-02-10T17:30:00+00:00,TCL,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-10,TCL,,skipped,,
+2026-02-10T17:30:00+00:00,TCL,BO3,TBD,S2G Esports,50.0,50.0,50.0,97.0,no_roster:TBD,TBD,S2G Esports,0,5,2026-02-10,TCL,,skipped,,
 2026-02-10T18:00:00+00:00,Hellenic Legends League,BO2,WLGaming,Team Phantasma,50.0,50.0,50.0,50.0,no_roster:WLGaming+Team Phantasma,WLGaming,Team Phantasma,0,0,2026-02-10,HELLENIC LEGENDS LEAGUE,,skipped,,
-2026-02-10T18:00:00+00:00,La Ligue Française,BO1,Joblife,TLN Pirates,64.3,35.7,58.3,58.5,ok,Joblife,TLN Pirates,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Joblife|TLN Pirates,no
-2026-02-10T19:00:00+00:00,La Ligue Française,BO1,Galions,Solary,63.2,36.8,57.1,50.2,ok,Galions,Solary,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Galions|Solary,no
-2026-02-10T20:00:00+00:00,La Ligue Française,BO1,ZYB,French Flair,20.0,80.0,50.0,53.8,ok,ZYB Esport,French Flair,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,French Flair|ZYB Esport,yes
-2026-02-10T21:00:00+00:00,La Ligue Française,BO1,Vitality.Bee,Skillcamp,33.0,67.0,50.0,50.0,ok,Vitality.Bee,Skillcamp,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Skillcamp|Vitality.Bee,yes
-2026-02-11T06:00:00+00:00,LPL,BO5,THUNDERTALKGAMING,Suzhou LNG Ninebot Esports,13.9,86.1,50.0,50.0,ok,ThunderTalk Gaming,LNG Esports,5,5,2026-02-11,LPL,,ok,LNG Esports|ThunderTalk Gaming,yes
-2026-02-11T09:00:00+00:00,LPL,BO5,SHANGHAI EDWARD GAMING HYCAN,Oh My God,70.1,29.9,50.0,50.0,ok,EDward Gaming,Oh My God,5,5,2026-02-11,LPL,,ok,EDward Gaming|Oh My God,no
-2026-02-11T16:00:00+00:00,Arabian League,BO3,Dragons Esports,GNG Amazigh,50.3,49.7,50.0,50.0,ok,Dragons Esports,GnG Amazigh,5,5,2026-02-11,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dragons Esports|GnG Amazigh,no
-2026-02-11T16:00:00+00:00,Arabian League,BO3,FN Esports,3BL GALAXY ESPORTS,77.0,23.0,50.0,50.0,ok,FN Esports,3BL Esports,5,5,2026-02-11,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,3BL Esports|FN Esports,yes
+2026-02-10T18:00:00+00:00,La Ligue Française,BO1,Joblife,TLN Pirates,64.1,35.9,58.3,58.5,ok,Joblife,TLN Pirates,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Joblife|TLN Pirates,no
+2026-02-10T19:00:00+00:00,La Ligue Française,BO1,Galions,Solary,61.4,38.6,57.1,50.2,ok,Galions,Solary,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Galions|Solary,no
+2026-02-10T20:00:00+00:00,La Ligue Française,BO1,ZYB,French Flair,26.3,73.7,50.0,53.8,ok,ZYB Esport,French Flair,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,French Flair|ZYB Esport,yes
+2026-02-10T21:00:00+00:00,La Ligue Française,BO1,Vitality.Bee,Skillcamp,32.1,67.9,50.0,50.0,ok,Vitality.Bee,Skillcamp,5,5,2026-02-10,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Skillcamp|Vitality.Bee,yes
+2026-02-11T06:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-11,LPL,,skipped,,
+2026-02-11T09:00:00+00:00,LPL,BO5,TBD,Suzhou LNG Ninebot Esports,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,LNG Esports,0,5,2026-02-11,LPL,,skipped,,
+2026-02-11T16:00:00+00:00,Arabian League,BO3,Dragons Esports,GNG Amazigh,54.1,45.9,50.0,50.0,ok,Dragons Esports,GnG Amazigh,5,5,2026-02-11,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dragons Esports|GnG Amazigh,no
+2026-02-11T16:00:00+00:00,Arabian League,BO3,FN Esports,3BL GALAXY ESPORTS,76.4,23.6,50.0,50.0,ok,FN Esports,3BL Esports,5,5,2026-02-11,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,3BL Esports|FN Esports,yes
 2026-02-11T16:00:00+00:00,Hellenic Legends League,BO2,GOAL esports,Team Paradox,50.0,50.0,50.0,50.0,no_roster:Team Paradox,GAM Esports,Team Paradox,5,0,2026-02-11,HELLENIC LEGENDS LEAGUE,,skipped,,
 2026-02-11T16:00:00+00:00,Hitpoint Masters,BO5,BRUTE,SPAXFAMILY,50.0,50.0,50.0,50.0,no_roster:BRUTE+SPAXFAMILY,BRUTE,SPAXFAMILY,0,0,2026-02-11,HITPOINT MASTERS,,skipped,,
-2026-02-11T17:00:00+00:00,La Ligue Française,BO1,BK ROG Esports,Skillcamp,67.0,33.0,70.7,67.0,ok,BK ROG Esports,Skillcamp,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BK ROG Esports|Skillcamp,no
+2026-02-11T17:00:00+00:00,La Ligue Française,BO1,BK ROG Esports,Skillcamp,55.9,44.1,70.0,67.9,ok,BK ROG Esports,Skillcamp,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BK ROG Esports|Skillcamp,no
 2026-02-11T17:00:00+00:00,LoL Italian Tournament,BO5,GMBLERS Esports,Deacoy,50.0,50.0,50.0,50.0,no_roster:GMBLERS Esports+Deacoy,GMBLERS Esports,Deacoy,0,0,2026-02-11,LOL ITALIAN TOURNAMENT,,skipped,,
+2026-02-11T17:00:00+00:00,Prime League,BO1,Rossmann Centaurs,Eintracht Spandau,50.8,49.2,,,ok,ROSSMANN Centaurs,Eintracht Spandau,5,5,2026-02-11,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Eintracht Spandau|ROSSMANN Centaurs,yes
 2026-02-11T18:00:00+00:00,Esports Balkan League,BO3,SPIKE Syndicate,Crvena zvezda Esports,50.0,50.0,50.0,50.0,no_roster:SPIKE Syndicate+Crvena zvezda Esports,SPIKE Syndicate,Crvena zvezda Esports,0,0,2026-02-11,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-02-11T18:00:00+00:00,Hellenic Legends League,BO2,ALMO Players,HowL Esports,50.0,50.0,50.0,50.0,no_roster:ALMO Players,ALMO Players,ULF Esports,0,5,2026-02-11,HELLENIC LEGENDS LEAGUE,,skipped,,
-2026-02-11T18:00:00+00:00,La Ligue Française,BO1,Solary,TLN Pirates,64.5,35.5,36.8,35.7,ok,Solary,TLN Pirates,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Solary|TLN Pirates,no
-2026-02-11T18:30:00+00:00,Arabian League,BO3,BAAM Esports,One More Esports,65.2,34.8,66.6,50.0,ok,BAAM Esports,One More Esports,5,5,2026-02-11,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BAAM Esports|One More Esports,no
-2026-02-11T18:30:00+00:00,Arabian League,BO3,NextGeneration Esports,Anubis Gaming,63.7,36.3,50.0,50.0,ok,NextGeneration Esports,Anubis Gaming,5,5,2026-02-11,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Anubis Gaming|NextGeneration Esports,yes
-2026-02-11T19:00:00+00:00,La Ligue Française,BO1,Lille Esport,Galions,26.6,73.4,29.3,63.2,ok,Lille Esport,Galions,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Galions|Lille Esport,yes
-2026-02-11T20:00:00+00:00,La Ligue Française,BO1,ZYB,Joblife,34.4,65.6,20.0,64.3,ok,ZYB Esport,Joblife,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Joblife|ZYB Esport,yes
-2026-02-11T21:00:00+00:00,La Ligue Française,BO1,Vitality.Bee,French Flair,28.7,71.3,33.0,80.0,ok,Vitality.Bee,French Flair,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,French Flair|Vitality.Bee,yes
-2026-02-12T06:00:00+00:00,LCP,BO5,GAM Esports,Fukuoka SoftBank HAWKS gaming,56.2,43.8,18.4,35.6,ok,GAM Esports,Fukuoka SoftBank HAWKS gaming,5,5,2026-02-12,LCP,,ok,Fukuoka SoftBank HAWKS gaming|GAM Esports,yes
-2026-02-12T06:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-12,LPL,,skipped,,
-2026-02-12T08:00:00+00:00,LCK,BO5,BNK FEARX,DN SOOPers,62.0,38.0,81.3,50.0,ok,BNK FEARX,DN SOOPers,5,5,2026-02-12,LCK,,ok,BNK FEARX|DN SOOPers,no
-2026-02-12T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-12,LPL,,skipped,,
+2026-02-11T18:00:00+00:00,La Ligue Française,BO1,Solary,TLN Pirates,63.2,36.8,38.6,35.9,ok,Solary,TLN Pirates,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Solary|TLN Pirates,no
+2026-02-11T18:00:00+00:00,Prime League,BO1,Kaufland Hangry Knights,TeamOrangeGaming,48.2,51.8,,,ok,Kaufland Hangry Knights,TeamOrangeGaming,5,5,2026-02-11,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Kaufland Hangry Knights|TeamOrangeGaming,no
+2026-02-11T18:30:00+00:00,Arabian League,BO3,BAAM Esports,One More Esports,66.5,33.5,66.6,50.0,ok,BAAM Esports,One More Esports,5,5,2026-02-11,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BAAM Esports|One More Esports,no
+2026-02-11T18:30:00+00:00,Arabian League,BO3,NextGeneration Esports,Anubis Gaming,58.2,41.8,50.0,50.0,ok,NextGeneration Esports,Anubis Gaming,5,5,2026-02-11,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Anubis Gaming|NextGeneration Esports,yes
+2026-02-11T19:00:00+00:00,La Ligue Française,BO1,Lille Esport,Galions,28.3,71.7,30.0,61.4,ok,Lille Esport,Galions,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Galions|Lille Esport,yes
+2026-02-11T19:00:00+00:00,Prime League,BO1,G2 NORD,Eintracht Spandau,50.0,50.0,,49.2,no_roster:G2 NORD,G2 NORD,Eintracht Spandau,0,5,2026-02-11,PRIME LEAGUE,,skipped,,
+2026-02-11T20:00:00+00:00,La Ligue Française,BO1,ZYB,Joblife,38.9,61.1,26.3,64.1,ok,ZYB Esport,Joblife,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Joblife|ZYB Esport,yes
+2026-02-11T20:00:00+00:00,Prime League,BO1,Rossmann Centaurs,TeamOrangeGaming,51.9,48.1,50.8,51.8,ok,ROSSMANN Centaurs,TeamOrangeGaming,5,5,2026-02-11,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,ROSSMANN Centaurs|TeamOrangeGaming,no
+2026-02-11T21:00:00+00:00,La Ligue Française,BO1,Vitality.Bee,French Flair,29.0,71.0,32.1,73.7,ok,Vitality.Bee,French Flair,5,5,2026-02-11,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,French Flair|Vitality.Bee,yes
+2026-02-11T21:00:00+00:00,Prime League,BO1,Kaufland Hangry Knights,G2 NORD,50.0,50.0,48.2,50.0,no_roster:G2 NORD,Kaufland Hangry Knights,G2 NORD,5,0,2026-02-11,PRIME LEAGUE,,skipped,,
+2026-02-12T06:00:00+00:00,LCP,BO5,GAM Esports,Fukuoka SoftBank HAWKS gaming,58.1,41.9,18.4,35.6,ok,GAM Esports,Fukuoka SoftBank HAWKS gaming,5,5,2026-02-12,LCP,,ok,Fukuoka SoftBank HAWKS gaming|GAM Esports,yes
+2026-02-12T08:00:00+00:00,LCK,BO5,BNK FEARX,DN SOOPers,65.2,34.8,81.3,50.0,ok,BNK FEARX,DN SOOPers,5,5,2026-02-12,LCK,,ok,BNK FEARX|DN SOOPers,no
 2026-02-12T15:00:00+00:00,Hitpoint Masters,BO5,NightBirds,UP2U Meavedron,50.0,50.0,50.0,50.0,no_roster:NightBirds+UP2U Meavedron,NightBirds,UP2U Meavedron,0,0,2026-02-12,HITPOINT MASTERS,,skipped,,
-2026-02-12T15:00:00+00:00,TCL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-12,TCL,,skipped,,
+2026-02-12T15:00:00+00:00,TCL,BO5,TBD,Dark Passage,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,Dark Passage,0,5,2026-02-12,TCL,,skipped,,
 2026-02-12T16:00:00+00:00,Arabian League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-12,ARABIAN LEAGUE,,skipped,,
 2026-02-12T16:00:00+00:00,Hellenic Legends League,BO2,Team Paradox,Team Phantasma,50.0,50.0,50.0,50.0,no_roster:Team Paradox+Team Phantasma,Team Paradox,Team Phantasma,0,0,2026-02-12,HELLENIC LEGENDS LEAGUE,,skipped,,
-2026-02-12T17:00:00+00:00,La Ligue Française,BO1,Vitality.Bee,BK ROG Esports,25.9,74.1,28.7,67.0,ok,Vitality.Bee,BK ROG Esports,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BK ROG Esports|Vitality.Bee,yes
+2026-02-12T17:00:00+00:00,La Ligue Française,BO1,Vitality.Bee,BK ROG Esports,28.7,71.3,29.0,55.9,ok,Vitality.Bee,BK ROG Esports,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BK ROG Esports|Vitality.Bee,yes
 2026-02-12T17:00:00+00:00,LoL Italian Tournament,BO5,TBD,EKO Esports,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,LEO Esports,0,5,2026-02-12,LOL ITALIAN TOURNAMENT,,skipped,,
-2026-02-12T17:00:00+00:00,NLC,BO1,Deer Gaming,4 Swines & A Bum,64.6,35.4,50.0,50.0,ok,Deer Gaming,4 Swines & A Bum,5,5,2026-02-12,NLC,,ok,4 Swines & A Bum|Deer Gaming,yes
+2026-02-12T17:00:00+00:00,NLC,BO1,Deer Gaming,4 Swines & A Bum,63.1,36.9,50.0,50.0,ok,Deer Gaming,4 Swines & A Bum,5,5,2026-02-12,NLC,,ok,4 Swines & A Bum|Deer Gaming,yes
+2026-02-12T17:00:00+00:00,Prime League,BO1,E Wie Einfach E-Sports,Berlin International Gaming,15.5,84.5,,,ok,E WIE EINFACH E-SPORTS,Berlin International Gaming,5,5,2026-02-12,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Berlin International Gaming|E WIE EINFACH E-SPORTS,yes
 2026-02-12T17:00:00+00:00,Road of Legends,BO5,TBD,The Bandits,50.0,50.0,50.0,50.0,no_roster:TBD+The Bandits,TBD,The Bandits,0,0,2026-02-12,ROAD OF LEGENDS,,skipped,,
 2026-02-12T18:00:00+00:00,Esports Balkan League,BO3,Lupus Esports,The Secret Club,50.0,50.0,50.0,50.0,no_roster:Lupus Esports+The Secret Club,Lupus Esports,The Secret Club,0,0,2026-02-12,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-02-12T18:00:00+00:00,Hellenic Legends League,BO2,GOAL esports,HowL Esports,47.9,52.1,50.0,50.0,ok,GAM Esports,ULF Esports,5,5,2026-02-12,HELLENIC LEGENDS LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,GAM Esports|ULF Esports,no
-2026-02-12T18:00:00+00:00,La Ligue Française,BO1,ZYB,Solary,34.4,65.6,34.4,64.5,ok,ZYB Esport,Solary,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Solary|ZYB Esport,yes
-2026-02-12T18:00:00+00:00,NLC,BO1,Lundqvist Lightside,Bulldog Esports,35.0,65.0,50.0,50.0,ok,Lundqvist Lightside,Bulldog Esports,5,5,2026-02-12,NLC,,ok,Bulldog Esports|Lundqvist Lightside,yes
+2026-02-12T18:00:00+00:00,Hellenic Legends League,BO2,GOAL esports,HowL Esports,50.3,49.7,50.0,50.0,ok,GAM Esports,ULF Esports,5,5,2026-02-12,HELLENIC LEGENDS LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,GAM Esports|ULF Esports,no
+2026-02-12T18:00:00+00:00,La Ligue Française,BO1,ZYB,Solary,36.9,63.1,38.9,63.2,ok,ZYB Esport,Solary,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Solary|ZYB Esport,yes
+2026-02-12T18:00:00+00:00,NLC,BO1,Lundqvist Lightside,Bulldog Esports,36.7,63.3,50.0,50.0,ok,Lundqvist Lightside,Bulldog Esports,5,5,2026-02-12,NLC,,ok,Bulldog Esports|Lundqvist Lightside,yes
+2026-02-12T18:00:00+00:00,Prime League,BO1,A One Man Army,E Wie Einfach E-Sports,49.2,50.8,,15.5,ok,A One Man Army Prime,E WIE EINFACH E-SPORTS,5,5,2026-02-12,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,A One Man Army Prime|E WIE EINFACH E-SPORTS,no
 2026-02-12T18:30:00+00:00,Arabian League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-12,ARABIAN LEAGUE,,skipped,,
-2026-02-12T19:00:00+00:00,La Ligue Française,BO1,Joblife,French Flair,29.5,70.5,65.6,71.3,ok,Joblife,French Flair,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,French Flair|Joblife,yes
-2026-02-12T19:00:00+00:00,NLC,BO1,Arctic Pandas,Lund Esports Organization,70.1,29.9,50.0,50.0,ok,Arctic Pandas,LEO,5,5,2026-02-12,NLC,,ok,Arctic Pandas|LEO,no
+2026-02-12T19:00:00+00:00,La Ligue Française,BO1,Joblife,French Flair,50.0,50.0,61.1,71.0,ok,Joblife,French Flair,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,French Flair|Joblife,yes
+2026-02-12T19:00:00+00:00,Liga Portuguesa,BO1,Way Gaming Esports,Otter Side,50.0,50.0,,,no_roster:Way Gaming Esports,Way Gaming Esports,Otter Side,0,5,2026-02-12,LIGA PORTUGUESA,,skipped,,
+2026-02-12T19:00:00+00:00,NLC,BO1,Arctic Pandas,Lund Esports Organization,62.3,37.7,50.0,50.0,ok,Arctic Pandas,LEO,5,5,2026-02-12,NLC,,ok,Arctic Pandas|LEO,no
+2026-02-12T19:00:00+00:00,Prime League,BO1,Unicorns of Love Sexy Edition,Eintracht Frankfurt,60.5,39.5,50.0,,ok,Unicorns of Love Sexy Edition,Eintracht Frankfurt,5,5,2026-02-12,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Eintracht Frankfurt|Unicorns of Love Sexy Edition,yes
 2026-02-12T20:00:00+00:00,Esports Balkan League,BO3,BeFive,Partizan Sangal,50.0,50.0,50.0,50.0,no_roster:BeFive+Partizan Sangal,BeFive,Partizan Sangal,0,0,2026-02-12,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-02-12T20:00:00+00:00,La Ligue Française,BO1,Galions,Skillcamp,66.7,33.3,73.4,33.0,ok,Galions,Skillcamp,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Galions|Skillcamp,no
-2026-02-12T20:00:00+00:00,NLC,BO1,La BOMBAS,Verdant,23.8,76.2,50.0,50.0,ok,La BOMBAS,Verdant,5,5,2026-02-12,NLC,,ok,La BOMBAS|Verdant,no
-2026-02-12T21:00:00+00:00,La Ligue Française,BO1,Lille Esport,TLN Pirates,49.7,50.3,26.6,35.5,ok,Lille Esport,TLN Pirates,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Lille Esport|TLN Pirates,no
-2026-02-12T21:00:00+00:00,NLC,BO1,DMG Esports,Ruddy Corporation,88.1,11.9,50.0,50.0,ok,DMG Esports,Ruddy Corporation,5,5,2026-02-12,NLC,,ok,DMG Esports|Ruddy Corporation,no
-2026-02-13T06:00:00+00:00,LCP,BO5,Ground Zero Gaming,CTBC Flying Oyster,26.8,73.2,13.5,95.8,ok,Ground Zero Gaming,CTBC Flying Oyster,5,5,2026-02-13,LCP,,ok,CTBC Flying Oyster|Ground Zero Gaming,yes
-2026-02-13T08:00:00+00:00,LCK,BO5,Dplus KIA,DRX,74.6,25.4,50.0,74.2,ok,Dplus Kia,DRX Challengers,5,5,2026-02-13,LCK,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dplus Kia|DRX Challengers,no
+2026-02-12T20:00:00+00:00,La Ligue Française,BO1,Galions,Skillcamp,65.5,34.5,71.7,44.1,ok,Galions,Skillcamp,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Galions|Skillcamp,no
+2026-02-12T20:00:00+00:00,Liga Portuguesa,BO1,Rage Bait e-Sports,Elegance,50.0,50.0,,,no_roster:Elegance,Rage Bait e-Sports,Elegance,5,0,2026-02-12,LIGA PORTUGUESA,,skipped,,
+2026-02-12T20:00:00+00:00,NLC,BO1,La BOMBAS,Verdant,25.1,74.9,50.0,50.0,ok,La BOMBAS,Verdant,5,5,2026-02-12,NLC,,ok,La BOMBAS|Verdant,no
+2026-02-12T20:00:00+00:00,Prime League,BO1,Unicorns of Love Sexy Edition,Berlin International Gaming,20.7,79.3,60.5,84.5,ok,Unicorns of Love Sexy Edition,Berlin International Gaming,5,5,2026-02-12,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Berlin International Gaming|Unicorns of Love Sexy Edition,yes
+2026-02-12T21:00:00+00:00,La Ligue Française,BO1,Lille Esport,TLN Pirates,49.8,50.2,28.3,36.8,ok,Lille Esport,TLN Pirates,5,5,2026-02-12,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Lille Esport|TLN Pirates,no
+2026-02-12T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-12,LIGA PORTUGUESA,,skipped,,
+2026-02-12T21:00:00+00:00,NLC,BO1,DMG Esports,Ruddy Corporation,89.3,10.7,50.0,50.0,ok,DMG Esports,Ruddy Corporation,5,5,2026-02-12,NLC,,ok,DMG Esports|Ruddy Corporation,no
+2026-02-12T21:00:00+00:00,Prime League,BO1,A One Man Army,Eintracht Frankfurt,38.7,61.3,49.2,39.5,ok,A One Man Army Prime,Eintracht Frankfurt,5,5,2026-02-12,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,A One Man Army Prime|Eintracht Frankfurt,no
+2026-02-12T22:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-12,LIGA PORTUGUESA,,skipped,,
+2026-02-12T23:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-12,LIGA PORTUGUESA,,skipped,,
+2026-02-13T06:00:00+00:00,LCP,BO5,Ground Zero Gaming,CTBC Flying Oyster,27.1,72.9,13.5,95.8,ok,Ground Zero Gaming,CTBC Flying Oyster,5,5,2026-02-13,LCP,,ok,CTBC Flying Oyster|Ground Zero Gaming,yes
+2026-02-13T08:00:00+00:00,LCK,BO5,Dplus KIA,DRX,75.2,24.8,50.0,74.2,ok,Dplus Kia,DRX Challengers,5,5,2026-02-13,LCK,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dplus Kia|DRX Challengers,no
 2026-02-13T11:00:00+00:00,LES,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,LES,,skipped,,
 2026-02-13T12:00:00+00:00,LES,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,LES,,skipped,,
 2026-02-13T13:00:00+00:00,LES,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,LES,,skipped,,
 2026-02-13T14:00:00+00:00,LES,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,LES,,skipped,,
 2026-02-13T15:00:00+00:00,LES,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,LES,,skipped,,
-2026-02-13T15:00:00+00:00,TCL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,TCL,,skipped,,
+2026-02-13T15:00:00+00:00,TCL,BO5,TBD,PCIFIC Esports,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,PCIFIC Esports,0,5,2026-02-13,TCL,,skipped,,
 2026-02-13T16:00:00+00:00,Arabian League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,ARABIAN LEAGUE,,skipped,,
 2026-02-13T16:00:00+00:00,Hitpoint Masters,BO5,EXILE Esports,eSuba,50.0,50.0,50.0,50.0,no_roster:eSuba,LEO Esports,eSuba,5,0,2026-02-13,HITPOINT MASTERS,,skipped,,
-2026-02-13T17:00:00+00:00,La Ligue Française,BO1,ZYB,Lille Esport,41.0,59.0,34.4,49.7,ok,ZYB Esport,Lille Esport,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Lille Esport|ZYB Esport,yes
+2026-02-13T17:00:00+00:00,La Ligue Française,BO1,ZYB,Lille Esport,42.4,57.6,36.9,49.8,ok,ZYB Esport,Lille Esport,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Lille Esport|ZYB Esport,yes
 2026-02-13T17:00:00+00:00,LoL Italian Tournament,BO5,TBD,Colossal Gaming,50.0,50.0,50.0,50.0,no_roster:TBD+Colossal Gaming,TBD,Colossal Gaming,0,0,2026-02-13,LOL ITALIAN TOURNAMENT,,skipped,,
 2026-02-13T18:00:00+00:00,Esports Balkan League,BO3,SPIKE Syndicate,BeFive,50.0,50.0,50.0,50.0,no_roster:SPIKE Syndicate+BeFive,SPIKE Syndicate,BeFive,0,0,2026-02-13,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-02-13T18:00:00+00:00,LES,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,LES,,skipped,,
-2026-02-13T18:00:00+00:00,La Ligue Française,BO1,Skillcamp,TLN Pirates,61.9,38.1,33.3,50.3,ok,Skillcamp,TLN Pirates,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Skillcamp|TLN Pirates,no
+2026-02-13T18:00:00+00:00,La Ligue Française,BO1,Skillcamp,TLN Pirates,61.4,38.6,34.5,50.2,ok,Skillcamp,TLN Pirates,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Skillcamp|TLN Pirates,no
 2026-02-13T18:30:00+00:00,Arabian League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,ARABIAN LEAGUE,,skipped,,
-2026-02-13T19:00:00+00:00,La Ligue Française,BO1,Vitality.Bee,Galions,20.3,79.7,25.9,66.7,ok,Vitality.Bee,Galions,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Galions|Vitality.Bee,yes
+2026-02-13T19:00:00+00:00,La Ligue Française,BO1,Vitality.Bee,Galions,22.6,77.4,28.7,65.5,ok,Vitality.Bee,Galions,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Galions|Vitality.Bee,yes
+2026-02-13T19:00:00+00:00,Liga Portuguesa,BO1,Instituto Politecnico de Santarem,Crusaders,50.0,50.0,,,no_roster:Instituto Politecnico de Santarem,Instituto Politecnico de Santarem,Crusaders,0,5,2026-02-13,LIGA PORTUGUESA,,skipped,,
 2026-02-13T20:00:00+00:00,Esports Balkan League,BO3,Partizan Sangal,Crvena zvezda Esports,50.0,50.0,50.0,50.0,no_roster:Partizan Sangal+Crvena zvezda Esports,Partizan Sangal,Crvena zvezda Esports,0,0,2026-02-13,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-02-13T20:00:00+00:00,La Ligue Française,BO1,Joblife,Solary,49.3,50.7,29.5,65.6,ok,Joblife,Solary,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Joblife|Solary,no
-2026-02-13T21:00:00+00:00,La Ligue Française,BO1,BK ROG Esports,French Flair,44.1,55.9,74.1,70.5,ok,BK ROG Esports,French Flair,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BK ROG Esports|French Flair,no
+2026-02-13T20:00:00+00:00,La Ligue Française,BO1,Joblife,Solary,49.7,50.3,50.0,63.1,ok,Joblife,Solary,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Joblife|Solary,no
+2026-02-13T20:00:00+00:00,Liga Portuguesa,BO1,Periquitos Zangados,Ovos Moles eSports,50.0,50.0,,,no_roster:Periquitos Zangados+Ovos Moles eSports,Periquitos Zangados,Ovos Moles eSports,0,0,2026-02-13,LIGA PORTUGUESA,,skipped,,
+2026-02-13T21:00:00+00:00,La Ligue Française,BO1,BK ROG Esports,French Flair,54.2,45.8,71.3,50.0,ok,BK ROG Esports,French Flair,5,5,2026-02-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BK ROG Esports|French Flair,no
+2026-02-13T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,LIGA PORTUGUESA,,skipped,,
+2026-02-13T22:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,LIGA PORTUGUESA,,skipped,,
+2026-02-13T23:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-13,LIGA PORTUGUESA,,skipped,,
 2026-02-14T06:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-14,LCP,,skipped,,
 2026-02-14T08:00:00+00:00,LCK,BO5,TBD,Gen.G Esports,50.0,50.0,50.0,31.8,no_roster:TBD,TBD,Gen.G,0,5,2026-02-14,LCK,,skipped,,
 2026-02-14T09:00:00+00:00,LES,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-14,LES,,skipped,,
+2026-02-14T10:00:00+00:00,Rift Legends,BO1,DOCISK,Onion Team,50.0,50.0,,,no_roster:Onion Team,DOCISK,Onion Team,5,0,2026-02-14,RIFT LEGENDS,,skipped,,
+2026-02-14T11:15:00+00:00,Rift Legends,BO1,Forsaken,devils.one,82.0,18.0,,,ok,Forsaken,devils.one,5,5,2026-02-14,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,devils.one|Forsaken,yes
 2026-02-14T12:00:00+00:00,LES,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-14,LES,,skipped,,
+2026-02-14T12:30:00+00:00,Rift Legends,BO1,Orbit Anonymo,LODIS,46.6,53.4,,,ok,Orbit Anonymo Esports,LODIS,5,5,2026-02-14,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,LODIS|Orbit Anonymo Esports,yes
+2026-02-14T13:45:00+00:00,Rift Legends,BO1,Barcząca Esports,BOMBA Team,50.0,50.0,,,no_roster:BOMBA Team,Barcząca Esports,BOMBA Team,5,0,2026-02-14,RIFT LEGENDS,,skipped,,
 2026-02-14T15:00:00+00:00,LES,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-14,LES,,skipped,,
-2026-02-14T16:00:00+00:00,CBLOL,BO5,Vivo Keyd Stars,LEVIATÁN,51.5,48.5,10.7,51.3,ok,Vivo Keyd Stars,Leviatan,5,5,2026-02-14,CBLOL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Leviatan|Vivo Keyd Stars,yes
+2026-02-14T16:00:00+00:00,CBLOL,BO5,Vivo Keyd Stars,LEVIATÁN,53.8,46.2,10.7,51.3,ok,Vivo Keyd Stars,Leviatan,5,5,2026-02-14,CBLOL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Leviatan|Vivo Keyd Stars,yes
+2026-02-14T16:00:00+00:00,Rift Legends,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-14,RIFT LEGENDS,,skipped,,
+2026-02-14T17:15:00+00:00,Rift Legends,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-14,RIFT LEGENDS,,skipped,,
 2026-02-14T18:00:00+00:00,LES,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-14,LES,,skipped,,
-2026-02-14T21:00:00+00:00,LCS,BO5,Sentinels,Disguised,53.3,46.7,50.0,50.0,ok,Sentinels,Disguised,5,5,2026-02-14,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Disguised|Sentinels,yes
+2026-02-14T18:30:00+00:00,Rift Legends,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-14,RIFT LEGENDS,,skipped,,
+2026-02-14T19:45:00+00:00,Rift Legends,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-14,RIFT LEGENDS,,skipped,,
+2026-02-14T21:00:00+00:00,LCS,BO5,Sentinels,Disguised,56.7,43.3,50.0,50.0,ok,Sentinels,Disguised,5,5,2026-02-14,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Disguised|Sentinels,yes
 2026-02-15T06:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,LCP,,skipped,,
 2026-02-15T08:00:00+00:00,LCK,BO5,TBD,T1,50.0,50.0,50.0,16.5,no_roster:TBD,TBD,T1,0,5,2026-02-15,LCK,,skipped,,
 2026-02-15T11:00:00+00:00,LES,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,LES,,skipped,,
+2026-02-15T12:00:00+00:00,Rift Legends,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,RIFT LEGENDS,,skipped,,
 2026-02-15T13:00:00+00:00,Hitpoint Masters,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,HITPOINT MASTERS,,skipped,,
+2026-02-15T13:15:00+00:00,Rift Legends,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,RIFT LEGENDS,,skipped,,
 2026-02-15T14:00:00+00:00,LES,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,LES,,skipped,,
+2026-02-15T14:30:00+00:00,Rift Legends,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,RIFT LEGENDS,,skipped,,
 2026-02-15T16:00:00+00:00,CBLOL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,CBLOL,,skipped,,
 2026-02-15T17:00:00+00:00,Hitpoint Masters,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,HITPOINT MASTERS,,skipped,,
 2026-02-15T17:00:00+00:00,LES,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,LES,,skipped,,
-2026-02-15T21:00:00+00:00,LCS,BO5,Cloud9 Kia,FlyQuest,55.7,44.3,50.0,72.6,ok,Cloud9,FlyQuest,5,5,2026-02-15,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Cloud9|FlyQuest,no
-2026-02-16T15:45:00+00:00,LEC,BO3,Natus Vincere,Fnatic,61.0,39.0,55.7,60.1,ok,Natus Vincere,Fnatic,5,5,2026-02-16,LEC,,ok,Fnatic|Natus Vincere,yes
-2026-02-16T17:30:00+00:00,LEC,BO3,Team Vitality,Movistar KOI,53.0,47.0,50.0,56.8,ok,Team Vitality,Movistar KOI,5,5,2026-02-16,LEC,,ok,Movistar KOI|Team Vitality,yes
-2026-02-17T15:45:00+00:00,LEC,BO3,Team Heretics,G2 Esports,35.4,64.6,52.1,50.0,ok,Team Heretics,G2 Esports,5,5,2026-02-17,LEC,,ok,G2 Esports|Team Heretics,yes
+2026-02-15T17:30:00+00:00,Rift Legends,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-15,RIFT LEGENDS,,skipped,,
+2026-02-15T21:00:00+00:00,LCS,BO5,Cloud9 Kia,FlyQuest,48.5,51.5,50.0,72.6,ok,Cloud9,FlyQuest,5,5,2026-02-15,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Cloud9|FlyQuest,no
+2026-02-16T15:45:00+00:00,LEC,BO3,Natus Vincere,Fnatic,65.6,34.4,55.7,60.1,ok,Natus Vincere,Fnatic,5,5,2026-02-16,LEC,,ok,Fnatic|Natus Vincere,yes
+2026-02-16T17:30:00+00:00,LEC,BO3,Team Vitality,Movistar KOI,50.9,49.1,50.0,56.8,ok,Team Vitality,Movistar KOI,5,5,2026-02-16,LEC,,ok,Movistar KOI|Team Vitality,yes
+2026-02-17T15:45:00+00:00,LEC,BO3,Team Heretics,G2 Esports,34.9,65.1,52.1,50.0,ok,Team Heretics,G2 Esports,5,5,2026-02-17,LEC,,ok,G2 Esports|Team Heretics,yes
 2026-02-17T17:00:00+00:00,Road of Legends,BO5,TBD,Senshi eSports,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,Zenshi Gaming,0,5,2026-02-17,ROAD OF LEGENDS,,skipped,,
-2026-02-17T17:30:00+00:00,LEC,BO3,Karmine Corp,GIANTX,65.9,34.1,55.6,53.0,ok,Karmine Corp,GiantX,5,5,2026-02-17,LEC,,ok,GiantX|Karmine Corp,yes
+2026-02-17T17:30:00+00:00,LEC,BO3,Karmine Corp,GIANTX,71.3,28.7,55.6,53.0,ok,Karmine Corp,GiantX,5,5,2026-02-17,LEC,,ok,GiantX|Karmine Corp,yes
 2026-02-18T16:00:00+00:00,Arabian League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-18,ARABIAN LEAGUE,,skipped,,
 2026-02-18T16:00:00+00:00,Hitpoint Masters,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-18,HITPOINT MASTERS,,skipped,,
+2026-02-18T17:00:00+00:00,Prime League,BO1,TeamOrangeGaming,Eintracht Spandau,56.3,43.7,48.1,50.0,ok,TeamOrangeGaming,Eintracht Spandau,5,5,2026-02-18,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Eintracht Spandau|TeamOrangeGaming,yes
 2026-02-18T18:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-18,ESPORTS BALKAN LEAGUE,,skipped,,
+2026-02-18T18:00:00+00:00,Prime League,BO1,Rossmann Centaurs,G2 NORD,50.0,50.0,51.9,50.0,no_roster:G2 NORD,ROSSMANN Centaurs,G2 NORD,5,0,2026-02-18,PRIME LEAGUE,,skipped,,
 2026-02-18T18:30:00+00:00,Arabian League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-18,ARABIAN LEAGUE,,skipped,,
+2026-02-18T19:00:00+00:00,Liga Portuguesa,BO1,Cuban Raft Raiders,GTZ Esports,50.0,50.0,,,no_roster:Cuban Raft Raiders,Cuban Raft Raiders,GTZ Esports,0,5,2026-02-18,LIGA PORTUGUESA,,skipped,,
+2026-02-18T19:00:00+00:00,Prime League,BO1,Kaufland Hangry Knights,Eintracht Spandau,52.4,47.6,50.0,43.7,ok,Kaufland Hangry Knights,Eintracht Spandau,5,5,2026-02-18,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Eintracht Spandau|Kaufland Hangry Knights,yes
 2026-02-18T20:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-18,ESPORTS BALKAN LEAGUE,,skipped,,
+2026-02-18T20:00:00+00:00,Liga Portuguesa,BO1,Vantex,Cães de Agua,50.0,50.0,,,no_roster:Vantex+Cães de Agua,Vantex,Cães de Agua,0,0,2026-02-18,LIGA PORTUGUESA,,skipped,,
+2026-02-18T20:00:00+00:00,Prime League,BO1,G2 NORD,TeamOrangeGaming,50.0,50.0,50.0,56.3,no_roster:G2 NORD,G2 NORD,TeamOrangeGaming,0,5,2026-02-18,PRIME LEAGUE,,skipped,,
+2026-02-18T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-18,LIGA PORTUGUESA,,skipped,,
+2026-02-18T21:00:00+00:00,Prime League,BO1,Kaufland Hangry Knights,Rossmann Centaurs,43.7,56.3,52.4,50.0,ok,Kaufland Hangry Knights,ROSSMANN Centaurs,5,5,2026-02-18,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Kaufland Hangry Knights|ROSSMANN Centaurs,no
+2026-02-18T22:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-18,LIGA PORTUGUESA,,skipped,,
+2026-02-18T23:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-18,LIGA PORTUGUESA,,skipped,,
 2026-02-19T08:00:00+00:00,LCK,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,LCK,,skipped,,
 2026-02-19T15:00:00+00:00,TCL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,TCL,,skipped,,
 2026-02-19T16:00:00+00:00,Arabian League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,ARABIAN LEAGUE,,skipped,,
 2026-02-19T16:00:00+00:00,Hitpoint Masters,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,HITPOINT MASTERS,,skipped,,
-2026-02-19T17:00:00+00:00,NLC,BO1,4 Swines & A Bum,La BOMBAS,52.1,47.9,35.4,23.8,ok,4 Swines & A Bum,La BOMBAS,5,5,2026-02-19,NLC,,ok,4 Swines & A Bum|La BOMBAS,no
+2026-02-19T17:00:00+00:00,NLC,BO1,4 Swines & A Bum,La BOMBAS,50.8,49.2,36.9,25.1,ok,4 Swines & A Bum,La BOMBAS,5,5,2026-02-19,NLC,,ok,4 Swines & A Bum|La BOMBAS,no
+2026-02-19T17:00:00+00:00,Prime League,BO1,A One Man Army,Berlin International Gaming,11.5,88.5,38.7,79.3,ok,A One Man Army Prime,Berlin International Gaming,5,5,2026-02-19,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,A One Man Army Prime|Berlin International Gaming,no
 2026-02-19T17:00:00+00:00,Road of Legends,BO5,TBD,Frites Esports Club,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,Chiefs Esports Club,0,5,2026-02-19,ROAD OF LEGENDS,,skipped,,
 2026-02-19T18:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-02-19T18:00:00+00:00,NLC,BO1,Lund Esports Organization,Bulldog Esports,52.6,47.4,29.9,65.0,ok,LEO,Bulldog Esports,5,5,2026-02-19,NLC,,ok,Bulldog Esports|LEO,yes
+2026-02-19T18:00:00+00:00,NLC,BO1,Lund Esports Organization,Bulldog Esports,54.7,45.3,37.7,63.3,ok,LEO,Bulldog Esports,5,5,2026-02-19,NLC,,ok,Bulldog Esports|LEO,yes
+2026-02-19T18:00:00+00:00,Prime League,BO1,Unicorns of Love Sexy Edition,E Wie Einfach E-Sports,68.5,31.5,20.7,50.8,ok,Unicorns of Love Sexy Edition,E WIE EINFACH E-SPORTS,5,5,2026-02-19,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,E WIE EINFACH E-SPORTS|Unicorns of Love Sexy Edition,yes
 2026-02-19T18:30:00+00:00,Arabian League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,ARABIAN LEAGUE,,skipped,,
-2026-02-19T19:00:00+00:00,NLC,BO1,Deer Gaming,DMG Esports,41.9,58.1,64.6,88.1,ok,Deer Gaming,DMG Esports,5,5,2026-02-19,NLC,,ok,Deer Gaming|DMG Esports,no
+2026-02-19T19:00:00+00:00,Liga Portuguesa,BO1,GD Esports,Keypulse Esports,68.0,32.0,,,ok,G2 Esports,Keypulse Esports,5,5,2026-02-19,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,G2 Esports|Keypulse Esports,no
+2026-02-19T19:00:00+00:00,NLC,BO1,Deer Gaming,DMG Esports,42.4,57.6,63.1,89.3,ok,Deer Gaming,DMG Esports,5,5,2026-02-19,NLC,,ok,Deer Gaming|DMG Esports,no
+2026-02-19T19:00:00+00:00,Prime League,BO1,Eintracht Frankfurt,Berlin International Gaming,19.9,80.1,61.3,88.5,ok,Eintracht Frankfurt,Berlin International Gaming,5,5,2026-02-19,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Berlin International Gaming|Eintracht Frankfurt,yes
 2026-02-19T20:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-02-19T20:00:00+00:00,NLC,BO1,Arctic Pandas,Ruddy Corporation,87.7,12.3,70.1,11.9,ok,Arctic Pandas,Ruddy Corporation,5,5,2026-02-19,NLC,,ok,Arctic Pandas|Ruddy Corporation,no
-2026-02-19T21:00:00+00:00,NLC,BO1,Lundqvist Lightside,Verdant,35.8,64.2,35.0,76.2,ok,Lundqvist Lightside,Verdant,5,5,2026-02-19,NLC,,ok,Lundqvist Lightside|Verdant,no
+2026-02-19T20:00:00+00:00,Liga Portuguesa,BO1,ZeroZone Gaming,Francesinhas,50.0,50.0,,,no_roster:Francesinhas,ZeroZone Gaming,Francesinhas,5,0,2026-02-19,LIGA PORTUGUESA,,skipped,,
+2026-02-19T20:00:00+00:00,NLC,BO1,Arctic Pandas,Ruddy Corporation,87.8,12.2,62.3,10.7,ok,Arctic Pandas,Ruddy Corporation,5,5,2026-02-19,NLC,,ok,Arctic Pandas|Ruddy Corporation,no
+2026-02-19T20:00:00+00:00,Prime League,BO1,A One Man Army,Unicorns of Love Sexy Edition,28.1,71.9,11.5,68.5,ok,A One Man Army Prime,Unicorns of Love Sexy Edition,5,5,2026-02-19,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,A One Man Army Prime|Unicorns of Love Sexy Edition,no
+2026-02-19T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,LIGA PORTUGUESA,,skipped,,
+2026-02-19T21:00:00+00:00,NLC,BO1,Lundqvist Lightside,Verdant,35.7,64.3,36.7,74.9,ok,Lundqvist Lightside,Verdant,5,5,2026-02-19,NLC,,ok,Lundqvist Lightside|Verdant,no
+2026-02-19T21:00:00+00:00,Prime League,BO1,Eintracht Frankfurt,E Wie Einfach E-Sports,59.8,40.2,19.9,31.5,ok,Eintracht Frankfurt,E WIE EINFACH E-SPORTS,5,5,2026-02-19,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,E WIE EINFACH E-SPORTS|Eintracht Frankfurt,yes
+2026-02-19T22:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,LIGA PORTUGUESA,,skipped,,
+2026-02-19T23:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-19,LIGA PORTUGUESA,,skipped,,
 2026-02-20T08:00:00+00:00,LCK,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-20,LCK,,skipped,,
 2026-02-20T15:00:00+00:00,TCL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-20,TCL,,skipped,,
 2026-02-20T15:45:00+00:00,LEC,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-20,LEC,,skipped,,
@@ -123,7 +168,7 @@ match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last
 2026-02-20T21:00:00+00:00,LCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-20,LCS,,skipped,,
 2026-02-21T08:00:00+00:00,LCK,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-21,LCK,,skipped,,
 2026-02-21T15:45:00+00:00,LEC,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-21,LEC,,skipped,,
-2026-02-21T16:00:00+00:00,CBLOL,BO5,RED Canids Kalunga,LOUD,70.5,29.5,50.0,50.0,ok,RED Canids,LOUD,5,5,2026-02-21,CBLOL,ValueError: Roster vide : impossible d'agréger les features.,skipped,LOUD|RED Canids,yes
+2026-02-21T16:00:00+00:00,CBLOL,BO5,RED Canids Kalunga,LOUD,69.9,30.1,50.0,50.0,ok,RED Canids,LOUD,5,5,2026-02-21,CBLOL,ValueError: Roster vide : impossible d'agréger les features.,skipped,LOUD|RED Canids,yes
 2026-02-21T17:30:00+00:00,LEC,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-21,LEC,,skipped,,
 2026-02-21T21:00:00+00:00,LCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-21,LCS,,skipped,,
 2026-02-22T08:00:00+00:00,LCK,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-22,LCK,,skipped,,
@@ -132,28 +177,30 @@ match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last
 2026-02-22T17:30:00+00:00,LEC,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-22,LEC,,skipped,,
 2026-02-22T21:00:00+00:00,LCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-22,LCS,,skipped,,
 2026-02-23T05:00:00+00:00,LCK Challengers,BO5,TBD,NS Challengers,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,Nongshim Esports Academy,0,5,2026-02-23,LCKC,,skipped,,
-2026-02-23T08:00:00+00:00,LCK Challengers,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-23,LCKC,,skipped,,
+2026-02-23T08:00:00+00:00,LCK Challengers,BO5,TBD,T1 Esports Academy,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,T1,0,5,2026-02-23,LCKC,,skipped,,
 2026-02-23T15:45:00+00:00,LEC,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-23,LEC,,skipped,,
 2026-02-24T06:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-24,LPL,,skipped,,
 2026-02-24T08:00:00+00:00,LCK Challengers,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-24,LCKC,,skipped,,
 2026-02-24T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-24,LPL,,skipped,,
 2026-02-24T16:00:00+00:00,Arabian League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-24,ARABIAN LEAGUE,,skipped,,
 2026-02-24T16:00:00+00:00,Hitpoint Masters,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-24,HITPOINT MASTERS,,skipped,,
+2026-02-24T16:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-24,RIFT LEGENDS,,skipped,,
 2026-02-25T06:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,LPL,,skipped,,
 2026-02-25T08:00:00+00:00,LCK Challengers,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,LCKC,,skipped,,
 2026-02-25T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,LPL,,skipped,,
 2026-02-25T16:00:00+00:00,Arabian League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,ARABIAN LEAGUE,,skipped,,
 2026-02-25T16:00:00+00:00,Hitpoint Masters,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,HITPOINT MASTERS,,skipped,,
-2026-02-25T17:00:00+00:00,NLC,BO1,4 Swines & A Bum,Lund Esports Organization,19.6,80.4,52.1,52.6,ok,4 Swines & A Bum,LEO,5,5,2026-02-25,NLC,,ok,4 Swines & A Bum|LEO,no
+2026-02-25T16:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,RIFT LEGENDS,,skipped,,
+2026-02-25T17:00:00+00:00,NLC,BO1,4 Swines & A Bum,Lund Esports Organization,19.2,80.8,50.8,54.7,ok,4 Swines & A Bum,LEO,5,5,2026-02-25,NLC,,ok,4 Swines & A Bum|LEO,no
 2026-02-25T17:00:00+00:00,Prime League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,PRIME LEAGUE,,skipped,,
 2026-02-25T18:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-02-25T18:00:00+00:00,NLC,BO1,La BOMBAS,Bulldog Esports,22.7,77.3,47.9,47.4,ok,La BOMBAS,Bulldog Esports,5,5,2026-02-25,NLC,,ok,Bulldog Esports|La BOMBAS,yes
+2026-02-25T18:00:00+00:00,NLC,BO1,La BOMBAS,Bulldog Esports,22.4,77.6,49.2,45.3,ok,La BOMBAS,Bulldog Esports,5,5,2026-02-25,NLC,,ok,Bulldog Esports|La BOMBAS,yes
 2026-02-25T19:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,LIGA PORTUGUESA,,skipped,,
-2026-02-25T19:00:00+00:00,NLC,BO1,Ruddy Corporation,Verdant,19.4,80.6,12.3,64.2,ok,Ruddy Corporation,Verdant,5,5,2026-02-25,NLC,,ok,Ruddy Corporation|Verdant,no
+2026-02-25T19:00:00+00:00,NLC,BO1,Ruddy Corporation,Verdant,21.4,78.6,12.2,64.3,ok,Ruddy Corporation,Verdant,5,5,2026-02-25,NLC,,ok,Ruddy Corporation|Verdant,no
 2026-02-25T19:30:00+00:00,Prime League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,PRIME LEAGUE,,skipped,,
 2026-02-25T20:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-02-25T20:00:00+00:00,NLC,BO1,Deer Gaming,Lundqvist Lightside,56.8,43.2,41.9,35.8,ok,Deer Gaming,Lundqvist Lightside,5,5,2026-02-25,NLC,,ok,Deer Gaming|Lundqvist Lightside,no
-2026-02-25T21:00:00+00:00,NLC,BO1,Arctic Pandas,DMG Esports,68.1,31.9,87.7,58.1,ok,Arctic Pandas,DMG Esports,5,5,2026-02-25,NLC,,ok,Arctic Pandas|DMG Esports,no
+2026-02-25T20:00:00+00:00,NLC,BO1,Deer Gaming,Lundqvist Lightside,55.9,44.1,42.4,35.7,ok,Deer Gaming,Lundqvist Lightside,5,5,2026-02-25,NLC,,ok,Deer Gaming|Lundqvist Lightside,no
+2026-02-25T21:00:00+00:00,NLC,BO1,Arctic Pandas,DMG Esports,70.0,30.0,87.8,57.6,ok,Arctic Pandas,DMG Esports,5,5,2026-02-25,NLC,,ok,Arctic Pandas|DMG Esports,no
 2026-02-25T22:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-25,LIGA PORTUGUESA,,skipped,,
 2026-02-26T06:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,LCP,,skipped,,
 2026-02-26T08:00:00+00:00,LCK Challengers,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,LCKC,,skipped,,
@@ -161,16 +208,17 @@ match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last
 2026-02-26T15:00:00+00:00,TCL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,TCL,,skipped,,
 2026-02-26T16:00:00+00:00,Arabian League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,ARABIAN LEAGUE,,skipped,,
 2026-02-26T16:00:00+00:00,Hitpoint Masters,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,HITPOINT MASTERS,,skipped,,
-2026-02-26T17:00:00+00:00,NLC,BO1,4 Swines & A Bum,Lundqvist Lightside,36.6,63.4,19.6,43.2,ok,4 Swines & A Bum,Lundqvist Lightside,5,5,2026-02-26,NLC,,ok,4 Swines & A Bum|Lundqvist Lightside,no
+2026-02-26T16:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,RIFT LEGENDS,,skipped,,
+2026-02-26T17:00:00+00:00,NLC,BO1,4 Swines & A Bum,Lundqvist Lightside,37.6,62.4,19.2,44.1,ok,4 Swines & A Bum,Lundqvist Lightside,5,5,2026-02-26,NLC,,ok,4 Swines & A Bum|Lundqvist Lightside,no
 2026-02-26T17:00:00+00:00,Prime League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,PRIME LEAGUE,,skipped,,
 2026-02-26T18:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-02-26T18:00:00+00:00,NLC,BO1,Verdant,Bulldog Esports,44.6,55.4,80.6,77.3,ok,Verdant,Bulldog Esports,5,5,2026-02-26,NLC,,ok,Bulldog Esports|Verdant,yes
+2026-02-26T18:00:00+00:00,NLC,BO1,Verdant,Bulldog Esports,46.2,53.8,78.6,77.6,ok,Verdant,Bulldog Esports,5,5,2026-02-26,NLC,,ok,Bulldog Esports|Verdant,yes
 2026-02-26T19:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,LIGA PORTUGUESA,,skipped,,
-2026-02-26T19:00:00+00:00,NLC,BO1,La BOMBAS,DMG Esports,26.1,73.9,22.7,31.9,ok,La BOMBAS,DMG Esports,5,5,2026-02-26,NLC,,ok,DMG Esports|La BOMBAS,yes
+2026-02-26T19:00:00+00:00,NLC,BO1,La BOMBAS,DMG Esports,24.8,75.2,22.4,30.0,ok,La BOMBAS,DMG Esports,5,5,2026-02-26,NLC,,ok,DMG Esports|La BOMBAS,yes
 2026-02-26T19:30:00+00:00,Prime League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,PRIME LEAGUE,,skipped,,
 2026-02-26T20:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-02-26T20:00:00+00:00,NLC,BO1,Lund Esports Organization,Ruddy Corporation,85.4,14.6,80.4,19.4,ok,LEO,Ruddy Corporation,5,5,2026-02-26,NLC,,ok,LEO|Ruddy Corporation,no
-2026-02-26T21:00:00+00:00,NLC,BO1,Deer Gaming,Arctic Pandas,27.0,73.0,56.8,68.1,ok,Deer Gaming,Arctic Pandas,5,5,2026-02-26,NLC,,ok,Arctic Pandas|Deer Gaming,yes
+2026-02-26T20:00:00+00:00,NLC,BO1,Lund Esports Organization,Ruddy Corporation,85.2,14.8,80.8,21.4,ok,LEO,Ruddy Corporation,5,5,2026-02-26,NLC,,ok,LEO|Ruddy Corporation,no
+2026-02-26T21:00:00+00:00,NLC,BO1,Deer Gaming,Arctic Pandas,26.6,73.4,55.9,70.0,ok,Deer Gaming,Arctic Pandas,5,5,2026-02-26,NLC,,ok,Arctic Pandas|Deer Gaming,yes
 2026-02-26T22:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-26,LIGA PORTUGUESA,,skipped,,
 2026-02-27T06:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-27,LCP,,skipped,,
 2026-02-27T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-02-27,LPL,,skipped,,
@@ -204,16 +252,19 @@ match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last
 2026-03-04T20:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-04,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-03-05T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-05,LPL,,skipped,,
 2026-03-05T16:00:00+00:00,Hitpoint Masters,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-05,HITPOINT MASTERS,,skipped,,
+2026-03-05T16:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-05,RIFT LEGENDS,,skipped,,
 2026-03-05T17:00:00+00:00,NLC,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-05,NLC,,skipped,,
 2026-03-05T17:00:00+00:00,Prime League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-05,PRIME LEAGUE,,skipped,,
 2026-03-05T18:00:00+00:00,Esports Balkan League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-05,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-03-05T19:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-05,LIGA PORTUGUESA,,skipped,,
+2026-03-06T16:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-06,RIFT LEGENDS,,skipped,,
 2026-03-06T17:00:00+00:00,NLC,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-06,NLC,,skipped,,
 2026-03-06T17:00:00+00:00,Prime League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-06,PRIME LEAGUE,,skipped,,
 2026-03-06T18:00:00+00:00,Esports Balkan League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-06,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-03-06T19:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-06,LIGA PORTUGUESA,,skipped,,
 2026-03-07T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-07,LPL,,skipped,,
 2026-03-07T16:00:00+00:00,Hitpoint Masters,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-07,HITPOINT MASTERS,,skipped,,
+2026-03-07T16:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-07,RIFT LEGENDS,,skipped,,
 2026-03-07T17:00:00+00:00,NLC,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-07,NLC,,skipped,,
 2026-03-08T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-08,LPL,,skipped,,
 2026-03-13T19:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-03-13,LIGA PORTUGUESA,,skipped,,
