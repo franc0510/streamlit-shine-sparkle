@@ -182,6 +182,14 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
               <OddsCell label="Unibet" odds={unibetOdds} recommendedSide={unibetSide} />
               <OddsCell label="Stake" odds={stakeOdds} recommendedSide={stakeSide} />
             </div>
+            <a
+              href="https://stake.com/?c=unYcYWyb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary/10 border border-primary/30 text-xs font-semibold text-primary hover:bg-primary/20 transition-colors"
+            >
+              🎰 Parier sur Stake
+            </a>
           </div>
         )}
 
