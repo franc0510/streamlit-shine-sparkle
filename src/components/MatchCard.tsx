@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
+import { BookmakerOdds, BetRecommendation } from "@/lib/csvParser";
 
 interface MatchCardProps {
   tournament: string;
@@ -21,10 +22,47 @@ interface MatchCardProps {
     team1: number;
     team2: number;
   };
+  pinnacleOdds?: BookmakerOdds;
+  unibetOdds?: BookmakerOdds;
+  stakeOdds?: BookmakerOdds;
+  recoPinnacle?: BetRecommendation;
+  recoStake?: BetRecommendation;
+  bestBet?: {
+    bookmaker: string;
+    text: string;
+    odds: number | null;
+    ev: number | null;
+  };
 }
 
-export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdds }: MatchCardProps) => {
+const OddsCell = ({ label, odds }: { label: string; odds?: BookmakerOdds }) => {
+  if (!odds || (odds.team1 === null && odds.team2 === null)) return null;
+  return (
+    <div className="flex items-center justify-between text-[10px] sm:text-xs">
+      <span className="text-muted-foreground font-medium">{label}</span>
+      <div className="flex gap-3">
+        <span className="text-foreground font-semibold">{odds.team1?.toFixed(2) ?? '—'}</span>
+        <span className="text-muted-foreground/50">|</span>
+        <span className="text-foreground font-semibold">{odds.team2?.toFixed(2) ?? '—'}</span>
+      </div>
+    </div>
+  );
+};
+
+export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdds, pinnacleOdds, unibetOdds, stakeOdds, recoPinnacle, recoStake, bestBet }: MatchCardProps) => {
   const { t } = useTranslation();
+
+  const hasOdds = pinnacleOdds?.team1 !== null || unibetOdds?.team1 !== null || stakeOdds?.team1 !== null;
+  const hasBestBet = bestBet && bestBet.bookmaker && bestBet.bookmaker !== '' && bestBet.text && bestBet.text !== 'NO BET';
+
+  // Get profitable bets
+  const profitableBets: { bookmaker: string; text: string; ev: number }[] = [];
+  if (recoPinnacle && recoPinnacle.team !== 'NO BET' && recoPinnacle.ev && recoPinnacle.ev > 0) {
+    profitableBets.push({ bookmaker: 'Pinnacle', text: recoPinnacle.text, ev: recoPinnacle.ev });
+  }
+  if (recoStake && recoStake.team !== 'NO BET' && recoStake.ev && recoStake.ev > 0) {
+    profitableBets.push({ bookmaker: 'Stake', text: recoStake.text, ev: recoStake.ev });
+  }
   
   return (
     <Card className="group relative overflow-hidden bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 animate-slide-up">
@@ -115,7 +153,56 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
           </div>
         </div>
 
-        <div className="mt-3 sm:mt-4 md:mt-6 pt-3 sm:pt-4 md:pt-6 border-t border-border/50">
+        {/* Bookmaker Odds Section */}
+        {hasOdds && (
+          <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wider">Cotes</span>
+              <div className="flex gap-6 text-[10px] sm:text-xs text-muted-foreground">
+                <span>{team1.name.substring(0, 8)}</span>
+                <span>{team2.name.substring(0, 8)}</span>
+              </div>
+            </div>
+            <div className="space-y-1.5">
+              <OddsCell label="Pinnacle" odds={pinnacleOdds} />
+              <OddsCell label="Unibet" odds={unibetOdds} />
+              <OddsCell label="Stake" odds={stakeOdds} />
+            </div>
+          </div>
+        )}
+
+        {/* AI Recommendation */}
+        {hasBestBet && (
+          <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
+            <div className="bg-gradient-to-r from-emerald-500/10 to-primary/10 border border-emerald-500/30 rounded-lg p-2.5 sm:p-3">
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <span className="text-[10px] sm:text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                  🤖 AI Recommendation
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm font-semibold text-foreground">
+                {bestBet!.text}
+              </p>
+              {bestBet!.ev && (
+                <p className="text-[10px] sm:text-xs text-emerald-400/80 mt-0.5">
+                  via <span className="capitalize">{bestBet!.bookmaker}</span> · EV: +{(bestBet!.ev * 100).toFixed(1)}%
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
+        {!hasBestBet && (
+          <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
+            <div className="bg-secondary/30 border border-border/30 rounded-lg p-2.5 sm:p-3 text-center">
+              <span className="text-[10px] sm:text-xs text-muted-foreground">
+                🤖 Pas de pari rentable détecté
+              </span>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
           <p className="text-[10px] sm:text-xs text-muted-foreground text-center leading-relaxed">
             Probabilité de victoire de série ({format})
           </p>

@@ -334,6 +334,12 @@ const Index = () => {
                       team1: parseFloat(calculateMinOdds(match.proba1)),
                       team2: parseFloat(calculateMinOdds(match.proba2))
                     }}
+                    pinnacleOdds={match.pinnacleOdds}
+                    unibetOdds={match.unibetOdds}
+                    stakeOdds={match.stakeOdds}
+                    recoPinnacle={match.recoPinnacle}
+                    recoStake={match.recoStake}
+                    bestBet={match.bestBet}
                   />
                 </Link>
               </div>
@@ -373,6 +379,12 @@ const Index = () => {
                   team1: parseFloat(calculateMinOdds(match.proba1)),
                   team2: parseFloat(calculateMinOdds(match.proba2))
                 }}
+                pinnacleOdds={match.pinnacleOdds}
+                unibetOdds={match.unibetOdds}
+                stakeOdds={match.stakeOdds}
+                recoPinnacle={match.recoPinnacle}
+                recoStake={match.recoStake}
+                bestBet={match.bestBet}
               />
             </Link>
           ))}
