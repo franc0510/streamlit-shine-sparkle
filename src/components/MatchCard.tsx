@@ -73,7 +73,10 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
     (unibetOdds.team1 && unibetOdds.team1 >= minOdds.team1) ? 'team1' :
     (unibetOdds.team2 && unibetOdds.team2 >= minOdds.team2) ? 'team2' : null
   ) : null;
-  const stakeSide = getRecoSide(recoStake);
+  const stakeSide = stakeOdds ? (
+    (stakeOdds.team1 && stakeOdds.team1 >= minOdds.team1) ? 'team1' :
+    (stakeOdds.team2 && stakeOdds.team2 >= minOdds.team2) ? 'team2' : null
+  ) : null;
 
   return (
     <Card className="group relative overflow-hidden bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 animate-slide-up">
