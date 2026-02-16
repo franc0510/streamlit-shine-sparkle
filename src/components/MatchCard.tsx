@@ -35,15 +35,19 @@ interface MatchCardProps {
   };
 }
 
-const OddsCell = ({ label, odds }: { label: string; odds?: BookmakerOdds }) => {
+const OddsCell = ({ label, odds, recommendedSide }: { label: string; odds?: BookmakerOdds; recommendedSide?: 'team1' | 'team2' | null }) => {
   if (!odds || (odds.team1 === null && odds.team2 === null)) return null;
   return (
     <div className="flex items-center justify-between text-[10px] sm:text-xs">
       <span className="text-muted-foreground font-medium">{label}</span>
       <div className="flex gap-3">
-        <span className="text-foreground font-semibold">{odds.team1?.toFixed(2) ?? '—'}</span>
+        <span className={`font-semibold ${recommendedSide === 'team1' ? 'text-emerald-400' : 'text-foreground'}`}>
+          {odds.team1?.toFixed(2) ?? '—'}{recommendedSide === 'team1' ? ' ⭐' : ''}
+        </span>
         <span className="text-muted-foreground/50">|</span>
-        <span className="text-foreground font-semibold">{odds.team2?.toFixed(2) ?? '—'}</span>
+        <span className={`font-semibold ${recommendedSide === 'team2' ? 'text-emerald-400' : 'text-foreground'}`}>
+          {odds.team2?.toFixed(2) ?? '—'}{recommendedSide === 'team2' ? ' ⭐' : ''}
+        </span>
       </div>
     </div>
   );
@@ -55,15 +59,22 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
   const hasOdds = pinnacleOdds?.team1 !== null || unibetOdds?.team1 !== null || stakeOdds?.team1 !== null;
   const hasBestBet = bestBet && bestBet.bookmaker && bestBet.bookmaker !== '' && bestBet.text && bestBet.text !== 'NO BET';
 
-  // Get profitable bets
-  const profitableBets: { bookmaker: string; text: string; ev: number }[] = [];
-  if (recoPinnacle && recoPinnacle.team !== 'NO BET' && recoPinnacle.ev && recoPinnacle.ev > 0) {
-    profitableBets.push({ bookmaker: 'Pinnacle', text: recoPinnacle.text, ev: recoPinnacle.ev });
-  }
-  if (recoStake && recoStake.team !== 'NO BET' && recoStake.ev && recoStake.ev > 0) {
-    profitableBets.push({ bookmaker: 'Stake', text: recoStake.text, ev: recoStake.ev });
-  }
-  
+  // Determine recommended side for each bookmaker
+  const getRecoSide = (reco?: BetRecommendation): 'team1' | 'team2' | null => {
+    if (!reco || reco.team === 'NO BET') return null;
+    if (reco.team === 'TEAM1') return 'team1';
+    if (reco.team === 'TEAM2') return 'team2';
+    return null;
+  };
+
+  const pinnacleSide = getRecoSide(recoPinnacle);
+  // For Unibet, use same logic as bestBet (check which team has EV+ based on probabilities)
+  const unibetSide = unibetOdds ? (
+    (unibetOdds.team1 && unibetOdds.team1 >= minOdds.team1) ? 'team1' :
+    (unibetOdds.team2 && unibetOdds.team2 >= minOdds.team2) ? 'team2' : null
+  ) : null;
+  const stakeSide = getRecoSide(recoStake);
+
   return (
     <Card className="group relative overflow-hidden bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 animate-slide-up">
       <div className="absolute inset-0 bg-gradient-gaming opacity-0 group-hover:opacity-5 transition-opacity" />
@@ -164,9 +175,9 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
               </div>
             </div>
             <div className="space-y-1.5">
-              <OddsCell label="Pinnacle" odds={pinnacleOdds} />
-              <OddsCell label="Unibet" odds={unibetOdds} />
-              <OddsCell label="Stake" odds={stakeOdds} />
+              <OddsCell label="Pinnacle" odds={pinnacleOdds} recommendedSide={pinnacleSide} />
+              <OddsCell label="Unibet" odds={unibetOdds} recommendedSide={unibetSide} />
+              <OddsCell label="Stake" odds={stakeOdds} recommendedSide={stakeSide} />
             </div>
           </div>
         )}
@@ -188,16 +199,6 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
                   via <span className="capitalize">{bestBet!.bookmaker}</span> · EV: +{(bestBet!.ev * 100).toFixed(1)}%
                 </p>
               )}
-            </div>
-          </div>
-        )}
-
-        {!hasBestBet && (
-          <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
-            <div className="bg-secondary/30 border border-border/30 rounded-lg p-2.5 sm:p-3 text-center">
-              <span className="text-[10px] sm:text-xs text-muted-foreground">
-                🤖 Pas de pari rentable détecté
-              </span>
             </div>
           </div>
         )}
