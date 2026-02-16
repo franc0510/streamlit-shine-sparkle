@@ -135,9 +135,12 @@ const Index = () => {
   // Identifier le PREMIER match global (celui qui sera accessible gratuitement)
   const freeMatchId = useMemo(() => {
     if (upcomingMatches.length === 0) return null;
-    const firstMatch = upcomingMatches[0];
-    // Créer un ID unique basé sur le match
-    return `${firstMatch.tournament}-${firstMatch.date}-${firstMatch.time}-${firstMatch.team1}-${firstMatch.team2}`;
+    // Prefer first match with odds available
+    const matchWithOdds = upcomingMatches.find(m => 
+      m.pinnacleOdds?.team1 !== null || m.unibetOdds?.team1 !== null || m.stakeOdds?.team1 !== null
+    );
+    const chosen = matchWithOdds || upcomingMatches[0];
+    return `${chosen.tournament}-${chosen.date}-${chosen.time}-${chosen.team1}-${chosen.team2}`;
   }, [upcomingMatches]);
 
   // Fonction pour vérifier si un match est le match gratuit
