@@ -267,6 +267,10 @@
     "vs": "VS",
     "aiPrediction": "Prédiction IA",
     "winProbability": "% Victoire",
-    "missingPlayers": "Joueurs manquants pour construire les radars."
+    "missingPlayers": "Joueurs manquants pour construire les radars.",
+    "odds": "Cotes",
+    "aiRecommendation": "🤖 Recommandation IA",
+    "betOn": "Parier ↗",
+    "seriesWinProbability": "Probabilité de victoire de série"
   }
 }

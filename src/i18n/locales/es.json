@@ -267,6 +267,10 @@
     "vs": "VS",
     "aiPrediction": "Predicción IA",
     "winProbability": "% Victoria",
-    "missingPlayers": "Faltan jugadores para construir radares."
+    "missingPlayers": "Faltan jugadores para construir radares.",
+    "odds": "Cuotas",
+    "aiRecommendation": "🤖 Recomendación IA",
+    "betOn": "Apostar ↗",
+    "seriesWinProbability": "Probabilidad de victoria de serie"
   }
 }

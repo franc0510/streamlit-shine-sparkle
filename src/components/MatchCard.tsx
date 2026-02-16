@@ -35,7 +35,7 @@ interface MatchCardProps {
   };
 }
 
-const OddsCell = ({ label, odds, recommendedSide, affiliateUrl }: { label: string; odds?: BookmakerOdds; recommendedSide?: 'team1' | 'team2' | null; affiliateUrl?: string }) => {
+const OddsCell = ({ label, odds, recommendedSide, affiliateUrl, betLabel }: { label: string; odds?: BookmakerOdds; recommendedSide?: 'team1' | 'team2' | null; affiliateUrl?: string; betLabel?: string }) => {
   if (!odds || (odds.team1 === null && odds.team2 === null)) return null;
   return (
     <div className="flex items-center justify-between text-[10px] sm:text-xs">
@@ -49,7 +49,7 @@ const OddsCell = ({ label, odds, recommendedSide, affiliateUrl }: { label: strin
             onClick={(e) => e.stopPropagation()}
             className="text-[9px] px-1.5 py-0.5 rounded-full bg-gradient-to-r from-emerald-500/20 to-primary/20 border border-emerald-500/40 text-emerald-400 hover:from-emerald-500/40 hover:to-primary/40 hover:scale-110 transition-all duration-200 font-bold tracking-wide"
           >
-            Parier ↗
+            {betLabel || 'Parier ↗'}
           </a>
         )}
       </span>
@@ -184,7 +184,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
         {hasOdds && (
           <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wider">Cotes</span>
+              <span className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t('matchDetails.odds')}</span>
               <div className="flex gap-6 text-[10px] sm:text-xs text-muted-foreground">
                 <span>{team1.name.substring(0, 8)}</span>
                 <span>{team2.name.substring(0, 8)}</span>
@@ -193,7 +193,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
             <div className="space-y-1.5">
               <OddsCell label="Pinnacle" odds={pinnacleOdds} recommendedSide={pinnacleSide} />
               <OddsCell label="Unibet" odds={unibetOdds} recommendedSide={unibetSide} />
-              <OddsCell label="Stake" odds={stakeOdds} recommendedSide={stakeSide} affiliateUrl="https://stake.com/?c=unYcYWyb" />
+              <OddsCell label="Stake" odds={stakeOdds} recommendedSide={stakeSide} affiliateUrl="https://stake.com/?c=unYcYWyb" betLabel={t('matchDetails.betOn')} />
             </div>
           </div>
         )}
@@ -204,7 +204,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
             <div className="bg-gradient-to-r from-emerald-500/10 to-primary/10 border border-emerald-500/30 rounded-lg p-2.5 sm:p-3">
               <div className="flex items-center gap-1.5 mb-1.5">
                 <span className="text-[10px] sm:text-xs font-bold text-emerald-400 uppercase tracking-wider">
-                  🤖 AI Recommendation
+                  {t('matchDetails.aiRecommendation')}
                 </span>
               </div>
               <p className="text-xs sm:text-sm font-semibold text-foreground">
@@ -221,7 +221,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
 
         <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
           <p className="text-[10px] sm:text-xs text-muted-foreground text-center leading-relaxed">
-            Probabilité de victoire de série ({format})
+            {t('matchDetails.seriesWinProbability')} ({format})
           </p>
         </div>
       </div>
