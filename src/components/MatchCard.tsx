@@ -35,11 +35,24 @@ interface MatchCardProps {
   };
 }
 
-const OddsCell = ({ label, odds, recommendedSide }: { label: string; odds?: BookmakerOdds; recommendedSide?: 'team1' | 'team2' | null }) => {
+const OddsCell = ({ label, odds, recommendedSide, affiliateUrl }: { label: string; odds?: BookmakerOdds; recommendedSide?: 'team1' | 'team2' | null; affiliateUrl?: string }) => {
   if (!odds || (odds.team1 === null && odds.team2 === null)) return null;
   return (
     <div className="flex items-center justify-between text-[10px] sm:text-xs">
-      <span className="text-muted-foreground font-medium">{label}</span>
+      <span className="text-muted-foreground font-medium flex items-center gap-1">
+        {label}
+        {affiliateUrl && (
+          <a
+            href={affiliateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="text-[9px] px-1 py-0.5 rounded bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+          >
+            ↗
+          </a>
+        )}
+      </span>
       <div className="flex gap-3">
         <span className={`font-semibold ${recommendedSide === 'team1' ? 'text-emerald-400' : 'text-foreground'}`}>
           {odds.team1?.toFixed(2) ?? '—'}{recommendedSide === 'team1' ? ' ⭐' : ''}
@@ -180,16 +193,8 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
             <div className="space-y-1.5">
               <OddsCell label="Pinnacle" odds={pinnacleOdds} recommendedSide={pinnacleSide} />
               <OddsCell label="Unibet" odds={unibetOdds} recommendedSide={unibetSide} />
-              <OddsCell label="Stake" odds={stakeOdds} recommendedSide={stakeSide} />
+              <OddsCell label="Stake" odds={stakeOdds} recommendedSide={stakeSide} affiliateUrl="https://stake.com/?c=unYcYWyb" />
             </div>
-            <a
-              href="https://stake.com/?c=unYcYWyb"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary/10 border border-primary/30 text-xs font-semibold text-primary hover:bg-primary/20 transition-colors"
-            >
-              🎰 Parier sur Stake
-            </a>
           </div>
         )}
 
