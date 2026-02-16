@@ -185,11 +185,22 @@ const Index = () => {
           default:
             return true;
         }
-      });
+    });
+    }
+    
+    // For non-premium: put the free match first
+    if (!isPremium && freeMatchId) {
+      const freeIdx = filtered.findIndex(m => 
+        `${m.tournament}-${m.date}-${m.time}-${m.team1}-${m.team2}` === freeMatchId
+      );
+      if (freeIdx > 0) {
+        const [freeMatch] = filtered.splice(freeIdx, 1);
+        filtered = [freeMatch, ...filtered];
+      }
     }
     
     return filtered;
-  }, [upcomingMatches, selectedLeague, selectedDate]);
+  }, [upcomingMatches, selectedLeague, selectedDate, isPremium, freeMatchId]);
 
   const calculateMinOdds = (proba: number) => {
     return (100 / proba).toFixed(2);
