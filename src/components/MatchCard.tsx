@@ -47,9 +47,9 @@ const OddsCell = ({ label, odds, recommendedSide, affiliateUrl }: { label: strin
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="text-[9px] px-1 py-0.5 rounded bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+            className="text-[9px] px-1.5 py-0.5 rounded-full bg-gradient-to-r from-emerald-500/20 to-primary/20 border border-emerald-500/40 text-emerald-400 hover:from-emerald-500/40 hover:to-primary/40 hover:scale-110 transition-all duration-200 font-bold tracking-wide animate-pulse hover:animate-none"
           >
-            ↗
+            Parier ↗
           </a>
         )}
       </span>
