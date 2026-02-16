@@ -267,6 +267,10 @@
     "vs": "VS",
     "aiPrediction": "AI预测",
     "winProbability": "胜率%",
-    "missingPlayers": "缺少选手来构建雷达图。"
+    "missingPlayers": "缺少选手来构建雷达图。",
+    "odds": "赔率",
+    "aiRecommendation": "🤖 AI推荐",
+    "betOn": "投注 ↗",
+    "seriesWinProbability": "系列赛胜率"
   }
 }

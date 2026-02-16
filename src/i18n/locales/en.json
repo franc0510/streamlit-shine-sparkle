@@ -267,6 +267,10 @@
     "vs": "VS",
     "aiPrediction": "AI Prediction",
     "winProbability": "Win %",
-    "missingPlayers": "Missing players to build radars."
+    "missingPlayers": "Missing players to build radars.",
+    "odds": "Odds",
+    "aiRecommendation": "🤖 AI Recommendation",
+    "betOn": "Bet ↗",
+    "seriesWinProbability": "Series win probability"
   }
 }
