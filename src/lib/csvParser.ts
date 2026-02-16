@@ -1,3 +1,16 @@
+export interface BookmakerOdds {
+  team1: number | null;
+  team2: number | null;
+}
+
+export interface BetRecommendation {
+  bookmaker: string;
+  team: string; // "TEAM1", "TEAM2", or "NO BET"
+  odds: number | null;
+  ev: number | null;
+  text: string;
+}
+
 export interface Match {
   date: string;
   time: string;
@@ -5,27 +18,37 @@ export interface Match {
   format: string;
   team1: string;
   team2: string;
-  used_team1: string; // Exact name from parquet
-  used_team2: string; // Exact name from parquet
+  used_team1: string;
+  used_team2: string;
   proba1: number;
   proba2: number;
   status?: string;
   matchDate?: Date;
+  // Bookmaker odds
+  pinnacleOdds?: BookmakerOdds;
+  unibetOdds?: BookmakerOdds;
+  stakeOdds?: BookmakerOdds;
+  // Recommendations
+  recoPinnacle?: BetRecommendation;
+  recoStake?: BetRecommendation;
+  bestBet?: {
+    bookmaker: string;
+    text: string;
+    odds: number | null;
+    ev: number | null;
+  };
 }
 
 // GitHub raw URLs for CSV files (updated by GitHub Actions)
 const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/franc0510/streamlit-shine-sparkle/main/public/Documents';
 
 const fetchCSVFromGitHub = async (filename: string): Promise<string> => {
-  // Add cache-busting timestamp to avoid browser caching
   const cacheBuster = `?t=${Date.now()}`;
   const url = `${GITHUB_RAW_BASE}/${filename}${cacheBuster}`;
   
   const response = await fetch(url, {
-    cache: 'no-store', // Ensure no caching
-    headers: {
-      'Accept': 'text/plain',
-    },
+    cache: 'no-store',
+    headers: { 'Accept': 'text/plain' },
   });
   
   if (!response.ok) {
@@ -35,12 +58,25 @@ const fetchCSVFromGitHub = async (filename: string): Promise<string> => {
   return response.text();
 };
 
+const parseNum = (val: string | undefined): number | null => {
+  if (!val || val.trim() === '') return null;
+  const n = parseFloat(val);
+  return isNaN(n) ? null : n;
+};
+
 export const parseScheduleCSV = async (): Promise<Match[]> => {
   try {
     const text = await fetchCSVFromGitHub('schedule_with_probs.csv');
-    const lines = text.split('\n').slice(1); // Skip header
+    const lines = text.split('\n');
+    const header = lines[0].split(',');
     
-    return lines
+    // Build column index map
+    const col: Record<string, number> = {};
+    header.forEach((h, i) => { col[h.trim()] = i; });
+    
+    const dataLines = lines.slice(1);
+    
+    return dataLines
       .filter(line => line.trim())
       .map(line => {
         const cols = line.split(',');
@@ -49,15 +85,49 @@ export const parseScheduleCSV = async (): Promise<Match[]> => {
         return {
           date: dateTime.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' }),
           time: dateTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
-          tournament: cols[1],
-          format: cols[2],
-          team1: cols[3],
-          team2: cols[4],
-          proba1: parseFloat(cols[5]),
-          proba2: parseFloat(cols[6]),
-          used_team1: cols[10] || cols[3], // Column 10: used_team1
-          used_team2: cols[11] || cols[4], // Column 11: used_team2
-          status: cols[9]
+          tournament: cols[col['league'] ?? 1],
+          format: cols[col['bo_format'] ?? 2],
+          team1: cols[col['team1'] ?? 3],
+          team2: cols[col['team2'] ?? 4],
+          proba1: parseFloat(cols[col['proba_team1_pct'] ?? 5]),
+          proba2: parseFloat(cols[col['proba_team2_pct'] ?? 6]),
+          used_team1: cols[col['used_team1'] ?? 10] || cols[col['team1'] ?? 3],
+          used_team2: cols[col['used_team2'] ?? 11] || cols[col['team2'] ?? 4],
+          status: cols[col['status'] ?? 9],
+          // Bookmaker odds
+          pinnacleOdds: {
+            team1: parseNum(cols[col['pinnacle_team1']]),
+            team2: parseNum(cols[col['pinnacle_team2']]),
+          },
+          unibetOdds: {
+            team1: parseNum(cols[col['unibet_team1']]),
+            team2: parseNum(cols[col['unibet_team2']]),
+          },
+          stakeOdds: {
+            team1: parseNum(cols[col['stake.bet.br_team1']]),
+            team2: parseNum(cols[col['stake.bet.br_team2']]),
+          },
+          // Recommendations
+          recoPinnacle: {
+            bookmaker: 'Pinnacle',
+            team: cols[col['reco_pinnacle']] || 'NO BET',
+            odds: parseNum(cols[col['reco_pinnacle_odds']]),
+            ev: parseNum(cols[col['reco_pinnacle_ev']]),
+            text: cols[col['reco_pinnacle_text']] || '',
+          },
+          recoStake: {
+            bookmaker: 'Stake',
+            team: cols[col['reco_stake']] || 'NO BET',
+            odds: parseNum(cols[col['reco_stake_odds']]),
+            ev: parseNum(cols[col['reco_stake_ev']]),
+            text: cols[col['reco_stake_text']] || '',
+          },
+          bestBet: {
+            bookmaker: cols[col['best_bookmaker']] || '',
+            text: cols[col['best_bet']] || '',
+            odds: parseNum(cols[col['best_odds']]),
+            ev: parseNum(cols[col['best_ev']]),
+          },
         };
       })
       .filter(match => match.status === 'ok');
