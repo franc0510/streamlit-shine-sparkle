@@ -71,7 +71,8 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
   const { t } = useTranslation();
 
   const hasOdds = pinnacleOdds?.team1 !== null || unibetOdds?.team1 !== null || polymarketOdds?.team1 !== null || stakeOdds?.team1 !== null;
-  const hasBestBet = bestBet && bestBet.bookmaker && bestBet.bookmaker !== '' && bestBet.text && bestBet.text !== 'NO BET';
+  const allowedBookmakers = ['pinnacle', 'unibet', 'polymarket', 'stake'];
+  const hasBestBet = bestBet && bestBet.bookmaker && bestBet.bookmaker !== '' && bestBet.text && bestBet.text !== 'NO BET' && allowedBookmakers.includes(bestBet.bookmaker.toLowerCase());
 
   // Determine recommended side for each bookmaker
   const getRecoSide = (reco?: BetRecommendation): 'team1' | 'team2' | null => {
