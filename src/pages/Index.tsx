@@ -137,7 +137,7 @@ const Index = () => {
     if (upcomingMatches.length === 0) return null;
     // Prefer first match with odds available
     const matchWithOdds = upcomingMatches.find(m => 
-      m.pinnacleOdds?.team1 !== null || m.unibetOdds?.team1 !== null || m.stakeOdds?.team1 !== null
+      m.pinnacleOdds?.team1 !== null || m.unibetOdds?.team1 !== null || m.polymarketOdds?.team1 !== null || m.stakeOdds?.team1 !== null
     );
     const chosen = matchWithOdds || upcomingMatches[0];
     return `${chosen.tournament}-${chosen.date}-${chosen.time}-${chosen.team1}-${chosen.team2}`;
@@ -350,6 +350,7 @@ const Index = () => {
                     }}
                     pinnacleOdds={match.pinnacleOdds}
                     unibetOdds={match.unibetOdds}
+                    polymarketOdds={match.polymarketOdds}
                     stakeOdds={match.stakeOdds}
                     recoPinnacle={match.recoPinnacle}
                     recoStake={match.recoStake}
@@ -395,6 +396,7 @@ const Index = () => {
                 }}
                 pinnacleOdds={match.pinnacleOdds}
                 unibetOdds={match.unibetOdds}
+                polymarketOdds={match.polymarketOdds}
                 stakeOdds={match.stakeOdds}
                 recoPinnacle={match.recoPinnacle}
                 recoStake={match.recoStake}

@@ -27,6 +27,7 @@ export interface Match {
   // Bookmaker odds
   pinnacleOdds?: BookmakerOdds;
   unibetOdds?: BookmakerOdds;
+  polymarketOdds?: BookmakerOdds;
   stakeOdds?: BookmakerOdds;
   // Recommendations
   recoPinnacle?: BetRecommendation;
@@ -102,6 +103,10 @@ export const parseScheduleCSV = async (): Promise<Match[]> => {
           unibetOdds: {
             team1: parseNum(cols[col['unibet_team1']]),
             team2: parseNum(cols[col['unibet_team2']]),
+          },
+          polymarketOdds: {
+            team1: parseNum(cols[col['polymarket_team1']]),
+            team2: parseNum(cols[col['polymarket_team2']]),
           },
           stakeOdds: {
             team1: parseNum(cols[col['stake.bet.br_team1']]),

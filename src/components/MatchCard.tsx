@@ -24,6 +24,7 @@ interface MatchCardProps {
   };
   pinnacleOdds?: BookmakerOdds;
   unibetOdds?: BookmakerOdds;
+  polymarketOdds?: BookmakerOdds;
   stakeOdds?: BookmakerOdds;
   recoPinnacle?: BetRecommendation;
   recoStake?: BetRecommendation;
@@ -66,10 +67,10 @@ const OddsCell = ({ label, odds, recommendedSide, affiliateUrl, betLabel }: { la
   );
 };
 
-export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdds, pinnacleOdds, unibetOdds, stakeOdds, recoPinnacle, recoStake, bestBet }: MatchCardProps) => {
+export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdds, pinnacleOdds, unibetOdds, polymarketOdds, stakeOdds, recoPinnacle, recoStake, bestBet }: MatchCardProps) => {
   const { t } = useTranslation();
 
-  const hasOdds = pinnacleOdds?.team1 !== null || unibetOdds?.team1 !== null || stakeOdds?.team1 !== null;
+  const hasOdds = pinnacleOdds?.team1 !== null || unibetOdds?.team1 !== null || polymarketOdds?.team1 !== null || stakeOdds?.team1 !== null;
   const hasBestBet = bestBet && bestBet.bookmaker && bestBet.bookmaker !== '' && bestBet.text && bestBet.text !== 'NO BET';
 
   // Determine recommended side for each bookmaker
@@ -85,6 +86,10 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
   const unibetSide = unibetOdds ? (
     (unibetOdds.team1 && unibetOdds.team1 >= minOdds.team1) ? 'team1' :
     (unibetOdds.team2 && unibetOdds.team2 >= minOdds.team2) ? 'team2' : null
+  ) : null;
+  const polymarketSide = polymarketOdds ? (
+    (polymarketOdds.team1 && polymarketOdds.team1 >= minOdds.team1) ? 'team1' :
+    (polymarketOdds.team2 && polymarketOdds.team2 >= minOdds.team2) ? 'team2' : null
   ) : null;
   const stakeSide = stakeOdds ? (
     (stakeOdds.team1 && stakeOdds.team1 >= minOdds.team1) ? 'team1' :
@@ -193,6 +198,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
             <div className="space-y-1.5">
               <OddsCell label="Pinnacle" odds={pinnacleOdds} recommendedSide={pinnacleSide} />
               <OddsCell label="Unibet" odds={unibetOdds} recommendedSide={unibetSide} />
+              <OddsCell label="Polymarket" odds={polymarketOdds} recommendedSide={polymarketSide} />
               <OddsCell label="Stake" odds={stakeOdds} recommendedSide={stakeSide} affiliateUrl="https://stake.com/?c=unYcYWyb" betLabel={t('matchDetails.betOn')} />
             </div>
           </div>
