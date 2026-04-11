@@ -128,13 +128,18 @@ serve(async (req) => {
     const productId = typeof item.price.product === "string" ? item.price.product : (item.price.product?.id ?? null);
     const subscriptionEnd = new Date(activeSub.current_period_end * 1000).toISOString();
 
-    log("Active subscription found", { productId, subscriptionEnd });
+    const isTrialing = activeSub.status === "trialing";
+    const trialEnd = activeSub.trial_end ? new Date(activeSub.trial_end * 1000).toISOString() : null;
+
+    log("Active subscription found", { productId, subscriptionEnd, isTrialing, trialEnd });
 
     return new Response(
       JSON.stringify({
         subscribed: true,
         product_id: productId,
         subscription_end: subscriptionEnd,
+        is_trialing: isTrialing,
+        trial_end: trialEnd,
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },

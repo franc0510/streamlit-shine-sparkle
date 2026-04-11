@@ -6,6 +6,8 @@ interface SubscriptionContextType {
   subscriptionStatus: SubscriptionStatus;
   isLoading: boolean;
   isPremium: boolean;
+  isTrialing: boolean;
+  trialEnd: string | null;
   refreshSubscription: () => Promise<void>;
 }
 
@@ -16,11 +18,15 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
     subscribed: false,
     product_id: null,
     subscription_end: null,
+    is_trialing: false,
+    trial_end: null,
   });
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const isPremium = subscriptionStatus.subscribed;
+  const isTrialing = subscriptionStatus.is_trialing ?? false;
+  const trialEnd = subscriptionStatus.trial_end ?? null;
 
   const refreshSubscription = async () => {
     // Éviter les appels multiples simultanés
@@ -44,6 +50,8 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
           subscribed: false,
           product_id: null,
           subscription_end: null,
+          is_trialing: false,
+          trial_end: null,
         });
         return;
       }
@@ -58,6 +66,8 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
         subscribed: false,
         product_id: null,
         subscription_end: null,
+        is_trialing: false,
+        trial_end: null,
       });
     } finally {
       console.log('[SubscriptionContext] Refresh complete');
@@ -95,6 +105,8 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
             subscribed: false,
             product_id: null,
             subscription_end: null,
+            is_trialing: false,
+            trial_end: null,
           });
         }
       }
@@ -123,6 +135,8 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
         subscriptionStatus,
         isLoading,
         isPremium,
+        isTrialing,
+        trialEnd,
         refreshSubscription,
       }}
     >
