@@ -56,6 +56,7 @@
     "premiumSubscription": "abonnement Premium",
     "premiumMember": "Vous êtes membre Premium - Accès illimité",
     "freeMatchInfo": "1 match gratuit • {count} matchs Premium",
+    "trialLimitInfo": "Matchs limités aux 7 prochains jours",
     "premiumContent": "Contenu Premium",
     "unlockPredictions": "Débloquez toutes les prédictions",
     "subscribeButton": "S'abonner",
@@ -247,7 +248,12 @@
     "activeBadge": "Actif",
     "premiumSubscription": "Abonnement Premium",
     "renewalDate": "Renouvellement le",
-    "cancelAnytime": "Annulation possible à tout moment"
+    "cancelAnytime": "Annulation possible à tout moment",
+    "freeTrialBadge": "7 jours d'essai gratuit",
+    "startFreeTrial": "Essayer gratuitement 7 jours",
+    "trialInfo": "7 jours gratuits, puis 20€/mois. Annulation possible à tout moment.",
+    "trialBadge": "Essai gratuit",
+    "trialEndsOn": "Essai gratuit jusqu'au"
   },
   "matchDetails": {
     "back": "Retour à League of Legends",

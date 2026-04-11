@@ -8,7 +8,11 @@ export interface SubscriptionStatus {
   subscribed: boolean;
   product_id: string | null;
   subscription_end: string | null;
+  is_trialing?: boolean;
+  trial_end?: string | null;
 }
+
+export const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/dRmaEX7bZ3cT3UDaaKak002";
 
 export type DiagnosticStep = {
   name: string;

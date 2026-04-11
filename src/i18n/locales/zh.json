@@ -56,6 +56,7 @@
     "premiumSubscription": "高级订阅",
     "premiumMember": "您是高级会员 - 无限访问",
     "freeMatchInfo": "1场免费比赛 • {count}场高级比赛",
+    "trialLimitInfo": "比赛仅限未来7天",
     "premiumContent": "高级内容",
     "unlockPredictions": "解锁所有预测",
     "subscribeButton": "订阅",
@@ -247,7 +248,12 @@
     "activeBadge": "活跃",
     "premiumSubscription": "高级订阅",
     "renewalDate": "续订日期",
-    "cancelAnytime": "随时取消"
+    "cancelAnytime": "随时取消",
+    "freeTrialBadge": "7天免费试用",
+    "startFreeTrial": "开始7天免费试用",
+    "trialInfo": "7天免费，之后每月20€。随时取消。",
+    "trialBadge": "免费试用",
+    "trialEndsOn": "免费试用至"
   },
   "matchDetails": {
     "back": "返回英雄联盟",

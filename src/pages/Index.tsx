@@ -8,6 +8,7 @@ import { useEffect, useState, useMemo } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/contexts/SubscriptionContext";
+import { STRIPE_PAYMENT_LINK } from "@/lib/subscription";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 
@@ -51,7 +52,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
-  const { isPremium, refreshSubscription } = useSubscription();
+  const { isPremium, isTrialing, refreshSubscription } = useSubscription();
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
   
@@ -153,6 +154,21 @@ const Index = () => {
   const filteredMatches = useMemo(() => {
     let filtered = upcomingMatches;
     
+    // For trial users: only show matches within the next 7 days
+    if (isPremium && isTrialing) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const trialLimit = new Date(today);
+      trialLimit.setDate(trialLimit.getDate() + 7);
+      
+      filtered = filtered.filter(m => {
+        const matchDate = parseMatchDate(m.date);
+        if (!matchDate) return true;
+        matchDate.setHours(0, 0, 0, 0);
+        return matchDate >= today && matchDate <= trialLimit;
+      });
+    }
+    
     // Filter by league
     if (selectedLeague !== "all") {
       filtered = filtered.filter(m => m.tournament === selectedLeague);
@@ -171,7 +187,7 @@ const Index = () => {
       
       filtered = filtered.filter(m => {
         const matchDate = parseMatchDate(m.date);
-        if (!matchDate) return true; // Keep matches we can't parse
+        if (!matchDate) return true;
         
         matchDate.setHours(0, 0, 0, 0);
         
@@ -200,7 +216,7 @@ const Index = () => {
     }
     
     return filtered;
-  }, [upcomingMatches, selectedLeague, selectedDate, isPremium, freeMatchId]);
+  }, [upcomingMatches, selectedLeague, selectedDate, isPremium, isTrialing, freeMatchId]);
 
   const calculateMinOdds = (proba: number) => {
     return (100 / proba).toFixed(2);
@@ -259,12 +275,19 @@ const Index = () => {
             </div>
           )}
           
-          {isPremium && (
+          {isPremium && !isTrialing && (
             <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 mb-8">
               <Check className="w-5 h-5 text-primary" />
               <p className="text-sm text-foreground/90 font-semibold">
                 {t('home.premiumMember')}
               </p>
+            </div>
+          )}
+          {isPremium && isTrialing && (
+            <div className="inline-flex items-center gap-3 bg-amber-500/10 border border-amber-500/30 rounded-lg px-6 py-3 mb-8">
+              <span className="text-sm font-semibold text-amber-500">
+                🎁 {t('auth.trialBadge')} — {t('home.trialLimitInfo')}
+              </span>
             </div>
           )}
         </div>
