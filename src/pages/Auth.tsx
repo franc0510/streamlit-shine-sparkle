@@ -340,7 +340,9 @@ const Auth = () => {
               {isPremium ? (
               <>
                   <div className="absolute top-4 right-4">
-                    <Badge className="bg-primary text-primary-foreground">{t('auth.activeBadge')}</Badge>
+                    <Badge className="bg-primary text-primary-foreground">
+                      {isTrialing ? t('auth.trialBadge') : t('auth.activeBadge')}
+                    </Badge>
                   </div>
 
                   <div className="mb-6">
@@ -351,7 +353,12 @@ const Auth = () => {
                       </span>
                       <span className="text-muted-foreground">/mois</span>
                     </div>
-                    {subscriptionStatus.subscription_end && (
+                    {isTrialing && trialEnd && (
+                      <p className="text-sm text-amber-500 mt-2 font-semibold">
+                        🎁 {t('auth.trialEndsOn')} {new Date(trialEnd).toLocaleDateString("fr-FR")}
+                      </p>
+                    )}
+                    {!isTrialing && subscriptionStatus.subscription_end && (
                       <p className="text-sm text-muted-foreground mt-2">
                         {t('auth.renewalDate')} {new Date(subscriptionStatus.subscription_end).toLocaleDateString("fr-FR")}
                       </p>
