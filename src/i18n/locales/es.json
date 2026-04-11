@@ -56,6 +56,7 @@
     "premiumSubscription": "suscripción Premium",
     "premiumMember": "Eres miembro Premium - Acceso ilimitado",
     "freeMatchInfo": "1 partido gratis • {count} partidos Premium",
+    "trialLimitInfo": "Partidos limitados a los próximos 7 días",
     "premiumContent": "Contenido Premium",
     "unlockPredictions": "Desbloquea todas las predicciones",
     "subscribeButton": "Suscribirse",

@@ -56,6 +56,7 @@
     "premiumSubscription": "Premium subscription",
     "premiumMember": "You are a Premium member - Unlimited access",
     "freeMatchInfo": "1 free match • {count} Premium matches",
+    "trialLimitInfo": "Matches limited to the next 7 days",
     "premiumContent": "Premium Content",
     "unlockPredictions": "Unlock all predictions",
     "subscribeButton": "Subscribe",
