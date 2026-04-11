@@ -275,12 +275,19 @@ const Index = () => {
             </div>
           )}
           
-          {isPremium && (
+          {isPremium && !isTrialing && (
             <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 mb-8">
               <Check className="w-5 h-5 text-primary" />
               <p className="text-sm text-foreground/90 font-semibold">
                 {t('home.premiumMember')}
               </p>
+            </div>
+          )}
+          {isPremium && isTrialing && (
+            <div className="inline-flex items-center gap-3 bg-amber-500/10 border border-amber-500/30 rounded-lg px-6 py-3 mb-8">
+              <span className="text-sm font-semibold text-amber-500">
+                🎁 {t('auth.trialBadge')} — {t('home.trialLimitInfo')}
+              </span>
             </div>
           )}
         </div>
