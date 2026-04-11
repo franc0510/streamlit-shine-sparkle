@@ -247,7 +247,12 @@
     "activeBadge": "Active",
     "premiumSubscription": "Premium Subscription",
     "renewalDate": "Renewal on",
-    "cancelAnytime": "Cancel anytime"
+    "cancelAnytime": "Cancel anytime",
+    "freeTrialBadge": "7-day free trial",
+    "startFreeTrial": "Start 7-day free trial",
+    "trialInfo": "7 days free, then €20/month. Cancel anytime.",
+    "trialBadge": "Free trial",
+    "trialEndsOn": "Free trial until"
   },
   "matchDetails": {
     "back": "Back to League of Legends",

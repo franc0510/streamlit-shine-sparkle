@@ -247,7 +247,12 @@
     "activeBadge": "Actif",
     "premiumSubscription": "Abonnement Premium",
     "renewalDate": "Renouvellement le",
-    "cancelAnytime": "Annulation possible à tout moment"
+    "cancelAnytime": "Annulation possible à tout moment",
+    "freeTrialBadge": "7 jours d'essai gratuit",
+    "startFreeTrial": "Essayer gratuitement 7 jours",
+    "trialInfo": "7 jours gratuits, puis 20€/mois. Annulation possible à tout moment.",
+    "trialBadge": "Essai gratuit",
+    "trialEndsOn": "Essai gratuit jusqu'au"
   },
   "matchDetails": {
     "back": "Retour à League of Legends",
