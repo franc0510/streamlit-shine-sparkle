@@ -10,7 +10,7 @@ import { Lock, Mail, User, CreditCard, Check, ExternalLink } from "lucide-react"
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-import { createCheckoutSession, openCustomerPortal, type DiagnosticStep } from "@/lib/subscription";
+import { createCheckoutSession, openCustomerPortal, STRIPE_PAYMENT_LINK, type DiagnosticStep } from "@/lib/subscription";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { z } from "zod";
@@ -42,7 +42,7 @@ const Auth = () => {
   const [diagnostics, setDiagnostics] = useState<DiagnosticStep[]>([]);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { isPremium, subscriptionStatus, refreshSubscription } = useSubscription();
+  const { isPremium, isTrialing, trialEnd, subscriptionStatus, refreshSubscription } = useSubscription();
 
   useEffect(() => {
     // Pas de redirection automatique depuis la page abonnement
@@ -155,38 +155,8 @@ const Auth = () => {
     }
   };
 
-  const handleSubscribe = async () => {
-    if (!user) {
-      toast({
-        title: t('auth.loginRequired'),
-        description: t('auth.loginRequiredDesc'),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setCheckoutLoading(true);
-    try {
-      const url = await createCheckoutSession(user.email);
-      if (url) {
-        window.location.href = url;
-      } else {
-        toast({
-          title: t('auth.checkoutError'),
-          description: t('auth.checkoutErrorDesc'),
-          variant: "destructive",
-        });
-      }
-    } catch (e) {
-      console.error("[subscribe] exception:", e);
-      toast({
-        title: t('auth.checkoutError'),
-        description: t('auth.checkoutErrorGeneric'),
-        variant: "destructive",
-      });
-    } finally {
-      setCheckoutLoading(false);
-    }
+  const handleSubscribe = () => {
+    window.location.href = STRIPE_PAYMENT_LINK;
   };
 
   const handleManageSubscription = async () => {
@@ -426,6 +396,9 @@ const Auth = () => {
                       </span>
                       <span className="text-muted-foreground">/mois</span>
                     </div>
+                    <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-green-500/10 px-4 py-1.5 text-sm font-semibold text-green-500">
+                      🎁 {t('auth.freeTrialBadge')}
+                    </div>
                   </div>
 
                   <div className="space-y-4 mb-8">
@@ -444,19 +417,12 @@ const Auth = () => {
                     className="w-full gap-2"
                     variant="default"
                     onClick={handleSubscribe}
-                    disabled={authLoading || !user || checkoutLoading}
                   >
                     <CreditCard className="w-4 h-4" />
-                    {checkoutLoading
-                      ? t('auth.subscriptionInProgress')
-                      : authLoading
-                        ? t('auth.subscriptionInProgress')
-                        : !user
-                          ? t('auth.loginTitle')
-                          : t('auth.subscribe')}
+                    {t('auth.startFreeTrial')}
                   </Button>
 
-                  <p className="text-xs text-muted-foreground text-center mt-4">Annulation possible à tout moment</p>
+                  <p className="text-xs text-muted-foreground text-center mt-4">{t('auth.trialInfo')}</p>
                 </>
               )}
             </Card>
