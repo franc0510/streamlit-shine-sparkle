@@ -8,6 +8,7 @@ import { useEffect, useState, useMemo } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/contexts/SubscriptionContext";
+import { STRIPE_PAYMENT_LINK } from "@/lib/subscription";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 
