@@ -3,7 +3,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, Sparkles } from "lucide-react";
-import { createCheckoutSession } from "@/lib/subscription";
+import { STRIPE_PAYMENT_LINK } from "@/lib/subscription";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
@@ -33,40 +33,8 @@ export const PremiumGate = ({
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleUpgrade = async () => {
-    if (!user) {
-      toast({
-        title: "Connexion requise",
-        description: "Veuillez vous connecter pour passer Premium",
-        variant: "destructive",
-      });
-      navigate("/auth");
-      return;
-    }
-
-    try {
-      const checkoutUrl = await createCheckoutSession(user.email);
-      if (checkoutUrl) {
-        window.location.href = checkoutUrl;
-        toast({
-          title: "Redirection vers Stripe",
-          description: "Vous allez être redirigé...",
-        });
-      } else {
-        toast({
-          title: "Erreur",
-          description: "Impossible de créer la session de paiement",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      console.error("Error creating checkout:", error);
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue",
-        variant: "destructive",
-      });
-    }
+  const handleUpgrade = () => {
+    window.location.href = STRIPE_PAYMENT_LINK;
   };
 
   // Si premium, afficher tout le contenu
