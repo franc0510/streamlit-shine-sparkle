@@ -44,7 +44,8 @@
   },
   "home": {
     "title": "英雄联盟",
-    "subtitle": "基于高级统计模型的预测",
+    "subtitle": "英雄联盟预测与电竞博彩分析",
+    "tagline": "LFL、LEC、LCK、LPL、LCS 及 15+ 联赛",
     "loadingMatches": "加载比赛中...",
     "upcomingMatches": "即将到来的日程",
     "recentPredictions": "最近的预测",
@@ -55,11 +56,23 @@
     "fullAccess": "通过以下方式完全访问预测",
     "premiumSubscription": "高级订阅",
     "premiumMember": "您是高级会员 - 无限访问",
-    "freeMatchInfo": "1场免费比赛 • {count}场高级比赛",
+    "freeMatchInfo": "{{count}} 场免费比赛",
     "trialLimitInfo": "比赛仅限未来7天",
     "premiumContent": "高级内容",
     "unlockPredictions": "解锁所有预测",
     "subscribeButton": "订阅",
+    "loadMore": "查看接下来的 {{count}} 场比赛（剩余 {{remaining}} 场）",
+    "social": {
+      "subscribers": "+1,000 订阅用户",
+      "upToDate": "每场比赛前更新预测",
+      "secure": "安全支付",
+      "leagues": "15+ 联赛分析",
+      "freeTrial": "7 天免费试用"
+    },
+    "cta": {
+      "freeTrial": "7天免费试用",
+      "seeResults": "查看我们的结果"
+    },
     "premiumCta": {
       "title": "解锁所有预测",
       "description": "访问我们所有的分析、高级预测和详细统计数据，以最大化您的成功机会。",
@@ -67,9 +80,69 @@
       "subscribePremium": "订阅高级版"
     }
   },
+  "pricing": {
+    "title": "选择您的 PredictEsport 套餐",
+    "subtitle": "通过我们的 AI 访问所有英雄联盟预测。可随时取消。",
+    "trialBadge": "7 天免费试用",
+    "accountRequiredHint": "请先创建账户，以便将订阅与您的 PredictEsport 个人资料关联。",
+    "loginRequiredTitle": "需要账户",
+    "loginRequiredDesc": "请先登录或注册账户再订阅。",
+    "perMonth": "/月",
+    "perYear": "/年",
+    "startTrialBtn": "开始免费试用",
+    "haveAccount": "已经有账户？",
+    "loginLink": "登录",
+    "monthly": {
+      "title": "月度",
+      "desc": "按月计费，无承诺。",
+      "trialNote": "7 天免费，之后 14.90 欧元/月"
+    },
+    "yearly": {
+      "title": "年度",
+      "badge": "最佳优惠 · 免费2个月",
+      "desc": "选择年度套餐每年可节省约 30 欧元。",
+      "savingsNote": "相比月度免费 2 个月",
+      "trialNote": "7 天免费，之后 149.90 欧元/年"
+    },
+    "features": {
+      "f1": "无限制访问所有 LoL 预测",
+      "f2": "覆盖 15+ 主要联赛（LFL、LEC、LCK、LPL、LCS、MSI、Worlds...）",
+      "f3": "基于 LightGBM 与 Voting Ensemble 的 AI 推荐",
+      "f4": "自动识别价值投注（正 EV）",
+      "f5": "Pinnacle、Unibet、Polymarket、Stake 赔率比较",
+      "f6": "球员与战队的详细统计数据",
+      "f7": "新比赛与机会通知",
+      "f8": "通过电子邮件和 Discord 获得优先支持"
+    },
+    "reassurance": {
+      "secure": "Stripe 安全支付",
+      "secureDesc": "信用卡、Apple Pay、Google Pay",
+      "cancel": "一键取消",
+      "cancelDesc": "无承诺，从账户管理",
+      "algo": "训练完善的算法",
+      "algoDesc": "10 年 LoL 竞技数据"
+    }
+  },
+  "results": {
+    "title": "我们的成果与表现",
+    "subtitle": "了解我们的机器学习算法在电竞博彩上的真实表现。"
+  },
+  "faq": {
+    "title": "关于 AI 与电竞预测的常见问题",
+    "subtitle": "关于我们的机器学习算法、覆盖的 LoL 赛事和价值投注方法的所有信息。",
+    "q1": "PredictEsport 的预测是如何生成的？",
+    "a1": "与基于主观意见的网站不同，我们的预测由先进的人工智能引擎生成。我们使用经过 10 年竞技数据（KDA、GPM、视野、BP、版本胜率）训练的机器学习模型（LightGBM、Voting Ensemble）。算法实时处理数千个变量，计算客观且基于数据的胜率。",
+    "q2": "你们提供哪些 LoL 赛事的预测？",
+    "a2": "我们覆盖英雄联盟全球顶级赛事。算法分析包括主要联赛（LEC、LCK、LPL、LCS）、次级联赛（LFL、Arabian 等）和国际赛事（Worlds、MSI）。我们的模型能够适应每个赛区的特点。",
+    "q3": "你们的预测能保证盈利吗？",
+    "a3": "不能。电竞博彩始终包含一定的随机性（"人为因素"）。PredictEsport 提供基于统计概率的决策辅助，以最大化您长期的期望值（EV）。请始终理性投注。",
+    "q4": "竞猜与 AI 预测有什么区别？",
+    "a4": "传统竞猜通常是一个人的看法。PredictEsport 的预测是数学概率计算的结果。我们的模型量化不确定性并识别价值投注（庄家低估的赔率），而不仅仅是猜测胜者。"
+  },
   "about": {
-    "title": "结果",
-    "subtitle": "发现我们算法的性能",
+    "title": "关于我们",
+    "subtitle": "我们的故事、团队和使命",
+    "ctaResults": "查看详细成果",
     "roi": {
       "title": "财务结果（投资回报率）",
       "description": "对我们预测的财务结果感兴趣？留下您的电子邮件，我们将向您发送投资回报率详情。",
@@ -213,7 +286,7 @@
     "unexpectedError": "发生意外错误",
     "loggedInAs": "您已登录",
     "loggedInDesc": "发现我们的高级优惠 →",
-    "price": "€10/月",
+    "price": "14.90 欧元/月",
     "subscribe": "立即订阅",
     "manageSubscription": "管理订阅",
     "premiumFeatures": {
@@ -251,7 +324,7 @@
     "cancelAnytime": "随时取消",
     "freeTrialBadge": "7天免费试用",
     "startFreeTrial": "开始7天免费试用",
-    "trialInfo": "7天免费，之后每月20€。随时取消。",
+    "trialInfo": "7天免费，之后每月14.90 欧元。随时取消。",
     "trialBadge": "免费试用",
     "trialEndsOn": "免费试用至"
   },

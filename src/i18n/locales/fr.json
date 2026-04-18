@@ -44,7 +44,8 @@
   },
   "home": {
     "title": "League of Legends",
-    "subtitle": "Prédictions basées sur des modèles statistiques avancés",
+    "subtitle": "Prédictions LoL & Pronostics Esport",
+    "tagline": "LFL, LEC, LCK, LPL, LCS et 15+ autres leagues",
     "loadingMatches": "Chargement des matchs...",
     "upcomingMatches": "Calendrier à venir",
     "recentPredictions": "Prédictions récentes",
@@ -55,11 +56,23 @@
     "fullAccess": "Accès complet aux prédictions avec un",
     "premiumSubscription": "abonnement Premium",
     "premiumMember": "Vous êtes membre Premium - Accès illimité",
-    "freeMatchInfo": "1 match gratuit • {count} matchs Premium",
+    "freeMatchInfo": "{{count}} matchs gratuits",
     "trialLimitInfo": "Matchs limités aux 7 prochains jours",
     "premiumContent": "Contenu Premium",
     "unlockPredictions": "Débloquez toutes les prédictions",
     "subscribeButton": "S'abonner",
+    "loadMore": "Voir les {{count}} prochains matchs ({{remaining}} restants)",
+    "social": {
+      "subscribers": "+1 000 abonnés",
+      "upToDate": "Pronostics à jour avant chaque match",
+      "secure": "Paiements sécurisés",
+      "leagues": "Analyses 15+ leagues",
+      "freeTrial": "7 jours gratuits"
+    },
+    "cta": {
+      "freeTrial": "7 jours d'essai gratuit",
+      "seeResults": "Voir nos résultats"
+    },
     "premiumCta": {
       "title": "Débloquez toutes les prédictions",
       "description": "Accédez à l'ensemble de nos analyses, prédictions avancées et statistiques détaillées pour maximiser vos chances de succès.",
@@ -67,9 +80,69 @@
       "subscribePremium": "S'abonner Premium"
     }
   },
+  "pricing": {
+    "title": "Choisissez votre formule PredictEsport",
+    "subtitle": "Accédez à toutes les prédictions League of Legends générées par notre IA. Annulation possible à tout moment.",
+    "trialBadge": "7 jours d'essai gratuit",
+    "accountRequiredHint": "Créez d'abord votre compte pour relier votre abonnement à votre profil PredictEsport.",
+    "loginRequiredTitle": "Création de compte requise",
+    "loginRequiredDesc": "Connectez-vous ou créez un compte avant de souscrire.",
+    "perMonth": "/mois",
+    "perYear": "/an",
+    "startTrialBtn": "Démarrer l'essai gratuit",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "loginLink": "Se connecter",
+    "monthly": {
+      "title": "Mensuel",
+      "desc": "Facturation chaque mois, sans engagement.",
+      "trialNote": "7 jours gratuits, puis 14,90€/mois"
+    },
+    "yearly": {
+      "title": "Annuel",
+      "badge": "Meilleure offre · 2 mois offerts",
+      "desc": "Économisez ~30€ par an grâce à l'abonnement annuel.",
+      "savingsNote": "2 mois offerts vs mensuel",
+      "trialNote": "7 jours gratuits, puis 149,90€/an"
+    },
+    "features": {
+      "f1": "Accès illimité à toutes les prédictions LoL",
+      "f2": "Couverture des 15+ leagues majeures (LFL, LEC, LCK, LPL, LCS, MSI, Worlds...)",
+      "f3": "Recommandations IA basées sur LightGBM & Voting Ensemble",
+      "f4": "Identification automatique des value bets (EV positif)",
+      "f5": "Comparaison des cotes Pinnacle, Unibet, Polymarket, Stake",
+      "f6": "Statistiques détaillées par joueur et par équipe",
+      "f7": "Notifications des nouveaux matchs et opportunités",
+      "f8": "Support prioritaire par email et Discord"
+    },
+    "reassurance": {
+      "secure": "Paiement sécurisé Stripe",
+      "secureDesc": "Carte bancaire, Apple Pay, Google Pay",
+      "cancel": "Résiliation en 1 clic",
+      "cancelDesc": "Aucun engagement, gérez via votre espace",
+      "algo": "Algorithme entraîné",
+      "algoDesc": "10 ans de données compétitives LoL"
+    }
+  },
+  "results": {
+    "title": "Nos Résultats & Performances",
+    "subtitle": "Découvrez la performance réelle de notre algorithme de Machine Learning sur les paris esport."
+  },
+  "faq": {
+    "title": "Questions fréquentes sur l'IA et les prédictions esport",
+    "subtitle": "Tout ce qu'il faut savoir sur notre algorithme de Machine Learning, les compétitions LoL couvertes et notre approche value bet.",
+    "q1": "Comment sont générées les prédictions sur PredictEsport ?",
+    "a1": "Contrairement aux sites basés sur des avis subjectifs, nos prédictions sont générées par un moteur d'intelligence artificielle avancé. Nous utilisons des modèles de Machine Learning (LightGBM, Voting Ensemble) entraînés sur 10 ans de données compétitives (KDA, GPM, vision, drafts, winrates par patch). Notre algorithme traite des milliers de variables en temps réel pour calculer des probabilités de victoire objectives et basées sur la donnée.",
+    "q2": "Sur quelles compétitions LoL proposez-vous des pronostics ?",
+    "a2": "Nous couvrons l'élite mondiale de League of Legends. Nos analyses algorithmiques incluent les ligues majeures (LEC, LCK, LPL, LCS) ainsi que les leagues mineures (LFL, Arabian, etc.) et les tournois internationaux (Worlds, MSI). Notre modèle est capable de s'adapter aux spécificités de chaque région.",
+    "q3": "Vos prédictions garantissent-elles des gains ?",
+    "a3": "Non. Les paris esportifs comportent toujours une part d'aléa (le « facteur humain »). PredictEsport fournit une aide à la décision basée sur des probabilités statistiques pour maximiser votre Expected Value (EV) sur le long terme. Nous vous recommandons de toujours parier de manière responsable.",
+    "q4": "Quelle est la différence entre un pronostic et une prédiction par IA ?",
+    "a4": "Un pronostic classique est souvent l'avis d'une personne. Une prédiction PredictEsport est le résultat d'un calcul mathématique de probabilités. Notre modèle quantifie l'incertitude et identifie les value bets (cotes sous-évaluées par les bookmakers) plutôt que de simplement deviner le vainqueur."
+  },
   "about": {
-    "title": "Résultats",
-    "subtitle": "Découvrez les performances de notre algorithme",
+    "title": "À propos",
+    "subtitle": "Notre histoire, notre équipe et notre mission",
+    "ctaResults": "Voir nos résultats détaillés",
     "roi": {
       "title": "Résultats Financiers (ROI)",
       "description": "Intéressé par les résultats financiers de nos prédictions ? Laissez-nous votre email et nous vous enverrons les détails de notre ROI.",
@@ -213,7 +286,7 @@
     "unexpectedError": "Une erreur inattendue s'est produite",
     "loggedInAs": "Vous êtes connecté",
     "loggedInDesc": "Découvrez notre offre Premium ci-contre →",
-    "price": "10€/mois",
+    "price": "14,90€/mois",
     "subscribe": "S'abonner maintenant",
     "manageSubscription": "Gérer mon abonnement",
     "premiumFeatures": {
@@ -251,7 +324,7 @@
     "cancelAnytime": "Annulation possible à tout moment",
     "freeTrialBadge": "7 jours d'essai gratuit",
     "startFreeTrial": "Essayer gratuitement 7 jours",
-    "trialInfo": "7 jours gratuits, puis 20€/mois. Annulation possible à tout moment.",
+    "trialInfo": "7 jours gratuits, puis 14,90€/mois. Annulation possible à tout moment.",
     "trialBadge": "Essai gratuit",
     "trialEndsOn": "Essai gratuit jusqu'au"
   },
