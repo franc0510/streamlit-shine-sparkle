@@ -16,7 +16,8 @@ const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-").replace(/[^a
 const buildMatchUrl = (m: Match) => `/match/${slugify(m.tournament)}/${m.date}/${m.time}/${slugify(m.team1)}-vs-${slugify(m.team2)}?bo=${m.format}`;
 
 const FREE_MATCHES_COUNT = 2;
-const INITIAL_MATCHES_LIMIT = 20;
+const INITIAL_MATCHES_LIMIT = 10;
+const MATCHES_INCREMENT = 10;
 
 const parseMatchDate = (dateStr: string): Date | null => {
   const months: Record<string, number> = {
@@ -209,23 +210,23 @@ const Index = () => {
         {/* HERO */}
         <div className="text-center mb-8 sm:mb-10 animate-fade-in">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-2 bg-gradient-gaming bg-clip-text text-transparent">
-            League of Legends
+            {t("hero.title")}
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl font-display font-semibold text-foreground/90 mb-3">
-            Prédictions LoL & Pronostics Esport
+            {t("hero.subtitle")}
           </p>
           <p className="text-sm sm:text-base text-muted-foreground mb-6 px-4">
-            LFL, LEC, LCK, LPL, LCS et 15+ autres leagues
+            {t("hero.leagues")}
           </p>
 
           {/* Social proof bar — full width, single line with icons */}
           <div className="max-w-5xl mx-auto bg-gradient-card border border-border/50 rounded-xl px-4 py-3 mb-6">
             <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm text-foreground/90">
-              <li className="flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" /> +1 000 abonnés</li>
-              <li className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-primary" /> Pronostics à jour avant chaque match</li>
-              <li className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-primary" /> Paiements sécurisés</li>
-              <li className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" /> Analyses 15+ leagues</li>
-              <li className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-amber-500" /> 7 jours gratuits</li>
+              <li className="flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" /> {t("hero.social.subscribers")}</li>
+              <li className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-primary" /> {t("hero.social.upToDate")}</li>
+              <li className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-amber-500" /> {t("hero.social.freeTrial")}</li>
+              <li className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" /> {t("hero.social.leagues")}</li>
+              <li className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-primary" /> {t("hero.social.securePayments")}</li>
             </ul>
           </div>
 
@@ -234,13 +235,13 @@ const Index = () => {
             <Link to="/pricing">
               <Button size="lg" className="gap-2">
                 <Gift className="w-4 h-4" />
-                7 jours d'essai gratuit
+                {t("hero.ctaTrial")}
               </Button>
             </Link>
             <Link to="/results">
               <Button size="lg" variant="outline" className="gap-2">
                 <Trophy className="w-4 h-4" />
-                Voir nos résultats
+                {t("hero.ctaResults")}
               </Button>
             </Link>
           </div>
@@ -259,10 +260,15 @@ const Index = () => {
             </div>
           )}
 
-          {/* SEO text — small/discreet */}
+          {/* SEO text — invisible (sr-only), heavy keywords */}
           <p className="sr-only">
-            PredictEsport analyse chaque match de League of Legends pour vous donner les meilleures prédictions avant de parier.
-            LFL, LEC, LCK, MSI, Worlds : retrouvez nos pronostics gratuits via notre IA, fruit de notre recherche.
+            {t("hero.seoCopy")}
+            PredictEsport prédictions LoL pronostics esport League of Legends IA Machine Learning LightGBM Voting Ensemble
+            value bet EV expected value LFL LEC LCK LPL LCS MSI Worlds EMEA Masters Arabian League NLC PRM Ultraliga
+            Hitpoint Masters LJL CBLOL LLA. Pinnacle Unibet Polymarket Stake odds comparison.
+            English: best LoL prediction tool, esports betting tips, AI esports predictions, LoL odds analysis,
+            value bet finder, free 7-day trial. Español: pronósticos esports League of Legends IA, mejores cuotas LoL,
+            apuestas valor LFL LEC. 中文: 英雄联盟预测 电竞预测 AI 价值投注 免费试用.
           </p>
         </div>
 
@@ -272,7 +278,7 @@ const Index = () => {
             <h2 className="text-2xl font-display font-bold">{t('home.upcomingMatches')}</h2>
             {!isPremium && (
               <p className="text-xs text-muted-foreground">
-                {FREE_MATCHES_COUNT} matchs gratuits • {Math.max(0, filteredMatches.length - FREE_MATCHES_COUNT)} matchs Premium
+                {t("home.freeMatchesInfo", { free: FREE_MATCHES_COUNT, premium: Math.max(0, filteredMatches.length - FREE_MATCHES_COUNT) })}
               </p>
             )}
           </div>
@@ -348,10 +354,10 @@ const Index = () => {
                   size="lg"
                   variant="outline"
                   className="gap-2"
-                  onClick={() => setMatchesLimit(prev => prev + 20)}
+                  onClick={() => setMatchesLimit(prev => prev + MATCHES_INCREMENT)}
                 >
                   <ChevronDown className="w-4 h-4" />
-                  Voir les 20 prochains matchs ({filteredMatches.length - matchesLimit} restants)
+                  {t("home.loadMore", { count: Math.min(MATCHES_INCREMENT, filteredMatches.length - matchesLimit), remaining: filteredMatches.length - matchesLimit })}
                 </Button>
               </div>
             )}
@@ -395,13 +401,13 @@ const Index = () => {
               <Link to="/pricing">
                 <Button size="lg" className="gap-2">
                   <Gift className="w-4 h-4" />
-                  Essayer 7 jours gratuitement
+                  {t("hero.ctaTrial")}
                 </Button>
               </Link>
               <Link to="/results">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Trophy className="w-4 h-4" />
-                  Voir nos résultats
+                  {t("hero.ctaResults")}
                 </Button>
               </Link>
             </div>
