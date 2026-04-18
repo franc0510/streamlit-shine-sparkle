@@ -117,28 +117,8 @@ const Results = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8">
-              <h3 className="text-2xl font-display font-bold mb-3 text-center">{t("about.roi.title")}</h3>
-              <p className="text-muted-foreground text-center mb-6">{t("about.roi.description")}</p>
-              <form onSubmit={handleRoiSubmit} className="max-w-md mx-auto space-y-4">
-                <Input
-                  type="email"
-                  placeholder={t("about.roi.emailPlaceholder")}
-                  value={roiEmail}
-                  onChange={(e) => setRoiEmail(e.target.value)}
-                  required
-                  className="bg-background/50"
-                />
-                <Button type="submit" className="w-full" disabled={roiLoading}>
-                  {roiLoading ? (
-                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{t("about.roi.sending")}</>
-                  ) : (
-                    t("about.roi.submit")
-                  )}
-                </Button>
-              </form>
-            </div>
           </section>
+
 
           {/* Hidden SEO content */}
           <div className="sr-only">
