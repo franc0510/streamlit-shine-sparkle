@@ -3,7 +3,9 @@ import { MatchCard } from "@/components/MatchCard";
 import { MatchFilters } from "@/components/MatchFilters";
 import { Faq } from "@/components/Faq";
 import { Button } from "@/components/ui/button";
-import { Lock, Check, Trophy, Gift, ChevronDown, Users, Zap, ShieldCheck, BarChart3, Sparkles, Info } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Lock, Check, Trophy, Gift, ChevronDown, Users, Zap, ShieldCheck, BarChart3, Sparkles, Info, Loader2 } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
@@ -16,7 +18,8 @@ const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-").replace(/[^a
 const buildMatchUrl = (m: Match) => `/match/${slugify(m.tournament)}/${m.date}/${m.time}/${slugify(m.team1)}-vs-${slugify(m.team2)}?bo=${m.format}`;
 
 const FREE_MATCHES_COUNT = 2;
-const INITIAL_MATCHES_LIMIT = 20;
+const INITIAL_MATCHES_LIMIT = 10;
+const MATCHES_INCREMENT = 10;
 
 const parseMatchDate = (dateStr: string): Date | null => {
   const months: Record<string, number> = {
