@@ -232,13 +232,13 @@ const Index = () => {
         {/* HERO */}
         <div className="text-center mb-8 sm:mb-10 animate-fade-in">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-2 bg-gradient-gaming bg-clip-text text-transparent">
-            League of Legends
+            {t('home.title')}
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl font-display font-semibold text-foreground/90 mb-3">
-            Prédictions LoL & Pronostics Esport
+            {t('home.subtitle')}
           </p>
           <p className="text-sm sm:text-base text-muted-foreground mb-6 px-4">
-            LFL, LEC, LCK, LPL, LCS et 15+ autres leagues
+            {t('home.tagline')}
           </p>
 
           {/* Social proof bar — full width, single line with icons */}
@@ -282,11 +282,25 @@ const Index = () => {
             </div>
           )}
 
-          {/* SEO text — small/discreet */}
-          <p className="sr-only">
-            PredictEsport analyse chaque match de League of Legends pour vous donner les meilleures prédictions avant de parier.
-            LFL, LEC, LCK, MSI, Worlds : retrouvez nos pronostics gratuits via notre IA, fruit de notre recherche.
-          </p>
+          {/* SEO text — invisible mais riche pour le référencement */}
+          <div className="sr-only">
+            <h2>Prédictions LoL & Pronostics Esport propulsés par l'IA — LFL, LEC, LCK, LPL, LCS, MSI, Worlds</h2>
+            <p>
+              PredictEsport analyse chaque match de League of Legends grâce à un modèle de Machine Learning entraîné
+              (LightGBM, Voting Ensemble) sur 10 ans de données compétitives : KDA, GPM, vision, drafts, winrates par patch
+              et par champion. Découvrez les meilleurs pronostics LoL gratuits, identifiez les value bets sur Pinnacle,
+              Unibet, Polymarket et Stake, et optimisez votre Expected Value (EV) sur la LFL, LEC, LCK, LPL, LCS, EMEA Masters,
+              Arabian League, NLC, PRM, Ultraliga, Hitpoint Masters, LJL, CBLOL, LLA, MSI et Worlds. Essai gratuit 7 jours,
+              abonnement mensuel 14,90€ ou annuel 149,90€ (2 mois offerts).
+            </p>
+            <h3>Comment fonctionne notre IA de prédiction esport</h3>
+            <p>
+              Notre algorithme d'intelligence artificielle traite des milliers de variables par match : statistiques individuelles
+              des joueurs (top, jungle, mid, ADC, support), composition de draft, historique tête-à-tête des équipes, forme récente,
+              évolution méta par patch, performances en BO1/BO3/BO5. Cette approche purement quantitative permet d'identifier les
+              cotes sous-évaluées par les bookmakers et d'orienter les parieurs esport vers les paris à valeur attendue positive.
+            </p>
+          </div>
         </div>
 
         {/* Matches section */}
@@ -295,7 +309,7 @@ const Index = () => {
             <h2 className="text-2xl font-display font-bold">{t('home.upcomingMatches')}</h2>
             {!isPremium && (
               <p className="text-xs text-muted-foreground">
-                {FREE_MATCHES_COUNT} matchs gratuits • {Math.max(0, filteredMatches.length - FREE_MATCHES_COUNT)} matchs Premium
+                {t('home.freeMatchInfo', { count: FREE_MATCHES_COUNT })}
               </p>
             )}
           </div>
