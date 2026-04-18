@@ -161,13 +161,18 @@ export const Navbar = () => {
                     {/* Pages */}
                     <div className="space-y-2">
                       <DrawerClose asChild>
-                        <Link to="/about#performance" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
+                        <Link to="/results" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
                           {t('nav.results')}
                         </Link>
                       </DrawerClose>
                       <DrawerClose asChild>
                         <Link to="/pricing" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
                           Abonnement
+                        </Link>
+                      </DrawerClose>
+                      <DrawerClose asChild>
+                        <Link to="/about" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
+                          À propos
                         </Link>
                       </DrawerClose>
                       <DrawerClose asChild>
@@ -242,7 +247,7 @@ export const Navbar = () => {
               </div>
 
               <div className="flex items-center gap-2 sm:gap-3">
-                <Link to="/about#performance">
+                <Link to="/results">
                   <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
                     {t('nav.results')}
                   </Button>
@@ -252,17 +257,25 @@ export const Navbar = () => {
                     Abonnement
                   </Button>
                 </Link>
-                <Link to="/about#avis">
-                  <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
-                    {t('nav.reviews')}
-                  </Button>
-                </Link>
-                <Link to="/about#contact">
-                  <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
-                    {t('nav.contact')}
-                  </Button>
-                </Link>
-                
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
+                      À propos
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={() => navigate('/about')} className="cursor-pointer">
+                      À propos
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate('/about#avis')} className="cursor-pointer">
+                      {t('nav.reviews')}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate('/about#contact')} className="cursor-pointer">
+                      {t('nav.contact')}
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
                 <LanguageSelector />
                 
                 {user ? (
