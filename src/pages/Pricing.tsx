@@ -90,8 +90,8 @@ const Pricing = () => {
 
             {/* Annuel — Best value */}
             <Card className="p-6 sm:p-8 bg-gradient-card border-2 border-primary/60 relative shadow-elegant">
-              <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 gap-1 whitespace-nowrap">
-                <Crown className="w-3.5 h-3.5" />
+              <Badge className="absolute -top-4 left-1/2 -translate-x-1/2 gap-1.5 whitespace-nowrap px-4 py-1.5 text-sm sm:text-base font-bold shadow-elegant">
+                <Crown className="w-4 h-4 sm:w-5 sm:h-5" />
                 {t("pricing.yearly.badge")}
               </Badge>
 

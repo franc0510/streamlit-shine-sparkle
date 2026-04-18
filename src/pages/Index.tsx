@@ -233,9 +233,13 @@ const Index = () => {
           {/* CTAs sous la barre */}
           <div className="flex flex-wrap items-center justify-center gap-3 mb-4">
             <Link to="/pricing">
-              <Button size="lg" className="gap-2">
-                <Gift className="w-4 h-4" />
+              <Button
+                size="lg"
+                className="gap-2 text-base sm:text-lg font-bold px-6 sm:px-8 py-6 sm:py-7 shadow-elegant animate-glow-pulse bg-gradient-gaming hover:opacity-90"
+              >
+                <Gift className="w-5 h-5 sm:w-6 sm:h-6" />
                 {t("hero.ctaTrial")}
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
             </Link>
             <Link to="/results">
