@@ -147,6 +147,15 @@
       "subscribePremium": "S'abonner Premium"
     }
   },
+  "results": {
+    "title": "Nos Résultats & Performances",
+    "subtitle": "Découvrez la performance réelle de notre algorithme de Machine Learning sur les paris esport."
+  },
+  "footer": {
+    "tagline": "PredictEsport est la plateforme de référence pour les pronostics esport League of Legends, propulsée par un algorithme d'intelligence artificielle (Machine Learning). Grâce à notre modèle prédictif (LightGBM / Ensemble Learning), nous analysons en profondeur tout l'historique des matchs esportifs. Notre objectif est d'offrir une aide à la décision basée sur les statistiques (KDA, GPM, drafts, historique) pour optimiser vos analyses sur les paris esport.",
+    "rights": "© 2025 PredictEsport. Tous droits réservés.",
+    "disclaimer": "Les prédictions sont alimentées par PredictEsport. Le système utilise une approche purement mathématique basée sur les statistiques historiques des joueurs et des équipes pour estimer les probabilités de victoire en série. Il s'agit uniquement d'un outil d'analyse et de statistiques — il n'encourage pas les paris sur les matchs."
+  },
   "about": {
     "title": "Résultats",
     "subtitle": "Découvrez les performances de notre algorithme",
