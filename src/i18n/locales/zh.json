@@ -42,6 +42,83 @@
     "allReviews": "所有评价",
     "noReviews": "暂无评价。成为第一个！"
   },
+  "hero": {
+    "title": "英雄联盟",
+    "subtitle": "LoL 预测与电竞投注建议",
+    "leagues": "LFL、LEC、LCK、LPL、LCS 及其他 15+ 联赛",
+    "social": {
+      "subscribers": "+1,000 名订阅者",
+      "upToDate": "每场比赛前更新预测",
+      "freeTrial": "7 天免费试用",
+      "leagues": "分析 15+ 联赛",
+      "securePayments": "安全支付"
+    },
+    "ctaTrial": "7 天免费试用",
+    "ctaResults": "查看我们的结果",
+    "seoCopy": "PredictEsport 分析每一场英雄联盟比赛，在您下注前提供最佳预测。LFL、LEC、LCK、MSI、全球总决赛：通过我们的 AI 获取专业预测。"
+  },
+  "pricing": {
+    "trialBadge": "7 天免费试用",
+    "title": "选择您的 PredictEsport 套餐",
+    "subtitle": "通过我们的 AI 访问所有英雄联盟预测。可随时取消。",
+    "startTrial": "开始免费试用",
+    "loginRequiredTitle": "需要登录",
+    "loginRequiredDesc": "创建账户或登录以开始免费试用。",
+    "alreadyAccount": "已有账户？",
+    "monthly": {
+      "title": "月度",
+      "desc": "按月计费，无承诺。",
+      "perMonth": "月",
+      "trialNote": "7 天免费，之后每月 €14.90"
+    },
+    "yearly": {
+      "title": "年度",
+      "desc": "通过年度订阅每年节省 €30.10。",
+      "perYear": "年",
+      "badge": "最佳选择 · 2 个月免费",
+      "trialNote": "7 天免费，之后每年 €149.90"
+    },
+    "reassurance": {
+      "secureTitle": "Stripe 安全支付",
+      "secureDesc": "信用卡、Apple Pay、Google Pay",
+      "cancelTitle": "一键取消",
+      "cancelDesc": "无承诺，通过您的账户管理",
+      "algoTitle": "训练有素的算法",
+      "algoDesc": "10 年 LoL 竞技数据"
+    },
+    "features": [
+      "无限访问所有 LoL 预测",
+      "覆盖 15+ 主要联赛（LFL、LEC、LCK、LPL、LCS、MSI、全球总决赛...）",
+      "基于 LightGBM 和 Voting Ensemble 的 AI 推荐",
+      "自动识别价值投注（正期望值 EV）",
+      "比较 Pinnacle、Unibet、Polymarket、Stake 赔率",
+      "详细的选手和战队统计数据",
+      "新比赛和机会通知",
+      "邮件和 Discord 优先支持"
+    ]
+  },
+  "faq": {
+    "title": "关于 AI 和电竞预测的常见问题",
+    "subtitle": "您需要了解的关于我们的机器学习算法、所覆盖的 LoL 比赛以及价值投注方法的一切。",
+    "items": [
+      {
+        "q": "PredictEsport 的预测是如何生成的？",
+        "a": "与基于主观意见的网站不同，我们的预测由先进的 AI 引擎生成。我们使用经过 10 年竞技数据（KDA、GPM、视野、BP、版本胜率）训练的机器学习模型（LightGBM、Voting Ensemble）。我们的算法实时处理数千个变量，以计算客观、基于数据的获胜概率。"
+      },
+      {
+        "q": "你们覆盖哪些 LoL 比赛？",
+        "a": "我们覆盖英雄联盟的世界精英赛事。我们的算法分析包括主要联赛（LEC、LCK、LPL、LCS）以及次要联赛（LFL、阿拉伯联赛等）和国际锦标赛（全球总决赛、MSI）。我们的模型可以适应每个地区的特点。"
+      },
+      {
+        "q": "你们的预测能保证盈利吗？",
+        "a": "不能。电竞投注始终带有随机性（"人为因素"）。PredictEsport 基于统计概率提供决策支持，以最大化您的长期期望值（EV）。我们建议您始终理性投注。"
+      },
+      {
+        "q": "建议和 AI 预测有什么区别？",
+        "a": "传统建议通常是某人的意见。PredictEsport 预测是数学概率计算的结果。我们的模型量化不确定性并识别价值投注（博彩公司低估的赔率），而不仅仅是猜测获胜者。"
+      }
+    ]
+  },
   "home": {
     "title": "英雄联盟",
     "subtitle": "基于高级统计模型的预测",
@@ -56,6 +133,8 @@
     "premiumSubscription": "高级订阅",
     "premiumMember": "您是高级会员 - 无限访问",
     "freeMatchInfo": "1场免费比赛 • {count}场高级比赛",
+    "freeMatchesInfo": "{{free}} 场免费比赛 • {{premium}} 场高级比赛",
+    "loadMore": "查看接下来 {{count}} 场比赛（剩余 {{remaining}} 场）",
     "trialLimitInfo": "比赛仅限未来7天",
     "premiumContent": "高级内容",
     "unlockPredictions": "解锁所有预测",
