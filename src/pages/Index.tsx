@@ -61,6 +61,26 @@ const Index = () => {
   const [selectedDate, setSelectedDate] = useState("all");
   const [matchesLimit, setMatchesLimit] = useState(INITIAL_MATCHES_LIMIT);
 
+  // ROI form state
+  const [roiEmail, setRoiEmail] = useState("");
+  const [roiLoading, setRoiLoading] = useState(false);
+
+  const handleRoiSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setRoiLoading(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-roi-results", { body: { email: roiEmail } });
+      if (error) throw error;
+      toast({ title: t("about.roi.successTitle"), description: t("about.roi.successDescription") });
+      setRoiEmail("");
+    } catch {
+      toast({ title: t("about.roi.errorTitle"), description: t("about.roi.errorDescription"), variant: "destructive" });
+    } finally {
+      setRoiLoading(false);
+    }
+  };
+
+
   useEffect(() => {
     const loadMatches = async () => {
       setLoadError(null);
