@@ -9,6 +9,7 @@
     },
     "results": "结果",
     "about": "关于",
+    "subscription": "订阅",
     "contact": "联系",
     "reviews": "评价",
     "login": "登录",
@@ -145,6 +146,15 @@
       "startNow": "立即开始",
       "subscribePremium": "订阅高级版"
     }
+  },
+  "results": {
+    "title": "我们的结果与表现",
+    "subtitle": "了解我们的机器学习算法在电竞投注中的真实表现。"
+  },
+  "footer": {
+    "tagline": "PredictEsport 是英雄联盟电竞预测的参考平台，由人工智能算法（机器学习）驱动。借助我们的预测模型（LightGBM / 集成学习），我们深入分析所有电竞比赛的历史记录。我们的目标是提供基于统计数据（KDA、GPM、BP、历史）的决策支持，以优化您的电竞投注分析。",
+    "rights": "© 2025 PredictEsport。版权所有。",
+    "disclaimer": "预测由 PredictEsport 提供。该系统使用纯粹基于玩家和队伍历史统计数据的数学方法来估计系列赛获胜概率。这仅仅是一个分析和统计工具——它不鼓励对比赛进行投注。"
   },
   "about": {
     "title": "结果",

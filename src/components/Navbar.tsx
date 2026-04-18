@@ -167,12 +167,12 @@ export const Navbar = () => {
                       </DrawerClose>
                       <DrawerClose asChild>
                         <Link to="/pricing" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
-                          Abonnement
+                          {t('nav.subscription')}
                         </Link>
                       </DrawerClose>
                       <DrawerClose asChild>
                         <Link to="/about" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
-                          À propos
+                          {t('nav.about')}
                         </Link>
                       </DrawerClose>
                       <DrawerClose asChild>
@@ -254,18 +254,18 @@ export const Navbar = () => {
                 </Link>
                 <Link to="/pricing">
                   <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
-                    Abonnement
+                    {t('nav.subscription')}
                   </Button>
                 </Link>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
-                      À propos
+                      {t('nav.about')}
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={() => navigate('/about')} className="cursor-pointer">
-                      À propos
+                      {t('nav.about')}
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => navigate('/about#avis')} className="cursor-pointer">
                       {t('nav.reviews')}

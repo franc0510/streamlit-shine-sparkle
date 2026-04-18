@@ -36,10 +36,10 @@ const Results = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 bg-gradient-gaming bg-clip-text text-transparent">
-              Nos Résultats & Performances
+              {t("results.title")}
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-              Découvrez la performance réelle de notre algorithme de Machine Learning sur les paris esport.
+              {t("results.subtitle")}
             </p>
           </div>
 
