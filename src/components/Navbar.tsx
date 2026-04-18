@@ -161,17 +161,22 @@ export const Navbar = () => {
                     {/* Pages */}
                     <div className="space-y-2">
                       <DrawerClose asChild>
-                        <Link to="/about" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
+                        <Link to="/about#performance" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
                           {t('nav.results')}
                         </Link>
                       </DrawerClose>
                       <DrawerClose asChild>
-                        <Link to="/reviews" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
+                        <Link to="/pricing" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
+                          Abonnement
+                        </Link>
+                      </DrawerClose>
+                      <DrawerClose asChild>
+                        <Link to="/about#avis" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
                           {t('nav.reviews')}
                         </Link>
                       </DrawerClose>
                       <DrawerClose asChild>
-                        <Link to="/contact" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
+                        <Link to="/about#contact" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
                           {t('nav.contact')}
                         </Link>
                       </DrawerClose>
@@ -191,7 +196,7 @@ export const Navbar = () => {
                             {t('nav.manageSubscription')}
                           </Button>
                           {!isPremium && (
-                            <Button variant="outline" className="w-full justify-start gap-2" onClick={() => { navigate('/auth'); setMobileMenuOpen(false); }}>
+                            <Button variant="outline" className="w-full justify-start gap-2" onClick={() => { navigate('/pricing'); setMobileMenuOpen(false); }}>
                               <CreditCard className="w-4 h-4" />
                               {t('nav.subscribePremium')}
                             </Button>
@@ -237,17 +242,22 @@ export const Navbar = () => {
               </div>
 
               <div className="flex items-center gap-2 sm:gap-3">
-                <Link to="/about">
+                <Link to="/about#performance">
                   <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
                     {t('nav.results')}
                   </Button>
                 </Link>
-                <Link to="/reviews">
+                <Link to="/pricing">
+                  <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
+                    Abonnement
+                  </Button>
+                </Link>
+                <Link to="/about#avis">
                   <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
                     {t('nav.reviews')}
                   </Button>
                 </Link>
-                <Link to="/contact">
+                <Link to="/about#contact">
                   <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
                     {t('nav.contact')}
                   </Button>
@@ -269,7 +279,7 @@ export const Navbar = () => {
                         {t('nav.manageSubscription')}
                       </DropdownMenuItem>
                       {!isPremium && (
-                        <DropdownMenuItem onClick={() => navigate('/auth')} className="gap-2 cursor-pointer">
+                        <DropdownMenuItem onClick={() => navigate('/pricing')} className="gap-2 cursor-pointer">
                           <CreditCard className="w-4 h-4" />
                           {t('nav.subscribePremium')}
                         </DropdownMenuItem>
