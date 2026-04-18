@@ -3,7 +3,7 @@ import { MatchCard } from "@/components/MatchCard";
 import { MatchFilters } from "@/components/MatchFilters";
 import { Faq } from "@/components/Faq";
 import { Button } from "@/components/ui/button";
-import { Lock, Check, Trophy, Gift, ChevronDown } from "lucide-react";
+import { Lock, Check, Trophy, Gift, ChevronDown, Users, Zap, ShieldCheck, BarChart3, Sparkles, Info } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
@@ -208,60 +208,42 @@ const Index = () => {
       <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
         {/* HERO */}
         <div className="text-center mb-8 sm:mb-10 animate-fade-in">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-3 sm:mb-4 bg-gradient-gaming bg-clip-text text-transparent">
-            League of Legends — Prédictions LoL & Pronostics Esport
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-2 bg-gradient-gaming bg-clip-text text-transparent">
+            League of Legends
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-2 px-4">
+          <p className="text-lg sm:text-xl md:text-2xl font-display font-semibold text-foreground/90 mb-3">
+            Prédictions LoL & Pronostics Esport
+          </p>
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 px-4">
             LFL, LEC, LCK, LPL, LCS et 15+ autres leagues
           </p>
-          <p className="text-sm sm:text-base text-muted-foreground/90 max-w-3xl mx-auto px-4 mb-6">
-            PredictEsport analyse chaque match de League of Legends pour vous donner les meilleures prédictions avant de parier.
-            LFL, LEC, LCK, MSI, Worlds : retrouvez nos pronostics gratuits via notre IA, fruit de notre recherche.
-          </p>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+          {/* Social proof bar — full width, single line with icons */}
+          <div className="max-w-5xl mx-auto bg-gradient-card border border-border/50 rounded-xl px-4 py-3 mb-6">
+            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm text-foreground/90">
+              <li className="flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" /> +1 000 abonnés</li>
+              <li className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-primary" /> Pronostics à jour avant chaque match</li>
+              <li className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-primary" /> Paiements sécurisés</li>
+              <li className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" /> Analyses 15+ leagues</li>
+              <li className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-amber-500" /> 7 jours gratuits</li>
+            </ul>
+          </div>
+
+          {/* CTAs sous la barre */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-4">
             <Link to="/pricing">
               <Button size="lg" className="gap-2">
                 <Gift className="w-4 h-4" />
                 7 jours d'essai gratuit
               </Button>
             </Link>
-            <Link to="/about#performance">
+            <Link to="/results">
               <Button size="lg" variant="outline" className="gap-2">
                 <Trophy className="w-4 h-4" />
                 Voir nos résultats
               </Button>
             </Link>
-            <Link to="/about#performance">
-              <Button size="lg" variant="ghost" className="gap-2 text-sm">
-                Comprendre nos résultats ROI gratuitement →
-              </Button>
-            </Link>
           </div>
-
-          {/* Social proof bar */}
-          <div className="max-w-4xl mx-auto bg-gradient-card border border-border/50 rounded-xl px-4 py-3 sm:py-4">
-            <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-foreground/90">
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> 1 000 abonnés</li>
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Pronostics à jour avant chaque match</li>
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Paiements sécurisés</li>
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Analyses 15+ leagues</li>
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> 7 jours gratuits</li>
-            </ul>
-          </div>
-
-          {!isPremium && (
-            <div className="inline-flex items-center gap-3 bg-accent/10 border border-accent/30 rounded-lg px-6 py-3 mt-6">
-              <Lock className="w-5 h-5 text-accent" />
-              <p className="text-sm text-foreground/90">
-                {t('home.fullAccess')}{" "}
-                <Link to="/pricing" className="text-accent font-semibold hover:underline">
-                  {t('home.premiumSubscription')}
-                </Link>
-              </p>
-            </div>
-          )}
 
           {isPremium && !isTrialing && (
             <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 mt-6">
@@ -276,23 +258,30 @@ const Index = () => {
               </span>
             </div>
           )}
+
+          {/* SEO text — small/discreet */}
+          <p className="sr-only">
+            PredictEsport analyse chaque match de League of Legends pour vous donner les meilleures prédictions avant de parier.
+            LFL, LEC, LCK, MSI, Worlds : retrouvez nos pronostics gratuits via notre IA, fruit de notre recherche.
+          </p>
         </div>
 
         {/* Matches section */}
         <div className="mb-6">
-          <div className="flex items-center justify-center mb-4">
-            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-lg px-4 py-2">
-              <span className="text-sm font-semibold text-primary">{t('home.evExplanation')}</span>
-            </div>
-          </div>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-3">
             <h2 className="text-2xl font-display font-bold">{t('home.upcomingMatches')}</h2>
             {!isPremium && (
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 {FREE_MATCHES_COUNT} matchs gratuits • {Math.max(0, filteredMatches.length - FREE_MATCHES_COUNT)} matchs Premium
               </p>
             )}
           </div>
+
+          {/* EV explanation — discreet */}
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground/80 mb-4">
+            <Info className="w-3 h-3" />
+            <span>{t('home.evExplanation')}</span>
+          </p>
 
           <MatchFilters
             leagues={leagues}
@@ -409,7 +398,7 @@ const Index = () => {
                   Essayer 7 jours gratuitement
                 </Button>
               </Link>
-              <Link to="/about#performance">
+              <Link to="/results">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Trophy className="w-4 h-4" />
                   Voir nos résultats

@@ -8,6 +8,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
+import Results from "./pages/Results";
 import Pricing from "./pages/Pricing";
 import Auth from "./pages/Auth";
 import CS2 from "./pages/CS2";
@@ -32,6 +33,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/results" element={<Results />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/contact" element={<Navigate to="/about#contact" replace />} />
                 <Route path="/reviews" element={<Navigate to="/about#avis" replace />} />

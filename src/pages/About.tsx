@@ -153,7 +153,6 @@ const About = () => {
             {/* In-page nav */}
             <nav className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm">
               <a href="#histoire" className="px-4 py-2 rounded-full bg-secondary/60 hover:bg-secondary transition">Notre histoire</a>
-              <a href="#performance" className="px-4 py-2 rounded-full bg-secondary/60 hover:bg-secondary transition">Performances</a>
               <a href="#avis" className="px-4 py-2 rounded-full bg-secondary/60 hover:bg-secondary transition">Avis</a>
               <a href="#contact" className="px-4 py-2 rounded-full bg-secondary/60 hover:bg-secondary transition">Contact</a>
             </nav>
@@ -181,81 +180,16 @@ const About = () => {
             </div>
           </section>
 
-          {/* Performances */}
-          <section id="performance" className="mb-12 scroll-mt-20">
-            <h2 className="text-2xl sm:text-3xl font-display font-bold mb-8 text-center">{t('about.performance.title')}</h2>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <Card className="p-6 bg-gradient-card border-border/50">
-                <div className="text-4xl mb-4">⚡</div>
-                <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.summary.title')}</h3>
-                <div className="space-y-2 text-muted-foreground text-sm">
-                  <p>✓ {t('about.performance.summary.accuracy')}</p>
-                  <p>✓ {t('about.performance.summary.auc')}</p>
-                  <p>✓ {t('about.performance.summary.logloss')}</p>
-                </div>
-              </Card>
-              <Card className="p-6 bg-gradient-card border-border/50">
-                <div className="text-4xl mb-4">🎯</div>
-                <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.accuracy.title')}</h3>
-                <p className="text-muted-foreground">{t('about.performance.accuracy.desc1')}</p>
-                <p className="text-muted-foreground mt-2">{t('about.performance.accuracy.desc2')}</p>
-              </Card>
-              <Card className="p-6 bg-gradient-card border-border/50">
-                <div className="text-4xl mb-4">📈</div>
-                <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.auc.title')}</h3>
-                <p className="text-muted-foreground">{t('about.performance.auc.desc1')}</p>
-                <p className="text-muted-foreground mt-2">{t('about.performance.auc.desc2')}</p>
-              </Card>
-              <Card className="p-6 bg-gradient-card border-border/50">
-                <div className="text-4xl mb-4">🔥</div>
-                <h3 className="text-xl font-display font-bold mb-3">{t('about.performance.logloss.title')}</h3>
-                <p className="text-muted-foreground">{t('about.performance.logloss.desc1')}</p>
-                <p className="text-muted-foreground mt-2">{t('about.performance.logloss.desc2')}</p>
-              </Card>
-            </div>
-
-            {/* Value Bet explanation */}
-            <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 mb-8">
-              <h3 className="text-2xl font-display font-bold mb-4">{t('about.valueBet.title')}</h3>
-              <p className="text-muted-foreground leading-relaxed mb-3">{t('about.valueBet.intro')}</p>
-              <p className="text-muted-foreground leading-relaxed mb-6">{t('about.valueBet.formula')}</p>
-              <div className="border-t border-border/30 pt-6">
-                <h4 className="text-xl font-display font-bold mb-3">{t('about.valueBet.example.title')}</h4>
-                <div className="space-y-2 text-muted-foreground leading-relaxed">
-                  <p>{t('about.valueBet.example.scenario')}</p>
-                  <p>{t('about.valueBet.example.team1')}</p>
-                  <p>{t('about.valueBet.example.bookmaker')}</p>
-                  <p>{t('about.valueBet.example.algorithm')}</p>
-                  <p>{t('about.valueBet.example.calculation')}</p>
-                  <p className="font-mono text-foreground">{t('about.valueBet.example.formulaCalc')}</p>
-                  <p>{t('about.valueBet.example.conclusion')}</p>
-                  <p>{t('about.valueBet.example.explanation')}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* ROI Email */}
-            <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8">
-              <h3 className="text-2xl font-display font-bold mb-3 text-center">{t('about.roi.title')}</h3>
-              <p className="text-muted-foreground text-center mb-6">{t('about.roi.description')}</p>
-              <form onSubmit={handleRoiSubmit} className="max-w-md mx-auto space-y-4">
-                <Input
-                  type="email"
-                  placeholder={t('about.roi.emailPlaceholder')}
-                  value={roiEmail}
-                  onChange={(e) => setRoiEmail(e.target.value)}
-                  required
-                  className="bg-background/50"
-                />
-                <Button type="submit" className="w-full" disabled={roiLoading}>
-                  {roiLoading ? (
-                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{t('about.roi.sending')}</>
-                  ) : (
-                    t('about.roi.submit')
-                  )}
-                </Button>
-              </form>
+          {/* Lien vers la page résultats */}
+          <section className="mb-12">
+            <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 text-center">
+              <h2 className="text-2xl font-display font-bold mb-3">Découvrez nos résultats</h2>
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                Performances détaillées de notre algorithme de Machine Learning, métriques de précision et ROI réel.
+              </p>
+              <Link to="/results">
+                <Button size="lg" variant="default">Voir nos résultats & performances</Button>
+              </Link>
             </div>
           </section>
 
