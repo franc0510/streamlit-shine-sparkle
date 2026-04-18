@@ -12,7 +12,12 @@ export interface SubscriptionStatus {
   trial_end?: string | null;
 }
 
-export const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/dRmaEX7bZ3cT3UDaaKak002";
+// Lien legacy (mensuel) – conservé pour compatibilité
+export const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/3cIaEX1RF9Bhcr90Aaak003";
+
+// Liens Stripe par formule (avec essai gratuit 7 jours configuré côté Stripe)
+export const STRIPE_PAYMENT_LINK_MONTHLY = "https://buy.stripe.com/3cIaEX1RF9Bhcr90Aaak003";
+export const STRIPE_PAYMENT_LINK_YEARLY = "https://buy.stripe.com/7sYcN5cwjcNt4YHer0ak004";
 
 export type DiagnosticStep = {
   name: string;
