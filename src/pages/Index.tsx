@@ -435,18 +435,12 @@ const Index = () => {
       <footer className="border-t border-border mt-16 py-10">
         <div className="container mx-auto px-4 max-w-4xl">
           <p className="text-sm text-muted-foreground leading-relaxed text-center">
-            <strong className="text-foreground">PredictEsport</strong> est la plateforme de référence pour les pronostics esport
-            League of Legends, propulsée par un algorithme d'intelligence artificielle (Machine Learning). Grâce à notre modèle
-            prédictif (LightGBM / Ensemble Learning), nous analysons en profondeur tout l'historique des matchs esportifs.
-            Notre objectif est d'offrir une aide à la décision basée sur les statistiques (KDA, GPM, drafts, historique) pour
-            optimiser vos analyses sur les paris esport.
+            {t("footer.tagline")}
           </p>
           <div className="mt-6 text-center text-xs text-muted-foreground/80">
-            <p>&copy; 2025 PredictEsport. Tous droits réservés.</p>
+            <p>{t("footer.rights")}</p>
             <p className="mt-2 max-w-3xl mx-auto">
-              Les prédictions sont alimentées par PredictEsport. Le système utilise une approche purement mathématique basée sur
-              les statistiques historiques des joueurs et des équipes pour estimer les probabilités de victoire en série. Il s'agit
-              uniquement d'un outil d'analyse et de statistiques — il n'encourage pas les paris sur les matchs.
+              {t("footer.disclaimer")}
             </p>
           </div>
         </div>
