@@ -224,11 +224,11 @@ const Index = () => {
           {/* Social proof bar — full width, single line with icons */}
           <div className="max-w-5xl mx-auto bg-gradient-card border border-border/50 rounded-xl px-4 py-3 mb-6">
             <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm text-foreground/90">
-              <li className="flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" /> +1 000 abonnés</li>
-              <li className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-primary" /> Pronostics à jour avant chaque match</li>
-              <li className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-primary" /> Paiements sécurisés</li>
-              <li className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" /> Analyses 15+ leagues</li>
-              <li className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-amber-500" /> 7 jours gratuits</li>
+              <li className="flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" /> {t('home.social.subscribers')}</li>
+              <li className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-primary" /> {t('home.social.upToDate')}</li>
+              <li className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-amber-500" /> {t('home.social.freeTrial')}</li>
+              <li className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" /> {t('home.social.leagues')}</li>
+              <li className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-primary" /> {t('home.social.secure')}</li>
             </ul>
           </div>
 
@@ -237,13 +237,13 @@ const Index = () => {
             <Link to="/pricing">
               <Button size="lg" className="gap-2">
                 <Gift className="w-4 h-4" />
-                7 jours d'essai gratuit
+                {t('home.cta.freeTrial')}
               </Button>
             </Link>
             <Link to="/results">
               <Button size="lg" variant="outline" className="gap-2">
                 <Trophy className="w-4 h-4" />
-                Voir nos résultats
+                {t('home.cta.seeResults')}
               </Button>
             </Link>
           </div>
@@ -351,10 +351,10 @@ const Index = () => {
                   size="lg"
                   variant="outline"
                   className="gap-2"
-                  onClick={() => setMatchesLimit(prev => prev + 20)}
+                  onClick={() => setMatchesLimit(prev => prev + MATCHES_INCREMENT)}
                 >
                   <ChevronDown className="w-4 h-4" />
-                  Voir les 20 prochains matchs ({filteredMatches.length - matchesLimit} restants)
+                  {t('home.loadMore', { count: Math.min(MATCHES_INCREMENT, filteredMatches.length - matchesLimit), remaining: filteredMatches.length - matchesLimit })}
                 </Button>
               </div>
             )}
