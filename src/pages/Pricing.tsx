@@ -1,44 +1,38 @@
 import { Navbar } from "@/components/Navbar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, Crown, Sparkles, Calendar, Gift, LogIn } from "lucide-react";
+import { Check, Crown, Sparkles, Calendar, Gift } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { STRIPE_PAYMENT_LINK_MONTHLY, STRIPE_PAYMENT_LINK_YEARLY } from "@/lib/subscription";
+import {
+  STRIPE_PAYMENT_LINK_MONTHLY,
+  STRIPE_PAYMENT_LINK_YEARLY,
+  buildStripeLink,
+} from "@/lib/subscription";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
-import { useTranslation } from "react-i18next";
 
 const Pricing = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  const navigate = useNavigate();
 
-  const features = [
-    t("pricing.features.f1"),
-    t("pricing.features.f2"),
-    t("pricing.features.f3"),
-    t("pricing.features.f4"),
-    t("pricing.features.f5"),
-    t("pricing.features.f6"),
-    t("pricing.features.f7"),
-    t("pricing.features.f8"),
-  ];
+  const features = t("pricing.features", { returnObjects: true }) as string[];
 
-  const handleSubscribe = (url: string) => (e: React.MouseEvent) => {
+  const handleCheckout = (plan: "monthly" | "yearly") => {
     if (!user) {
-      e.preventDefault();
       toast({
         title: t("pricing.loginRequiredTitle"),
         description: t("pricing.loginRequiredDesc"),
       });
-      navigate("/auth");
+      navigate("/auth?redirect=/pricing");
       return;
     }
-    // user logged in -> open Stripe in same tab to allow return flow
+    const base = plan === "monthly" ? STRIPE_PAYMENT_LINK_MONTHLY : STRIPE_PAYMENT_LINK_YEARLY;
+    const url = buildStripeLink(base, user.email);
     window.location.href = url;
-    e.preventDefault();
   };
 
   return (
@@ -59,12 +53,6 @@ const Pricing = () => {
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
               {t("pricing.subtitle")}
             </p>
-            {!user && (
-              <div className="mt-6 inline-flex items-center gap-2 text-sm text-amber-500 bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2">
-                <LogIn className="w-4 h-4" />
-                <span>{t("pricing.accountRequiredHint")}</span>
-              </div>
-            )}
           </div>
 
           {/* Plans */}
@@ -80,17 +68,15 @@ const Pricing = () => {
               <div className="mb-6">
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl sm:text-5xl font-bold">14,90€</span>
-                  <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
+                  <span className="text-muted-foreground">/{t("pricing.monthly.perMonth")}</span>
                 </div>
                 <p className="text-sm text-amber-500 mt-2 font-semibold">{t("pricing.monthly.trialNote")}</p>
               </div>
 
-              <a href={STRIPE_PAYMENT_LINK_MONTHLY} onClick={handleSubscribe(STRIPE_PAYMENT_LINK_MONTHLY)} className="block">
-                <Button className="w-full gap-2" size="lg">
-                  <Sparkles className="w-4 h-4" />
-                  {t("pricing.startTrialBtn")}
-                </Button>
-              </a>
+              <Button onClick={() => handleCheckout("monthly")} className="w-full gap-2" size="lg">
+                <Sparkles className="w-4 h-4" />
+                {t("pricing.startTrial")}
+              </Button>
 
               <ul className="mt-6 space-y-2.5 text-sm">
                 {features.slice(0, 6).map((f) => (
@@ -104,7 +90,7 @@ const Pricing = () => {
 
             {/* Annuel — Best value */}
             <Card className="p-6 sm:p-8 bg-gradient-card border-2 border-primary/60 relative shadow-elegant">
-              <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 gap-1">
+              <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 gap-1 whitespace-nowrap">
                 <Crown className="w-3.5 h-3.5" />
                 {t("pricing.yearly.badge")}
               </Badge>
@@ -116,21 +102,20 @@ const Pricing = () => {
               <p className="text-sm text-muted-foreground mb-6">{t("pricing.yearly.desc")}</p>
 
               <div className="mb-6">
-                <div className="flex items-baseline gap-2 flex-wrap">
-                  <span className="text-2xl text-muted-foreground line-through">180€</span>
+                <div className="flex items-baseline gap-3 flex-wrap">
+                  <span className="text-3xl sm:text-4xl font-bold text-muted-foreground/60 line-through decoration-2">
+                    180€
+                  </span>
                   <span className="text-4xl sm:text-5xl font-bold">149,90€</span>
-                  <span className="text-muted-foreground">{t("pricing.perYear")}</span>
+                  <span className="text-muted-foreground">/{t("pricing.yearly.perYear")}</span>
                 </div>
-                <p className="text-sm text-green-500 mt-1 font-semibold">{t("pricing.yearly.savingsNote")}</p>
                 <p className="text-sm text-amber-500 mt-2 font-semibold">{t("pricing.yearly.trialNote")}</p>
               </div>
 
-              <a href={STRIPE_PAYMENT_LINK_YEARLY} onClick={handleSubscribe(STRIPE_PAYMENT_LINK_YEARLY)} className="block">
-                <Button className="w-full gap-2" size="lg" variant="default">
-                  <Crown className="w-4 h-4" />
-                  {t("pricing.startTrialBtn")}
-                </Button>
-              </a>
+              <Button onClick={() => handleCheckout("yearly")} className="w-full gap-2" size="lg" variant="default">
+                <Crown className="w-4 h-4" />
+                {t("pricing.startTrial")}
+              </Button>
 
               <ul className="mt-6 space-y-2.5 text-sm">
                 {features.map((f) => (
@@ -146,50 +131,41 @@ const Pricing = () => {
           {/* Reassurance row */}
           <div className="grid sm:grid-cols-3 gap-4 mb-12">
             <Card className="p-4 bg-gradient-card border-border/50 text-sm text-center">
-              <p className="font-semibold mb-1">🔒 {t("pricing.reassurance.secure")}</p>
+              <p className="font-semibold mb-1">🔒 {t("pricing.reassurance.secureTitle")}</p>
               <p className="text-muted-foreground text-xs">{t("pricing.reassurance.secureDesc")}</p>
             </Card>
             <Card className="p-4 bg-gradient-card border-border/50 text-sm text-center">
-              <p className="font-semibold mb-1">⏱️ {t("pricing.reassurance.cancel")}</p>
+              <p className="font-semibold mb-1">⏱️ {t("pricing.reassurance.cancelTitle")}</p>
               <p className="text-muted-foreground text-xs">{t("pricing.reassurance.cancelDesc")}</p>
             </Card>
             <Card className="p-4 bg-gradient-card border-border/50 text-sm text-center">
-              <p className="font-semibold mb-1">📊 {t("pricing.reassurance.algo")}</p>
+              <p className="font-semibold mb-1">📊 {t("pricing.reassurance.algoTitle")}</p>
               <p className="text-muted-foreground text-xs">{t("pricing.reassurance.algoDesc")}</p>
             </Card>
           </div>
 
           {/* Hidden SEO copy */}
           <div className="sr-only">
-            <h2>Abonnement pronostics esport League of Legends — mensuel et annuel</h2>
+            <h2>Abonnement pronostics esport League of Legends — PredictEsport</h2>
             <p>
-              PredictEsport propose deux formules d'abonnement à son outil de prédictions esport pour League of Legends :
-              un abonnement mensuel à 14,90€ (au lieu de 20€) et un abonnement annuel à 149,90€ au lieu de 180€,
-              équivalent à 2 mois offerts. Tous les abonnements incluent 7 jours d'essai gratuit pour tester
-              l'algorithme de Machine Learning (LightGBM, Voting Ensemble) sur les compétitions LFL, LEC, LCK, LPL, LCS,
-              MSI, Worlds, EMEA Masters, Arabian League, NLC, PRM, Ultraliga, Hitpoint Masters, LJL, CBLOL, LLA et autres.
-              L'objectif est d'identifier les value bets (EV positif) sur les cotes proposées par Pinnacle, Unibet,
-              Polymarket et Stake. Création de compte obligatoire avant paiement Stripe pour relier votre abonnement à
-              votre profil PredictEsport. Paiement sécurisé par carte bancaire, Apple Pay et Google Pay. Résiliation en
-              un clic à tout moment depuis votre espace personnel. Idéal pour parieurs esport, fans LoL, analystes Worlds
-              et MSI, communauté LFL, joueurs compétitifs, créateurs de contenu et data scientists passionnés.
-            </p>
-            <h3>Tarifs détaillés et avantages premium</h3>
-            <p>
-              Choisir l'abonnement annuel (149,90€) permet d'économiser 30,10€ par an par rapport au cumul mensuel
-              (12 × 14,90€ = 178,80€), soit environ deux mois offerts. Les deux formules donnent accès illimité aux
-              prédictions IA, à la comparaison automatique des cotes Pinnacle, Unibet, Polymarket et Stake, à
-              l'identification des value bets à EV positif, aux statistiques détaillées par joueur (KDA, GPM, vision,
-              winrate par champion, par patch et par rôle Top, Jungle, Mid, ADC, Support), aux notifications avant
-              chaque match, ainsi qu'à un support prioritaire par email et Discord.
+              PredictEsport propose deux formules d'abonnement à son outil de prédictions esport pour
+              League of Legends : un abonnement mensuel à 14,90€ et un abonnement annuel à 149,90€
+              équivalent à 2 mois offerts (180€ - 30,10€ d'économie). Tous les abonnements incluent 7 jours
+              d'essai gratuit pour tester l'algorithme de Machine Learning (LightGBM, Voting Ensemble, Random Forest)
+              sur les compétitions LFL, LEC, LCK, LPL, LCS, MSI, Worlds, EMEA Masters, Arabian League, NLC, PRM,
+              Ultraliga, Hitpoint Masters, LJL, CBLOL et LLA. L'objectif est d'identifier les value bets (EV positif)
+              sur les cotes proposées par Pinnacle, Unibet, Polymarket et Stake. Subscription LoL betting tips,
+              esports prediction subscription, pronosticos esports League of Legends, 英雄联盟预测订阅.
+              Pronostic LoL gratuit 7 jours, pronostic League of Legends IA, pronostic esport LFL LEC LCK,
+              pari LoL value bet expected value, abonnement pronostic esport mensuel annuel.
             </p>
           </div>
 
           <div className="text-center text-sm text-muted-foreground">
             <p>
-              {t("pricing.haveAccount")}{" "}
+              {t("pricing.alreadyAccount")}{" "}
               <Link to="/auth" className="text-primary hover:underline font-semibold">
-                {t("pricing.loginLink")}
+                {t("nav.login")}
               </Link>
             </p>
           </div>

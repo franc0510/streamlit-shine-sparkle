@@ -42,10 +42,86 @@
     "allReviews": "Todas las opiniones",
     "noReviews": "Aún no hay opiniones. ¡Sé el primero!"
   },
-  "home": {
+  "hero": {
     "title": "League of Legends",
     "subtitle": "Predicciones LoL y Pronósticos Esports",
-    "tagline": "LFL, LEC, LCK, LPL, LCS y 15+ ligas más",
+    "leagues": "LFL, LEC, LCK, LPL, LCS y 15+ ligas más",
+    "social": {
+      "subscribers": "+1.000 suscriptores",
+      "upToDate": "Pronósticos actualizados antes de cada partido",
+      "freeTrial": "7 días gratis",
+      "leagues": "Análisis de 15+ ligas",
+      "securePayments": "Pagos seguros"
+    },
+    "ctaTrial": "Prueba gratuita de 7 días",
+    "ctaResults": "Ver nuestros resultados",
+    "seoCopy": "PredictEsport analiza cada partido de League of Legends para darte las mejores predicciones antes de apostar. LFL, LEC, LCK, MSI, Worlds: descubre nuestros pronósticos con IA."
+  },
+  "pricing": {
+    "trialBadge": "Prueba gratuita de 7 días",
+    "title": "Elige tu plan PredictEsport",
+    "subtitle": "Accede a todas las predicciones de League of Legends generadas por nuestra IA. Cancela cuando quieras.",
+    "startTrial": "Comenzar prueba gratuita",
+    "loginRequiredTitle": "Inicio de sesión requerido",
+    "loginRequiredDesc": "Crea una cuenta o inicia sesión para comenzar tu prueba gratuita.",
+    "alreadyAccount": "¿Ya tienes una cuenta?",
+    "monthly": {
+      "title": "Mensual",
+      "desc": "Facturación mensual, sin compromiso.",
+      "perMonth": "mes",
+      "trialNote": "7 días gratis, luego 14,90€/mes"
+    },
+    "yearly": {
+      "title": "Anual",
+      "desc": "Ahorra 30,10€ al año con la suscripción anual.",
+      "perYear": "año",
+      "badge": "Mejor oferta · 2 meses gratis",
+      "trialNote": "7 días gratis, luego 149,90€/año"
+    },
+    "reassurance": {
+      "secureTitle": "Pago seguro Stripe",
+      "secureDesc": "Tarjeta, Apple Pay, Google Pay",
+      "cancelTitle": "Cancela en 1 clic",
+      "cancelDesc": "Sin compromiso, gestiona desde tu cuenta",
+      "algoTitle": "Algoritmo entrenado",
+      "algoDesc": "10 años de datos competitivos de LoL"
+    },
+    "features": [
+      "Acceso ilimitado a todas las predicciones LoL",
+      "Cobertura de 15+ ligas principales (LFL, LEC, LCK, LPL, LCS, MSI, Worlds...)",
+      "Recomendaciones IA basadas en LightGBM & Voting Ensemble",
+      "Detección automática de apuestas de valor (EV positivo)",
+      "Comparación de cuotas Pinnacle, Unibet, Polymarket, Stake",
+      "Estadísticas detalladas por jugador y equipo",
+      "Notificaciones de nuevos partidos y oportunidades",
+      "Soporte prioritario por email y Discord"
+    ]
+  },
+  "faq": {
+    "title": "Preguntas frecuentes sobre IA y predicciones esports",
+    "subtitle": "Todo lo que necesitas saber sobre nuestro algoritmo de Machine Learning, las competiciones LoL cubiertas y nuestro enfoque value bet.",
+    "items": [
+      {
+        "q": "¿Cómo se generan las predicciones de PredictEsport?",
+        "a": "A diferencia de los sitios basados en opiniones subjetivas, nuestras predicciones son generadas por un motor de IA avanzado. Usamos modelos de Machine Learning (LightGBM, Voting Ensemble) entrenados con 10 años de datos competitivos (KDA, GPM, visión, drafts, winrates por parche). Nuestro algoritmo procesa miles de variables en tiempo real para calcular probabilidades de victoria objetivas y basadas en datos."
+      },
+      {
+        "q": "¿Qué competiciones LoL cubren?",
+        "a": "Cubrimos la élite mundial de League of Legends. Nuestros análisis algorítmicos incluyen las ligas mayores (LEC, LCK, LPL, LCS) así como las ligas menores (LFL, Arabian, etc.) y los torneos internacionales (Worlds, MSI). Nuestro modelo se adapta a las especificidades de cada región."
+      },
+      {
+        "q": "¿Sus predicciones garantizan ganancias?",
+        "a": "No. Las apuestas en esports siempre conllevan azar (el 'factor humano'). PredictEsport proporciona ayuda en la toma de decisiones basada en probabilidades estadísticas para maximizar tu Expected Value (EV) a largo plazo. Recomendamos apostar siempre de manera responsable."
+      },
+      {
+        "q": "¿Cuál es la diferencia entre un pronóstico y una predicción IA?",
+        "a": "Un pronóstico clásico suele ser la opinión de una persona. Una predicción de PredictEsport es el resultado de un cálculo matemático de probabilidades. Nuestro modelo cuantifica la incertidumbre e identifica las apuestas de valor (cuotas subestimadas por las casas de apuestas) en lugar de simplemente adivinar al ganador."
+      }
+    ]
+  },
+  "home": {
+    "title": "League of Legends",
+    "subtitle": "Predicciones basadas en modelos estadísticos avanzados",
     "loadingMatches": "Cargando partidos...",
     "upcomingMatches": "Calendario Próximo",
     "recentPredictions": "Predicciones Recientes",
@@ -56,23 +132,13 @@
     "fullAccess": "Acceso completo a predicciones con una",
     "premiumSubscription": "suscripción Premium",
     "premiumMember": "Eres miembro Premium - Acceso ilimitado",
-    "freeMatchInfo": "{{count}} partidos gratis",
+    "freeMatchInfo": "1 partido gratis • {count} partidos Premium",
+    "freeMatchesInfo": "{{free}} partidos gratis • {{premium}} partidos Premium",
+    "loadMore": "Ver los próximos {{count}} partidos ({{remaining}} restantes)",
     "trialLimitInfo": "Partidos limitados a los próximos 7 días",
     "premiumContent": "Contenido Premium",
     "unlockPredictions": "Desbloquea todas las predicciones",
     "subscribeButton": "Suscribirse",
-    "loadMore": "Ver los próximos {{count}} partidos ({{remaining}} restantes)",
-    "social": {
-      "subscribers": "+1 000 suscriptores",
-      "upToDate": "Pronósticos actualizados antes de cada partido",
-      "secure": "Pagos seguros",
-      "leagues": "Análisis de 15+ ligas",
-      "freeTrial": "7 días gratis"
-    },
-    "cta": {
-      "freeTrial": "Prueba gratuita de 7 días",
-      "seeResults": "Ver nuestros resultados"
-    },
     "premiumCta": {
       "title": "Desbloquea todas las predicciones",
       "description": "Accede a todos nuestros análisis, predicciones avanzadas y estadísticas detalladas para maximizar tus posibilidades de éxito.",
@@ -80,69 +146,9 @@
       "subscribePremium": "Suscribirse Premium"
     }
   },
-  "pricing": {
-    "title": "Elige tu plan PredictEsport",
-    "subtitle": "Accede a todas las predicciones de League of Legends generadas por nuestra IA. Cancela cuando quieras.",
-    "trialBadge": "7 días de prueba gratis",
-    "accountRequiredHint": "Crea primero tu cuenta para vincular tu suscripción a tu perfil PredictEsport.",
-    "loginRequiredTitle": "Cuenta requerida",
-    "loginRequiredDesc": "Inicia sesión o regístrate antes de suscribirte.",
-    "perMonth": "/mes",
-    "perYear": "/año",
-    "startTrialBtn": "Iniciar prueba gratuita",
-    "haveAccount": "¿Ya tienes cuenta?",
-    "loginLink": "Iniciar sesión",
-    "monthly": {
-      "title": "Mensual",
-      "desc": "Facturación mensual, sin compromiso.",
-      "trialNote": "7 días gratis, luego 14,90€/mes"
-    },
-    "yearly": {
-      "title": "Anual",
-      "badge": "Mejor oferta · 2 meses gratis",
-      "desc": "Ahorra ~30€ al año con el plan anual.",
-      "savingsNote": "2 meses gratis vs mensual",
-      "trialNote": "7 días gratis, luego 149,90€/año"
-    },
-    "features": {
-      "f1": "Acceso ilimitado a todas las predicciones de LoL",
-      "f2": "Cobertura de 15+ ligas mayores (LFL, LEC, LCK, LPL, LCS, MSI, Worlds...)",
-      "f3": "Recomendaciones IA basadas en LightGBM y Voting Ensemble",
-      "f4": "Detección automática de value bets (EV positivo)",
-      "f5": "Comparación de cuotas Pinnacle, Unibet, Polymarket y Stake",
-      "f6": "Estadísticas detalladas por jugador y por equipo",
-      "f7": "Notificaciones de nuevos partidos y oportunidades",
-      "f8": "Soporte prioritario por email y Discord"
-    },
-    "reassurance": {
-      "secure": "Pago seguro Stripe",
-      "secureDesc": "Tarjeta, Apple Pay, Google Pay",
-      "cancel": "Cancela en 1 clic",
-      "cancelDesc": "Sin compromiso, gestiona desde tu cuenta",
-      "algo": "Algoritmo entrenado",
-      "algoDesc": "10 años de datos competitivos de LoL"
-    }
-  },
-  "results": {
-    "title": "Nuestros Resultados y Rendimiento",
-    "subtitle": "Descubre el rendimiento real de nuestro algoritmo de Machine Learning en apuestas esports."
-  },
-  "faq": {
-    "title": "Preguntas frecuentes sobre IA y predicciones esports",
-    "subtitle": "Todo lo que debes saber sobre nuestro algoritmo de Machine Learning, las competiciones de LoL cubiertas y nuestro enfoque value bet.",
-    "q1": "¿Cómo se generan las predicciones en PredictEsport?",
-    "a1": "A diferencia de los sitios basados en opiniones subjetivas, nuestras predicciones son generadas por un motor de inteligencia artificial avanzado. Usamos modelos de Machine Learning (LightGBM, Voting Ensemble) entrenados con 10 años de datos competitivos (KDA, GPM, visión, drafts, winrates por parche). Nuestro algoritmo procesa miles de variables en tiempo real para calcular probabilidades de victoria objetivas y basadas en datos.",
-    "q2": "¿Qué competiciones de LoL cubren con pronósticos?",
-    "a2": "Cubrimos la élite mundial de League of Legends. Nuestros análisis algorítmicos incluyen las ligas mayores (LEC, LCK, LPL, LCS), las ligas menores (LFL, Arabian, etc.) y los torneos internacionales (Worlds, MSI). Nuestro modelo se adapta a las particularidades de cada región.",
-    "q3": "¿Sus predicciones garantizan ganancias?",
-    "a3": "No. Las apuestas esports siempre tienen un componente aleatorio (el «factor humano»). PredictEsport ofrece una ayuda a la decisión basada en probabilidades estadísticas para maximizar tu Expected Value (EV) a largo plazo. Apuesta siempre de manera responsable.",
-    "q4": "¿Cuál es la diferencia entre un pronóstico y una predicción IA?",
-    "a4": "Un pronóstico clásico suele ser la opinión de una persona. Una predicción PredictEsport es el resultado de un cálculo matemático de probabilidades. Nuestro modelo cuantifica la incertidumbre e identifica value bets (cuotas infravaloradas por las casas) en lugar de simplemente adivinar el ganador."
-  },
   "about": {
-    "title": "Acerca de",
-    "subtitle": "Nuestra historia, nuestro equipo y nuestra misión",
-    "ctaResults": "Ver nuestros resultados detallados",
+    "title": "Resultados",
+    "subtitle": "Descubre el rendimiento de nuestro algoritmo",
     "roi": {
       "title": "Resultados Financieros (ROI)",
       "description": "¿Interesado en los resultados financieros de nuestras predicciones? Déjanos tu email y te enviaremos los detalles de nuestro ROI.",
@@ -286,7 +292,7 @@
     "unexpectedError": "Ocurrió un error inesperado",
     "loggedInAs": "Has iniciado sesión",
     "loggedInDesc": "Descubre nuestra oferta Premium →",
-    "price": "14,90€/mes",
+    "price": "10€/mes",
     "subscribe": "Suscribirse ahora",
     "manageSubscription": "Gestionar suscripción",
     "premiumFeatures": {
@@ -324,7 +330,7 @@
     "cancelAnytime": "Cancelar en cualquier momento",
     "freeTrialBadge": "7 días de prueba gratis",
     "startFreeTrial": "Probar gratis 7 días",
-    "trialInfo": "7 días gratis, luego 14,90€/mes. Cancelar en cualquier momento.",
+    "trialInfo": "7 días gratis, luego 20€/mes. Cancelar en cualquier momento.",
     "trialBadge": "Prueba gratis",
     "trialEndsOn": "Prueba gratis hasta el"
   },

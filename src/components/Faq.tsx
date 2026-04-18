@@ -3,18 +3,12 @@ import { useTranslation } from "react-i18next";
 
 export const Faq = () => {
   const { t } = useTranslation();
-
-  const faqs = [
-    { q: t("faq.q1"), a: t("faq.a1") },
-    { q: t("faq.q2"), a: t("faq.a2") },
-    { q: t("faq.q3"), a: t("faq.a3") },
-    { q: t("faq.q4"), a: t("faq.a4") },
-  ];
+  const items = t("faq.items", { returnObjects: true }) as { q: string; a: string }[];
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
+    mainEntity: items.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -32,7 +26,7 @@ export const Faq = () => {
 
       <div className="max-w-3xl mx-auto bg-gradient-card border border-border/50 rounded-xl p-4 sm:p-6">
         <Accordion type="single" collapsible className="w-full">
-          {faqs.map((f, i) => (
+          {items.map((f, i) => (
             <AccordionItem key={i} value={`item-${i}`}>
               <AccordionTrigger className="text-left text-base font-semibold">
                 {f.q}
@@ -52,4 +46,3 @@ export const Faq = () => {
     </section>
   );
 };
-

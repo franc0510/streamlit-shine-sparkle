@@ -3,9 +3,7 @@ import { MatchCard } from "@/components/MatchCard";
 import { MatchFilters } from "@/components/MatchFilters";
 import { Faq } from "@/components/Faq";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Lock, Check, Trophy, Gift, ChevronDown, Users, Zap, ShieldCheck, BarChart3, Sparkles, Info, Loader2 } from "lucide-react";
+import { Lock, Check, Trophy, Gift, ChevronDown, Users, Zap, ShieldCheck, BarChart3, Sparkles, Info } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
@@ -60,26 +58,6 @@ const Index = () => {
   const [selectedLeague, setSelectedLeague] = useState("all");
   const [selectedDate, setSelectedDate] = useState("all");
   const [matchesLimit, setMatchesLimit] = useState(INITIAL_MATCHES_LIMIT);
-
-  // ROI form state
-  const [roiEmail, setRoiEmail] = useState("");
-  const [roiLoading, setRoiLoading] = useState(false);
-
-  const handleRoiSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setRoiLoading(true);
-    try {
-      const { error } = await supabase.functions.invoke("send-roi-results", { body: { email: roiEmail } });
-      if (error) throw error;
-      toast({ title: t("about.roi.successTitle"), description: t("about.roi.successDescription") });
-      setRoiEmail("");
-    } catch {
-      toast({ title: t("about.roi.errorTitle"), description: t("about.roi.errorDescription"), variant: "destructive" });
-    } finally {
-      setRoiLoading(false);
-    }
-  };
-
 
   useEffect(() => {
     const loadMatches = async () => {
@@ -232,23 +210,23 @@ const Index = () => {
         {/* HERO */}
         <div className="text-center mb-8 sm:mb-10 animate-fade-in">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-2 bg-gradient-gaming bg-clip-text text-transparent">
-            {t('home.title')}
+            {t("hero.title")}
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl font-display font-semibold text-foreground/90 mb-3">
-            {t('home.subtitle')}
+            {t("hero.subtitle")}
           </p>
           <p className="text-sm sm:text-base text-muted-foreground mb-6 px-4">
-            {t('home.tagline')}
+            {t("hero.leagues")}
           </p>
 
           {/* Social proof bar — full width, single line with icons */}
           <div className="max-w-5xl mx-auto bg-gradient-card border border-border/50 rounded-xl px-4 py-3 mb-6">
             <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm text-foreground/90">
-              <li className="flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" /> {t('home.social.subscribers')}</li>
-              <li className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-primary" /> {t('home.social.upToDate')}</li>
-              <li className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-amber-500" /> {t('home.social.freeTrial')}</li>
-              <li className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" /> {t('home.social.leagues')}</li>
-              <li className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-primary" /> {t('home.social.secure')}</li>
+              <li className="flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" /> {t("hero.social.subscribers")}</li>
+              <li className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-primary" /> {t("hero.social.upToDate")}</li>
+              <li className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-amber-500" /> {t("hero.social.freeTrial")}</li>
+              <li className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" /> {t("hero.social.leagues")}</li>
+              <li className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-primary" /> {t("hero.social.securePayments")}</li>
             </ul>
           </div>
 
@@ -257,13 +235,13 @@ const Index = () => {
             <Link to="/pricing">
               <Button size="lg" className="gap-2">
                 <Gift className="w-4 h-4" />
-                {t('home.cta.freeTrial')}
+                {t("hero.ctaTrial")}
               </Button>
             </Link>
             <Link to="/results">
               <Button size="lg" variant="outline" className="gap-2">
                 <Trophy className="w-4 h-4" />
-                {t('home.cta.seeResults')}
+                {t("hero.ctaResults")}
               </Button>
             </Link>
           </div>
@@ -282,25 +260,16 @@ const Index = () => {
             </div>
           )}
 
-          {/* SEO text — invisible mais riche pour le référencement */}
-          <div className="sr-only">
-            <h2>Prédictions LoL & Pronostics Esport propulsés par l'IA — LFL, LEC, LCK, LPL, LCS, MSI, Worlds</h2>
-            <p>
-              PredictEsport analyse chaque match de League of Legends grâce à un modèle de Machine Learning entraîné
-              (LightGBM, Voting Ensemble) sur 10 ans de données compétitives : KDA, GPM, vision, drafts, winrates par patch
-              et par champion. Découvrez les meilleurs pronostics LoL gratuits, identifiez les value bets sur Pinnacle,
-              Unibet, Polymarket et Stake, et optimisez votre Expected Value (EV) sur la LFL, LEC, LCK, LPL, LCS, EMEA Masters,
-              Arabian League, NLC, PRM, Ultraliga, Hitpoint Masters, LJL, CBLOL, LLA, MSI et Worlds. Essai gratuit 7 jours,
-              abonnement mensuel 14,90€ ou annuel 149,90€ (2 mois offerts).
-            </p>
-            <h3>Comment fonctionne notre IA de prédiction esport</h3>
-            <p>
-              Notre algorithme d'intelligence artificielle traite des milliers de variables par match : statistiques individuelles
-              des joueurs (top, jungle, mid, ADC, support), composition de draft, historique tête-à-tête des équipes, forme récente,
-              évolution méta par patch, performances en BO1/BO3/BO5. Cette approche purement quantitative permet d'identifier les
-              cotes sous-évaluées par les bookmakers et d'orienter les parieurs esport vers les paris à valeur attendue positive.
-            </p>
-          </div>
+          {/* SEO text — invisible (sr-only), heavy keywords */}
+          <p className="sr-only">
+            {t("hero.seoCopy")}
+            PredictEsport prédictions LoL pronostics esport League of Legends IA Machine Learning LightGBM Voting Ensemble
+            value bet EV expected value LFL LEC LCK LPL LCS MSI Worlds EMEA Masters Arabian League NLC PRM Ultraliga
+            Hitpoint Masters LJL CBLOL LLA. Pinnacle Unibet Polymarket Stake odds comparison.
+            English: best LoL prediction tool, esports betting tips, AI esports predictions, LoL odds analysis,
+            value bet finder, free 7-day trial. Español: pronósticos esports League of Legends IA, mejores cuotas LoL,
+            apuestas valor LFL LEC. 中文: 英雄联盟预测 电竞预测 AI 价值投注 免费试用.
+          </p>
         </div>
 
         {/* Matches section */}
@@ -309,7 +278,7 @@ const Index = () => {
             <h2 className="text-2xl font-display font-bold">{t('home.upcomingMatches')}</h2>
             {!isPremium && (
               <p className="text-xs text-muted-foreground">
-                {t('home.freeMatchInfo', { count: FREE_MATCHES_COUNT })}
+                {t("home.freeMatchesInfo", { free: FREE_MATCHES_COUNT, premium: Math.max(0, filteredMatches.length - FREE_MATCHES_COUNT) })}
               </p>
             )}
           </div>
@@ -388,7 +357,7 @@ const Index = () => {
                   onClick={() => setMatchesLimit(prev => prev + MATCHES_INCREMENT)}
                 >
                   <ChevronDown className="w-4 h-4" />
-                  {t('home.loadMore', { count: Math.min(MATCHES_INCREMENT, filteredMatches.length - matchesLimit), remaining: filteredMatches.length - matchesLimit })}
+                  {t("home.loadMore", { count: Math.min(MATCHES_INCREMENT, filteredMatches.length - matchesLimit), remaining: filteredMatches.length - matchesLimit })}
                 </Button>
               </div>
             )}
@@ -432,43 +401,18 @@ const Index = () => {
               <Link to="/pricing">
                 <Button size="lg" className="gap-2">
                   <Gift className="w-4 h-4" />
-                  Essayer 7 jours gratuitement
+                  {t("hero.ctaTrial")}
                 </Button>
               </Link>
               <Link to="/results">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Trophy className="w-4 h-4" />
-                  Voir nos résultats
+                  {t("hero.ctaResults")}
                 </Button>
               </Link>
             </div>
           </div>
         )}
-
-        {/* ROI section — Financial Results form */}
-        <section className="mt-16">
-          <Card className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 max-w-3xl mx-auto">
-            <h3 className="text-2xl sm:text-3xl font-display font-bold mb-3 text-center">{t("about.roi.title")}</h3>
-            <p className="text-muted-foreground text-center mb-6 max-w-xl mx-auto">{t("about.roi.description")}</p>
-            <form onSubmit={handleRoiSubmit} className="max-w-md mx-auto space-y-4">
-              <Input
-                type="email"
-                placeholder={t("about.roi.emailPlaceholder")}
-                value={roiEmail}
-                onChange={(e) => setRoiEmail(e.target.value)}
-                required
-                className="bg-background/50"
-              />
-              <Button type="submit" className="w-full" disabled={roiLoading}>
-                {roiLoading ? (
-                  <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{t("about.roi.sending")}</>
-                ) : (
-                  t("about.roi.submit")
-                )}
-              </Button>
-            </form>
-          </Card>
-        </section>
 
         {/* FAQ */}
         <Faq />

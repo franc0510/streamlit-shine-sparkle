@@ -12,12 +12,20 @@ export interface SubscriptionStatus {
   trial_end?: string | null;
 }
 
-// Lien legacy (mensuel) – conservé pour compatibilité
-export const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/3cIaEX1RF9Bhcr90Aaak003";
-
-// Liens Stripe par formule (avec essai gratuit 7 jours configuré côté Stripe)
 export const STRIPE_PAYMENT_LINK_MONTHLY = "https://buy.stripe.com/3cIaEX1RF9Bhcr90Aaak003";
 export const STRIPE_PAYMENT_LINK_YEARLY = "https://buy.stripe.com/7sYcN5cwjcNt4YHer0ak004";
+// Backward compatibility (default = monthly)
+export const STRIPE_PAYMENT_LINK = STRIPE_PAYMENT_LINK_MONTHLY;
+
+/**
+ * Build a Stripe payment link with the user's email pre-filled,
+ * so Stripe associates the subscription with the right account.
+ */
+export const buildStripeLink = (baseUrl: string, email?: string | null): string => {
+  if (!email) return baseUrl;
+  const sep = baseUrl.includes("?") ? "&" : "?";
+  return `${baseUrl}${sep}prefilled_email=${encodeURIComponent(email)}`;
+};
 
 export type DiagnosticStep = {
   name: string;
