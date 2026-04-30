@@ -184,9 +184,14 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
                   style={{ width: `${team2.winProbability}%` }}
                 />
               </div>
-              <span className="text-[10px] sm:text-xs text-muted-foreground">
-                EV ≥ {minOdds.team2.toFixed(2)}
-              </span>
+              <div className="flex flex-col items-center leading-tight">
+                <span className="text-[10px] sm:text-xs text-muted-foreground">
+                  EV ≥ {minOdds.team2.toFixed(2)}
+                </span>
+                <span className="text-[9px] sm:text-[10px] text-muted-foreground/80">
+                  +5%: {(minOdds.team2 * 1.05).toFixed(2)} · +10%: {(minOdds.team2 * 1.10).toFixed(2)}
+                </span>
+              </div>
             </div>
           </div>
         </div>
