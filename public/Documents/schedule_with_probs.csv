@@ -1,244 +1,251 @@
 match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last_proba_team1_pct,last_proba_team2_pct,status,used_team1,used_team2,roster1_size,roster2_size,as_of,league_like,debug_error,symmetry_check,order_key,flip_applied
-2026-05-10T10:00:00+00:00,LCK,BO3,KIWOOM DRX,Hanwha Life Esports,30.6,69.4,13.9,14.5,ok,Kiwoom DRX,Hanwha Life Esports,5,5,2026-05-10,LCK,,ok,Hanwha Life Esports|Kiwoom DRX,yes
-2026-05-10T11:30:00+00:00,LCP,BO3,Fukuoka SoftBank HAWKS gaming,GAM Esports,40.3,59.7,73.2,87.8,ok,Fukuoka SoftBank HAWKS gaming,GAM Esports,5,5,2026-05-10,LCP,,ok,Fukuoka SoftBank HAWKS gaming|GAM Esports,no
-2026-05-10T13:00:00+00:00,LEC,BO3,GIANTX,Karmine Corp,32.9,67.1,61.7,50.0,ok,GiantX,Karmine Corp,5,5,2026-05-10,LEC,,ok,GiantX|Karmine Corp,no
-2026-05-10T16:00:00+00:00,CBLOL,BO5,LOS,Fluxo,50.0,50.0,50.0,60.0,no_roster:LOS,LOS,Fluxo,0,5,2026-05-10,CBLOL,,skipped,,
-2026-05-10T16:00:00+00:00,LEC,BO3,G2 Esports,Movistar KOI,55.6,44.4,52.4,56.6,ok,G2 Esports,Movistar KOI,5,5,2026-05-10,LEC,,ok,G2 Esports|Movistar KOI,no
-2026-05-10T20:00:00+00:00,LCS,BO3,Cloud9 Kia,FlyQuest,63.7,36.3,58.8,72.6,ok,Cloud9,FlyQuest,5,5,2026-05-10,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Cloud9|FlyQuest,no
-2026-05-10T23:00:00+00:00,LCS,BO3,LYON,Team Liquid Alienware,50.0,50.0,50.0,50.0,no_roster:Team Liquid Alienware,LYON,Team Liquid Alienware,5,0,2026-05-10,LCS,,skipped,,
-2026-05-11T05:00:00+00:00,LCK Challengers,BO3,KRX Challengers,NS Challengers,37.5,62.5,40.7,55.3,ok,DRX Challengers,Nongshim Esports Academy,5,5,2026-05-11,LCKC,,ok,DRX Challengers|Nongshim Esports Academy,no
-2026-05-11T07:00:00+00:00,LCK Challengers,BO3,T1 Esports Academy,Gen.G Global Academy,72.8,27.2,46.1,39.6,ok,T1,Gen.G Global Academy,5,5,2026-05-11,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Gen.G Global Academy|T1,yes
-2026-05-11T09:00:00+00:00,LCK Challengers,BO3,BNK FEARX Youth,DNS Challengers,46.0,54.0,69.7,50.0,ok,BNK FEARX Youth,DN SOOPers Challengers,5,5,2026-05-11,LCKC,,ok,BNK FEARX Youth|DN SOOPers Challengers,no
-2026-05-11T14:30:00+00:00,TCL,BO3,SU Esports,Ozarox Esports,52.3,47.7,40.6,54.7,ok,SU Esports,Ozarox Esports,5,5,2026-05-11,TCL,,ok,Ozarox Esports|SU Esports,yes
-2026-05-11T15:00:00+00:00,Prime League,BO3,Eintracht Frankfurt,G2 NORD,40.1,59.9,58.4,77.9,ok,Eintracht Frankfurt,G2 NORD,5,5,2026-05-11,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Eintracht Frankfurt|G2 NORD,no
-2026-05-11T17:00:00+00:00,Prime League,BO3,Kaufland Hangry Knights,TeamOrangeGaming,21.6,78.4,35.7,42.8,ok,Kaufland Hangry Knights,TeamOrangeGaming,5,5,2026-05-11,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Kaufland Hangry Knights|TeamOrangeGaming,no
-2026-05-11T17:30:00+00:00,TCL,BO3,Team Phoenix,BoostGate Esports,28.6,71.4,50.0,50.0,ok,Team Phoenix,BoostGate Esports,5,5,2026-05-11,TCL,,ok,BoostGate Esports|Team Phoenix,yes
+2026-05-11T14:30:00+00:00,TCL,BO3,SU Esports,Ozarox Esports,50.4,49.6,40.6,54.7,ok,SU Esports,Ozarox Esports,5,5,2026-05-11,TCL,,ok,Ozarox Esports|SU Esports,yes
+2026-05-11T15:00:00+00:00,Prime League,BO3,Eintracht Frankfurt,G2 NORD,44.8,55.2,58.4,77.9,ok,Eintracht Frankfurt,G2 NORD,5,5,2026-05-11,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Eintracht Frankfurt|G2 NORD,no
+2026-05-11T17:00:00+00:00,Prime League,BO3,Kaufland Hangry Knights,TeamOrangeGaming,25.0,75.0,35.7,42.8,ok,Kaufland Hangry Knights,TeamOrangeGaming,5,5,2026-05-11,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Kaufland Hangry Knights|TeamOrangeGaming,no
+2026-05-11T17:30:00+00:00,TCL,BO3,Team Phoenix,BoostGate Esports,30.7,69.3,50.0,50.0,ok,Team Phoenix,BoostGate Esports,5,5,2026-05-11,TCL,,ok,BoostGate Esports|Team Phoenix,yes
 2026-05-11T20:00:00+00:00,Circuito Desafiante,BO5,Ei Nerd Esports,Estral Esports,50.0,50.0,50.0,50.0,no_roster:Ei Nerd Esports,Ei Nerd Esports,Estral Esports,0,5,2026-05-11,CIRCUITO DESAFIANTE,,skipped,,
-2026-05-11T23:00:00+00:00,LRN,BO5,Lyon Academy,SDM Tigres,76.3,23.7,50.0,50.0,ok,Lyon Gaming,SDM Tigres,5,5,2026-05-11,LRN,ValueError: Roster vide : impossible d'agréger les features.,skipped,Lyon Gaming|SDM Tigres,no
-2026-05-12T08:00:00+00:00,LCK Challengers,BO3,HLE Challengers,kt Challengers,60.2,39.8,50.0,50.0,ok,Hanwha Life Esports,KT Rolster Challengers,5,5,2026-05-12,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Hanwha Life Esports|KT Rolster Challengers,no
-2026-05-12T09:00:00+00:00,LPL,BO3,TOP ESPORTS,Shenzhen NINJAS IN PYJAMAS,55.7,44.3,46.8,42.7,ok,Top Esports,Ninjas in Pyjamas,5,5,2026-05-12,LPL,,ok,Ninjas in Pyjamas|Top Esports,yes
-2026-05-12T10:00:00+00:00,LCK Challengers,BO3,BRO Challengers,DK Challengers,38.0,62.0,50.0,50.0,ok,HANJIN BRION Challengers,Dplus Kia Challengers,5,5,2026-05-12,LCKC,,ok,Dplus Kia Challengers|HANJIN BRION Challengers,yes
-2026-05-12T11:00:00+00:00,LPL,BO3,Invictus Gaming,BILIBILI GAMING,33.8,66.2,38.5,50.0,ok,Invictus Gaming,Bilibili Gaming,5,5,2026-05-12,LPL,,ok,Bilibili Gaming|Invictus Gaming,yes
-2026-05-12T14:30:00+00:00,TCL,BO3,Bushido Wildcats,MISA Esports,53.6,46.4,50.0,79.6,ok,Bushido Wildcats,Misa Esports,5,5,2026-05-12,TCL,,ok,Bushido Wildcats|Misa Esports,no
+2026-05-11T23:00:00+00:00,LRN,BO5,Lyon Academy,SDM Tigres,70.8,29.2,50.0,50.0,ok,Lyon Gaming,SDM Tigres,5,5,2026-05-11,LRN,ValueError: Roster vide : impossible d'agréger les features.,skipped,Lyon Gaming|SDM Tigres,no
+2026-05-12T08:00:00+00:00,LCK Challengers,BO3,HLE Challengers,kt Challengers,59.1,40.9,50.0,50.0,ok,Hanwha Life Esports,KT Rolster Challengers,5,5,2026-05-12,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Hanwha Life Esports|KT Rolster Challengers,no
+2026-05-12T09:00:00+00:00,LPL,BO3,TOP ESPORTS,Shenzhen NINJAS IN PYJAMAS,52.5,47.5,46.8,42.7,ok,Top Esports,Ninjas in Pyjamas,5,5,2026-05-12,LPL,,ok,Ninjas in Pyjamas|Top Esports,yes
+2026-05-12T10:00:00+00:00,LCK Challengers,BO3,BRO Challengers,DK Challengers,37.1,62.9,50.0,50.0,ok,HANJIN BRION Challengers,Dplus Kia Challengers,5,5,2026-05-12,LCKC,,ok,Dplus Kia Challengers|HANJIN BRION Challengers,yes
+2026-05-12T11:00:00+00:00,LPL,BO3,Invictus Gaming,BILIBILI GAMING,30.0,70.0,38.5,50.0,ok,Invictus Gaming,Bilibili Gaming,5,5,2026-05-12,LPL,,ok,Bilibili Gaming|Invictus Gaming,yes
+2026-05-12T14:30:00+00:00,TCL,BO3,Bushido Wildcats,MISA Esports,57.4,42.6,50.0,79.6,ok,Bushido Wildcats,Misa Esports,5,5,2026-05-12,TCL,,ok,Bushido Wildcats|Misa Esports,no
 2026-05-12T15:00:00+00:00,Prime League,BO3,VfB Stuttgart,E Wie Einfach E-Sports,50.0,50.0,50.0,43.6,no_roster:VfB Stuttgart,VfB Stuttgart,E WIE EINFACH E-SPORTS,0,5,2026-05-12,PRIME LEAGUE,,skipped,,
-2026-05-12T16:00:00+00:00,Arabian League,BO3,Dragons Esports,BAAM Esports,65.4,34.6,50.0,54.9,ok,Dragons Esports,BAAM Esports,5,5,2026-05-12,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BAAM Esports|Dragons Esports,yes
-2026-05-12T17:00:00+00:00,Prime League,BO3,Rossmann Centaurs,Unicorns of Love Sexy Edition,25.0,75.0,27.7,50.0,ok,ROSSMANN Centaurs,Unicorns of Love Sexy Edition,5,5,2026-05-12,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,ROSSMANN Centaurs|Unicorns of Love Sexy Edition,no
-2026-05-12T17:00:00+00:00,Road of Legends,BO3,Frites Esports Club,mCon Esports,57.1,42.9,50.0,54.4,ok,Chiefs Esports Club,mCon esports,5,5,2026-05-12,ROAD OF LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Chiefs Esports Club|mCon esports,no
-2026-05-12T17:30:00+00:00,TCL,BO3,Dark Passage,PCIFIC Esports,44.3,55.7,50.0,19.6,ok,Dark Passage,PCIFIC Esports,5,5,2026-05-12,TCL,,ok,Dark Passage|PCIFIC Esports,no
+2026-05-12T16:00:00+00:00,Arabian League,BO3,Dragons Esports,BAAM Esports,69.3,30.7,50.0,54.9,ok,Dragons Esports,BAAM Esports,5,5,2026-05-12,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,BAAM Esports|Dragons Esports,yes
+2026-05-12T17:00:00+00:00,Prime League,BO3,Rossmann Centaurs,Unicorns of Love Sexy Edition,30.8,69.2,27.7,50.0,ok,ROSSMANN Centaurs,Unicorns of Love Sexy Edition,5,5,2026-05-12,PRIME LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,ROSSMANN Centaurs|Unicorns of Love Sexy Edition,no
+2026-05-12T17:00:00+00:00,Road of Legends,BO3,Frites Esports Club,mCon Esports,54.9,45.1,50.0,54.4,ok,Chiefs Esports Club,mCon esports,5,5,2026-05-12,ROAD OF LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Chiefs Esports Club|mCon esports,no
+2026-05-12T17:30:00+00:00,TCL,BO3,Dark Passage,PCIFIC Esports,45.4,54.6,50.0,19.6,ok,Dark Passage,PCIFIC Esports,5,5,2026-05-12,TCL,,ok,Dark Passage|PCIFIC Esports,no
 2026-05-12T18:00:00+00:00,Road of Legends,BO3,Senshi eSports,Dynasty,50.0,50.0,50.0,50.0,no_roster:Dynasty,Senshi Esports Club,Dynasty,5,0,2026-05-12,ROAD OF LEGENDS,,skipped,,
-2026-05-12T18:30:00+00:00,Arabian League,BO3,Anubis Gaming,FN Esports,44.8,55.2,49.8,50.0,ok,Anubis Gaming,FN Esports,5,5,2026-05-12,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Anubis Gaming|FN Esports,no
+2026-05-12T18:30:00+00:00,Arabian League,BO3,Anubis Gaming,FN Esports,41.4,58.6,49.8,50.0,ok,Anubis Gaming,FN Esports,5,5,2026-05-12,ARABIAN LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Anubis Gaming|FN Esports,no
 2026-05-12T20:00:00+00:00,Circuito Desafiante,BO5,paiN Gaming Academy,7REX Team,50.0,50.0,50.0,50.0,no_roster:7REX Team,paiN Gaming,7REX Team,5,0,2026-05-12,CIRCUITO DESAFIANTE,,skipped,,
 2026-05-12T20:00:00+00:00,LRS,BO5,The New Kings,Malvinas Gaming,50.0,50.0,50.0,50.0,no_roster:The New Kings+Malvinas Gaming,The New Kings,Malvinas Gaming,0,0,2026-05-12,LRS,,skipped,,
-2026-05-13T08:00:00+00:00,LCK,BO3,T1,NONGSHIM RED FORCE,58.2,41.8,16.5,11.7,ok,T1,Nongshim RedForce,5,5,2026-05-13,LCK,,ok,Nongshim RedForce|T1,yes
-2026-05-13T09:00:00+00:00,LPL,BO3,Oh My God,EDWARD GAMING,36.5,63.5,59.4,83.9,ok,Oh My God,EDward Gaming,5,5,2026-05-13,LPL,,ok,EDward Gaming|Oh My God,yes
-2026-05-13T10:00:00+00:00,LCK,BO3,DN SOOPers,Dplus KIA,25.6,74.4,50.0,50.0,ok,DN SOOPers,Dplus Kia,5,5,2026-05-13,LCK,,ok,DN SOOPers|Dplus Kia,no
-2026-05-13T11:00:00+00:00,LPL,BO3,Xi'an Team WE,Anyone's Legend,30.5,69.5,24.8,50.0,ok,Team WE,Anyone's Legend,5,5,2026-05-13,LPL,,ok,Anyone's Legend|Team WE,yes
-2026-05-13T13:00:00+00:00,Hellenic Legends League,BO5,WLGaming,Team Phantasma,68.0,32.0,50.0,50.0,ok,WLGaming Esports,Team Phantasma,5,5,2026-05-13,HELLENIC LEGENDS LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Team Phantasma|WLGaming Esports,yes
-2026-05-13T15:00:00+00:00,LES,BO3,Barça Esports,FALKE ESPORTS,64.9,35.1,50.0,50.0,ok,Barça eSports,FALKN,5,5,2026-05-13,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,Barça eSports|FALKN,no
+2026-05-13T08:00:00+00:00,LCK,BO3,T1,NONGSHIM RED FORCE,63.7,36.3,16.5,11.7,ok,T1,Nongshim RedForce,5,5,2026-05-13,LCK,,ok,Nongshim RedForce|T1,yes
+2026-05-13T09:00:00+00:00,LPL,BO3,Oh My God,EDWARD GAMING,34.1,65.9,59.4,83.9,ok,Oh My God,EDward Gaming,5,5,2026-05-13,LPL,,ok,EDward Gaming|Oh My God,yes
+2026-05-13T10:00:00+00:00,LCK,BO3,DN SOOPers,Dplus KIA,24.5,75.5,50.0,50.0,ok,DN SOOPers,Dplus Kia,5,5,2026-05-13,LCK,,ok,DN SOOPers|Dplus Kia,no
+2026-05-13T10:00:00+00:00,VCS,BO3,Saigon Warrior,Saigon Zen Esport,50.0,50.0,50.0,,no_roster:Saigon Warrior+Saigon Zen Esport,Saigon Warrior,Saigon Zen Esport,0,0,2026-05-13,VCS,,skipped,,
+2026-05-13T11:00:00+00:00,LPL,BO3,Xi'an Team WE,Anyone's Legend,30.8,69.2,24.8,50.0,ok,Team WE,Anyone's Legend,5,5,2026-05-13,LPL,,ok,Anyone's Legend|Team WE,yes
+2026-05-13T13:00:00+00:00,Hellenic Legends League,BO5,WLGaming,Team Phantasma,65.6,34.4,50.0,50.0,ok,WLGaming Esports,Team Phantasma,5,5,2026-05-13,HELLENIC LEGENDS LEAGUE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Team Phantasma|WLGaming Esports,yes
+2026-05-13T13:00:00+00:00,VCS,BO3,Saigon Dino,Saigon MVKE Academy,50.0,50.0,50.0,50.0,no_roster:Saigon MVKE Academy,Saigon Dino,Saigon MVKE Academy,5,0,2026-05-13,VCS,,skipped,,
+2026-05-13T15:00:00+00:00,LES,BO3,Barça Esports,FALKE ESPORTS,70.2,29.8,50.0,9.3,ok,Barça eSports,FALKN,5,5,2026-05-13,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,Barça eSports|FALKN,no
 2026-05-13T16:00:00+00:00,Arabian League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-13,ARABIAN LEAGUE,,skipped,,
 2026-05-13T16:00:00+00:00,Esports Balkan League,BO3,SPIKE Syndicate,TQ DURPA KASLQ,50.0,50.0,50.0,50.0,no_roster:SPIKE Syndicate+TQ DURPA KASLQ,SPIKE Syndicate,TQ DURPA KASLQ,0,0,2026-05-13,ESPORTS BALKAN LEAGUE,,skipped,,
+2026-05-13T16:00:00+00:00,La Ligue Française,BO3,Ici Japon Corp,Esprit Shonen,51.7,48.3,50.0,50.0,ok,Ici Japon Corp. Esport,Esprit Shōnen,5,5,2026-05-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Esprit Shōnen|Ici Japon Corp. Esport,yes
 2026-05-13T18:00:00+00:00,Esports Balkan League,BO3,Team Spawn Peek,Washed Gaming,50.0,50.0,50.0,50.0,no_roster:Team Spawn Peek+Washed Gaming,Team Spawn Peek,Washed Gaming,0,0,2026-05-13,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-05-13T18:00:00+00:00,LES,BO3,Movistar KOI Fénix,GIANTX ITERO,31.8,68.2,50.0,85.7,ok,Movistar KOI Fénix,GIANTX iTero,5,5,2026-05-13,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,GIANTX iTero|Movistar KOI Fénix,yes
-2026-05-14T05:00:00+00:00,LCK Challengers,BO3,DK Challengers,BNK FEARX Youth,45.8,54.2,62.0,46.0,ok,Dplus Kia Challengers,BNK FEARX Youth,5,5,2026-05-14,LCKC,,ok,BNK FEARX Youth|Dplus Kia Challengers,yes
-2026-05-14T05:00:00+00:00,LCK Challengers,BO3,T1 Esports Academy,DNS Challengers,63.2,36.8,72.8,54.0,ok,T1,DN SOOPers Challengers,5,5,2026-05-14,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,DN SOOPers Challengers|T1,yes
-2026-05-14T05:00:00+00:00,LCK Challengers,BO3,kt Challengers,BRO Challengers,57.6,42.4,39.8,38.0,ok,KT Rolster Challengers,HANJIN BRION Challengers,5,5,2026-05-14,LCKC,,ok,HANJIN BRION Challengers|KT Rolster Challengers,yes
-2026-05-14T08:00:00+00:00,LCK,BO3,BNK FEARX,Gen.G Esports,25.6,74.4,18.9,50.0,ok,BNK FEARX,Gen.G,5,5,2026-05-14,LCK,,ok,BNK FEARX|Gen.G,no
-2026-05-14T08:00:00+00:00,LJL,BO3,UWinks,L Guide Gaming,66.7,33.3,77.7,76.3,ok,Uwinks,L Guide Gaming,5,5,2026-05-14,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,L Guide Gaming|Uwinks,yes
+2026-05-13T18:00:00+00:00,LES,BO3,Movistar KOI Fénix,GIANTX ITERO,30.9,69.1,50.0,85.7,ok,Movistar KOI Fénix,GIANTX iTero,5,5,2026-05-13,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,GIANTX iTero|Movistar KOI Fénix,yes
+2026-05-13T19:00:00+00:00,La Ligue Française,BO3,Vitality.Bee,ZYB,67.3,32.7,34.6,30.0,ok,Vitality.Bee,ZYB Esport,5,5,2026-05-13,LA LIGUE FRANÇAISE,ValueError: Roster vide : impossible d'agréger les features.,skipped,Vitality.Bee|ZYB Esport,no
+2026-05-14T05:00:00+00:00,LCK Challengers,BO3,DK Challengers,BNK FEARX Youth,42.4,57.6,62.9,69.7,ok,Dplus Kia Challengers,BNK FEARX Youth,5,5,2026-05-14,LCKC,,ok,BNK FEARX Youth|Dplus Kia Challengers,yes
+2026-05-14T05:00:00+00:00,LCK Challengers,BO3,T1 Esports Academy,DNS Challengers,60.7,39.3,46.1,50.0,ok,T1,DN SOOPers Challengers,5,5,2026-05-14,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,DN SOOPers Challengers|T1,yes
+2026-05-14T05:00:00+00:00,LCK Challengers,BO3,kt Challengers,BRO Challengers,53.3,46.7,40.9,37.1,ok,KT Rolster Challengers,HANJIN BRION Challengers,5,5,2026-05-14,LCKC,,ok,HANJIN BRION Challengers|KT Rolster Challengers,yes
+2026-05-14T08:00:00+00:00,LCK,BO3,BNK FEARX,Gen.G Esports,30.0,70.0,18.9,50.0,ok,BNK FEARX,Gen.G,5,5,2026-05-14,LCK,,ok,BNK FEARX|Gen.G,no
+2026-05-14T08:00:00+00:00,LJL,BO3,UWinks,L Guide Gaming,64.0,36.0,77.7,76.3,ok,Uwinks,L Guide Gaming,5,5,2026-05-14,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,L Guide Gaming|Uwinks,yes
 2026-05-14T09:00:00+00:00,LPL,BO3,Suzhou LNG Esports,LGD GAMING,50.0,50.0,50.0,71.1,no_roster:Suzhou LNG Esports,Suzhou LNG Esports,LGD Gaming,0,5,2026-05-14,LPL,,skipped,,
-2026-05-14T10:00:00+00:00,LCK,BO3,KIWOOM DRX,kt Rolster,28.5,71.5,30.6,50.0,ok,Kiwoom DRX,KT Rolster,5,5,2026-05-14,LCK,,ok,Kiwoom DRX|KT Rolster,no
-2026-05-14T11:00:00+00:00,LJL,BO3,FENNEL,Arneb,73.1,26.9,50.0,50.0,ok,FENNEL,Arneb,5,5,2026-05-14,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Arneb|FENNEL,yes
-2026-05-14T11:00:00+00:00,LPL,BO3,WeiboGaming,Beijing JDG Esports,50.0,50.0,50.0,50.0,no_roster:Beijing JDG Esports,Weibo Gaming,Beijing JDG Esports,5,0,2026-05-14,LPL,,skipped,,
+2026-05-14T10:00:00+00:00,LCK,BO3,KIWOOM DRX,kt Rolster,23.0,77.0,13.9,50.0,ok,Kiwoom DRX,KT Rolster,5,5,2026-05-14,LCK,,ok,Kiwoom DRX|KT Rolster,no
+2026-05-14T10:00:00+00:00,VCS,BO3,Saigon 9Gaming,TP.HCM SN CyberCore Esports,50.0,50.0,50.0,50.0,no_roster:TP.HCM SN CyberCore Esports,Saint Gaming,TP.HCM SN CyberCore Esports,5,0,2026-05-14,VCS,,skipped,,
+2026-05-14T11:00:00+00:00,LJL,BO3,FENNEL,Arneb,74.5,25.5,50.0,50.0,ok,FENNEL,Arneb,5,5,2026-05-14,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Arneb|FENNEL,yes
+2026-05-14T11:00:00+00:00,LPL,BO3,WeiboGaming,Beijing JDG Esports,50.0,50.0,33.8,50.0,no_roster:Beijing JDG Esports,Weibo Gaming,Beijing JDG Esports,5,0,2026-05-14,LPL,,skipped,,
 2026-05-14T13:00:00+00:00,Hellenic Legends League,BO5,GOAL esports,Team Insidious,50.0,50.0,50.0,50.0,no_roster:Team Insidious,GAM Esports,Team Insidious,5,0,2026-05-14,HELLENIC LEGENDS LEAGUE,,skipped,,
-2026-05-14T15:00:00+00:00,LES,BO3,UCAM Esports Club,LUA Gaming,57.5,42.5,45.0,50.0,ok,UCAM Esports,LUA Gaming,5,5,2026-05-14,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,LUA Gaming|UCAM Esports,yes
+2026-05-14T13:00:00+00:00,VCS,BO3,Saigon Zen Esport,Saigon Dino,50.0,50.0,50.0,50.0,no_roster:Saigon Zen Esport,Saigon Zen Esport,Saigon Dino,0,5,2026-05-14,VCS,,skipped,,
+2026-05-14T15:00:00+00:00,LES,BO3,UCAM Esports Club,LUA Gaming,55.4,44.6,45.0,50.0,ok,UCAM Esports,LUA Gaming,5,5,2026-05-14,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,LUA Gaming|UCAM Esports,yes
 2026-05-14T16:00:00+00:00,Esports Balkan League,BO3,Lenovo Legion Honvéd,Partizan Sangal,50.0,50.0,50.0,50.0,no_roster:Lenovo Legion Honvéd+Partizan Sangal,Lenovo Legion Honvéd,Partizan Sangal,0,0,2026-05-14,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-05-14T16:00:00+00:00,LoL Italian Tournament,BO5,GMBLERS Esports,EKO Esports,50.0,50.0,50.0,50.0,no_roster:GMBLERS Esports,GMBLERS Esports,LEO Esports,0,5,2026-05-14,LOL ITALIAN TOURNAMENT,,skipped,,
 2026-05-14T17:00:00+00:00,Road of Legends,BO3,Myth Esports,The Bandits,50.0,50.0,50.0,50.0,no_roster:The Bandits,5M Esports,The Bandits,5,0,2026-05-14,ROAD OF LEGENDS,,skipped,,
 2026-05-14T18:00:00+00:00,Esports Balkan League,BO3,The Secret Club,MAGAZA,50.0,50.0,50.0,50.0,no_roster:The Secret Club+MAGAZA,The Secret Club,MAGAZA,0,0,2026-05-14,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-05-14T18:00:00+00:00,LES,BO3,Heretics Academy,UB Alma Mater,50.0,50.0,56.4,50.0,no_roster:UB Alma Mater,Team Heretics,UB Alma Mater,5,0,2026-05-14,LES,,skipped,,
-2026-05-14T18:00:00+00:00,Liga Portuguesa,BO1,Ronaldo Team,Otter Side,41.6,58.4,50.0,50.0,ok,Ronaldo Team,Otter Side,5,5,2026-05-14,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Otter Side|Ronaldo Team,yes
+2026-05-14T18:00:00+00:00,Liga Portuguesa,BO1,Ronaldo Team,Otter Side,40.4,59.6,50.0,52.1,ok,Ronaldo Team,Otter Side,5,5,2026-05-14,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Otter Side|Ronaldo Team,yes
 2026-05-14T18:00:00+00:00,Road of Legends,BO3,Once Upon a Team,ZennIT,50.0,50.0,50.0,50.0,no_roster:Once Upon a Team,Once Upon a Team,Zenith Esports,0,5,2026-05-14,ROAD OF LEGENDS,,skipped,,
-2026-05-14T19:00:00+00:00,Liga Portuguesa,BO1,Francesinhas,Bubliki,47.0,53.0,50.0,50.0,ok,Francesinhas,Bubliki,5,5,2026-05-14,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Bubliki|Francesinhas,yes
-2026-05-14T20:00:00+00:00,Liga Portuguesa,BO1,Crusaders,Dream Esports,53.8,46.2,49.2,50.0,ok,Crusaders,Dream Esports,5,5,2026-05-14,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Crusaders|Dream Esports,no
-2026-05-14T20:00:00+00:00,NACL,BO3,Supernova,Maryville University,34.1,65.9,69.3,68.4,ok,Supernova,Maryville University,5,5,2026-05-14,NACL,,ok,Maryville University|Supernova,yes
-2026-05-14T21:00:00+00:00,Liga Portuguesa,BO1,GTZ Esports,ZeroZone Gaming,54.6,45.4,50.0,47.8,ok,GTZ Esports,ZeroZone Gaming,5,5,2026-05-14,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,GTZ Esports|ZeroZone Gaming,no
-2026-05-14T23:00:00+00:00,NACL,BO3,Conviction,Dorado Gaming,52.8,47.2,67.0,35.1,ok,Conviction,Dorado Gaming,5,5,2026-05-14,NACL,,ok,Conviction|Dorado Gaming,no
-2026-05-15T05:00:00+00:00,LCK Challengers,BO3,HLE Challengers,NS Challengers,54.4,45.6,60.2,62.5,ok,Hanwha Life Esports,Nongshim Esports Academy,5,5,2026-05-15,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Hanwha Life Esports|Nongshim Esports Academy,no
-2026-05-15T05:00:00+00:00,LCK Challengers,BO3,KRX Challengers,Gen.G Global Academy,59.4,40.6,37.5,27.2,ok,DRX Challengers,Gen.G Global Academy,5,5,2026-05-15,LCKC,,ok,DRX Challengers|Gen.G Global Academy,no
-2026-05-15T08:00:00+00:00,LCK,BO3,Hanwha Life Esports,Dplus KIA,65.6,34.4,69.4,74.4,ok,Hanwha Life Esports,Dplus Kia,5,5,2026-05-15,LCK,,ok,Dplus Kia|Hanwha Life Esports,yes
-2026-05-15T08:00:00+00:00,LJL,BO3,DFM Academy,Rising Gaming,26.3,73.7,42.9,48.9,ok,DRX Academy,Rising Gaming,5,5,2026-05-15,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,DRX Academy|Rising Gaming,no
-2026-05-15T09:00:00+00:00,LPL,BO3,Ultra Prime,Oh My God,46.9,53.1,31.2,36.5,ok,Ultra Prime,Oh My God,5,5,2026-05-15,LPL,,ok,Oh My God|Ultra Prime,yes
-2026-05-15T10:00:00+00:00,LCK,BO3,HANJIN BRION,DN SOOPers,63.7,36.3,47.6,25.6,ok,HANJIN BRION,DN SOOPers,5,5,2026-05-15,LCK,,ok,DN SOOPers|HANJIN BRION,yes
-2026-05-15T11:00:00+00:00,LJL,BO3,New Meta,RAYN Clocks,69.9,30.1,50.0,50.0,ok,New Meta,RAYN Clocks,5,5,2026-05-15,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,New Meta|RAYN Clocks,no
-2026-05-15T11:00:00+00:00,LPL,BO3,TOP ESPORTS,BILIBILI GAMING,52.0,48.0,55.7,66.2,ok,Top Esports,Bilibili Gaming,5,5,2026-05-15,LPL,,ok,Bilibili Gaming|Top Esports,yes
-2026-05-15T14:30:00+00:00,TCL,BO3,Team Phoenix,Ozarox Esports,23.3,76.7,28.6,47.7,ok,Team Phoenix,Ozarox Esports,5,5,2026-05-15,TCL,,ok,Ozarox Esports|Team Phoenix,yes
+2026-05-14T19:00:00+00:00,Liga Portuguesa,BO1,Francesinhas,Bubliki,41.2,58.8,50.0,50.0,ok,Francesinhas,Bubliki,5,5,2026-05-14,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Bubliki|Francesinhas,yes
+2026-05-14T20:00:00+00:00,Liga Portuguesa,BO1,Crusaders,Dream Esports,52.5,47.5,49.2,50.0,ok,Crusaders,Dream Esports,5,5,2026-05-14,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Crusaders|Dream Esports,no
+2026-05-14T20:00:00+00:00,NACL,BO3,Supernova,Maryville University,29.8,70.2,69.3,68.4,ok,Supernova,Maryville University,5,5,2026-05-14,NACL,,ok,Maryville University|Supernova,yes
+2026-05-14T21:00:00+00:00,Liga Portuguesa,BO1,GTZ Esports,ZeroZone Gaming,53.2,46.8,50.0,47.8,ok,GTZ Esports,ZeroZone Gaming,5,5,2026-05-14,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,GTZ Esports|ZeroZone Gaming,no
+2026-05-14T23:00:00+00:00,NACL,BO3,Conviction,Dorado Gaming,54.7,45.3,67.0,35.1,ok,Conviction,Dorado Gaming,5,5,2026-05-14,NACL,,ok,Conviction|Dorado Gaming,no
+2026-05-15T05:00:00+00:00,LCK Challengers,BO3,HLE Challengers,NS Challengers,59.1,40.9,59.1,55.3,ok,Hanwha Life Esports,Nongshim Esports Academy,5,5,2026-05-15,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Hanwha Life Esports|Nongshim Esports Academy,no
+2026-05-15T05:00:00+00:00,LCK Challengers,BO3,KRX Challengers,Gen.G Global Academy,62.0,38.0,40.7,11.4,ok,DRX Challengers,Gen.G Global Academy,5,5,2026-05-15,LCKC,,ok,DRX Challengers|Gen.G Global Academy,no
+2026-05-15T08:00:00+00:00,LCK,BO3,Hanwha Life Esports,Dplus KIA,58.7,41.3,14.5,75.5,ok,Hanwha Life Esports,Dplus Kia,5,5,2026-05-15,LCK,,ok,Dplus Kia|Hanwha Life Esports,yes
+2026-05-15T08:00:00+00:00,LJL,BO3,DFM Academy,Rising Gaming,24.8,75.2,42.9,48.9,ok,DRX Academy,Rising Gaming,5,5,2026-05-15,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,DRX Academy|Rising Gaming,no
+2026-05-15T09:00:00+00:00,LPL,BO3,Ultra Prime,Oh My God,44.3,55.7,31.2,34.1,ok,Ultra Prime,Oh My God,5,5,2026-05-15,LPL,,ok,Oh My God|Ultra Prime,yes
+2026-05-15T10:00:00+00:00,LCK,BO3,HANJIN BRION,DN SOOPers,60.9,39.1,47.6,24.5,ok,HANJIN BRION,DN SOOPers,5,5,2026-05-15,LCK,,ok,DN SOOPers|HANJIN BRION,yes
+2026-05-15T10:00:00+00:00,VCS,BO3,Saigon Warrior,TP.HCM SN CyberCore Esports,50.0,50.0,50.0,50.0,no_roster:Saigon Warrior+TP.HCM SN CyberCore Esports,Saigon Warrior,TP.HCM SN CyberCore Esports,0,0,2026-05-15,VCS,,skipped,,
+2026-05-15T11:00:00+00:00,LJL,BO3,New Meta,RAYN Clocks,71.2,28.8,50.0,50.0,ok,New Meta,RAYN Clocks,5,5,2026-05-15,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,New Meta|RAYN Clocks,no
+2026-05-15T11:00:00+00:00,LPL,BO3,TOP ESPORTS,BILIBILI GAMING,47.0,53.0,52.5,70.0,ok,Top Esports,Bilibili Gaming,5,5,2026-05-15,LPL,,ok,Bilibili Gaming|Top Esports,yes
+2026-05-15T13:00:00+00:00,VCS,BO3,Saigon 9Gaming,Saigon MVKE Academy,50.0,50.0,50.0,50.0,no_roster:Saigon MVKE Academy,Saint Gaming,Saigon MVKE Academy,5,0,2026-05-15,VCS,,skipped,,
+2026-05-15T14:30:00+00:00,TCL,BO3,Team Phoenix,Ozarox Esports,25.8,74.2,30.7,49.6,ok,Team Phoenix,Ozarox Esports,5,5,2026-05-15,TCL,,ok,Ozarox Esports|Team Phoenix,yes
 2026-05-15T16:00:00+00:00,LoL Italian Tournament,BO5,TBD,Colossal Gaming,50.0,50.0,50.0,50.0,no_roster:TBD+Colossal Gaming,TBD,Colossal Gaming,0,0,2026-05-15,LOL ITALIAN TOURNAMENT,,skipped,,
-2026-05-15T17:30:00+00:00,TCL,BO3,SU Esports,BoostGate Esports,54.7,45.3,52.3,71.4,ok,SU Esports,BoostGate Esports,5,5,2026-05-15,TCL,,ok,BoostGate Esports|SU Esports,yes
-2026-05-15T18:00:00+00:00,Liga Portuguesa,BO1,ZeroZone Gaming,Dream Esports,32.5,67.5,45.4,46.2,ok,ZeroZone Gaming,Dream Esports,5,5,2026-05-15,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dream Esports|ZeroZone Gaming,yes
-2026-05-15T19:00:00+00:00,Liga Portuguesa,BO1,Ronaldo Team,Crusaders,45.3,54.7,41.6,53.8,ok,Ronaldo Team,Crusaders,5,5,2026-05-15,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Crusaders|Ronaldo Team,yes
-2026-05-15T20:00:00+00:00,Liga Portuguesa,BO1,Bubliki,Otter Side,70.5,29.5,53.0,58.4,ok,Bubliki,Otter Side,5,5,2026-05-15,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Bubliki|Otter Side,no
-2026-05-15T20:00:00+00:00,NACL,BO3,Winthrop University,Citadel Gaming,53.6,46.4,46.0,54.1,ok,Winthrop University,Citadel Gaming,5,5,2026-05-15,NACL,,ok,Citadel Gaming|Winthrop University,yes
-2026-05-15T21:00:00+00:00,Liga Portuguesa,BO1,GTZ Esports,Francesinhas,31.6,68.4,54.6,47.0,ok,GTZ Esports,Francesinhas,5,5,2026-05-15,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Francesinhas|GTZ Esports,yes
-2026-05-15T23:00:00+00:00,NACL,BO3,Dorado Gaming,CCG Esports,51.3,48.7,47.2,55.9,ok,Dorado Gaming,CCG Esports,5,5,2026-05-15,NACL,,ok,CCG Esports|Dorado Gaming,yes
-2026-05-16T08:00:00+00:00,LCK,BO3,Gen.G Esports,T1,57.6,42.4,74.4,58.2,ok,Gen.G,T1,5,5,2026-05-16,LCK,,ok,Gen.G|T1,no
-2026-05-16T09:00:00+00:00,LCP,BO3,Relove Deep Cross Gaming,Ground Zero Gaming,66.4,33.6,71.7,64.1,ok,Deep Cross Gaming,Ground Zero Gaming,5,5,2026-05-16,LCP,,ok,Deep Cross Gaming|Ground Zero Gaming,no
-2026-05-16T09:00:00+00:00,LPL,BO3,THUNDER TALK GAMING,EDWARD GAMING,36.7,63.3,44.1,63.5,ok,ThunderTalk Gaming,EDward Gaming,5,5,2026-05-16,LPL,,ok,EDward Gaming|ThunderTalk Gaming,yes
+2026-05-15T17:30:00+00:00,TCL,BO3,SU Esports,BoostGate Esports,51.3,48.7,50.4,69.3,ok,SU Esports,BoostGate Esports,5,5,2026-05-15,TCL,,ok,BoostGate Esports|SU Esports,yes
+2026-05-15T18:00:00+00:00,Liga Portuguesa,BO1,ZeroZone Gaming,Dream Esports,37.4,62.6,46.8,47.5,ok,ZeroZone Gaming,Dream Esports,5,5,2026-05-15,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dream Esports|ZeroZone Gaming,yes
+2026-05-15T19:00:00+00:00,Liga Portuguesa,BO1,Ronaldo Team,Crusaders,45.1,54.9,40.4,52.5,ok,Ronaldo Team,Crusaders,5,5,2026-05-15,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Crusaders|Ronaldo Team,yes
+2026-05-15T20:00:00+00:00,Liga Portuguesa,BO1,Bubliki,Otter Side,67.3,32.7,58.8,59.6,ok,Bubliki,Otter Side,5,5,2026-05-15,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Bubliki|Otter Side,no
+2026-05-15T20:00:00+00:00,NACL,BO3,Winthrop University,Citadel Gaming,56.1,43.9,46.0,54.1,ok,Winthrop University,Citadel Gaming,5,5,2026-05-15,NACL,,ok,Citadel Gaming|Winthrop University,yes
+2026-05-15T21:00:00+00:00,Liga Portuguesa,BO1,GTZ Esports,Francesinhas,32.3,67.7,53.2,41.2,ok,GTZ Esports,Francesinhas,5,5,2026-05-15,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Francesinhas|GTZ Esports,yes
+2026-05-15T23:00:00+00:00,NACL,BO3,Dorado Gaming,CCG Esports,52.6,47.4,45.3,55.9,ok,Dorado Gaming,CCG Esports,5,5,2026-05-15,NACL,,ok,CCG Esports|Dorado Gaming,yes
+2026-05-16T08:00:00+00:00,LCK,BO3,Gen.G Esports,T1,52.7,47.3,70.0,63.7,ok,Gen.G,T1,5,5,2026-05-16,LCK,,ok,Gen.G|T1,no
+2026-05-16T09:00:00+00:00,LCP,BO3,Relove Deep Cross Gaming,Ground Zero Gaming,66.5,33.5,71.7,64.1,ok,Deep Cross Gaming,Ground Zero Gaming,5,5,2026-05-16,LCP,,ok,Deep Cross Gaming|Ground Zero Gaming,no
+2026-05-16T09:00:00+00:00,LPL,BO3,THUNDER TALK GAMING,EDWARD GAMING,35.7,64.3,44.1,65.9,ok,ThunderTalk Gaming,EDward Gaming,5,5,2026-05-16,LPL,,ok,EDward Gaming|ThunderTalk Gaming,yes
 2026-05-16T10:00:00+00:00,Hitpoint Masters,BO3,CITA Kaizen,Bohemian Guardians,50.0,50.0,50.0,50.0,no_roster:CITA Kaizen+Bohemian Guardians,CITA Kaizen,Bohemian Guardians,0,0,2026-05-16,HITPOINT MASTERS,,skipped,,
-2026-05-16T10:00:00+00:00,LCK,BO3,BNK FEARX,NONGSHIM RED FORCE,44.3,55.7,25.6,41.8,ok,BNK FEARX,Nongshim RedForce,5,5,2026-05-16,LCK,,ok,BNK FEARX|Nongshim RedForce,no
-2026-05-16T11:00:00+00:00,LPL,BO3,Xi'an Team WE,Shenzhen NINJAS IN PYJAMAS,30.7,69.3,30.5,44.3,ok,Team WE,Ninjas in Pyjamas,5,5,2026-05-16,LPL,,ok,Ninjas in Pyjamas|Team WE,yes
-2026-05-16T11:30:00+00:00,LCP,BO3,MVK Esports,Fukuoka SoftBank HAWKS gaming,38.5,61.5,7.9,40.3,ok,MGN Vikings Esports,Fukuoka SoftBank HAWKS gaming,5,5,2026-05-16,LCP,,ok,Fukuoka SoftBank HAWKS gaming|MGN Vikings Esports,yes
+2026-05-16T10:00:00+00:00,LCK,BO3,BNK FEARX,NONGSHIM RED FORCE,47.8,52.2,30.0,36.3,ok,BNK FEARX,Nongshim RedForce,5,5,2026-05-16,LCK,,ok,BNK FEARX|Nongshim RedForce,no
+2026-05-16T11:00:00+00:00,LPL,BO3,Xi'an Team WE,Shenzhen NINJAS IN PYJAMAS,35.1,64.9,30.8,47.5,ok,Team WE,Ninjas in Pyjamas,5,5,2026-05-16,LPL,,ok,Ninjas in Pyjamas|Team WE,yes
+2026-05-16T11:30:00+00:00,LCP,BO3,MVK Esports,Fukuoka SoftBank HAWKS gaming,36.3,63.7,7.9,73.2,ok,MGN Vikings Esports,Fukuoka SoftBank HAWKS gaming,5,5,2026-05-16,LCP,,ok,Fukuoka SoftBank HAWKS gaming|MGN Vikings Esports,yes
 2026-05-16T12:30:00+00:00,Hitpoint Masters,BO3,EXILE Esports,BRUTE,50.0,50.0,50.0,50.0,no_roster:BRUTE,EFIVE Esports,BRUTE,5,0,2026-05-16,HITPOINT MASTERS,,skipped,,
 2026-05-16T15:00:00+00:00,Hitpoint Masters,BO3,UP2U Meavedron,Onion Team,50.0,50.0,50.0,50.0,no_roster:UP2U Meavedron,UP2U Meavedron,Onion Team,0,5,2026-05-16,HITPOINT MASTERS,,skipped,,
 2026-05-16T16:00:00+00:00,CBLOL,BO5,TBD,LOUD,50.0,50.0,50.0,41.3,no_roster:TBD,TBD,LOUD,0,5,2026-05-16,CBLOL,,skipped,,
 2026-05-16T17:30:00+00:00,Hitpoint Masters,BO3,NightBirds,eSuba,50.0,50.0,50.0,50.0,no_roster:NightBirds,NightBirds,eSuba,0,5,2026-05-16,HITPOINT MASTERS,,skipped,,
-2026-05-16T20:00:00+00:00,LCS,BO3,Team Liquid Alienware,Cloud9 Kia,50.0,50.0,50.0,63.7,no_roster:Team Liquid Alienware,Team Liquid Alienware,Cloud9,0,5,2026-05-16,LCS,,skipped,,
-2026-05-16T23:00:00+00:00,LCS,BO3,Shopify Rebellion,Disguised,49.6,50.4,53.0,50.0,ok,Shopify Rebellion,Disguised,5,5,2026-05-16,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Disguised|Shopify Rebellion,yes
-2026-05-17T08:00:00+00:00,LCK,BO3,Hanwha Life Esports,kt Rolster,57.1,42.9,65.6,71.5,ok,Hanwha Life Esports,KT Rolster,5,5,2026-05-17,LCK,,ok,Hanwha Life Esports|KT Rolster,no
-2026-05-17T09:00:00+00:00,LCP,BO3,DetonatioN FocusMe,Team Secret Whales,51.2,48.8,14.0,26.1,ok,DetonatioN FocusMe,Team Whales,5,5,2026-05-17,LCP,ValueError: Roster vide : impossible d'agréger les features.,skipped,DetonatioN FocusMe|Team Whales,no
-2026-05-17T09:00:00+00:00,LPL,BO3,Beijing JDG Esports,Invictus Gaming,50.0,50.0,50.0,33.8,no_roster:Beijing JDG Esports,Beijing JDG Esports,Invictus Gaming,0,5,2026-05-17,LPL,,skipped,,
+2026-05-16T20:00:00+00:00,LCS,BO3,Team Liquid Alienware,Cloud9 Kia,50.0,50.0,50.0,58.8,no_roster:Team Liquid Alienware,Team Liquid Alienware,Cloud9,0,5,2026-05-16,LCS,,skipped,,
+2026-05-16T23:00:00+00:00,LCS,BO3,Shopify Rebellion,Disguised,52.3,47.7,53.0,50.0,ok,Shopify Rebellion,Disguised,5,5,2026-05-16,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Disguised|Shopify Rebellion,yes
+2026-05-17T08:00:00+00:00,LCK,BO3,Hanwha Life Esports,kt Rolster,61.0,39.0,58.7,77.0,ok,Hanwha Life Esports,KT Rolster,5,5,2026-05-17,LCK,,ok,Hanwha Life Esports|KT Rolster,no
+2026-05-17T09:00:00+00:00,LCP,BO3,DetonatioN FocusMe,Team Secret Whales,46.5,53.5,14.0,26.1,ok,DetonatioN FocusMe,Team Whales,5,5,2026-05-17,LCP,ValueError: Roster vide : impossible d'agréger les features.,skipped,DetonatioN FocusMe|Team Whales,no
+2026-05-17T09:00:00+00:00,LPL,BO3,Beijing JDG Esports,Invictus Gaming,50.0,50.0,50.0,30.0,no_roster:Beijing JDG Esports,Beijing JDG Esports,Invictus Gaming,0,5,2026-05-17,LPL,,skipped,,
 2026-05-17T10:00:00+00:00,Hitpoint Masters,BO3,CITA Kaizen,Onion Team,50.0,50.0,50.0,50.0,no_roster:CITA Kaizen,CITA Kaizen,Onion Team,0,5,2026-05-17,HITPOINT MASTERS,,skipped,,
-2026-05-17T10:00:00+00:00,LCK,BO3,KIWOOM DRX,HANJIN BRION,38.3,61.7,28.5,63.7,ok,Kiwoom DRX,HANJIN BRION,5,5,2026-05-17,LCK,,ok,HANJIN BRION|Kiwoom DRX,yes
-2026-05-17T11:00:00+00:00,LPL,BO3,BILIBILI GAMING,Anyone's Legend,54.6,45.4,48.0,69.5,ok,Bilibili Gaming,Anyone's Legend,5,5,2026-05-17,LPL,,ok,Anyone's Legend|Bilibili Gaming,yes
-2026-05-17T11:30:00+00:00,LCP,BO3,GAM Esports,CTBC Flying Oyster,57.8,42.2,59.7,95.8,ok,GAM Esports,CTBC Flying Oyster,5,5,2026-05-17,LCP,,ok,CTBC Flying Oyster|GAM Esports,yes
+2026-05-17T10:00:00+00:00,LCK,BO3,KIWOOM DRX,HANJIN BRION,34.6,65.4,23.0,60.9,ok,Kiwoom DRX,HANJIN BRION,5,5,2026-05-17,LCK,,ok,HANJIN BRION|Kiwoom DRX,yes
+2026-05-17T11:00:00+00:00,LPL,BO3,BILIBILI GAMING,Anyone's Legend,47.3,52.7,53.0,69.2,ok,Bilibili Gaming,Anyone's Legend,5,5,2026-05-17,LPL,,ok,Anyone's Legend|Bilibili Gaming,yes
+2026-05-17T11:30:00+00:00,LCP,BO3,GAM Esports,CTBC Flying Oyster,57.6,42.4,87.8,95.8,ok,GAM Esports,CTBC Flying Oyster,5,5,2026-05-17,LCP,,ok,CTBC Flying Oyster|GAM Esports,yes
 2026-05-17T12:30:00+00:00,Hitpoint Masters,BO3,Bohemian Guardians,NightBirds,50.0,50.0,50.0,50.0,no_roster:Bohemian Guardians+NightBirds,Bohemian Guardians,NightBirds,0,0,2026-05-17,HITPOINT MASTERS,,skipped,,
 2026-05-17T15:00:00+00:00,Hitpoint Masters,BO3,BRUTE,eSuba,50.0,50.0,50.0,50.0,no_roster:BRUTE,BRUTE,eSuba,0,5,2026-05-17,HITPOINT MASTERS,,skipped,,
-2026-05-17T16:00:00+00:00,CBLOL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-17,CBLOL,,skipped,,
+2026-05-17T16:00:00+00:00,CBLOL,BO5,TBD,Fluxo,50.0,50.0,50.0,60.0,no_roster:TBD,TBD,Fluxo,0,5,2026-05-17,CBLOL,,skipped,,
 2026-05-17T17:30:00+00:00,Hitpoint Masters,BO3,UP2U Meavedron,EXILE Esports,50.0,50.0,50.0,50.0,no_roster:UP2U Meavedron,UP2U Meavedron,EFIVE Esports,0,5,2026-05-17,HITPOINT MASTERS,,skipped,,
-2026-05-17T20:00:00+00:00,LCS,BO3,Sentinels,Dignitas,57.8,42.2,39.1,71.0,ok,Sentinels,Dignitas,5,5,2026-05-17,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dignitas|Sentinels,yes
-2026-05-17T23:00:00+00:00,LCS,BO3,FlyQuest,LYON,27.0,73.0,36.3,50.0,ok,FlyQuest,LYON,5,5,2026-05-17,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,FlyQuest|LYON,no
-2026-05-18T05:00:00+00:00,LCK Challengers,BO3,DK Challengers,T1 Esports Academy,43.5,56.5,45.8,63.2,ok,Dplus Kia Challengers,T1,5,5,2026-05-18,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dplus Kia Challengers|T1,no
-2026-05-18T07:00:00+00:00,LCK Challengers,BO3,DNS Challengers,KRX Challengers,59.4,40.6,36.8,59.4,ok,DN SOOPers Challengers,DRX Challengers,5,5,2026-05-18,LCKC,,ok,DN SOOPers Challengers|DRX Challengers,no
-2026-05-18T09:00:00+00:00,LCK Challengers,BO3,Gen.G Global Academy,HLE Challengers,16.9,83.1,40.6,54.4,ok,Gen.G Global Academy,Hanwha Life Esports,5,5,2026-05-18,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Gen.G Global Academy|Hanwha Life Esports,no
+2026-05-17T20:00:00+00:00,LCS,BO3,Sentinels,Dignitas,55.8,44.2,39.1,71.0,ok,Sentinels,Dignitas,5,5,2026-05-17,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dignitas|Sentinels,yes
+2026-05-17T23:00:00+00:00,LCS,BO3,FlyQuest,LYON,37.4,62.6,72.6,50.0,ok,FlyQuest,LYON,5,5,2026-05-17,LCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,FlyQuest|LYON,no
+2026-05-18T05:00:00+00:00,LCK Challengers,BO3,DK Challengers,T1 Esports Academy,41.1,58.9,42.4,60.7,ok,Dplus Kia Challengers,T1,5,5,2026-05-18,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dplus Kia Challengers|T1,no
+2026-05-18T07:00:00+00:00,LCK Challengers,BO3,DNS Challengers,KRX Challengers,59.9,40.1,39.3,62.0,ok,DN SOOPers Challengers,DRX Challengers,5,5,2026-05-18,LCKC,,ok,DN SOOPers Challengers|DRX Challengers,no
+2026-05-18T09:00:00+00:00,LCK Challengers,BO3,Gen.G Global Academy,HLE Challengers,20.1,79.9,38.0,59.1,ok,Gen.G Global Academy,Hanwha Life Esports,5,5,2026-05-18,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Gen.G Global Academy|Hanwha Life Esports,no
 2026-05-18T20:00:00+00:00,Circuito Desafiante,BO5,TBD,RED Kalunga Academy,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,RED Canids,0,5,2026-05-18,CIRCUITO DESAFIANTE,,skipped,,
 2026-05-18T23:00:00+00:00,LRN,BO5,TBD,Zeu5 Esports,50.0,50.0,50.0,60.6,no_roster:TBD,TBD,5M Esports,0,5,2026-05-18,LRN,,skipped,,
-2026-05-19T08:00:00+00:00,LCK Challengers,BO3,BNK FEARX Youth,BRO Challengers,54.9,45.1,54.2,42.4,ok,BNK FEARX Youth,HANJIN BRION Challengers,5,5,2026-05-19,LCKC,,ok,BNK FEARX Youth|HANJIN BRION Challengers,no
-2026-05-19T10:00:00+00:00,LCK Challengers,BO3,kt Challengers,NS Challengers,40.2,59.8,57.6,45.6,ok,KT Rolster Challengers,Nongshim Esports Academy,5,5,2026-05-19,LCKC,,ok,KT Rolster Challengers|Nongshim Esports Academy,no
-2026-05-19T15:00:00+00:00,Rift Legends,BO3,Barcząca Esports,Forsaken,39.9,60.1,43.2,54.0,ok,Barcząca Esports,Forsaken,5,5,2026-05-19,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Barcząca Esports|Forsaken,no
+2026-05-19T08:00:00+00:00,LCK Challengers,BO3,BNK FEARX Youth,BRO Challengers,55.1,44.9,57.6,46.7,ok,BNK FEARX Youth,HANJIN BRION Challengers,5,5,2026-05-19,LCKC,,ok,BNK FEARX Youth|HANJIN BRION Challengers,no
+2026-05-19T10:00:00+00:00,LCK Challengers,BO3,kt Challengers,NS Challengers,41.0,59.0,53.3,40.9,ok,KT Rolster Challengers,Nongshim Esports Academy,5,5,2026-05-19,LCKC,,ok,KT Rolster Challengers|Nongshim Esports Academy,no
+2026-05-19T15:00:00+00:00,Rift Legends,BO3,Barcząca Esports,Forsaken,41.6,58.4,43.2,54.0,ok,Barcząca Esports,Forsaken,5,5,2026-05-19,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Barcząca Esports|Forsaken,no
 2026-05-19T16:00:00+00:00,Arabian League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-19,ARABIAN LEAGUE,,skipped,,
 2026-05-19T16:00:00+00:00,Road of Legends,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-19,ROAD OF LEGENDS,,skipped,,
 2026-05-19T17:30:00+00:00,Rift Legends,BO3,DOCISK,DV1 inStreamly,50.0,50.0,27.0,50.0,no_roster:DV1 inStreamly,DOCISK,DV1 inStreamly,5,0,2026-05-19,RIFT LEGENDS,,skipped,,
 2026-05-19T18:00:00+00:00,Road of Legends,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-19,ROAD OF LEGENDS,,skipped,,
 2026-05-19T20:00:00+00:00,Circuito Desafiante,BO5,TBD,INTZ,50.0,50.0,50.0,50.0,no_roster:TBD,TBD,INTZ,0,5,2026-05-19,CIRCUITO DESAFIANTE,,skipped,,
 2026-05-19T20:00:00+00:00,LRS,BO5,TBD,9z Globant,50.0,50.0,50.0,50.0,no_roster:TBD+9z Globant,TBD,9z Globant,0,0,2026-05-19,LRS,,skipped,,
-2026-05-20T08:00:00+00:00,LCK,BO3,T1,KIWOOM DRX,66.2,33.8,42.4,38.3,ok,T1,Kiwoom DRX,5,5,2026-05-20,LCK,,ok,Kiwoom DRX|T1,yes
-2026-05-20T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,kt Rolster,40.1,59.9,55.7,42.9,ok,Nongshim RedForce,KT Rolster,5,5,2026-05-20,LCK,,ok,KT Rolster|Nongshim RedForce,yes
-2026-05-20T15:00:00+00:00,LES,BO3,LUA Gaming,UB Alma Mater,50.0,50.0,42.5,50.0,no_roster:UB Alma Mater,LUA Gaming,UB Alma Mater,5,0,2026-05-20,LES,,skipped,,
+2026-05-20T08:00:00+00:00,LCK,BO3,T1,KIWOOM DRX,73.0,27.0,47.3,34.6,ok,T1,Kiwoom DRX,5,5,2026-05-20,LCK,,ok,Kiwoom DRX|T1,yes
+2026-05-20T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,kt Rolster,42.1,57.9,52.2,39.0,ok,Nongshim RedForce,KT Rolster,5,5,2026-05-20,LCK,,ok,KT Rolster|Nongshim RedForce,yes
+2026-05-20T10:00:00+00:00,VCS,BO3,Saigon Zen Esport,Saigon MVKE Academy,50.0,50.0,50.0,50.0,no_roster:Saigon Zen Esport+Saigon MVKE Academy,Saigon Zen Esport,Saigon MVKE Academy,0,0,2026-05-20,VCS,,skipped,,
+2026-05-20T13:00:00+00:00,VCS,BO3,Saigon Warrior,Saigon 9Gaming,50.0,50.0,50.0,50.0,no_roster:Saigon Warrior,Saigon Warrior,Saint Gaming,0,5,2026-05-20,VCS,,skipped,,
+2026-05-20T15:00:00+00:00,LES,BO3,LUA Gaming,UB Alma Mater,50.0,50.0,44.6,50.0,no_roster:UB Alma Mater,LUA Gaming,UB Alma Mater,5,0,2026-05-20,LES,,skipped,,
 2026-05-20T15:00:00+00:00,Prime League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-20,PRIME LEAGUE,,skipped,,
-2026-05-20T15:00:00+00:00,Rift Legends,BO3,GLORE,LODIS,24.5,75.5,50.0,62.6,ok,GLORE,LODIS,5,5,2026-05-20,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,GLORE|LODIS,no
+2026-05-20T15:00:00+00:00,Rift Legends,BO3,GLORE,LODIS,29.5,70.5,50.0,62.6,ok,GLORE,LODIS,5,5,2026-05-20,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,GLORE|LODIS,no
 2026-05-20T16:00:00+00:00,Arabian League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-20,ARABIAN LEAGUE,,skipped,,
 2026-05-20T16:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-20,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-05-20T17:30:00+00:00,Rift Legends,BO3,Anonymo,BOMBA Team,32.7,67.3,50.0,50.0,ok,Anonymo Esports,Bomba Team,5,5,2026-05-20,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Anonymo Esports|Bomba Team,no
+2026-05-20T17:30:00+00:00,Rift Legends,BO3,Anonymo,BOMBA Team,33.9,66.1,50.0,50.0,ok,Anonymo Esports,Bomba Team,5,5,2026-05-20,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Anonymo Esports|Bomba Team,no
 2026-05-20T18:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-20,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-05-20T18:00:00+00:00,LES,BO3,Barça Esports,Heretics Academy,49.1,50.9,64.9,50.0,ok,Barça eSports,Team Heretics,5,5,2026-05-20,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,Barça eSports|Team Heretics,no
-2026-05-20T20:00:00+00:00,Circuito Desafiante,BO5,KaBuM! Eports,Vivo Keyd Stars Academy,43.9,56.1,50.0,50.0,ok,KaBuM! Esports,Vivo Keyd Stars,5,5,2026-05-20,CIRCUITO DESAFIANTE,ValueError: Roster vide : impossible d'agréger les features.,skipped,KaBuM! Esports|Vivo Keyd Stars,no
+2026-05-20T18:00:00+00:00,LES,BO3,Barça Esports,Heretics Academy,47.4,52.6,70.2,50.0,ok,Barça eSports,Team Heretics,5,5,2026-05-20,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,Barça eSports|Team Heretics,no
+2026-05-20T20:00:00+00:00,Circuito Desafiante,BO5,KaBuM! Eports,Vivo Keyd Stars Academy,41.7,58.3,50.0,50.0,ok,KaBuM! Esports,Vivo Keyd Stars,5,5,2026-05-20,CIRCUITO DESAFIANTE,ValueError: Roster vide : impossible d'agréger les features.,skipped,KaBuM! Esports|Vivo Keyd Stars,no
 2026-05-20T20:00:00+00:00,NACL,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-20,NACL,,skipped,,
 2026-05-20T23:00:00+00:00,NACL,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-20,NACL,,skipped,,
-2026-05-21T05:00:00+00:00,LCK Challengers,BO3,DNS Challengers,HLE Challengers,26.5,73.5,59.4,83.1,ok,DN SOOPers Challengers,Hanwha Life Esports,5,5,2026-05-21,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,DN SOOPers Challengers|Hanwha Life Esports,no
-2026-05-21T05:00:00+00:00,LCK Challengers,BO3,KRX Challengers,DK Challengers,42.0,58.0,40.6,43.5,ok,DRX Challengers,Dplus Kia Challengers,5,5,2026-05-21,LCKC,,ok,Dplus Kia Challengers|DRX Challengers,yes
-2026-05-21T05:00:00+00:00,LCK Challengers,BO3,NS Challengers,Gen.G Global Academy,67.2,32.8,59.8,16.9,ok,Nongshim Esports Academy,Gen.G Global Academy,5,5,2026-05-21,LCKC,,ok,Gen.G Global Academy|Nongshim Esports Academy,yes
-2026-05-21T08:00:00+00:00,LCK,BO3,BNK FEARX,Hanwha Life Esports,21.9,78.1,44.3,57.1,ok,BNK FEARX,Hanwha Life Esports,5,5,2026-05-21,LCK,,ok,BNK FEARX|Hanwha Life Esports,no
-2026-05-21T08:00:00+00:00,LJL,BO3,UWinks,FENNEL,33.2,66.8,66.7,73.1,ok,Uwinks,FENNEL,5,5,2026-05-21,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,FENNEL|Uwinks,yes
+2026-05-21T05:00:00+00:00,LCK Challengers,BO3,DNS Challengers,HLE Challengers,30.2,69.8,59.9,79.9,ok,DN SOOPers Challengers,Hanwha Life Esports,5,5,2026-05-21,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,DN SOOPers Challengers|Hanwha Life Esports,no
+2026-05-21T05:00:00+00:00,LCK Challengers,BO3,KRX Challengers,DK Challengers,44.1,55.9,40.1,41.1,ok,DRX Challengers,Dplus Kia Challengers,5,5,2026-05-21,LCKC,,ok,Dplus Kia Challengers|DRX Challengers,yes
+2026-05-21T05:00:00+00:00,LCK Challengers,BO3,NS Challengers,Gen.G Global Academy,64.0,36.0,59.0,20.1,ok,Nongshim Esports Academy,Gen.G Global Academy,5,5,2026-05-21,LCKC,,ok,Gen.G Global Academy|Nongshim Esports Academy,yes
+2026-05-21T08:00:00+00:00,LCK,BO3,BNK FEARX,Hanwha Life Esports,25.9,74.1,47.8,61.0,ok,BNK FEARX,Hanwha Life Esports,5,5,2026-05-21,LCK,,ok,BNK FEARX|Hanwha Life Esports,no
+2026-05-21T08:00:00+00:00,LJL,BO3,UWinks,FENNEL,36.5,63.5,64.0,74.5,ok,Uwinks,FENNEL,5,5,2026-05-21,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,FENNEL|Uwinks,yes
 2026-05-21T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-21,LPL,,skipped,,
-2026-05-21T10:00:00+00:00,LCK,BO3,Dplus KIA,HANJIN BRION,59.7,40.3,34.4,61.7,ok,Dplus Kia,HANJIN BRION,5,5,2026-05-21,LCK,,ok,Dplus Kia|HANJIN BRION,no
-2026-05-21T11:00:00+00:00,LJL,BO3,New Meta,Rising Gaming,51.1,48.9,69.9,73.7,ok,New Meta,Rising Gaming,5,5,2026-05-21,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,New Meta|Rising Gaming,no
-2026-05-21T15:00:00+00:00,LES,BO3,GIANTX ITERO,FALKE ESPORTS,86.4,13.6,68.2,35.1,ok,GIANTX iTero,FALKN,5,5,2026-05-21,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,FALKN|GIANTX iTero,yes
+2026-05-21T10:00:00+00:00,LCK,BO3,Dplus KIA,HANJIN BRION,64.4,35.6,41.3,65.4,ok,Dplus Kia,HANJIN BRION,5,5,2026-05-21,LCK,,ok,Dplus Kia|HANJIN BRION,no
+2026-05-21T10:00:00+00:00,VCS,BO3,Saigon Dino,TP.HCM SN CyberCore Esports,50.0,50.0,50.0,50.0,no_roster:TP.HCM SN CyberCore Esports,Saigon Dino,TP.HCM SN CyberCore Esports,5,0,2026-05-21,VCS,,skipped,,
+2026-05-21T11:00:00+00:00,LJL,BO3,New Meta,Rising Gaming,55.8,44.2,71.2,75.2,ok,New Meta,Rising Gaming,5,5,2026-05-21,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,New Meta|Rising Gaming,no
+2026-05-21T13:00:00+00:00,VCS,BO3,Saigon Zen Esport,Saigon 9Gaming,50.0,50.0,50.0,50.0,no_roster:Saigon Zen Esport,Saigon Zen Esport,Saint Gaming,0,5,2026-05-21,VCS,,skipped,,
+2026-05-21T15:00:00+00:00,LES,BO3,GIANTX ITERO,FALKE ESPORTS,89.9,10.1,69.1,29.8,ok,GIANTX iTero,FALKN,5,5,2026-05-21,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,FALKN|GIANTX iTero,yes
 2026-05-21T15:00:00+00:00,Prime League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-21,PRIME LEAGUE,,skipped,,
-2026-05-21T15:00:00+00:00,Rift Legends,BO3,Forsaken,DOCISK,75.9,24.1,60.1,50.0,ok,Forsaken,DOCISK,5,5,2026-05-21,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,DOCISK|Forsaken,yes
+2026-05-21T15:00:00+00:00,Rift Legends,BO3,Forsaken,DOCISK,75.3,24.7,58.4,50.0,ok,Forsaken,DOCISK,5,5,2026-05-21,RIFT LEGENDS,ValueError: Roster vide : impossible d'agréger les features.,skipped,DOCISK|Forsaken,yes
 2026-05-21T16:00:00+00:00,Arabian League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-21,ARABIAN LEAGUE,,skipped,,
 2026-05-21T16:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-21,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-05-21T16:00:00+00:00,Road of Legends,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-21,ROAD OF LEGENDS,,skipped,,
-2026-05-21T17:30:00+00:00,Rift Legends,BO3,Barcząca Esports,DV1 inStreamly,50.0,50.0,39.9,50.0,no_roster:DV1 inStreamly,Barcząca Esports,DV1 inStreamly,5,0,2026-05-21,RIFT LEGENDS,,skipped,,
+2026-05-21T17:30:00+00:00,Rift Legends,BO3,Barcząca Esports,DV1 inStreamly,50.0,50.0,41.6,50.0,no_roster:DV1 inStreamly,Barcząca Esports,DV1 inStreamly,5,0,2026-05-21,RIFT LEGENDS,,skipped,,
 2026-05-21T18:00:00+00:00,Esports Balkan League,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-21,ESPORTS BALKAN LEAGUE,,skipped,,
-2026-05-21T18:00:00+00:00,LES,BO3,UCAM Esports Club,Movistar KOI Fénix,61.5,38.5,57.5,31.8,ok,UCAM Esports,Movistar KOI Fénix,5,5,2026-05-21,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,Movistar KOI Fénix|UCAM Esports,yes
-2026-05-21T18:00:00+00:00,Liga Portuguesa,BO1,Francesinhas,Dream Esports,47.7,52.3,68.4,67.5,ok,Francesinhas,Dream Esports,5,5,2026-05-21,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dream Esports|Francesinhas,yes
+2026-05-21T18:00:00+00:00,LES,BO3,UCAM Esports Club,Movistar KOI Fénix,58.7,41.3,55.4,30.9,ok,UCAM Esports,Movistar KOI Fénix,5,5,2026-05-21,LES,ValueError: Roster vide : impossible d'agréger les features.,skipped,Movistar KOI Fénix|UCAM Esports,yes
+2026-05-21T18:00:00+00:00,Liga Portuguesa,BO1,Francesinhas,Dream Esports,56.8,43.2,67.7,62.6,ok,Francesinhas,Dream Esports,5,5,2026-05-21,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dream Esports|Francesinhas,yes
 2026-05-21T18:00:00+00:00,Road of Legends,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-21,ROAD OF LEGENDS,,skipped,,
-2026-05-21T19:00:00+00:00,Liga Portuguesa,BO1,Crusaders,ZeroZone Gaming,68.7,31.3,54.7,32.5,ok,Crusaders,ZeroZone Gaming,5,5,2026-05-21,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Crusaders|ZeroZone Gaming,no
-2026-05-21T20:00:00+00:00,Liga Portuguesa,BO1,Bubliki,Ronaldo Team,67.8,32.2,70.5,45.3,ok,Bubliki,Ronaldo Team,5,5,2026-05-21,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Bubliki|Ronaldo Team,no
+2026-05-21T19:00:00+00:00,Liga Portuguesa,BO1,Crusaders,ZeroZone Gaming,64.5,35.5,54.9,37.4,ok,Crusaders,ZeroZone Gaming,5,5,2026-05-21,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Crusaders|ZeroZone Gaming,no
+2026-05-21T20:00:00+00:00,Liga Portuguesa,BO1,Bubliki,Ronaldo Team,66.2,33.8,67.3,45.1,ok,Bubliki,Ronaldo Team,5,5,2026-05-21,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Bubliki|Ronaldo Team,no
 2026-05-21T20:00:00+00:00,NACL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-21,NACL,,skipped,,
-2026-05-21T21:00:00+00:00,Liga Portuguesa,BO1,GTZ Esports,Otter Side,36.0,64.0,31.6,29.5,ok,GTZ Esports,Otter Side,5,5,2026-05-21,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,GTZ Esports|Otter Side,no
-2026-05-22T05:00:00+00:00,LCK Challengers,BO3,BRO Challengers,T1 Esports Academy,35.8,64.2,45.1,56.5,ok,HANJIN BRION Challengers,T1,5,5,2026-05-22,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,HANJIN BRION Challengers|T1,no
-2026-05-22T05:00:00+00:00,LCK Challengers,BO3,kt Challengers,BNK FEARX Youth,53.1,46.9,40.2,54.9,ok,KT Rolster Challengers,BNK FEARX Youth,5,5,2026-05-22,LCKC,,ok,BNK FEARX Youth|KT Rolster Challengers,yes
-2026-05-22T08:00:00+00:00,LCK,BO3,DN SOOPers,KIWOOM DRX,41.4,58.6,36.3,33.8,ok,DN SOOPers,Kiwoom DRX,5,5,2026-05-22,LCK,,ok,DN SOOPers|Kiwoom DRX,no
-2026-05-22T08:00:00+00:00,LJL,BO3,DFM Academy,RAYN Clocks,47.1,52.9,26.3,30.1,ok,DRX Academy,RAYN Clocks,5,5,2026-05-22,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,DRX Academy|RAYN Clocks,no
+2026-05-21T21:00:00+00:00,Liga Portuguesa,BO1,GTZ Esports,Otter Side,36.3,63.7,32.3,32.7,ok,GTZ Esports,Otter Side,5,5,2026-05-21,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,GTZ Esports|Otter Side,no
+2026-05-22T05:00:00+00:00,LCK Challengers,BO3,BRO Challengers,T1 Esports Academy,36.4,63.6,44.9,58.9,ok,HANJIN BRION Challengers,T1,5,5,2026-05-22,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,HANJIN BRION Challengers|T1,no
+2026-05-22T05:00:00+00:00,LCK Challengers,BO3,kt Challengers,BNK FEARX Youth,50.0,50.0,41.0,55.1,ok,KT Rolster Challengers,BNK FEARX Youth,5,5,2026-05-22,LCKC,,ok,BNK FEARX Youth|KT Rolster Challengers,yes
+2026-05-22T08:00:00+00:00,LCK,BO3,DN SOOPers,KIWOOM DRX,46.8,53.2,39.1,27.0,ok,DN SOOPers,Kiwoom DRX,5,5,2026-05-22,LCK,,ok,DN SOOPers|Kiwoom DRX,no
+2026-05-22T08:00:00+00:00,LJL,BO3,DFM Academy,RAYN Clocks,44.8,55.2,24.8,28.8,ok,DRX Academy,RAYN Clocks,5,5,2026-05-22,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,DRX Academy|RAYN Clocks,no
 2026-05-22T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-22,LPL,,skipped,,
-2026-05-22T10:00:00+00:00,LCK,BO3,kt Rolster,Gen.G Esports,44.7,55.3,59.9,57.6,ok,KT Rolster,Gen.G,5,5,2026-05-22,LCK,,ok,Gen.G|KT Rolster,yes
-2026-05-22T11:00:00+00:00,LJL,BO3,L Guide Gaming,Arneb,32.7,67.3,33.3,26.9,ok,L Guide Gaming,Arneb,5,5,2026-05-22,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Arneb|L Guide Gaming,yes
-2026-05-22T18:00:00+00:00,Liga Portuguesa,BO1,GTZ Esports,Bubliki,25.3,74.7,36.0,67.8,ok,GTZ Esports,Bubliki,5,5,2026-05-22,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Bubliki|GTZ Esports,yes
-2026-05-22T19:00:00+00:00,Liga Portuguesa,BO1,Francesinhas,Crusaders,54.8,45.2,47.7,68.7,ok,Francesinhas,Crusaders,5,5,2026-05-22,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Crusaders|Francesinhas,yes
-2026-05-22T20:00:00+00:00,Liga Portuguesa,BO1,Otter Side,Dream Esports,48.9,51.1,64.0,52.3,ok,Otter Side,Dream Esports,5,5,2026-05-22,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dream Esports|Otter Side,yes
+2026-05-22T10:00:00+00:00,LCK,BO3,kt Rolster,Gen.G Esports,43.9,56.1,57.9,52.7,ok,KT Rolster,Gen.G,5,5,2026-05-22,LCK,,ok,Gen.G|KT Rolster,yes
+2026-05-22T10:00:00+00:00,VCS,BO3,Saigon Warrior,Saigon Dino,50.0,50.0,50.0,50.0,no_roster:Saigon Warrior,Saigon Warrior,Saigon Dino,0,5,2026-05-22,VCS,,skipped,,
+2026-05-22T11:00:00+00:00,LJL,BO3,L Guide Gaming,Arneb,28.9,71.1,36.0,25.5,ok,L Guide Gaming,Arneb,5,5,2026-05-22,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Arneb|L Guide Gaming,yes
+2026-05-22T13:00:00+00:00,VCS,BO3,TP.HCM SN CyberCore Esports,Saigon MVKE Academy,50.0,50.0,50.0,50.0,no_roster:TP.HCM SN CyberCore Esports+Saigon MVKE Academy,TP.HCM SN CyberCore Esports,Saigon MVKE Academy,0,0,2026-05-22,VCS,,skipped,,
+2026-05-22T18:00:00+00:00,Liga Portuguesa,BO1,GTZ Esports,Bubliki,25.4,74.6,36.3,66.2,ok,GTZ Esports,Bubliki,5,5,2026-05-22,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Bubliki|GTZ Esports,yes
+2026-05-22T19:00:00+00:00,Liga Portuguesa,BO1,Francesinhas,Crusaders,51.5,48.5,56.8,64.5,ok,Francesinhas,Crusaders,5,5,2026-05-22,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Crusaders|Francesinhas,yes
+2026-05-22T20:00:00+00:00,Liga Portuguesa,BO1,Otter Side,Dream Esports,54.0,46.0,63.7,43.2,ok,Otter Side,Dream Esports,5,5,2026-05-22,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dream Esports|Otter Side,yes
 2026-05-22T20:00:00+00:00,NACL,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-22,NACL,,skipped,,
-2026-05-22T21:00:00+00:00,Liga Portuguesa,BO1,Ronaldo Team,ZeroZone Gaming,80.5,19.5,32.2,31.3,ok,Ronaldo Team,ZeroZone Gaming,5,5,2026-05-22,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Ronaldo Team|ZeroZone Gaming,no
+2026-05-22T21:00:00+00:00,Liga Portuguesa,BO1,Ronaldo Team,ZeroZone Gaming,76.8,23.2,33.8,35.5,ok,Ronaldo Team,ZeroZone Gaming,5,5,2026-05-22,LIGA PORTUGUESA,ValueError: Roster vide : impossible d'agréger les features.,skipped,Ronaldo Team|ZeroZone Gaming,no
 2026-05-22T23:00:00+00:00,NACL,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-22,NACL,,skipped,,
-2026-05-23T08:00:00+00:00,LCK,BO3,Dplus KIA,BNK FEARX,64.1,35.9,59.7,21.9,ok,Dplus Kia,BNK FEARX,5,5,2026-05-23,LCK,,ok,BNK FEARX|Dplus Kia,yes
+2026-05-23T08:00:00+00:00,LCK,BO3,Dplus KIA,BNK FEARX,58.9,41.1,64.4,25.9,ok,Dplus Kia,BNK FEARX,5,5,2026-05-23,LCK,,ok,BNK FEARX|Dplus Kia,yes
 2026-05-23T09:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-23,LCP,,skipped,,
 2026-05-23T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-23,LPL,,skipped,,
 2026-05-23T10:00:00+00:00,Hellenic Legends League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-23,HELLENIC LEGENDS LEAGUE,,skipped,,
-2026-05-23T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,Hanwha Life Esports,30.4,69.6,40.1,78.1,ok,Nongshim RedForce,Hanwha Life Esports,5,5,2026-05-23,LCK,,ok,Hanwha Life Esports|Nongshim RedForce,yes
-2026-05-23T16:00:00+00:00,CBLOL,BO5,TBD,Vivo Keyd Stars,50.0,50.0,50.0,10.7,no_roster:TBD,TBD,Vivo Keyd Stars,0,5,2026-05-23,CBLOL,,skipped,,
-2026-05-24T08:00:00+00:00,LCK,BO3,DN SOOPers,Gen.G Esports,13.4,86.6,41.4,55.3,ok,DN SOOPers,Gen.G,5,5,2026-05-24,LCK,,ok,DN SOOPers|Gen.G,no
+2026-05-23T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,Hanwha Life Esports,31.1,68.9,42.1,74.1,ok,Nongshim RedForce,Hanwha Life Esports,5,5,2026-05-23,LCK,,ok,Hanwha Life Esports|Nongshim RedForce,yes
+2026-05-23T16:00:00+00:00,CBLOL,BO5,LOS,Vivo Keyd Stars,50.0,50.0,50.0,10.7,no_roster:LOS,LOS,Vivo Keyd Stars,0,5,2026-05-23,CBLOL,,skipped,,
+2026-05-24T08:00:00+00:00,LCK,BO3,DN SOOPers,Gen.G Esports,12.2,87.8,46.8,56.1,ok,DN SOOPers,Gen.G,5,5,2026-05-24,LCK,,ok,DN SOOPers|Gen.G,no
 2026-05-24T09:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-24,LCP,,skipped,,
 2026-05-24T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-24,LPL,,skipped,,
-2026-05-24T10:00:00+00:00,LCK,BO3,HANJIN BRION,T1,37.7,62.3,40.3,66.2,ok,HANJIN BRION,T1,5,5,2026-05-24,LCK,,ok,HANJIN BRION|T1,no
+2026-05-24T10:00:00+00:00,LCK,BO3,HANJIN BRION,T1,40.6,59.4,35.6,73.0,ok,HANJIN BRION,T1,5,5,2026-05-24,LCK,,ok,HANJIN BRION|T1,no
 2026-05-24T16:00:00+00:00,CBLOL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-24,CBLOL,,skipped,,
-2026-05-25T05:00:00+00:00,LCK Challengers,BO3,DK Challengers,HLE Challengers,33.5,66.5,58.0,73.5,ok,Dplus Kia Challengers,Hanwha Life Esports,5,5,2026-05-25,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dplus Kia Challengers|Hanwha Life Esports,no
-2026-05-25T07:00:00+00:00,LCK Challengers,BO3,BNK FEARX Youth,T1 Esports Academy,35.8,64.2,46.9,64.2,ok,BNK FEARX Youth,T1,5,5,2026-05-25,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,BNK FEARX Youth|T1,no
-2026-05-25T09:00:00+00:00,LCK Challengers,BO3,BRO Challengers,KRX Challengers,50.7,49.3,35.8,42.0,ok,HANJIN BRION Challengers,DRX Challengers,5,5,2026-05-25,LCKC,,ok,DRX Challengers|HANJIN BRION Challengers,yes
-2026-05-25T09:00:00+00:00,PCS,BO3,CTBC Flying Oyster Academy,SillySilly Gaming,34.8,65.2,39.8,50.0,ok,CTBC Flying Oyster,SillySilly Gaming,5,5,2026-05-25,PCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,CTBC Flying Oyster|SillySilly Gaming,no
-2026-05-25T12:00:00+00:00,PCS,BO3,WangTing,Frank Esports,28.7,71.3,52.6,50.0,ok,wangting,Frank Esports,5,5,2026-05-25,PCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Frank Esports|wangting,yes
+2026-05-25T05:00:00+00:00,LCK Challengers,BO3,DK Challengers,HLE Challengers,34.4,65.6,55.9,69.8,ok,Dplus Kia Challengers,Hanwha Life Esports,5,5,2026-05-25,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,Dplus Kia Challengers|Hanwha Life Esports,no
+2026-05-25T07:00:00+00:00,LCK Challengers,BO3,BNK FEARX Youth,T1 Esports Academy,37.3,62.7,50.0,63.6,ok,BNK FEARX Youth,T1,5,5,2026-05-25,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,BNK FEARX Youth|T1,no
+2026-05-25T09:00:00+00:00,LCK Challengers,BO3,BRO Challengers,KRX Challengers,49.8,50.2,36.4,44.1,ok,HANJIN BRION Challengers,DRX Challengers,5,5,2026-05-25,LCKC,,ok,DRX Challengers|HANJIN BRION Challengers,yes
+2026-05-25T09:00:00+00:00,PCS,BO3,CTBC Flying Oyster Academy,SillySilly Gaming,38.0,62.0,39.8,50.0,ok,CTBC Flying Oyster,SillySilly Gaming,5,5,2026-05-25,PCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,CTBC Flying Oyster|SillySilly Gaming,no
+2026-05-25T12:00:00+00:00,PCS,BO3,WangTing,Frank Esports,25.8,74.2,52.6,50.0,ok,wangting,Frank Esports,5,5,2026-05-25,PCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Frank Esports|wangting,yes
 2026-05-25T21:00:00+00:00,CBLOL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-25,CBLOL,,skipped,,
 2026-05-25T23:00:00+00:00,LRN,BO5,G3V e-sports,FUEGO,50.0,50.0,50.0,50.0,no_roster:G3V e-sports+FUEGO,G3V e-sports,FUEGO,0,0,2026-05-25,LRN,,skipped,,
-2026-05-26T08:00:00+00:00,LCK Challengers,BO3,Gen.G Global Academy,kt Challengers,39.4,60.6,32.8,53.1,ok,Gen.G Global Academy,KT Rolster Challengers,5,5,2026-05-26,LCKC,,ok,Gen.G Global Academy|KT Rolster Challengers,no
-2026-05-26T09:00:00+00:00,PCS,BO3,Shadow Keepers Esports,Equinox Core,58.4,41.6,64.5,35.6,ok,Shadow Keepers Esports,Equinox Core,5,5,2026-05-26,PCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Equinox Core|Shadow Keepers Esports,yes
-2026-05-26T10:00:00+00:00,LCK Challengers,BO3,DNS Challengers,NS Challengers,41.0,59.0,26.5,67.2,ok,DN SOOPers Challengers,Nongshim Esports Academy,5,5,2026-05-26,LCKC,,ok,DN SOOPers Challengers|Nongshim Esports Academy,no
-2026-05-26T12:00:00+00:00,PCS,BO3,GZ Academy,Viper Night Raider,54.2,45.8,47.4,45.6,ok,LNG Academy,Viper Night Raider,5,5,2026-05-26,PCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,LNG Academy|Viper Night Raider,no
+2026-05-26T08:00:00+00:00,LCK Challengers,BO3,Gen.G Global Academy,kt Challengers,41.4,58.6,36.0,50.0,ok,Gen.G Global Academy,KT Rolster Challengers,5,5,2026-05-26,LCKC,,ok,Gen.G Global Academy|KT Rolster Challengers,no
+2026-05-26T09:00:00+00:00,PCS,BO3,Shadow Keepers Esports,Equinox Core,57.3,42.7,64.5,35.6,ok,Shadow Keepers Esports,Equinox Core,5,5,2026-05-26,PCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Equinox Core|Shadow Keepers Esports,yes
+2026-05-26T10:00:00+00:00,LCK Challengers,BO3,DNS Challengers,NS Challengers,44.2,55.8,30.2,64.0,ok,DN SOOPers Challengers,Nongshim Esports Academy,5,5,2026-05-26,LCKC,,ok,DN SOOPers Challengers|Nongshim Esports Academy,no
+2026-05-26T12:00:00+00:00,PCS,BO3,GZ Academy,Viper Night Raider,59.1,40.9,47.4,45.6,ok,LNG Academy,Viper Night Raider,5,5,2026-05-26,PCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,LNG Academy|Viper Night Raider,no
 2026-05-26T15:00:00+00:00,Prime League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-26,PRIME LEAGUE,,skipped,,
 2026-05-26T15:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-26,RIFT LEGENDS,,skipped,,
 2026-05-26T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-26,ROAD OF LEGENDS,,skipped,,
 2026-05-26T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-26,CIRCUITO DESAFIANTE,,skipped,,
 2026-05-26T20:00:00+00:00,LRS,BO5,Volticons,Golden Lions,50.0,50.0,50.0,50.0,no_roster:Volticons+Golden Lions,Volticons,Golden Lions,0,0,2026-05-26,LRS,,skipped,,
-2026-05-27T08:00:00+00:00,LCK,BO3,Gen.G Esports,Hanwha Life Esports,49.8,50.2,86.6,69.6,ok,Gen.G,Hanwha Life Esports,5,5,2026-05-27,LCK,,ok,Gen.G|Hanwha Life Esports,no
-2026-05-27T08:00:00+00:00,LJL,BO3,New Meta,DFM Academy,67.7,32.3,51.1,47.1,ok,New Meta,DRX Academy,5,5,2026-05-27,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,DRX Academy|New Meta,yes
+2026-05-27T08:00:00+00:00,LCK,BO3,Gen.G Esports,Hanwha Life Esports,54.2,45.8,87.8,68.9,ok,Gen.G,Hanwha Life Esports,5,5,2026-05-27,LCK,,ok,Gen.G|Hanwha Life Esports,no
+2026-05-27T08:00:00+00:00,LJL,BO3,New Meta,DFM Academy,68.7,31.3,55.8,44.8,ok,New Meta,DRX Academy,5,5,2026-05-27,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,DRX Academy|New Meta,yes
 2026-05-27T09:00:00+00:00,PCS,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-27,PCS,,skipped,,
-2026-05-27T10:00:00+00:00,LCK,BO3,BNK FEARX,KIWOOM DRX,50.5,49.5,35.9,58.6,ok,BNK FEARX,Kiwoom DRX,5,5,2026-05-27,LCK,,ok,BNK FEARX|Kiwoom DRX,no
-2026-05-27T11:00:00+00:00,LJL,BO3,UWinks,Arneb,44.6,55.4,33.2,67.3,ok,Uwinks,Arneb,5,5,2026-05-27,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Arneb|Uwinks,yes
+2026-05-27T10:00:00+00:00,LCK,BO3,BNK FEARX,KIWOOM DRX,57.0,43.0,41.1,53.2,ok,BNK FEARX,Kiwoom DRX,5,5,2026-05-27,LCK,,ok,BNK FEARX|Kiwoom DRX,no
+2026-05-27T10:00:00+00:00,VCS,BO3,Saigon Zen Esport,TP.HCM SN CyberCore Esports,50.0,50.0,50.0,50.0,no_roster:Saigon Zen Esport+TP.HCM SN CyberCore Esports,Saigon Zen Esport,TP.HCM SN CyberCore Esports,0,0,2026-05-27,VCS,,skipped,,
+2026-05-27T11:00:00+00:00,LJL,BO3,UWinks,Arneb,48.5,51.5,36.5,71.1,ok,Uwinks,Arneb,5,5,2026-05-27,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Arneb|Uwinks,yes
 2026-05-27T12:00:00+00:00,PCS,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-27,PCS,,skipped,,
+2026-05-27T13:00:00+00:00,VCS,BO3,Saigon 9Gaming,Saigon Dino,23.3,76.7,50.0,50.0,ok,Saint Gaming,Saigon Dino,5,5,2026-05-27,VCS,ValueError: Roster vide : impossible d'agréger les features.,skipped,Saigon Dino|Saint Gaming,yes
 2026-05-27T15:00:00+00:00,Prime League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-27,PRIME LEAGUE,,skipped,,
 2026-05-27T15:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-27,RIFT LEGENDS,,skipped,,
 2026-05-27T16:00:00+00:00,Esports Balkan League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-27,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-05-27T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-27,CIRCUITO DESAFIANTE,,skipped,,
 2026-05-27T20:00:00+00:00,NACL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-27,NACL,,skipped,,
-2026-05-28T05:00:00+00:00,LCK Challengers,BO3,HLE Challengers,BRO Challengers,74.4,25.6,66.5,50.7,ok,Hanwha Life Esports,HANJIN BRION Challengers,5,5,2026-05-28,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,HANJIN BRION Challengers|Hanwha Life Esports,yes
-2026-05-28T05:00:00+00:00,LCK Challengers,BO3,KRX Challengers,BNK FEARX Youth,43.3,56.7,49.3,35.8,ok,DRX Challengers,BNK FEARX Youth,5,5,2026-05-28,LCKC,,ok,BNK FEARX Youth|DRX Challengers,yes
-2026-05-28T05:00:00+00:00,LCK Challengers,BO3,T1 Esports Academy,kt Challengers,63.0,37.0,64.2,60.6,ok,T1,KT Rolster Challengers,5,5,2026-05-28,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,KT Rolster Challengers|T1,yes
-2026-05-28T08:00:00+00:00,LCK,BO3,DN SOOPers,NONGSHIM RED FORCE,34.3,65.7,13.4,30.4,ok,DN SOOPers,Nongshim RedForce,5,5,2026-05-28,LCK,,ok,DN SOOPers|Nongshim RedForce,no
-2026-05-28T08:00:00+00:00,LJL,BO3,L Guide Gaming,FENNEL,28.4,71.6,32.7,66.8,ok,L Guide Gaming,FENNEL,5,5,2026-05-28,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,FENNEL|L Guide Gaming,yes
+2026-05-28T05:00:00+00:00,LCK Challengers,BO3,HLE Challengers,BRO Challengers,73.5,26.5,65.6,49.8,ok,Hanwha Life Esports,HANJIN BRION Challengers,5,5,2026-05-28,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,HANJIN BRION Challengers|Hanwha Life Esports,yes
+2026-05-28T05:00:00+00:00,LCK Challengers,BO3,KRX Challengers,BNK FEARX Youth,37.7,62.3,50.2,37.3,ok,DRX Challengers,BNK FEARX Youth,5,5,2026-05-28,LCKC,,ok,BNK FEARX Youth|DRX Challengers,yes
+2026-05-28T05:00:00+00:00,LCK Challengers,BO3,T1 Esports Academy,kt Challengers,61.1,38.9,62.7,58.6,ok,T1,KT Rolster Challengers,5,5,2026-05-28,LCKC,ValueError: Roster vide : impossible d'agréger les features.,skipped,KT Rolster Challengers|T1,yes
+2026-05-28T08:00:00+00:00,LCK,BO3,DN SOOPers,NONGSHIM RED FORCE,37.4,62.6,12.2,31.1,ok,DN SOOPers,Nongshim RedForce,5,5,2026-05-28,LCK,,ok,DN SOOPers|Nongshim RedForce,no
+2026-05-28T08:00:00+00:00,LJL,BO3,L Guide Gaming,FENNEL,24.9,75.1,28.9,63.5,ok,L Guide Gaming,FENNEL,5,5,2026-05-28,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,FENNEL|L Guide Gaming,yes
 2026-05-28T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-28,LPL,,skipped,,
-2026-05-28T10:00:00+00:00,LCK,BO3,kt Rolster,T1,50.0,50.0,44.7,62.3,ok,KT Rolster,T1,5,5,2026-05-28,LCK,,ok,KT Rolster|T1,no
-2026-05-28T11:00:00+00:00,LJL,BO3,Rising Gaming,RAYN Clocks,65.9,34.1,48.9,52.9,ok,Rising Gaming,RAYN Clocks,5,5,2026-05-28,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,RAYN Clocks|Rising Gaming,yes
+2026-05-28T10:00:00+00:00,LCK,BO3,kt Rolster,T1,48.2,51.8,43.9,59.4,ok,KT Rolster,T1,5,5,2026-05-28,LCK,,ok,KT Rolster|T1,no
+2026-05-28T10:00:00+00:00,VCS,BO3,Saigon Warrior,Saigon MVKE Academy,50.0,50.0,50.0,50.0,no_roster:Saigon Warrior+Saigon MVKE Academy,Saigon Warrior,Saigon MVKE Academy,0,0,2026-05-28,VCS,,skipped,,
+2026-05-28T11:00:00+00:00,LJL,BO3,Rising Gaming,RAYN Clocks,66.7,33.3,44.2,55.2,ok,Rising Gaming,RAYN Clocks,5,5,2026-05-28,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,RAYN Clocks|Rising Gaming,yes
 2026-05-28T15:00:00+00:00,Prime League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-28,PRIME LEAGUE,,skipped,,
 2026-05-28T16:00:00+00:00,Esports Balkan League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-28,ESPORTS BALKAN LEAGUE,,skipped,,
 2026-05-28T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-28,ROAD OF LEGENDS,,skipped,,
 2026-05-28T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-28,LIGA PORTUGUESA,,skipped,,
 2026-05-28T20:00:00+00:00,NACL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-28,NACL,,skipped,,
-2026-05-29T05:00:00+00:00,LCK Challengers,BO3,Gen.G Global Academy,DNS Challengers,29.9,70.1,39.4,41.0,ok,Gen.G Global Academy,DN SOOPers Challengers,5,5,2026-05-29,LCKC,,ok,DN SOOPers Challengers|Gen.G Global Academy,yes
-2026-05-29T05:00:00+00:00,LCK Challengers,BO3,NS Challengers,DK Challengers,53.5,46.5,59.0,33.5,ok,Nongshim Esports Academy,Dplus Kia Challengers,5,5,2026-05-29,LCKC,,ok,Dplus Kia Challengers|Nongshim Esports Academy,yes
-2026-05-29T08:00:00+00:00,LCK,BO3,Dplus KIA,KIWOOM DRX,65.4,34.6,64.1,49.5,ok,Dplus Kia,Kiwoom DRX,5,5,2026-05-29,LCK,,ok,Dplus Kia|Kiwoom DRX,no
+2026-05-29T05:00:00+00:00,LCK Challengers,BO3,Gen.G Global Academy,DNS Challengers,29.3,70.7,41.4,44.2,ok,Gen.G Global Academy,DN SOOPers Challengers,5,5,2026-05-29,LCKC,,ok,DN SOOPers Challengers|Gen.G Global Academy,yes
+2026-05-29T05:00:00+00:00,LCK Challengers,BO3,NS Challengers,DK Challengers,50.4,49.6,55.8,34.4,ok,Nongshim Esports Academy,Dplus Kia Challengers,5,5,2026-05-29,LCKC,,ok,Dplus Kia Challengers|Nongshim Esports Academy,yes
+2026-05-29T08:00:00+00:00,LCK,BO3,Dplus KIA,KIWOOM DRX,67.8,32.2,58.9,43.0,ok,Dplus Kia,Kiwoom DRX,5,5,2026-05-29,LCK,,ok,Dplus Kia|Kiwoom DRX,no
 2026-05-29T09:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-29,LCP,,skipped,,
 2026-05-29T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-29,LPL,,skipped,,
-2026-05-29T10:00:00+00:00,LCK,BO3,Gen.G Esports,HANJIN BRION,68.0,32.0,49.8,37.7,ok,Gen.G,HANJIN BRION,5,5,2026-05-29,LCK,,ok,Gen.G|HANJIN BRION,no
+2026-05-29T10:00:00+00:00,LCK,BO3,Gen.G Esports,HANJIN BRION,67.1,32.9,54.2,40.6,ok,Gen.G,HANJIN BRION,5,5,2026-05-29,LCK,,ok,Gen.G|HANJIN BRION,no
 2026-05-29T16:00:00+00:00,LoL Italian Tournament,BO5,TBD,HMBLE,50.0,50.0,50.0,50.0,no_roster:TBD+HMBLE,TBD,HMBLE,0,0,2026-05-29,LOL ITALIAN TOURNAMENT,,skipped,,
 2026-05-29T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-29,LIGA PORTUGUESA,,skipped,,
 2026-05-29T20:00:00+00:00,NACL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-29,NACL,,skipped,,
-2026-05-30T08:00:00+00:00,LCK,BO3,kt Rolster,DN SOOPers,82.0,18.0,50.0,34.3,ok,KT Rolster,DN SOOPers,5,5,2026-05-30,LCK,,ok,DN SOOPers|KT Rolster,yes
+2026-05-30T08:00:00+00:00,LCK,BO3,kt Rolster,DN SOOPers,77.9,22.1,48.2,37.4,ok,KT Rolster,DN SOOPers,5,5,2026-05-30,LCK,,ok,DN SOOPers|KT Rolster,yes
 2026-05-30T09:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-30,LCP,,skipped,,
 2026-05-30T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-30,LPL,,skipped,,
-2026-05-30T10:00:00+00:00,LCK,BO3,BNK FEARX,T1,33.8,66.2,50.5,50.0,ok,BNK FEARX,T1,5,5,2026-05-30,LCK,,ok,BNK FEARX|T1,no
+2026-05-30T10:00:00+00:00,LCK,BO3,BNK FEARX,T1,33.4,66.6,57.0,51.8,ok,BNK FEARX,T1,5,5,2026-05-30,LCK,,ok,BNK FEARX|T1,no
 2026-05-30T11:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-30,RIFT LEGENDS,,skipped,,
 2026-05-30T15:00:00+00:00,Prime League,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-30,PRIME LEAGUE,,skipped,,
 2026-05-30T16:00:00+00:00,CBLOL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-30,CBLOL,,skipped,,
-2026-05-31T08:00:00+00:00,LCK,BO3,HANJIN BRION,Hanwha Life Esports,28.5,71.5,32.0,50.2,ok,HANJIN BRION,Hanwha Life Esports,5,5,2026-05-31,LCK,,ok,HANJIN BRION|Hanwha Life Esports,no
+2026-05-31T08:00:00+00:00,LCK,BO3,HANJIN BRION,Hanwha Life Esports,31.6,68.4,32.9,45.8,ok,HANJIN BRION,Hanwha Life Esports,5,5,2026-05-31,LCK,,ok,HANJIN BRION|Hanwha Life Esports,no
 2026-05-31T09:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-31,LCP,,skipped,,
 2026-05-31T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-31,LPL,,skipped,,
-2026-05-31T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,Dplus KIA,40.9,59.1,65.7,65.4,ok,Nongshim RedForce,Dplus Kia,5,5,2026-05-31,LCK,,ok,Dplus Kia|Nongshim RedForce,yes
+2026-05-31T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,Dplus KIA,41.4,58.6,62.6,67.8,ok,Nongshim RedForce,Dplus Kia,5,5,2026-05-31,LCK,,ok,Dplus Kia|Nongshim RedForce,yes
 2026-05-31T11:00:00+00:00,Rift Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-31,RIFT LEGENDS,,skipped,,
 2026-05-31T16:00:00+00:00,CBLOL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-05-31,CBLOL,,skipped,,
 2026-06-01T09:00:00+00:00,PCS,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-01,PCS,,skipped,,
@@ -250,14 +257,14 @@ match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last
 2026-06-02T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-02,ROAD OF LEGENDS,,skipped,,
 2026-06-02T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-02,LIGA PORTUGUESA,,skipped,,
 2026-06-02T20:00:00+00:00,LRS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-02,LRS,,skipped,,
-2026-06-03T08:00:00+00:00,LJL,BO3,DFM Academy,Arneb,32.2,67.8,32.3,55.4,ok,DRX Academy,Arneb,5,5,2026-06-03,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Arneb|DRX Academy,yes
+2026-06-03T08:00:00+00:00,LJL,BO3,DFM Academy,Arneb,26.9,73.1,31.3,51.5,ok,DRX Academy,Arneb,5,5,2026-06-03,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,Arneb|DRX Academy,yes
 2026-06-03T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-03,LPL,,skipped,,
 2026-06-03T09:00:00+00:00,PCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-03,PCS,,skipped,,
-2026-06-03T11:00:00+00:00,LJL,BO3,UWinks,New Meta,43.8,56.2,44.6,67.7,ok,Uwinks,New Meta,5,5,2026-06-03,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,New Meta|Uwinks,yes
+2026-06-03T11:00:00+00:00,LJL,BO3,UWinks,New Meta,45.0,55.0,48.5,68.7,ok,Uwinks,New Meta,5,5,2026-06-03,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,New Meta|Uwinks,yes
 2026-06-03T15:00:00+00:00,LES,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-03,LES,,skipped,,
 2026-06-03T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-03,LIGA PORTUGUESA,,skipped,,
-2026-06-04T08:00:00+00:00,LJL,BO3,L Guide Gaming,RAYN Clocks,41.3,58.7,28.4,34.1,ok,L Guide Gaming,RAYN Clocks,5,5,2026-06-04,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,L Guide Gaming|RAYN Clocks,no
-2026-06-04T11:00:00+00:00,LJL,BO3,Rising Gaming,FENNEL,40.3,59.7,65.9,71.6,ok,Rising Gaming,FENNEL,5,5,2026-06-04,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,FENNEL|Rising Gaming,yes
+2026-06-04T08:00:00+00:00,LJL,BO3,L Guide Gaming,RAYN Clocks,43.3,56.7,24.9,33.3,ok,L Guide Gaming,RAYN Clocks,5,5,2026-06-04,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,L Guide Gaming|RAYN Clocks,no
+2026-06-04T11:00:00+00:00,LJL,BO3,Rising Gaming,FENNEL,36.2,63.8,66.7,75.1,ok,Rising Gaming,FENNEL,5,5,2026-06-04,LJL,ValueError: Roster vide : impossible d'agréger les features.,skipped,FENNEL|Rising Gaming,yes
 2026-06-04T15:00:00+00:00,LES,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-04,LES,,skipped,,
 2026-06-04T20:00:00+00:00,NACL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-04,NACL,,skipped,,
 2026-06-05T09:00:00+00:00,LCP,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-05,LCP,,skipped,,
@@ -274,12 +281,18 @@ match_date_utc,league,bo_format,team1,team2,proba_team1_pct,proba_team2_pct,last
 2026-06-09T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-09,LPL,,skipped,,
 2026-06-09T20:00:00+00:00,LRS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-09,LRS,,skipped,,
 2026-06-10T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-10,LPL,,skipped,,
+2026-06-11T10:00:00+00:00,VCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-11,VCS,,skipped,,
 2026-06-12T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-12,LPL,,skipped,,
+2026-06-12T10:00:00+00:00,VCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-12,VCS,,skipped,,
 2026-06-13T08:00:00+00:00,LJL,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-13,LJL,,skipped,,
 2026-06-13T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-13,LPL,,skipped,,
+2026-06-13T10:00:00+00:00,VCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-13,VCS,,skipped,,
 2026-06-13T11:00:00+00:00,LJL,BO3,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-13,LJL,,skipped,,
 2026-06-14T08:00:00+00:00,LJL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-14,LJL,,skipped,,
 2026-06-14T09:00:00+00:00,LPL,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-14,LPL,,skipped,,
+2026-06-14T10:00:00+00:00,VCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-14,VCS,,skipped,,
+2026-06-19T10:00:00+00:00,VCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-19,VCS,,skipped,,
+2026-06-20T10:00:00+00:00,VCS,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-20,VCS,,skipped,,
 2026-06-28T03:00:00+00:00,MSI,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-28,MSI,,skipped,,
 2026-06-28T08:00:00+00:00,MSI,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-28,MSI,,skipped,,
 2026-06-29T03:00:00+00:00,MSI,BO5,TBD,TBD,50.0,50.0,50.0,50.0,no_roster:TBD+TBD,TBD,TBD,0,0,2026-06-29,MSI,,skipped,,
