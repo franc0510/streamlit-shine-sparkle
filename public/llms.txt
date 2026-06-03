@@ -1,0 +1,12 @@
+# PredictEsport
+
+> Prédictions et pronostics esport générés par IA (Machine Learning) sur League of Legends, CS2 et Dota 2. Identification de value bets sur 15+ leagues (LFL, LEC, LCK, LPL, LCS, MSI, Worlds).
+
+## Pages
+
+- [Accueil](/): Prédictions LoL du jour, value bets et probabilités IA.
+- [Résultats & performance](/results): Accuracy, AUC, LogLoss et ROI vérifiable du modèle.
+- [Abonnement](/pricing): Essai gratuit 7 jours puis offre premium mensuelle.
+- [À propos](/about): Présentation de la méthodologie, avis et contact.
+- [CS2](/cs2): Module Counter-Strike 2 (à venir).
+- [Dota 2](/dota2): Module Dota 2 (à venir).

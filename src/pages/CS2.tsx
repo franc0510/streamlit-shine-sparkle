@@ -33,7 +33,7 @@ const CS2 = () => {
               <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Gamepad2 className="w-6 h-6 text-orange-400" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">{t('comingSoon.features.aiPredictions')}</h3>
+              <h2 className="font-semibold text-foreground mb-2">{t('comingSoon.features.aiPredictions')}</h2>
               <p className="text-sm text-muted-foreground">{t('comingSoon.features.aiPredictionsDesc')}</p>
             </div>
             
@@ -41,7 +41,7 @@ const CS2 = () => {
               <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Trophy className="w-6 h-6 text-orange-400" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">{t('comingSoon.features.tournaments')}</h3>
+              <h2 className="font-semibold text-foreground mb-2">{t('comingSoon.features.tournaments')}</h2>
               <p className="text-sm text-muted-foreground">{t('comingSoon.features.tournamentsDesc')}</p>
             </div>
             
@@ -49,7 +49,7 @@ const CS2 = () => {
               <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Clock className="w-6 h-6 text-orange-400" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">{t('comingSoon.features.realtime')}</h3>
+              <h2 className="font-semibold text-foreground mb-2">{t('comingSoon.features.realtime')}</h2>
               <p className="text-sm text-muted-foreground">{t('comingSoon.features.realtimeDesc')}</p>
             </div>
           </div>

@@ -44,7 +44,7 @@ const Results = () => {
           </div>
 
           <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 mb-12">
-            <h3 className="text-2xl font-display font-bold mb-3 text-center">{t("about.roi.title")}</h3>
+            <h2 className="text-2xl font-display font-bold mb-3 text-center">{t("about.roi.title")}</h2>
             <p className="text-muted-foreground text-center mb-6">{t("about.roi.description")}</p>
             <form onSubmit={handleRoiSubmit} className="max-w-md mx-auto space-y-4">
               <Input
@@ -99,7 +99,7 @@ const Results = () => {
             </div>
 
             <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 mb-8">
-              <h3 className="text-2xl font-display font-bold mb-4">{t("about.valueBet.title")}</h3>
+              <h2 className="text-2xl font-display font-bold mb-4">{t("about.valueBet.title")}</h2>
               <p className="text-muted-foreground leading-relaxed mb-3">{t("about.valueBet.intro")}</p>
               <p className="text-muted-foreground leading-relaxed mb-6">{t("about.valueBet.formula")}</p>
               <div className="border-t border-border/30 pt-6">
