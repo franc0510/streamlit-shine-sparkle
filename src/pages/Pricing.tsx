@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { SEO } from "@/components/SEO";
 
 const Pricing = () => {
   const { t } = useTranslation();
@@ -37,6 +38,11 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Abonnement Premium — PredictEsport"
+        description="Accédez à toutes les prédictions LoL IA pour 20€/mois. 7 jours d'essai gratuit, sans engagement."
+        path="/pricing"
+      />
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-16">

@@ -1,12 +1,18 @@
 import { Navbar } from "@/components/Navbar";
 import { Lock, Swords, Shield, Trophy, Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const Dota2 = () => {
   const { t } = useTranslation();
   
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Prédictions Dota 2 — bientôt sur PredictEsport"
+        description="Module Dota 2 en préparation : pronostics IA, value bets et suivi des tournois Dota 2."
+        path="/dota2"
+      />
       <Navbar />
       
       <main className="container mx-auto px-4 py-8 sm:py-12 md:py-16">
@@ -33,7 +39,7 @@ const Dota2 = () => {
               <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-red-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Shield className="w-6 h-6 text-red-400" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">{t('comingSoon.features.aiPredictions')}</h3>
+              <h2 className="font-semibold text-foreground mb-2">{t('comingSoon.features.aiPredictions')}</h2>
               <p className="text-sm text-muted-foreground">{t('comingSoon.features.aiPredictionsDesc')}</p>
             </div>
             
@@ -41,7 +47,7 @@ const Dota2 = () => {
               <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-red-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Trophy className="w-6 h-6 text-red-400" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">{t('comingSoon.features.tournaments')}</h3>
+              <h2 className="font-semibold text-foreground mb-2">{t('comingSoon.features.tournaments')}</h2>
               <p className="text-sm text-muted-foreground">{t('comingSoon.features.tournamentsDesc')}</p>
             </div>
             
@@ -49,7 +55,7 @@ const Dota2 = () => {
               <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-red-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Clock className="w-6 h-6 text-red-400" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">{t('comingSoon.features.realtime')}</h3>
+              <h2 className="font-semibold text-foreground mb-2">{t('comingSoon.features.realtime')}</h2>
               <p className="text-sm text-muted-foreground">{t('comingSoon.features.realtimeDesc')}</p>
             </div>
           </div>

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
+import { SEO } from "@/components/SEO";
 
 const Results = () => {
   const { t } = useTranslation();
@@ -31,6 +32,11 @@ const Results = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Résultats & performance IA — PredictEsport"
+        description="Performances vérifiables de notre modèle de Machine Learning : Accuracy, AUC, LogLoss et ROI sur les Worlds 2025."
+        path="/results"
+      />
       <Navbar />
       <main className="container mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-16">
         <div className="max-w-4xl mx-auto">
@@ -44,7 +50,7 @@ const Results = () => {
           </div>
 
           <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 mb-12">
-            <h3 className="text-2xl font-display font-bold mb-3 text-center">{t("about.roi.title")}</h3>
+            <h2 className="text-2xl font-display font-bold mb-3 text-center">{t("about.roi.title")}</h2>
             <p className="text-muted-foreground text-center mb-6">{t("about.roi.description")}</p>
             <form onSubmit={handleRoiSubmit} className="max-w-md mx-auto space-y-4">
               <Input
@@ -99,7 +105,7 @@ const Results = () => {
             </div>
 
             <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 mb-8">
-              <h3 className="text-2xl font-display font-bold mb-4">{t("about.valueBet.title")}</h3>
+              <h2 className="text-2xl font-display font-bold mb-4">{t("about.valueBet.title")}</h2>
               <p className="text-muted-foreground leading-relaxed mb-3">{t("about.valueBet.intro")}</p>
               <p className="text-muted-foreground leading-relaxed mb-6">{t("about.valueBet.formula")}</p>
               <div className="border-t border-border/30 pt-6">

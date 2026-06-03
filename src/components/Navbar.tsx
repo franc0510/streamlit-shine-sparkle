@@ -124,7 +124,7 @@ export const Navbar = () => {
             {isMobile && (
               <Drawer open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <DrawerTrigger asChild>
-                  <Button variant="ghost" size="sm" className="md:hidden">
+                  <Button variant="ghost" size="sm" className="md:hidden" aria-label="Menu">
                     <Menu className="w-5 h-5" />
                   </Button>
                 </DrawerTrigger>
