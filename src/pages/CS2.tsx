@@ -1,12 +1,18 @@
 import { Navbar } from "@/components/Navbar";
 import { Lock, Gamepad2, Target, Trophy, Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const CS2 = () => {
   const { t } = useTranslation();
   
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Prédictions Counter-Strike 2 — bientôt sur PredictEsport"
+        description="Module CS2 en préparation : pronostics IA, value bets et suivi des tournois Counter-Strike 2."
+        path="/cs2"
+      />
       <Navbar />
       
       <main className="container mx-auto px-4 py-8 sm:py-12 md:py-16">

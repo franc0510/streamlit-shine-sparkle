@@ -13,6 +13,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import founderPhoto from "@/assets/founder.jpg";
+import { SEO } from "@/components/SEO";
 
 interface Review {
   id: string;
@@ -137,6 +138,11 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="À propos de PredictEsport — méthodologie & contact"
+        description="Découvrez l'histoire de PredictEsport, notre méthodologie IA, les avis de notre communauté et contactez-nous."
+        path="/about"
+      />
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-16">

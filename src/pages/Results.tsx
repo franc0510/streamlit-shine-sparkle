@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
+import { SEO } from "@/components/SEO";
 
 const Results = () => {
   const { t } = useTranslation();
@@ -31,6 +32,11 @@ const Results = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Résultats & performance IA — PredictEsport"
+        description="Performances vérifiables de notre modèle de Machine Learning : Accuracy, AUC, LogLoss et ROI sur les Worlds 2025."
+        path="/results"
+      />
       <Navbar />
       <main className="container mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-16">
         <div className="max-w-4xl mx-auto">

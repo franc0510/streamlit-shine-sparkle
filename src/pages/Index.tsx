@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-");
 const buildMatchUrl = (m: Match) => `/match/${slugify(m.tournament)}/${m.date}/${m.time}/${slugify(m.team1)}-vs-${slugify(m.team2)}?bo=${m.format}`;
@@ -204,6 +205,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="PredictEsport — Prédictions LoL & Pronostics IA"
+        description="Prédictions League of Legends générées par IA sur LFL, LEC, LCK, LPL, MSI et Worlds. Value bets et 7 jours d'essai gratuit."
+        path="/"
+      />
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
