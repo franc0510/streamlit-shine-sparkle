@@ -191,7 +191,7 @@
       "logloss": {
         "title": "LogLoss — 0.55",
         "desc1": "LogLoss衡量我们算法概率预测的质量。",
-        "desc2": "0.58的分数表明概率校准良好。"
+        "desc2": "0.55的分数表明概率校准良好。"
       }
     },
     "valueBet": {
