@@ -191,7 +191,7 @@
       "logloss": {
         "title": "LogLoss — 0.55",
         "desc1": "Le LogLoss mesure la qualité des prédictions probabilistes de notre algorithme.",
-        "desc2": "Un score de 0.58 indique une bonne calibration des probabilités."
+        "desc2": "Un score de 0.55 indique une bonne calibration des probabilités."
       }
     },
     "valueBet": {
