@@ -1,12 +1,18 @@
 import { Navbar } from "@/components/Navbar";
 import { Lock, Swords, Shield, Trophy, Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const Dota2 = () => {
   const { t } = useTranslation();
   
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Prédictions Dota 2 — bientôt sur PredictEsport"
+        description="Module Dota 2 en préparation : pronostics IA, value bets et suivi des tournois Dota 2."
+        path="/dota2"
+      />
       <Navbar />
       
       <main className="container mx-auto px-4 py-8 sm:py-12 md:py-16">

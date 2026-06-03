@@ -11,6 +11,7 @@ import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { PremiumGate } from "@/components/PremiumGate";
 import { useMatchAccess } from "@/hooks/useMatchAccess";
+import { SEO } from "@/components/SEO";
 
 function useQuery() {
   const { search } = useLocation();
@@ -133,6 +134,24 @@ export default function MatchDetails() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={`${initialTeam1} vs ${initialTeam2} — Prédiction IA ${league || ''}`.trim()}
+        description={`Prédiction et value bets IA pour ${initialTeam1} vs ${initialTeam2}${league ? ` (${league})` : ''}${when ? ` le ${when}` : ''}.`}
+        path={location.pathname}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "SportsEvent",
+          "name": `${initialTeam1} vs ${initialTeam2}`,
+          "sport": "Esports",
+          "startDate": when || undefined,
+          "competitor": [
+            { "@type": "SportsTeam", "name": initialTeam1 },
+            { "@type": "SportsTeam", "name": initialTeam2 },
+          ],
+          ...(league ? { "superEvent": { "@type": "SportsEvent", "name": league } } : {}),
+        }}
+      />
       <Navbar />
       <div className="px-3 sm:px-4 md:px-8 lg:px-12 py-4 sm:py-6">
         <Button variant="ghost" onClick={() => navigate("/")} className="mb-4 sm:mb-6 gap-2">
