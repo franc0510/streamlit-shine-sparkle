@@ -139,7 +139,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
             <h3 className="font-semibold text-center text-xs sm:text-sm line-clamp-2">{team1.name}</h3>
             <div className="flex flex-col items-center gap-0.5 sm:gap-1 w-full">
               <span className="text-lg sm:text-xl md:text-2xl font-display font-bold text-primary">
-                {team1.winProbability}%
+                {team1.winProbability.toFixed(2)}%
               </span>
               <div className="w-full bg-secondary rounded-full h-1.5 sm:h-2 mb-1">
                 <div
