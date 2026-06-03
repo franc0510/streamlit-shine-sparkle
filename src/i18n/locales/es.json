@@ -176,7 +176,7 @@
         "title": "En resumen",
         "accuracy": "Buenas predicciones (75%)",
         "auc": "Modelo confiable y estable (AUC 0.75)",
-        "logloss": "Probabilidades calibradas (LogLoss 0.58)"
+        "logloss": "Probabilidades calibradas (LogLoss 0.55)"
       },
       "accuracy": {
         "title": "Precisión — 75%",
@@ -189,7 +189,7 @@
         "desc2": "Con una puntuación de 0.75, el algoritmo es confiable en la detección de tendencias ganadoras."
       },
       "logloss": {
-        "title": "LogLoss — 0.58",
+        "title": "LogLoss — 0.55",
         "desc1": "LogLoss mide la calidad de las predicciones probabilísticas de nuestro algoritmo.",
         "desc2": "Una puntuación de 0.58 indica una buena calibración de probabilidades."
       }
