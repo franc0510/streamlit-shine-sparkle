@@ -90,8 +90,14 @@ export const parseScheduleCSV = async (): Promise<Match[]> => {
           format: cols[col['bo_format'] ?? 2],
           team1: cols[col['team1'] ?? 3],
           team2: cols[col['team2'] ?? 4],
-          proba1: parseFloat(cols[col['proba_team1_pct'] ?? 5]),
-          proba2: parseFloat(cols[col['proba_team2_pct'] ?? 6]),
+          proba1: (() => {
+            const raw = parseFloat(cols[col['proba_team1'] ?? 5]);
+            return isNaN(raw) ? 0 : (raw <= 1 ? raw * 100 : raw);
+          })(),
+          proba2: (() => {
+            const raw = parseFloat(cols[col['proba_team2'] ?? 6]);
+            return isNaN(raw) ? 0 : (raw <= 1 ? raw * 100 : raw);
+          })(),
           used_team1: cols[col['used_team1'] ?? 10] || cols[col['team1'] ?? 3],
           used_team2: cols[col['used_team2'] ?? 11] || cols[col['team2'] ?? 4],
           status: cols[col['status'] ?? 9],
