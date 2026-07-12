@@ -1,498 +1,492 @@
 match_date_utc,league,bo_format,team1,team2,proba_team1,proba_team2,last_proba_team1,last_proba_team2,used_team1,used_team2,model_info,status,debug_error,symmetry_check
-2026-07-11T08:00:00+00:00,MSI,BO5,Hanwha Life Esports,LYON,0.762693,0.237307,0.762693,0.237307,Hanwha Life Esports,LYON,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-11T19:00:00+00:00,LRN,BO3,Polar Squad,NCG Esports,0.5,0.5,0.5,0.5,,QNG Team,GameModelV5_LGBM+XGB+CAT,no_roster:Polar Squad(no_match:Polar Squad),no_roster:Polar Squad(no_match:Polar Squad),skipped
-2026-07-11T19:00:00+00:00,LRN,BO3,3V TEAM,SDM Tigres,0.5,0.5,0.5,0.5,,SDM Tigres,GameModelV5_LGBM+XGB+CAT,no_roster:3V TEAM(no_match:3V TEAM),no_roster:3V TEAM(no_match:3V TEAM),skipped
-2026-07-11T22:00:00+00:00,LRN,BO3,Lyon Academy,FUEGO,0.134224,0.865776,0.134224,0.865776,LNG Academy,Team GO,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-11T22:00:00+00:00,LRN,BO3,Kits Esports,Zeu5 Esports,0.5,0.5,0.5,0.5,Kaisa Gaming,,GameModelV5_LGBM+XGB+CAT,no_roster:Zeu5 Esports(no_match:Zeu5 Esports),no_roster:Zeu5 Esports(no_match:Zeu5 Esports),skipped
-2026-07-12T06:00:00+00:00,MSI,BO5,TBD,BILIBILI GAMING,0.007498,0.992502,0.007498,0.992502,Team BDS,Bilibili Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-12T19:00:00+00:00,LRN,BO3,SDM Tigres,FUEGO,0.013245,0.986755,0.013245,0.986755,SDM Tigres,Team GO,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-12T19:00:00+00:00,LRN,BO3,NCG Esports,Zeu5 Esports,0.5,0.5,0.5,0.5,QNG Team,,GameModelV5_LGBM+XGB+CAT,no_roster:Zeu5 Esports(no_match:Zeu5 Esports),no_roster:Zeu5 Esports(no_match:Zeu5 Esports),skipped
+2026-07-12T19:00:00+00:00,LRN,BO3,SDM Tigres,FUEGO,0.013285,0.986715,0.013285,0.986715,SDM Tigres,Team GO,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-12T22:00:00+00:00,LRN,BO3,Polar Squad,Lyon Academy,0.5,0.5,0.5,0.5,,LNG Academy,GameModelV5_LGBM+XGB+CAT,no_roster:Polar Squad(no_match:Polar Squad),no_roster:Polar Squad(no_match:Polar Squad),skipped
 2026-07-12T22:00:00+00:00,LRN,BO3,Kits Esports,3V TEAM,0.5,0.5,0.5,0.5,Kaisa Gaming,,GameModelV5_LGBM+XGB+CAT,no_roster:3V TEAM(no_match:3V TEAM),no_roster:3V TEAM(no_match:3V TEAM),skipped
-2026-07-13T15:00:00+00:00,Prime League,BO1,E Wie Einfach E-Sports,Unicorns of Love Sexy Edition,0.48717,0.51283,0.48717,0.51283,E WIE EINFACH E-SPORTS,Unicorns of Love Sexy Edition,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-13T16:00:00+00:00,Prime League,BO1,Kaufland Hangry Knights,Eintracht Frankfurt,0.675209,0.324791,0.675209,0.324791,Kaufland Hangry Knights,Eintracht Frankfurt,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-13T17:00:00+00:00,Prime League,BO1,Rossmann Centaurs,TeamOrangeGaming,0.391458,0.608542,0.391458,0.608542,ROSSMANN Centaurs,TeamOrangeGaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-13T18:00:00+00:00,Prime League,BO1,Eintracht Frankfurt,E Wie Einfach E-Sports,0.356666,0.643334,0.356666,0.643334,Eintracht Frankfurt,E WIE EINFACH E-SPORTS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-13T19:00:00+00:00,Prime League,BO1,VfB Stuttgart,Berlin International Gaming,0.171139,0.828861,0.171139,0.828861,VfB eSports,Berlin International Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-13T23:00:00+00:00,LRN,BO3,Kits Esports,Lyon Academy,0.346383,0.653617,0.346383,0.653617,Kaisa Gaming,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-13T15:00:00+00:00,Prime League,BO1,E Wie Einfach E-Sports,Unicorns of Love Sexy Edition,0.480864,0.519136,0.480864,0.519136,E WIE EINFACH E-SPORTS,Unicorns of Love Sexy Edition,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-13T16:00:00+00:00,Prime League,BO1,Kaufland Hangry Knights,Eintracht Frankfurt,0.665276,0.334724,0.665276,0.334724,Kaufland Hangry Knights,Eintracht Frankfurt,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-13T17:00:00+00:00,Prime League,BO1,Rossmann Centaurs,TeamOrangeGaming,0.384062,0.615938,0.384062,0.615938,ROSSMANN Centaurs,TeamOrangeGaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-13T18:00:00+00:00,Prime League,BO1,Eintracht Frankfurt,E Wie Einfach E-Sports,0.347219,0.652781,0.347219,0.652781,Eintracht Frankfurt,E WIE EINFACH E-SPORTS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-13T19:00:00+00:00,Prime League,BO1,VfB Stuttgart,Berlin International Gaming,0.168717,0.831283,0.168717,0.831283,VfB eSports,Berlin International Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-13T23:00:00+00:00,LRN,BO3,Kits Esports,Lyon Academy,0.348147,0.651853,0.348147,0.651853,Kaisa Gaming,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-13T23:00:00+00:00,LRN,BO3,3V TEAM,Zeu5 Esports,0.5,0.5,0.5,0.5,,,GameModelV5_LGBM+XGB+CAT,no_roster:3V TEAM(no_match:3V TEAM)+Zeu5 Esports(no_match:Zeu5 Esports),no_roster:3V TEAM(no_match:3V TEAM)+Zeu5 Esports(no_match:Zeu5 Esports),skipped
+2026-07-14T02:00:00+00:00,LRN,BO3,NCG Esports,FUEGO,0.101461,0.898539,0.101461,0.898539,QNG Team,Team GO,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-14T02:00:00+00:00,LRN,BO3,Polar Squad,SDM Tigres,0.5,0.5,0.5,0.5,,SDM Tigres,GameModelV5_LGBM+XGB+CAT,no_roster:Polar Squad(no_match:Polar Squad),no_roster:Polar Squad(no_match:Polar Squad),skipped
-2026-07-14T02:00:00+00:00,LRN,BO3,NCG Esports,FUEGO,0.107086,0.892914,0.107086,0.892914,QNG Team,Team GO,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-14T15:00:00+00:00,LES,BO3,LUA Gaming,FALKE ESPORTS,0.917733,0.082267,0.917733,0.082267,LUA Gaming,FALKN,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-14T17:00:00+00:00,Road of Legends,BO3,mCon Esports,Dynasty,0.108733,0.891267,0.108733,0.891267,mCon esports,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-14T17:30:00+00:00,LES,BO3,UCAM Esports Club,Heretics Academy,0.315428,0.684572,0.315428,0.684572,UCAM Esports,Team Heretics Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-14T18:00:00+00:00,Road of Legends,BO3,ZennIT,Senshi eSports,0.436561,0.563439,0.436561,0.563439,Zenshi Gaming,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-14T20:00:00+00:00,LRS,BO3,ZEN,Docta Esports Club,0.293745,0.706255,0.293745,0.706255,Zenshi Gaming,Doxa Gaming,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.359!=0.381
-2026-07-14T20:00:00+00:00,LRS,BO3,Golden Lions,Maze Gaming,0.942311,0.057689,0.942311,0.057689,Golden Guardians,Team Aze,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-14T23:00:00+00:00,LRS,BO3,9z Globant,Malvinas Gaming,0.5,0.5,0.5,0.5,,Galions,GameModelV5_LGBM+XGB+CAT,no_roster:9z Globant(no_match:9z Globant),no_roster:9z Globant(no_match:9z Globant),skipped
+2026-07-14T15:00:00+00:00,LES,BO3,LUA Gaming,FALKE ESPORTS,0.920772,0.079228,0.920772,0.079228,LUA Gaming,FALKN,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-14T17:00:00+00:00,Road of Legends,BO3,mCon Esports,Dynasty,0.10932,0.89068,0.10932,0.89068,mCon esports,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-14T17:30:00+00:00,LES,BO3,UCAM Esports Club,Heretics Academy,0.311943,0.688057,0.311943,0.688057,UCAM Esports,Team Heretics Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-14T18:00:00+00:00,Road of Legends,BO3,ZennIT,Senshi eSports,0.401157,0.598843,0.401157,0.598843,Zenshi Gaming,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-14T20:00:00+00:00,LRS,BO3,Golden Lions,Maze Gaming,0.933358,0.066642,0.933358,0.066642,Golden Guardians,Team Aze,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-14T20:00:00+00:00,LRS,BO3,ZEN,Docta Esports Club,0.297809,0.702191,0.297809,0.702191,Zenshi Gaming,Doxa Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-14T23:00:00+00:00,LRS,BO3,Volticons,Seven Dark,0.5,0.5,0.5,0.5,,,GameModelV5_LGBM+XGB+CAT,no_roster:Volticons(no_match:Volticons)+Seven Dark(no_match:Seven Dark),no_roster:Volticons(no_match:Volticons)+Seven Dark(no_match:Seven Dark),skipped
-2026-07-15T09:00:00+00:00,Esports World Cup,BO1,Team Secret,Sentinels,0.699915,0.300085,0.699915,0.300085,Team Secret,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-15T09:00:00+00:00,Esports World Cup,BO1,Gen.G Esports,Karmine Corp,0.772223,0.227777,0.772223,0.227777,Gen.G,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-15T10:10:00+00:00,Esports World Cup,BO1,GAM Esports,T1,0.236073,0.763927,0.236073,0.763927,GAM Esports,T1,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-15T10:10:00+00:00,Esports World Cup,BO1,BILIBILI GAMING,Movistar KOI,0.746584,0.253416,0.746584,0.253416,Bilibili Gaming,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.747!=0.769
-2026-07-15T11:20:00+00:00,Esports World Cup,BO1,G2 Esports,FURIA,0.801642,0.198358,0.801642,0.198358,G2 Esports,FURIA,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-14T23:00:00+00:00,LRS,BO3,9z Globant,Malvinas Gaming,0.5,0.5,0.5,0.5,,Galions,GameModelV5_LGBM+XGB+CAT,no_roster:9z Globant(no_match:9z Globant),no_roster:9z Globant(no_match:9z Globant),skipped
+2026-07-15T09:00:00+00:00,Esports World Cup,BO1,Team Secret,Sentinels,0.689253,0.310747,0.689253,0.310747,Team Secret,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T09:00:00+00:00,Esports World Cup,BO1,Gen.G Esports,Karmine Corp,0.760807,0.239193,0.760807,0.239193,Gen.G,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T10:10:00+00:00,Esports World Cup,BO1,GAM Esports,T1,0.22263,0.77737,0.22263,0.77737,GAM Esports,T1,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T10:10:00+00:00,Esports World Cup,BO1,BILIBILI GAMING,Movistar KOI,0.752754,0.247246,0.752754,0.247246,Bilibili Gaming,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T11:20:00+00:00,Esports World Cup,BO1,G2 Esports,FURIA,0.810131,0.189869,0.810131,0.189869,G2 Esports,FURIA,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-15T11:20:00+00:00,Esports World Cup,BO1,Dplus KIA,AG.AL,0.5,0.5,0.5,0.5,Dplus Kia,,GameModelV5_LGBM+XGB+CAT,no_roster:AG.AL(no_match:AG.AL),no_roster:AG.AL(no_match:AG.AL),skipped
 2026-07-15T12:30:00+00:00,Esports World Cup,BO1,Hanwha Life Esports,MIBR.LOS,0.5,0.5,0.5,0.5,Hanwha Life Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:MIBR.LOS(no_match:MIBR.LOS),no_roster:MIBR.LOS(no_match:MIBR.LOS),skipped
-2026-07-15T12:30:00+00:00,Esports World Cup,BO1,Beijing JDG Esports,LYON,0.142331,0.857669,0.142331,0.857669,J Team,LYON,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-15T13:40:00+00:00,Esports World Cup,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-15T13:40:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T12:30:00+00:00,Esports World Cup,BO1,Beijing JDG Esports,LYON,0.150806,0.849194,0.150806,0.849194,J Team,LYON,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T13:40:00+00:00,Esports World Cup,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T13:40:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-15T15:00:00+00:00,LES,BO3,UB Alma Mater,GIANTX ITERO,0.5,0.5,0.5,0.5,,GIANTX iTero,GameModelV5_LGBM+XGB+CAT,no_roster:UB Alma Mater(no_match:UB Alma Mater),no_roster:UB Alma Mater(no_match:UB Alma Mater),skipped
-2026-07-15T16:00:00+00:00,Arabian League,BO3,BAAM Esports,Anubis Gaming,0.039551,0.960449,0.039551,0.960449,BAAM Esports,Anubis Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-15T16:10:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-15T16:10:00+00:00,Esports World Cup,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-15T17:30:00+00:00,LES,BO3,Movistar KOI Fénix,Barça Esports,0.590598,0.409402,0.590598,0.409402,Movistar KOI Fénix,Barça eSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-15T18:30:00+00:00,Arabian League,BO3,JSK Gamefy,One More Esports,0.913773,0.086227,0.913773,0.086227,GAM Esports,One More Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T09:00:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T09:00:00+00:00,Esports World Cup,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T10:10:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T10:10:00+00:00,Esports World Cup,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T11:20:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T16:00:00+00:00,Arabian League,BO3,BAAM Esports,Anubis Gaming,0.037159,0.962841,0.037159,0.962841,BAAM Esports,Anubis Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T16:10:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T16:10:00+00:00,Esports World Cup,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T17:30:00+00:00,LES,BO3,Movistar KOI Fénix,Barça Esports,0.591615,0.408385,0.591615,0.408385,Movistar KOI Fénix,Barça eSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-15T18:30:00+00:00,Arabian League,BO3,JSK Gamefy,One More Esports,0.919654,0.080346,0.919654,0.080346,GAM Esports,One More Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T09:00:00+00:00,Esports World Cup,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T09:00:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T10:10:00+00:00,Esports World Cup,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T10:10:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T11:20:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-16T13:00:00+00:00,Hellenic Legends League,BO2,Gamespace M.C.,TheParadOx Invaders,0.5,0.5,0.5,0.5,GAM Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:TheParadOx Invaders(no_match:TheParadOx Invaders),no_roster:TheParadOx Invaders(no_match:TheParadOx Invaders),skipped
-2026-07-16T13:50:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T15:00:00+00:00,LES,BO3,FALKE ESPORTS,UCAM Esports Club,0.078332,0.921668,0.078332,0.921668,FALKN,UCAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T15:00:00+00:00,Hellenic Legends League,BO2,WLGaming,Team Phantasma,0.73177,0.26823,0.73177,0.26823,WLGaming Esports,Team Phantasma,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T15:00:00+00:00,Prime League,BO1,Kaufland Hangry Knights,Rossmann Centaurs,0.584359,0.415641,0.584359,0.415641,Kaufland Hangry Knights,ROSSMANN Centaurs,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T16:00:00+00:00,Prime League,BO1,G2 NORD,TeamOrangeGaming,0.646422,0.353578,0.646422,0.353578,G2 NORD,TeamOrangeGaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T13:50:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T15:00:00+00:00,Prime League,BO1,Kaufland Hangry Knights,Rossmann Centaurs,0.588922,0.411078,0.588922,0.411078,Kaufland Hangry Knights,ROSSMANN Centaurs,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T15:00:00+00:00,LES,BO3,FALKE ESPORTS,UCAM Esports Club,0.100084,0.899916,0.100084,0.899916,FALKN,UCAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T15:00:00+00:00,Hellenic Legends League,BO2,WLGaming,Team Phantasma,0.732856,0.267144,0.732856,0.267144,WLGaming Esports,Team Phantasma,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T16:00:00+00:00,Prime League,BO1,G2 NORD,TeamOrangeGaming,0.643831,0.356169,0.643831,0.356169,G2 NORD,TeamOrangeGaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-16T16:00:00+00:00,Arabian League,BO3,3BL GALAXY ESPORTS,Disruptors,0.5,0.5,0.5,0.5,3BL Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:Disruptors(no_match:Disruptors),no_roster:Disruptors(no_match:Disruptors),skipped
-2026-07-16T17:00:00+00:00,Road of Legends,BO3,Frites Esports Club,The Bandits,0.291457,0.708543,0.291457,0.708543,Fortress Esports,Royal Bandits,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T17:00:00+00:00,Prime League,BO1,VfB Stuttgart,Kaufland Hangry Knights,0.289364,0.710636,0.289364,0.710636,VfB eSports,Kaufland Hangry Knights,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-16T17:30:00+00:00,LES,BO3,Barça Esports,Heretics Academy,0.266275,0.733725,0.266275,0.733725,Barça eSports,Team Heretics Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T17:00:00+00:00,Prime League,BO1,VfB Stuttgart,Kaufland Hangry Knights,0.305015,0.694985,0.305015,0.694985,VfB eSports,Kaufland Hangry Knights,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T17:00:00+00:00,Road of Legends,BO3,Frites Esports Club,The Bandits,0.299382,0.700618,0.299382,0.700618,Fortress Esports,Royal Bandits,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T17:30:00+00:00,LES,BO3,Barça Esports,Heretics Academy,0.261099,0.738901,0.261099,0.738901,Barça eSports,Team Heretics Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-16T18:00:00+00:00,Road of Legends,BO3,Once Upon a Team,Myth Esports,0.5,0.5,0.5,0.5,,,GameModelV5_LGBM+XGB+CAT,no_roster:Once Upon a Team(no_match:Once Upon a Team)+Myth Esports(no_match:Myth Esports),no_roster:Once Upon a Team(no_match:Once Upon a Team)+Myth Esports(no_match:Myth Esports),skipped
-2026-07-16T18:00:00+00:00,Prime League,BO1,Eintracht Frankfurt,Eintracht Spandau,0.294038,0.705962,0.294038,0.705962,Eintracht Frankfurt,Eintracht Spandau,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T18:00:00+00:00,Prime League,BO1,Eintracht Frankfurt,Eintracht Spandau,0.294889,0.705111,0.294889,0.705111,Eintracht Frankfurt,Eintracht Spandau,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-16T18:30:00+00:00,Arabian League,BO3,GNG Amazigh,Al-Ahli,0.5,0.5,0.5,0.5,GnG Amazigh,,GameModelV5_LGBM+XGB+CAT,no_roster:Al-Ahli(no_match:Al-Ahli),no_roster:Al-Ahli(no_match:Al-Ahli),skipped
-2026-07-16T19:00:00+00:00,Prime League,BO1,Unicorns of Love Sexy Edition,TeamOrangeGaming,0.517208,0.482792,0.517208,0.482792,Unicorns of Love Sexy Edition,TeamOrangeGaming,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.517!=0.490
-2026-07-17T11:00:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-17T13:30:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-17T15:00:00+00:00,Prime League,BO1,G2 NORD,Berlin International Gaming,0.42089,0.57911,0.42089,0.57911,G2 NORD,Berlin International Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-17T16:00:00+00:00,Prime League,BO1,Eintracht Spandau,Berlin International Gaming,0.313094,0.686906,0.313094,0.686906,Eintracht Spandau,Berlin International Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-17T16:00:00+00:00,Arabian League,BO3,Anubis Gaming,JSK Gamefy,0.519376,0.480624,0.519376,0.480624,Anubis Gaming,GAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-17T17:00:00+00:00,Prime League,BO1,G2 NORD,Eintracht Spandau,0.593913,0.406087,0.593913,0.406087,G2 NORD,Eintracht Spandau,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-17T18:00:00+00:00,Prime League,BO1,VfB Stuttgart,E Wie Einfach E-Sports,0.305137,0.694863,0.305137,0.694863,VfB eSports,E WIE EINFACH E-SPORTS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-16T19:00:00+00:00,Prime League,BO1,Unicorns of Love Sexy Edition,TeamOrangeGaming,0.511809,0.488191,0.511809,0.488191,Unicorns of Love Sexy Edition,TeamOrangeGaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-17T11:00:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-17T13:30:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-17T15:00:00+00:00,Prime League,BO1,G2 NORD,Berlin International Gaming,0.426566,0.573434,0.426566,0.573434,G2 NORD,Berlin International Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-17T16:00:00+00:00,Prime League,BO1,Eintracht Spandau,Berlin International Gaming,0.332088,0.667912,0.332088,0.667912,Eintracht Spandau,Berlin International Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-17T16:00:00+00:00,Arabian League,BO3,Anubis Gaming,JSK Gamefy,0.486372,0.513628,0.486372,0.513628,Anubis Gaming,GAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.491!=0.524
+2026-07-17T17:00:00+00:00,Prime League,BO1,G2 NORD,Eintracht Spandau,0.596942,0.403058,0.596942,0.403058,G2 NORD,Eintracht Spandau,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-17T18:00:00+00:00,Prime League,BO1,VfB Stuttgart,E Wie Einfach E-Sports,0.307197,0.692803,0.307197,0.692803,VfB eSports,E WIE EINFACH E-SPORTS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-17T18:30:00+00:00,Arabian League,BO3,Disruptors,GNG Amazigh,0.5,0.5,0.5,0.5,,GnG Amazigh,GameModelV5_LGBM+XGB+CAT,no_roster:Disruptors(no_match:Disruptors),no_roster:Disruptors(no_match:Disruptors),skipped
-2026-07-17T19:00:00+00:00,Prime League,BO1,Rossmann Centaurs,Unicorns of Love Sexy Edition,0.397271,0.602729,0.397271,0.602729,ROSSMANN Centaurs,Unicorns of Love Sexy Edition,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-18T11:00:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-18T13:30:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-18T23:00:00+00:00,LRN,BO3,NCG Esports,Lyon Academy,0.306816,0.693184,0.306816,0.693184,QNG Team,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-17T19:00:00+00:00,Prime League,BO1,Rossmann Centaurs,Unicorns of Love Sexy Edition,0.394607,0.605393,0.394607,0.605393,ROSSMANN Centaurs,Unicorns of Love Sexy Edition,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-18T11:00:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-18T13:30:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-18T23:00:00+00:00,LRN,BO3,NCG Esports,Lyon Academy,0.299443,0.700557,0.299443,0.700557,QNG Team,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-18T23:00:00+00:00,LRN,BO3,SDM Tigres,Zeu5 Esports,0.5,0.5,0.5,0.5,SDM Tigres,,GameModelV5_LGBM+XGB+CAT,no_roster:Zeu5 Esports(no_match:Zeu5 Esports),no_roster:Zeu5 Esports(no_match:Zeu5 Esports),skipped
 2026-07-19T02:00:00+00:00,LRN,BO3,3V TEAM,FUEGO,0.5,0.5,0.5,0.5,,Team GO,GameModelV5_LGBM+XGB+CAT,no_roster:3V TEAM(no_match:3V TEAM),no_roster:3V TEAM(no_match:3V TEAM),skipped
 2026-07-19T02:00:00+00:00,LRN,BO3,Polar Squad,Kits Esports,0.5,0.5,0.5,0.5,,Kaisa Gaming,GameModelV5_LGBM+XGB+CAT,no_roster:Polar Squad(no_match:Polar Squad),no_roster:Polar Squad(no_match:Polar Squad),skipped
-2026-07-19T10:00:00+00:00,Esports World Cup,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-19T12:30:00+00:00,Esports World Cup,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-19T23:00:00+00:00,LRN,BO3,Kits Esports,SDM Tigres,0.750209,0.249791,0.750209,0.249791,Kaisa Gaming,SDM Tigres,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-19T10:00:00+00:00,Esports World Cup,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-19T12:30:00+00:00,Esports World Cup,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-19T23:00:00+00:00,LRN,BO3,Kits Esports,SDM Tigres,0.752663,0.247337,0.752663,0.247337,Kaisa Gaming,SDM Tigres,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-19T23:00:00+00:00,LRN,BO3,Polar Squad,FUEGO,0.5,0.5,0.5,0.5,,Team GO,GameModelV5_LGBM+XGB+CAT,no_roster:Polar Squad(no_match:Polar Squad),no_roster:Polar Squad(no_match:Polar Squad),skipped
 2026-07-20T02:00:00+00:00,LRN,BO3,3V TEAM,NCG Esports,0.5,0.5,0.5,0.5,,QNG Team,GameModelV5_LGBM+XGB+CAT,no_roster:3V TEAM(no_match:3V TEAM),no_roster:3V TEAM(no_match:3V TEAM),skipped
 2026-07-20T02:00:00+00:00,LRN,BO3,Lyon Academy,Zeu5 Esports,0.5,0.5,0.5,0.5,LNG Academy,,GameModelV5_LGBM+XGB+CAT,no_roster:Zeu5 Esports(no_match:Zeu5 Esports),no_roster:Zeu5 Esports(no_match:Zeu5 Esports),skipped
-2026-07-20T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-20T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-20T20:00:00+00:00,Circuito Desafiante,BO1,Vivo Keyd Stars Academy,KaBuM! Eports,0.968542,0.031458,0.968542,0.031458,Vivo Keyd Stars,UTeSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-20T21:00:00+00:00,Circuito Desafiante,BO1,INTZ,7REX Team,0.562377,0.437623,0.562377,0.437623,INTZ,G-Rex,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-20T22:00:00+00:00,Circuito Desafiante,BO1,RED Kalunga Academy,Ei Nerd Esports,0.467041,0.532959,0.467041,0.532959,LNG Academy,Team E Turner,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-20T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-20T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-20T20:00:00+00:00,Circuito Desafiante,BO1,Vivo Keyd Stars Academy,KaBuM! Eports,0.963529,0.036471,0.963529,0.036471,Vivo Keyd Stars,UTeSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-20T21:00:00+00:00,Circuito Desafiante,BO1,INTZ,7REX Team,0.568468,0.431532,0.568468,0.431532,INTZ,G-Rex,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-20T22:00:00+00:00,Circuito Desafiante,BO1,RED Kalunga Academy,Ei Nerd Esports,0.484341,0.515659,0.484341,0.515659,LNG Academy,Team E Turner,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.484!=0.527
 2026-07-20T23:00:00+00:00,Circuito Desafiante,BO1,TEAM SOLID,RMD Gaming,0.5,0.5,0.5,0.5,,MAD Team,GameModelV5_LGBM+XGB+CAT,no_roster:TEAM SOLID(no_match:TEAM SOLID),no_roster:TEAM SOLID(no_match:TEAM SOLID),skipped
-2026-07-21T00:00:00+00:00,Circuito Desafiante,BO1,Estral Esports,paiN Gaming Academy,0.604983,0.395017,0.604983,0.395017,Estral Esports,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-21T00:00:00+00:00,Circuito Desafiante,BO1,Estral Esports,paiN Gaming Academy,0.605126,0.394874,0.605126,0.394874,Estral Esports,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-21T13:00:00+00:00,Hellenic Legends League,BO2,ALMO Players,Hell ZeroLag,0.5,0.5,0.5,0.5,,,GameModelV5_LGBM+XGB+CAT,no_roster:ALMO Players(no_match:ALMO Players)+Hell ZeroLag(no_match:Hell ZeroLag),no_roster:ALMO Players(no_match:ALMO Players)+Hell ZeroLag(no_match:Hell ZeroLag),skipped
 2026-07-21T15:00:00+00:00,LES,BO3,LUA Gaming,UB Alma Mater,0.5,0.5,0.5,0.5,LUA Gaming,,GameModelV5_LGBM+XGB+CAT,no_roster:UB Alma Mater(no_match:UB Alma Mater),no_roster:UB Alma Mater(no_match:UB Alma Mater),skipped
 2026-07-21T15:00:00+00:00,Hellenic Legends League,BO2,Spartans EU,Valerion,0.5,0.5,0.5,0.5,,Varona Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Spartans EU(no_match:Spartans EU),no_roster:Spartans EU(no_match:Spartans EU),skipped
-2026-07-21T16:00:00+00:00,Arabian League,BO3,One More Esports,3BL GALAXY ESPORTS,0.492439,0.507561,0.492439,0.507561,One More Esports,3BL Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-21T16:00:00+00:00,Arabian League,BO3,One More Esports,3BL GALAXY ESPORTS,0.503435,0.496565,0.503435,0.496565,One More Esports,3BL Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-21T17:00:00+00:00,Road of Legends,BO3,mCon Esports,Once Upon a Team,0.5,0.5,0.5,0.5,mCon esports,,GameModelV5_LGBM+XGB+CAT,no_roster:Once Upon a Team(no_match:Once Upon a Team),no_roster:Once Upon a Team(no_match:Once Upon a Team),skipped
-2026-07-21T17:30:00+00:00,LES,BO3,GIANTX ITERO,Movistar KOI Fénix,0.63974,0.36026,0.63974,0.36026,GIANTX iTero,Movistar KOI Fénix,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-21T18:00:00+00:00,Road of Legends,BO3,Frites Esports Club,Senshi eSports,0.579898,0.420102,0.579898,0.420102,Fortress Esports,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-21T17:30:00+00:00,LES,BO3,GIANTX ITERO,Movistar KOI Fénix,0.65572,0.34428,0.65572,0.34428,GIANTX iTero,Movistar KOI Fénix,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-21T18:00:00+00:00,Road of Legends,BO3,Frites Esports Club,Senshi eSports,0.593613,0.406387,0.593613,0.406387,Fortress Esports,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-21T18:30:00+00:00,Arabian League,BO3,Al-Ahli,BAAM Esports,0.5,0.5,0.5,0.5,,BAAM Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Al-Ahli(no_match:Al-Ahli),no_roster:Al-Ahli(no_match:Al-Ahli),skipped
-2026-07-21T20:00:00+00:00,Circuito Desafiante,BO1,INTZ,RED Kalunga Academy,0.607874,0.392126,0.607874,0.392126,INTZ,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-21T20:00:00+00:00,LRS,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-21T21:00:00+00:00,Circuito Desafiante,BO1,paiN Gaming Academy,RMD Gaming,0.676146,0.323854,0.676146,0.323854,LNG Academy,MAD Team,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-21T22:00:00+00:00,Circuito Desafiante,BO1,KaBuM! Eports,Estral Esports,0.084238,0.915762,0.084238,0.915762,UTeSports,Estral Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-21T20:00:00+00:00,LRS,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-21T20:00:00+00:00,Circuito Desafiante,BO1,INTZ,RED Kalunga Academy,0.609009,0.390991,0.609009,0.390991,INTZ,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-21T21:00:00+00:00,Circuito Desafiante,BO1,paiN Gaming Academy,RMD Gaming,0.673934,0.326066,0.673934,0.326066,LNG Academy,MAD Team,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-21T22:00:00+00:00,Circuito Desafiante,BO1,KaBuM! Eports,Estral Esports,0.078881,0.921119,0.078881,0.921119,UTeSports,Estral Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-21T23:00:00+00:00,Circuito Desafiante,BO1,TEAM SOLID,Ei Nerd Esports,0.5,0.5,0.5,0.5,,Team E Turner,GameModelV5_LGBM+XGB+CAT,no_roster:TEAM SOLID(no_match:TEAM SOLID),no_roster:TEAM SOLID(no_match:TEAM SOLID),skipped
-2026-07-22T00:00:00+00:00,Circuito Desafiante,BO1,Vivo Keyd Stars Academy,7REX Team,0.680554,0.319446,0.680554,0.319446,Vivo Keyd Stars,G-Rex,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T00:00:00+00:00,Circuito Desafiante,BO1,Vivo Keyd Stars Academy,7REX Team,0.681265,0.318735,0.681265,0.318735,Vivo Keyd Stars,G-Rex,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-22T13:00:00+00:00,Hellenic Legends League,BO2,Spartans EU,WLGaming,0.5,0.5,0.5,0.5,,WLGaming Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Spartans EU(no_match:Spartans EU),no_roster:Spartans EU(no_match:Spartans EU),skipped
-2026-07-22T15:00:00+00:00,Hellenic Legends League,BO2,Hell ZeroLag,Gamespace M.C.,0.5,0.5,0.5,0.5,,GAM Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Hell ZeroLag(no_match:Hell ZeroLag),no_roster:Hell ZeroLag(no_match:Hell ZeroLag),skipped
 2026-07-22T15:00:00+00:00,LES,BO3,UB Alma Mater,FALKE ESPORTS,0.5,0.5,0.5,0.5,,FALKN,GameModelV5_LGBM+XGB+CAT,no_roster:UB Alma Mater(no_match:UB Alma Mater),no_roster:UB Alma Mater(no_match:UB Alma Mater),skipped
-2026-07-22T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T16:00:00+00:00,Arabian League,BO3,GNG Amazigh,One More Esports,0.554814,0.445186,0.554814,0.445186,GnG Amazigh,One More Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T17:30:00+00:00,LES,BO3,Barça Esports,UCAM Esports Club,0.412528,0.587472,0.412528,0.587472,Barça eSports,UCAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T18:30:00+00:00,Arabian League,BO3,3BL GALAXY ESPORTS,Anubis Gaming,0.067631,0.932369,0.067631,0.932369,3BL Esports,Anubis Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T20:00:00+00:00,Circuito Desafiante,BO1,KaBuM! Eports,INTZ,0.062286,0.937714,0.062286,0.937714,UTeSports,INTZ,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T15:00:00+00:00,Hellenic Legends League,BO2,Hell ZeroLag,Gamespace M.C.,0.5,0.5,0.5,0.5,,GAM Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Hell ZeroLag(no_match:Hell ZeroLag),no_roster:Hell ZeroLag(no_match:Hell ZeroLag),skipped
+2026-07-22T16:00:00+00:00,Arabian League,BO3,GNG Amazigh,One More Esports,0.548172,0.451828,0.548172,0.451828,GnG Amazigh,One More Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T17:30:00+00:00,LES,BO3,Barça Esports,UCAM Esports Club,0.409561,0.590439,0.409561,0.590439,Barça eSports,UCAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T18:30:00+00:00,Arabian League,BO3,3BL GALAXY ESPORTS,Anubis Gaming,0.074389,0.925611,0.074389,0.925611,3BL Esports,Anubis Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T20:00:00+00:00,Circuito Desafiante,BO1,KaBuM! Eports,INTZ,0.066648,0.933352,0.066648,0.933352,UTeSports,INTZ,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-22T21:00:00+00:00,Circuito Desafiante,BO1,Estral Esports,TEAM SOLID,0.5,0.5,0.5,0.5,Estral Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:TEAM SOLID(no_match:TEAM SOLID),no_roster:TEAM SOLID(no_match:TEAM SOLID),skipped
-2026-07-22T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T22:00:00+00:00,Circuito Desafiante,BO1,RMD Gaming,Vivo Keyd Stars Academy,0.13145,0.86855,0.13145,0.86855,MAD Team,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-22T23:00:00+00:00,Circuito Desafiante,BO1,Ei Nerd Esports,7REX Team,0.548891,0.451109,0.548891,0.451109,Team E Turner,G-Rex,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-23T00:00:00+00:00,Circuito Desafiante,BO1,RED Kalunga Academy,paiN Gaming Academy,0.503527,0.496473,0.503527,0.496473,LNG Academy,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-23T15:00:00+00:00,LES,BO3,Movistar KOI Fénix,LUA Gaming,0.513267,0.486733,0.513267,0.486733,Movistar KOI Fénix,LUA Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-23T16:00:00+00:00,Arabian League,BO3,BAAM Esports,JSK Gamefy,0.115989,0.884011,0.115989,0.884011,BAAM Esports,GAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T22:00:00+00:00,Circuito Desafiante,BO1,RMD Gaming,Vivo Keyd Stars Academy,0.132335,0.867665,0.132335,0.867665,MAD Team,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-22T23:00:00+00:00,Circuito Desafiante,BO1,Ei Nerd Esports,7REX Team,0.563449,0.436551,0.563449,0.436551,Team E Turner,G-Rex,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-23T00:00:00+00:00,Circuito Desafiante,BO1,RED Kalunga Academy,paiN Gaming Academy,0.498725,0.501275,0.498725,0.501275,LNG Academy,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-23T15:00:00+00:00,LES,BO3,Movistar KOI Fénix,LUA Gaming,0.511953,0.488047,0.511953,0.488047,Movistar KOI Fénix,LUA Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-23T16:00:00+00:00,Arabian League,BO3,BAAM Esports,JSK Gamefy,0.104234,0.895766,0.104234,0.895766,BAAM Esports,GAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-23T17:00:00+00:00,Road of Legends,BO3,Myth Esports,Dynasty,0.5,0.5,0.5,0.5,,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,no_roster:Myth Esports(no_match:Myth Esports),no_roster:Myth Esports(no_match:Myth Esports),skipped
-2026-07-23T17:30:00+00:00,LES,BO3,GIANTX ITERO,Heretics Academy,0.469207,0.530793,0.469207,0.530793,GIANTX iTero,Team Heretics Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-23T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-23T18:00:00+00:00,Road of Legends,BO3,The Bandits,ZennIT,0.921435,0.078565,0.921435,0.078565,Royal Bandits,Zenshi Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-23T17:30:00+00:00,LES,BO3,GIANTX ITERO,Heretics Academy,0.458498,0.541502,0.458498,0.541502,GIANTX iTero,Team Heretics Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-23T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-23T18:00:00+00:00,Road of Legends,BO3,The Bandits,ZennIT,0.941406,0.058594,0.941406,0.058594,Royal Bandits,Zenshi Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-23T18:30:00+00:00,Arabian League,BO3,Al-Ahli,Disruptors,0.5,0.5,0.5,0.5,,,GameModelV5_LGBM+XGB+CAT,no_roster:Al-Ahli(no_match:Al-Ahli)+Disruptors(no_match:Disruptors),no_roster:Al-Ahli(no_match:Al-Ahli)+Disruptors(no_match:Disruptors),skipped
-2026-07-23T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-23T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-23T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-24T14:00:00+00:00,LEC,BO3,G2 Esports,Movistar KOI,0.548859,0.451141,0.548859,0.451141,G2 Esports,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-24T17:00:00+00:00,LEC,BO3,Team Vitality,Karmine Corp,0.417883,0.582117,0.417883,0.582117,Team Vitality,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-25T14:00:00+00:00,LEC,BO3,Team Vitality,G2 Esports,0.456687,0.543313,0.456687,0.543313,Team Vitality,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.471!=0.449
-2026-07-25T16:00:00+00:00,CBLOL,BO3,FURIA,LOS,0.820504,0.179496,0.820504,0.179496,FURIA,Lotus,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.730!=0.691
-2026-07-25T17:00:00+00:00,LEC,BO3,Karmine Corp,Movistar KOI,0.454823,0.545177,0.454823,0.545177,Karmine Corp,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.470!=0.494
-2026-07-25T19:00:00+00:00,CBLOL,BO3,LOUD,paiN Gaming,0.681048,0.318952,0.681048,0.318952,LOUD,paiN Gaming,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.623!=0.603
-2026-07-25T20:00:00+00:00,LCS,BO3,FlyQuest,LYON,0.241068,0.758932,0.241068,0.758932,FlyQuest,LYON,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-25T23:00:00+00:00,LCS,BO3,Dignitas,Sentinels,0.21426,0.78574,0.21426,0.78574,Dignitas,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.299!=0.274
-2026-07-26T14:00:00+00:00,LEC,BO3,Movistar KOI,Team Vitality,0.613293,0.386707,0.613293,0.386707,Movistar KOI,Team Vitality,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-26T16:00:00+00:00,CBLOL,BO3,Fluxo W7M,LEVIATÁN,0.710566,0.289434,0.710566,0.289434,Fluxo W7M,Leviatan,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-26T17:00:00+00:00,LEC,BO3,G2 Esports,Karmine Corp,0.479367,0.520633,0.479367,0.520633,G2 Esports,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-23T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-23T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-23T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-24T14:00:00+00:00,LEC,BO3,G2 Esports,Movistar KOI,0.53578,0.46422,0.53578,0.46422,G2 Esports,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-24T17:00:00+00:00,LEC,BO3,Team Vitality,Karmine Corp,0.421739,0.578261,0.421739,0.578261,Team Vitality,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-25T14:00:00+00:00,LEC,BO3,Team Vitality,G2 Esports,0.43062,0.56938,0.43062,0.56938,Team Vitality,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-25T16:00:00+00:00,CBLOL,BO3,FURIA,LOS,0.82221,0.17779,0.82221,0.17779,FURIA,Lotus,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-25T17:00:00+00:00,LEC,BO3,Karmine Corp,Movistar KOI,0.457363,0.542637,0.457363,0.542637,Karmine Corp,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-25T19:00:00+00:00,CBLOL,BO3,LOUD,paiN Gaming,0.671391,0.328609,0.671391,0.328609,LOUD,paiN Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-25T20:00:00+00:00,LCS,BO3,FlyQuest,LYON,0.215644,0.784356,0.215644,0.784356,FlyQuest,LYON,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-25T23:00:00+00:00,LCS,BO3,Dignitas,Sentinels,0.198967,0.801033,0.198967,0.801033,Dignitas,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-26T14:00:00+00:00,LEC,BO3,Movistar KOI,Team Vitality,0.604273,0.395727,0.604273,0.395727,Movistar KOI,Team Vitality,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-26T16:00:00+00:00,CBLOL,BO3,Fluxo W7M,LEVIATÁN,0.700739,0.299261,0.700739,0.299261,Fluxo W7M,Leviatan,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-26T17:00:00+00:00,LEC,BO3,G2 Esports,Karmine Corp,0.465034,0.534966,0.465034,0.534966,G2 Esports,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-26T19:00:00+00:00,CBLOL,BO3,RED Kalunga,Vivo Keyd Stars,0.5,0.5,0.5,0.5,,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,no_roster:RED Kalunga(no_match:RED Kalunga),no_roster:RED Kalunga(no_match:RED Kalunga),skipped
-2026-07-26T20:00:00+00:00,LCS,BO3,Team Liquid Alienware,Cloud9 Kia,0.310556,0.689444,0.310556,0.689444,Team Liquid Challengers,Cloud9,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-26T23:00:00+00:00,LCS,BO3,Shopify Rebellion,Disguised,0.494308,0.505692,0.494308,0.505692,Shopify Rebellion,Disguised,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-26T20:00:00+00:00,LCS,BO3,Team Liquid Alienware,Cloud9 Kia,0.315921,0.684079,0.315921,0.684079,Team Liquid Challengers,Cloud9,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-26T23:00:00+00:00,LCS,BO3,Shopify Rebellion,Disguised,0.511752,0.488248,0.511752,0.488248,Shopify Rebellion,Disguised,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-27T13:00:00+00:00,Hellenic Legends League,BO2,Team Phantasma,ALMO Players,0.5,0.5,0.5,0.5,Team Phantasma,,GameModelV5_LGBM+XGB+CAT,no_roster:ALMO Players(no_match:ALMO Players),no_roster:ALMO Players(no_match:ALMO Players),skipped
 2026-07-27T15:00:00+00:00,Hellenic Legends League,BO2,Valerion,TheParadOx Invaders,0.5,0.5,0.5,0.5,Varona Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:TheParadOx Invaders(no_match:TheParadOx Invaders),no_roster:TheParadOx Invaders(no_match:TheParadOx Invaders),skipped
-2026-07-27T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-27T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-27T20:00:00+00:00,Circuito Desafiante,BO1,7REX Team,RED Kalunga Academy,0.485266,0.514734,0.485266,0.514734,G-Rex,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.485!=0.534
-2026-07-27T21:00:00+00:00,Circuito Desafiante,BO1,paiN Gaming Academy,Ei Nerd Esports,0.467041,0.532959,0.467041,0.532959,LNG Academy,Team E Turner,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-27T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-27T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-27T20:00:00+00:00,Circuito Desafiante,BO1,7REX Team,RED Kalunga Academy,0.532234,0.467766,0.532234,0.467766,G-Rex,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.532!=0.484
+2026-07-27T21:00:00+00:00,Circuito Desafiante,BO1,paiN Gaming Academy,Ei Nerd Esports,0.484341,0.515659,0.484341,0.515659,LNG Academy,Team E Turner,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.484!=0.527
 2026-07-27T22:00:00+00:00,Circuito Desafiante,BO1,KaBuM! Eports,TEAM SOLID,0.5,0.5,0.5,0.5,UTeSports,,GameModelV5_LGBM+XGB+CAT,no_roster:TEAM SOLID(no_match:TEAM SOLID),no_roster:TEAM SOLID(no_match:TEAM SOLID),skipped
-2026-07-27T23:00:00+00:00,LRN,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-27T23:00:00+00:00,Circuito Desafiante,BO1,INTZ,RMD Gaming,0.760882,0.239118,0.760882,0.239118,INTZ,MAD Team,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-28T00:00:00+00:00,Circuito Desafiante,BO1,Vivo Keyd Stars Academy,Estral Esports,0.666096,0.333904,0.666096,0.333904,Vivo Keyd Stars,Estral Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-28T13:00:00+00:00,Hellenic Legends League,BO2,Gamespace M.C.,Team Phantasma,0.978964,0.021036,0.978964,0.021036,GAM Esports,Team Phantasma,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-27T23:00:00+00:00,Circuito Desafiante,BO1,INTZ,RMD Gaming,0.751212,0.248788,0.751212,0.248788,INTZ,MAD Team,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-27T23:00:00+00:00,LRN,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T00:00:00+00:00,Circuito Desafiante,BO1,Vivo Keyd Stars Academy,Estral Esports,0.648583,0.351417,0.648583,0.351417,Vivo Keyd Stars,Estral Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T13:00:00+00:00,Hellenic Legends League,BO2,Gamespace M.C.,Team Phantasma,0.97977,0.02023,0.97977,0.02023,GAM Esports,Team Phantasma,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-28T15:00:00+00:00,Hellenic Legends League,BO2,ALMO Players,Spartans EU,0.5,0.5,0.5,0.5,,,GameModelV5_LGBM+XGB+CAT,no_roster:ALMO Players(no_match:ALMO Players)+Spartans EU(no_match:Spartans EU),no_roster:ALMO Players(no_match:ALMO Players)+Spartans EU(no_match:Spartans EU),skipped
 2026-07-28T15:00:00+00:00,LES,BO3,UB Alma Mater,UCAM Esports Club,0.5,0.5,0.5,0.5,,UCAM Esports,GameModelV5_LGBM+XGB+CAT,no_roster:UB Alma Mater(no_match:UB Alma Mater),no_roster:UB Alma Mater(no_match:UB Alma Mater),skipped
-2026-07-28T16:00:00+00:00,Arabian League,BO3,JSK Gamefy,3BL GALAXY ESPORTS,0.931001,0.068999,0.931001,0.068999,GAM Esports,3BL Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-28T17:00:00+00:00,Road of Legends,BO3,ZennIT,Dynasty,0.150187,0.849813,0.150187,0.849813,Zenshi Gaming,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-28T17:30:00+00:00,LES,BO3,Barça Esports,GIANTX ITERO,0.250167,0.749833,0.250167,0.749833,Barça eSports,GIANTX iTero,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T16:00:00+00:00,Arabian League,BO3,JSK Gamefy,3BL GALAXY ESPORTS,0.941545,0.058455,0.941545,0.058455,GAM Esports,3BL Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T17:00:00+00:00,Road of Legends,BO3,ZennIT,Dynasty,0.1337,0.8663,0.1337,0.8663,Zenshi Gaming,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T17:30:00+00:00,LES,BO3,Barça Esports,GIANTX ITERO,0.26275,0.73725,0.26275,0.73725,Barça eSports,GIANTX iTero,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-28T18:00:00+00:00,Road of Legends,BO3,The Bandits,Myth Esports,0.5,0.5,0.5,0.5,Royal Bandits,,GameModelV5_LGBM+XGB+CAT,no_roster:Myth Esports(no_match:Myth Esports),no_roster:Myth Esports(no_match:Myth Esports),skipped
-2026-07-28T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-28T18:30:00+00:00,Arabian League,BO3,One More Esports,Al-Ahli,0.5,0.5,0.5,0.5,One More Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:Al-Ahli(no_match:Al-Ahli),no_roster:Al-Ahli(no_match:Al-Ahli),skipped
-2026-07-28T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-28T20:00:00+00:00,Circuito Desafiante,BO1,paiN Gaming Academy,TEAM SOLID,0.5,0.5,0.5,0.5,LNG Academy,,GameModelV5_LGBM+XGB+CAT,no_roster:TEAM SOLID(no_match:TEAM SOLID),no_roster:TEAM SOLID(no_match:TEAM SOLID),skipped
-2026-07-28T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-28T20:00:00+00:00,LRS,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-28T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-28T21:00:00+00:00,Circuito Desafiante,BO1,Ei Nerd Esports,Vivo Keyd Stars Academy,0.345106,0.654894,0.345106,0.654894,Team E Turner,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-28T22:00:00+00:00,Circuito Desafiante,BO1,Estral Esports,INTZ,0.516999,0.483001,0.516999,0.483001,Estral Esports,INTZ,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-28T23:00:00+00:00,Circuito Desafiante,BO1,7REX Team,KaBuM! Eports,0.884007,0.115993,0.884007,0.115993,G-Rex,UTeSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T00:00:00+00:00,Circuito Desafiante,BO1,RMD Gaming,RED Kalunga Academy,0.317744,0.682256,0.317744,0.682256,MAD Team,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T08:00:00+00:00,LCK,BO3,KIWOOM DRX,NONGSHIM RED FORCE,0.485292,0.514708,0.485292,0.514708,Kiwoom DRX,Nongshim RedForce,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T10:00:00+00:00,LCK,BO3,T1,kt Rolster,0.813892,0.186108,0.813892,0.186108,T1,KT Rolster,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.724!=0.693
-2026-07-29T13:00:00+00:00,Hellenic Legends League,BO2,WLGaming,Valerion,0.851589,0.148411,0.851589,0.148411,WLGaming Esports,Varona Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T15:00:00+00:00,LES,BO3,LUA Gaming,Heretics Academy,0.287762,0.712238,0.287762,0.712238,LUA Gaming,Team Heretics Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T20:00:00+00:00,LRS,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T21:00:00+00:00,Circuito Desafiante,BO1,Ei Nerd Esports,Vivo Keyd Stars Academy,0.337952,0.662048,0.337952,0.662048,Team E Turner,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T22:00:00+00:00,Circuito Desafiante,BO1,Estral Esports,INTZ,0.539622,0.460378,0.539622,0.460378,Estral Esports,INTZ,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-28T23:00:00+00:00,Circuito Desafiante,BO1,7REX Team,KaBuM! Eports,0.870651,0.129349,0.870651,0.129349,G-Rex,UTeSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T00:00:00+00:00,Circuito Desafiante,BO1,RMD Gaming,RED Kalunga Academy,0.316934,0.683066,0.316934,0.683066,MAD Team,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T08:00:00+00:00,LCK,BO3,KIWOOM DRX,NONGSHIM RED FORCE,0.494138,0.505862,0.494138,0.505862,Kiwoom DRX,Nongshim RedForce,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T10:00:00+00:00,LCK,BO3,T1,kt Rolster,0.793426,0.206574,0.793426,0.206574,T1,KT Rolster,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.708!=0.728
+2026-07-29T13:00:00+00:00,Hellenic Legends League,BO2,WLGaming,Valerion,0.856979,0.143021,0.856979,0.143021,WLGaming Esports,Varona Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T15:00:00+00:00,LES,BO3,LUA Gaming,Heretics Academy,0.275583,0.724417,0.275583,0.724417,LUA Gaming,Team Heretics Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-29T15:00:00+00:00,Hellenic Legends League,BO2,TheParadOx Invaders,Hell ZeroLag,0.5,0.5,0.5,0.5,,,GameModelV5_LGBM+XGB+CAT,no_roster:TheParadOx Invaders(no_match:TheParadOx Invaders)+Hell ZeroLag(no_match:Hell ZeroLag),no_roster:TheParadOx Invaders(no_match:TheParadOx Invaders)+Hell ZeroLag(no_match:Hell ZeroLag),skipped
-2026-07-29T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T16:00:00+00:00,Arabian League,BO3,Anubis Gaming,GNG Amazigh,0.911685,0.088315,0.911685,0.088315,Anubis Gaming,GnG Amazigh,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T17:30:00+00:00,LES,BO3,Movistar KOI Fénix,FALKE ESPORTS,0.95226,0.04774,0.95226,0.04774,Movistar KOI Fénix,FALKN,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T16:00:00+00:00,Arabian League,BO3,Anubis Gaming,GNG Amazigh,0.906554,0.093446,0.906554,0.093446,Anubis Gaming,GnG Amazigh,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T17:30:00+00:00,LES,BO3,Movistar KOI Fénix,FALKE ESPORTS,0.953104,0.046896,0.953104,0.046896,Movistar KOI Fénix,FALKN,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-29T18:30:00+00:00,Arabian League,BO3,Disruptors,BAAM Esports,0.5,0.5,0.5,0.5,,BAAM Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Disruptors(no_match:Disruptors),no_roster:Disruptors(no_match:Disruptors),skipped
-2026-07-29T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T20:00:00+00:00,Circuito Desafiante,BO1,Ei Nerd Esports,INTZ,0.576684,0.423316,0.576684,0.423316,Team E Turner,INTZ,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T21:00:00+00:00,Circuito Desafiante,BO1,RMD Gaming,KaBuM! Eports,0.815368,0.184632,0.815368,0.184632,MAD Team,UTeSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-29T22:00:00+00:00,Circuito Desafiante,BO1,paiN Gaming Academy,7REX Team,0.465544,0.534456,0.465544,0.534456,LNG Academy,G-Rex,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.466!=0.515
-2026-07-29T23:00:00+00:00,Circuito Desafiante,BO1,RED Kalunga Academy,Estral Esports,0.388988,0.611012,0.388988,0.611012,LNG Academy,Estral Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T20:00:00+00:00,Circuito Desafiante,BO1,Ei Nerd Esports,INTZ,0.537778,0.462222,0.537778,0.462222,Team E Turner,INTZ,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.538!=0.568
+2026-07-29T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T21:00:00+00:00,Circuito Desafiante,BO1,RMD Gaming,KaBuM! Eports,0.795626,0.204374,0.795626,0.204374,MAD Team,UTeSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-29T22:00:00+00:00,Circuito Desafiante,BO1,paiN Gaming Academy,7REX Team,0.515832,0.484168,0.515832,0.484168,LNG Academy,G-Rex,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.516!=0.468
+2026-07-29T23:00:00+00:00,Circuito Desafiante,BO1,RED Kalunga Academy,Estral Esports,0.376544,0.623456,0.376544,0.623456,LNG Academy,Estral Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-30T00:00:00+00:00,Circuito Desafiante,BO1,TEAM SOLID,Vivo Keyd Stars Academy,0.5,0.5,0.5,0.5,,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,no_roster:TEAM SOLID(no_match:TEAM SOLID),no_roster:TEAM SOLID(no_match:TEAM SOLID),skipped
-2026-07-30T08:00:00+00:00,LCK,BO3,DN SOOPers,BNK FEARX,0.217961,0.782039,0.217961,0.782039,DN SOOPers,BNK FEARX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-30T10:00:00+00:00,LCK,BO3,Hanwha Life Esports,Dplus KIA,0.699391,0.300609,0.699391,0.300609,Hanwha Life Esports,Dplus Kia,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-30T15:00:00+00:00,LES,BO3,LUA Gaming,Barça Esports,0.513667,0.486333,0.513667,0.486333,LUA Gaming,Barça eSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-30T08:00:00+00:00,LCK,BO3,DN SOOPers,BNK FEARX,0.222399,0.777601,0.222399,0.777601,DN SOOPers,BNK FEARX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-30T10:00:00+00:00,LCK,BO3,Hanwha Life Esports,Dplus KIA,0.778701,0.221299,0.778701,0.221299,Hanwha Life Esports,Dplus Kia,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-30T15:00:00+00:00,LES,BO3,LUA Gaming,Barça Esports,0.534469,0.465531,0.534469,0.465531,LUA Gaming,Barça eSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-07-30T16:00:00+00:00,Arabian League,BO3,Disruptors,One More Esports,0.5,0.5,0.5,0.5,,One More Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Disruptors(no_match:Disruptors),no_roster:Disruptors(no_match:Disruptors),skipped
 2026-07-30T17:00:00+00:00,Road of Legends,BO3,Frites Esports Club,Once Upon a Team,0.5,0.5,0.5,0.5,Fortress Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:Once Upon a Team(no_match:Once Upon a Team),no_roster:Once Upon a Team(no_match:Once Upon a Team),skipped
-2026-07-30T17:30:00+00:00,LES,BO3,Heretics Academy,FALKE ESPORTS,0.980709,0.019291,0.980709,0.019291,Team Heretics Academy,FALKN,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-30T18:00:00+00:00,Road of Legends,BO3,mCon Esports,Senshi eSports,0.321035,0.678965,0.321035,0.678965,mCon esports,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.378!=0.416
-2026-07-30T18:30:00+00:00,Arabian League,BO3,GNG Amazigh,JSK Gamefy,0.127191,0.872809,0.127191,0.872809,GnG Amazigh,GAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-31T08:00:00+00:00,LCK,BO3,Gen.G Esports,T1,0.662939,0.337061,0.662939,0.337061,Gen.G,T1,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-31T10:00:00+00:00,LCK,BO3,HANJIN BRION,KIWOOM DRX,0.593556,0.406444,0.593556,0.406444,HANJIN BRION,Kiwoom DRX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-31T15:00:00+00:00,LEC,BO3,Team Vitality,Team Heretics,0.832174,0.167826,0.832174,0.167826,Team Vitality,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-07-31T17:15:00+00:00,LEC,BO3,Movistar KOI,Shifters,0.812214,0.187786,0.812214,0.187786,Movistar KOI,Shifters,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-01T08:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,BNK FEARX,0.362035,0.637965,0.362035,0.637965,Nongshim RedForce,BNK FEARX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-01T10:00:00+00:00,LCK,BO3,Gen.G Esports,Dplus KIA,0.758104,0.241896,0.758104,0.241896,Gen.G,Dplus Kia,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.680!=0.654
-2026-08-01T15:00:00+00:00,LEC,BO3,GIANTX,SK Gaming,0.723589,0.276411,0.723589,0.276411,GiantX,SK Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-01T16:00:00+00:00,CBLOL,BO3,Vivo Keyd Stars,FURIA,0.508779,0.491221,0.508779,0.491221,Vivo Keyd Stars,FURIA,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-01T17:15:00+00:00,LEC,BO3,Karmine Corp,Natus Vincere,0.810019,0.189981,0.810019,0.189981,Karmine Corp,Natus Vincere,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-01T19:00:00+00:00,CBLOL,BO3,LEVIATÁN,paiN Gaming,0.320264,0.679736,0.320264,0.679736,Leviatan,paiN Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-01T20:00:00+00:00,LCS,BO3,Cloud9 Kia,Dignitas,0.835038,0.164962,0.835038,0.164962,Cloud9,Dignitas,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-01T23:00:00+00:00,LCS,BO3,FlyQuest,Disguised,0.826557,0.173443,0.826557,0.173443,FlyQuest,Disguised,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-02T08:00:00+00:00,LCK,BO3,DN SOOPers,HANJIN BRION,0.286201,0.713799,0.286201,0.713799,DN SOOPers,HANJIN BRION,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-02T10:00:00+00:00,LCK,BO3,kt Rolster,Hanwha Life Esports,0.106378,0.893622,0.106378,0.893622,KT Rolster,Hanwha Life Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-02T15:00:00+00:00,LEC,BO3,SK Gaming,G2 Esports,0.133752,0.866248,0.133752,0.866248,SK Gaming,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-02T16:00:00+00:00,CBLOL,BO3,Fluxo W7M,LOUD,0.391948,0.608052,0.391948,0.608052,Fluxo W7M,LOUD,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-02T17:15:00+00:00,LEC,BO3,Fnatic,Movistar KOI,0.213055,0.786945,0.213055,0.786945,Fnatic,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-30T17:30:00+00:00,LES,BO3,Heretics Academy,FALKE ESPORTS,0.981718,0.018282,0.981718,0.018282,Team Heretics Academy,FALKN,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-30T18:00:00+00:00,Road of Legends,BO3,mCon Esports,Senshi eSports,0.360822,0.639178,0.360822,0.639178,mCon esports,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-30T18:30:00+00:00,Arabian League,BO3,GNG Amazigh,JSK Gamefy,0.097269,0.902731,0.097269,0.902731,GnG Amazigh,GAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-31T08:00:00+00:00,LCK,BO3,Gen.G Esports,T1,0.640312,0.359688,0.640312,0.359688,Gen.G,T1,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-31T10:00:00+00:00,LCK,BO3,HANJIN BRION,KIWOOM DRX,0.577109,0.422891,0.577109,0.422891,HANJIN BRION,Kiwoom DRX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-31T15:00:00+00:00,LEC,BO3,Team Vitality,Team Heretics,0.82363,0.17637,0.82363,0.17637,Team Vitality,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-07-31T17:15:00+00:00,LEC,BO3,Movistar KOI,Shifters,0.789601,0.210399,0.789601,0.210399,Movistar KOI,Shifters,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-01T08:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,BNK FEARX,0.356428,0.643572,0.356428,0.643572,Nongshim RedForce,BNK FEARX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-01T10:00:00+00:00,LCK,BO3,Gen.G Esports,Dplus KIA,0.747342,0.252658,0.747342,0.252658,Gen.G,Dplus Kia,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-01T15:00:00+00:00,LEC,BO3,GIANTX,SK Gaming,0.723583,0.276417,0.723583,0.276417,GiantX,SK Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-01T16:00:00+00:00,CBLOL,BO3,Vivo Keyd Stars,FURIA,0.463584,0.536416,0.463584,0.536416,Vivo Keyd Stars,FURIA,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-01T17:15:00+00:00,LEC,BO3,Karmine Corp,Natus Vincere,0.817272,0.182728,0.817272,0.182728,Karmine Corp,Natus Vincere,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-01T19:00:00+00:00,CBLOL,BO3,LEVIATÁN,paiN Gaming,0.303162,0.696838,0.303162,0.696838,Leviatan,paiN Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-01T20:00:00+00:00,LCS,BO3,Cloud9 Kia,Dignitas,0.838793,0.161207,0.838793,0.161207,Cloud9,Dignitas,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.746!=0.766
+2026-08-01T23:00:00+00:00,LCS,BO3,FlyQuest,Disguised,0.82616,0.17384,0.82616,0.17384,FlyQuest,Disguised,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-02T08:00:00+00:00,LCK,BO3,DN SOOPers,HANJIN BRION,0.307665,0.692335,0.307665,0.692335,DN SOOPers,HANJIN BRION,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-02T10:00:00+00:00,LCK,BO3,kt Rolster,Hanwha Life Esports,0.086079,0.913921,0.086079,0.913921,KT Rolster,Hanwha Life Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-02T15:00:00+00:00,LEC,BO3,SK Gaming,G2 Esports,0.134628,0.865372,0.134628,0.865372,SK Gaming,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-02T16:00:00+00:00,CBLOL,BO3,Fluxo W7M,LOUD,0.396641,0.603359,0.396641,0.603359,Fluxo W7M,LOUD,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-02T17:15:00+00:00,LEC,BO3,Fnatic,Movistar KOI,0.207233,0.792767,0.207233,0.792767,Fnatic,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-02T19:00:00+00:00,CBLOL,BO3,LOS,RED Kalunga,0.5,0.5,0.5,0.5,Lotus,,GameModelV5_LGBM+XGB+CAT,no_roster:RED Kalunga(no_match:RED Kalunga),no_roster:RED Kalunga(no_match:RED Kalunga),skipped
-2026-08-02T20:00:00+00:00,LCS,BO3,LYON,Shopify Rebellion,0.964037,0.035963,0.964037,0.035963,LYON,Shopify Rebellion,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-02T23:00:00+00:00,LCS,BO3,Team Liquid Alienware,Sentinels,0.244376,0.755624,0.244376,0.755624,Team Liquid Challengers,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-03T15:00:00+00:00,LEC,BO3,Natus Vincere,Shifters,0.607987,0.392013,0.607987,0.392013,Natus Vincere,Shifters,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-03T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-03T17:15:00+00:00,LEC,BO3,Karmine Corp,Team Heretics,0.883355,0.116645,0.883355,0.116645,Karmine Corp,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-03T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-03T20:00:00+00:00,Circuito Desafiante,BO1,RMD Gaming,Ei Nerd Esports,0.229204,0.770796,0.229204,0.770796,MAD Team,Team E Turner,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-02T20:00:00+00:00,LCS,BO3,LYON,Shopify Rebellion,0.979994,0.020006,0.979994,0.020006,LYON,Shopify Rebellion,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-02T23:00:00+00:00,LCS,BO3,Team Liquid Alienware,Sentinels,0.236249,0.763751,0.236249,0.763751,Team Liquid Challengers,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-03T15:00:00+00:00,LEC,BO3,Natus Vincere,Shifters,0.572353,0.427647,0.572353,0.427647,Natus Vincere,Shifters,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.548!=0.576
+2026-08-03T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-03T17:15:00+00:00,LEC,BO3,Karmine Corp,Team Heretics,0.875493,0.124507,0.875493,0.124507,Karmine Corp,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-03T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-03T20:00:00+00:00,Circuito Desafiante,BO1,RMD Gaming,Ei Nerd Esports,0.235491,0.764509,0.235491,0.764509,MAD Team,Team E Turner,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.235!=0.298
 2026-08-03T21:00:00+00:00,Circuito Desafiante,BO1,TEAM SOLID,INTZ,0.5,0.5,0.5,0.5,,INTZ,GameModelV5_LGBM+XGB+CAT,no_roster:TEAM SOLID(no_match:TEAM SOLID),no_roster:TEAM SOLID(no_match:TEAM SOLID),skipped
-2026-08-03T22:00:00+00:00,Circuito Desafiante,BO1,paiN Gaming Academy,Vivo Keyd Stars Academy,0.253353,0.746647,0.253353,0.746647,LNG Academy,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-03T23:00:00+00:00,LRN,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-03T23:00:00+00:00,Circuito Desafiante,BO1,7REX Team,Estral Esports,0.451658,0.548342,0.451658,0.548342,G-Rex,Estral Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-04T00:00:00+00:00,Circuito Desafiante,BO1,KaBuM! Eports,RED Kalunga Academy,0.043293,0.956707,0.043293,0.956707,UTeSports,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-03T22:00:00+00:00,Circuito Desafiante,BO1,paiN Gaming Academy,Vivo Keyd Stars Academy,0.267764,0.732236,0.267764,0.732236,LNG Academy,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-03T23:00:00+00:00,LRN,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-03T23:00:00+00:00,Circuito Desafiante,BO1,7REX Team,Estral Esports,0.44192,0.55808,0.44192,0.55808,G-Rex,Estral Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T00:00:00+00:00,Circuito Desafiante,BO1,KaBuM! Eports,RED Kalunga Academy,0.042432,0.957568,0.042432,0.957568,UTeSports,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-04T13:00:00+00:00,Hellenic Legends League,BO2,TheParadOx Invaders,Team Phantasma,0.5,0.5,0.5,0.5,,Team Phantasma,GameModelV5_LGBM+XGB+CAT,no_roster:TheParadOx Invaders(no_match:TheParadOx Invaders),no_roster:TheParadOx Invaders(no_match:TheParadOx Invaders),skipped
-2026-08-04T15:00:00+00:00,LES,BO3,UB Alma Mater,Movistar KOI Fénix,0.5,0.5,0.5,0.5,,Movistar KOI Fénix,GameModelV5_LGBM+XGB+CAT,no_roster:UB Alma Mater(no_match:UB Alma Mater),no_roster:UB Alma Mater(no_match:UB Alma Mater),skipped
 2026-08-04T15:00:00+00:00,Hellenic Legends League,BO2,Valerion,Hell ZeroLag,0.5,0.5,0.5,0.5,Varona Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:Hell ZeroLag(no_match:Hell ZeroLag),no_roster:Hell ZeroLag(no_match:Hell ZeroLag),skipped
+2026-08-04T15:00:00+00:00,LES,BO3,UB Alma Mater,Movistar KOI Fénix,0.5,0.5,0.5,0.5,,Movistar KOI Fénix,GameModelV5_LGBM+XGB+CAT,no_roster:UB Alma Mater(no_match:UB Alma Mater),no_roster:UB Alma Mater(no_match:UB Alma Mater),skipped
 2026-08-04T16:00:00+00:00,Arabian League,BO3,Al-Ahli,Anubis Gaming,0.5,0.5,0.5,0.5,,Anubis Gaming,GameModelV5_LGBM+XGB+CAT,no_roster:Al-Ahli(no_match:Al-Ahli),no_roster:Al-Ahli(no_match:Al-Ahli),skipped
-2026-08-04T17:00:00+00:00,Road of Legends,BO3,mCon Esports,The Bandits,0.144189,0.855811,0.144189,0.855811,mCon esports,Royal Bandits,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-04T17:30:00+00:00,LES,BO3,UCAM Esports Club,GIANTX ITERO,0.368979,0.631021,0.368979,0.631021,UCAM Esports,GIANTX iTero,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-04T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T17:00:00+00:00,Road of Legends,BO3,mCon Esports,The Bandits,0.138457,0.861543,0.138457,0.861543,mCon esports,Royal Bandits,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.234!=0.209
+2026-08-04T17:30:00+00:00,LES,BO3,UCAM Esports Club,GIANTX ITERO,0.354105,0.645895,0.354105,0.645895,UCAM Esports,GIANTX iTero,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-04T18:00:00+00:00,Road of Legends,BO3,Once Upon a Team,ZennIT,0.5,0.5,0.5,0.5,,Zenshi Gaming,GameModelV5_LGBM+XGB+CAT,no_roster:Once Upon a Team(no_match:Once Upon a Team),no_roster:Once Upon a Team(no_match:Once Upon a Team),skipped
-2026-08-04T18:30:00+00:00,Arabian League,BO3,BAAM Esports,3BL GALAXY ESPORTS,0.555242,0.444758,0.555242,0.444758,BAAM Esports,3BL Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-04T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-04T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-04T20:00:00+00:00,LRS,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-04T20:00:00+00:00,Circuito Desafiante,BO1,Vivo Keyd Stars Academy,INTZ,0.651155,0.348845,0.651155,0.348845,Vivo Keyd Stars,INTZ,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-04T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.503527,0.496473,0.503527,0.496473,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T18:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T18:30:00+00:00,Arabian League,BO3,BAAM Esports,3BL GALAXY ESPORTS,0.561999,0.438001,0.561999,0.438001,BAAM Esports,3BL Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T19:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T20:00:00+00:00,Circuito Desafiante,BO1,Vivo Keyd Stars Academy,INTZ,0.659064,0.340936,0.659064,0.340936,Vivo Keyd Stars,INTZ,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T20:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T20:00:00+00:00,LRS,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T21:00:00+00:00,Liga Portuguesa,BO1,TBD,TBD,0.498725,0.501275,0.498725,0.501275,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-04T21:00:00+00:00,Circuito Desafiante,BO1,RED Kalunga Academy,TEAM SOLID,0.5,0.5,0.5,0.5,LNG Academy,,GameModelV5_LGBM+XGB+CAT,no_roster:TEAM SOLID(no_match:TEAM SOLID),no_roster:TEAM SOLID(no_match:TEAM SOLID),skipped
-2026-08-04T22:00:00+00:00,Circuito Desafiante,BO1,7REX Team,RMD Gaming,0.67994,0.32006,0.67994,0.32006,G-Rex,MAD Team,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-04T23:00:00+00:00,Circuito Desafiante,BO1,KaBuM! Eports,paiN Gaming Academy,0.043293,0.956707,0.043293,0.956707,UTeSports,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-05T00:00:00+00:00,Circuito Desafiante,BO1,Estral Esports,Ei Nerd Esports,0.52867,0.47133,0.52867,0.47133,Estral Esports,Team E Turner,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.529!=0.571
-2026-08-05T08:00:00+00:00,LCK,BO3,HANJIN BRION,NONGSHIM RED FORCE,0.571197,0.428803,0.571197,0.428803,HANJIN BRION,Nongshim RedForce,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-05T10:00:00+00:00,LCK,BO3,Hanwha Life Esports,Gen.G Esports,0.448711,0.551289,0.448711,0.551289,Hanwha Life Esports,Gen.G,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T22:00:00+00:00,Circuito Desafiante,BO1,7REX Team,RMD Gaming,0.668101,0.331899,0.668101,0.331899,G-Rex,MAD Team,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-04T23:00:00+00:00,Circuito Desafiante,BO1,KaBuM! Eports,paiN Gaming Academy,0.042432,0.957568,0.042432,0.957568,UTeSports,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T00:00:00+00:00,Circuito Desafiante,BO1,Estral Esports,Ei Nerd Esports,0.551522,0.448478,0.551522,0.448478,Estral Esports,Team E Turner,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.552!=0.580
+2026-08-05T08:00:00+00:00,LCK,BO3,HANJIN BRION,NONGSHIM RED FORCE,0.607323,0.392677,0.607323,0.392677,HANJIN BRION,Nongshim RedForce,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.572!=0.551
+2026-08-05T10:00:00+00:00,LCK,BO3,Hanwha Life Esports,Gen.G Esports,0.454159,0.545841,0.454159,0.545841,Hanwha Life Esports,Gen.G,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-05T13:00:00+00:00,Hellenic Legends League,BO2,Spartans EU,Gamespace M.C.,0.5,0.5,0.5,0.5,,GAM Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Spartans EU(no_match:Spartans EU),no_roster:Spartans EU(no_match:Spartans EU),skipped
-2026-08-05T15:00:00+00:00,LES,BO3,GIANTX ITERO,LUA Gaming,0.732438,0.267562,0.732438,0.267562,GIANTX iTero,LUA Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T15:00:00+00:00,LES,BO3,GIANTX ITERO,LUA Gaming,0.736699,0.263301,0.736699,0.263301,GIANTX iTero,LUA Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-05T15:00:00+00:00,Hellenic Legends League,BO2,WLGaming,ALMO Players,0.5,0.5,0.5,0.5,WLGaming Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:ALMO Players(no_match:ALMO Players),no_roster:ALMO Players(no_match:ALMO Players),skipped
-2026-08-05T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-05T16:00:00+00:00,Arabian League,BO3,JSK Gamefy,Al-Ahli,0.5,0.5,0.5,0.5,GAM Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:Al-Ahli(no_match:Al-Ahli),no_roster:Al-Ahli(no_match:Al-Ahli),skipped
-2026-08-05T17:30:00+00:00,LES,BO3,UCAM Esports Club,Movistar KOI Fénix,0.473054,0.526946,0.473054,0.526946,UCAM Esports,Movistar KOI Fénix,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-05T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-05T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T17:30:00+00:00,LES,BO3,UCAM Esports Club,Movistar KOI Fénix,0.47288,0.52712,0.47288,0.52712,UCAM Esports,Movistar KOI Fénix,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-05T18:30:00+00:00,Arabian League,BO3,Anubis Gaming,Disruptors,0.5,0.5,0.5,0.5,Anubis Gaming,,GameModelV5_LGBM+XGB+CAT,no_roster:Disruptors(no_match:Disruptors),no_roster:Disruptors(no_match:Disruptors),skipped
 2026-08-05T20:00:00+00:00,Circuito Desafiante,BO1,TEAM SOLID,7REX Team,0.5,0.5,0.5,0.5,,G-Rex,GameModelV5_LGBM+XGB+CAT,no_roster:TEAM SOLID(no_match:TEAM SOLID),no_roster:TEAM SOLID(no_match:TEAM SOLID),skipped
-2026-08-05T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-05T21:00:00+00:00,Circuito Desafiante,BO1,Estral Esports,RMD Gaming,0.69897,0.30103,0.69897,0.30103,Estral Esports,MAD Team,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-05T22:00:00+00:00,Circuito Desafiante,BO1,Ei Nerd Esports,KaBuM! Eports,0.913717,0.086283,0.913717,0.086283,Team E Turner,UTeSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-05T23:00:00+00:00,Circuito Desafiante,BO1,RED Kalunga Academy,Vivo Keyd Stars Academy,0.253353,0.746647,0.253353,0.746647,LNG Academy,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-06T00:00:00+00:00,Circuito Desafiante,BO1,INTZ,paiN Gaming Academy,0.607874,0.392126,0.607874,0.392126,INTZ,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-06T08:00:00+00:00,LCK,BO3,KIWOOM DRX,DN SOOPers,0.633542,0.366458,0.633542,0.366458,Kiwoom DRX,DN SOOPers,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-06T10:00:00+00:00,LCK,BO3,Dplus KIA,T1,0.371774,0.628226,0.371774,0.628226,Dplus Kia,T1,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T21:00:00+00:00,Circuito Desafiante,BO1,Estral Esports,RMD Gaming,0.708468,0.291532,0.708468,0.291532,Estral Esports,MAD Team,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T22:00:00+00:00,Circuito Desafiante,BO1,Ei Nerd Esports,KaBuM! Eports,0.895643,0.104357,0.895643,0.104357,Team E Turner,UTeSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-05T23:00:00+00:00,Circuito Desafiante,BO1,RED Kalunga Academy,Vivo Keyd Stars Academy,0.267764,0.732236,0.267764,0.732236,LNG Academy,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-06T00:00:00+00:00,Circuito Desafiante,BO1,INTZ,paiN Gaming Academy,0.609009,0.390991,0.609009,0.390991,INTZ,LNG Academy,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-06T08:00:00+00:00,LCK,BO3,KIWOOM DRX,DN SOOPers,0.64029,0.35971,0.64029,0.35971,Kiwoom DRX,DN SOOPers,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-06T10:00:00+00:00,LCK,BO3,Dplus KIA,T1,0.368753,0.631247,0.368753,0.631247,Dplus Kia,T1,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-06T15:00:00+00:00,LES,BO3,Heretics Academy,UB Alma Mater,0.5,0.5,0.5,0.5,Team Heretics Academy,,GameModelV5_LGBM+XGB+CAT,no_roster:UB Alma Mater(no_match:UB Alma Mater),no_roster:UB Alma Mater(no_match:UB Alma Mater),skipped
-2026-08-06T16:00:00+00:00,Arabian League,BO3,One More Esports,BAAM Esports,0.456165,0.543835,0.456165,0.543835,One More Esports,BAAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-06T16:00:00+00:00,Arabian League,BO3,One More Esports,BAAM Esports,0.465687,0.534313,0.465687,0.534313,One More Esports,BAAM Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-06T17:00:00+00:00,Road of Legends,BO3,Myth Esports,Senshi eSports,0.5,0.5,0.5,0.5,,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,no_roster:Myth Esports(no_match:Myth Esports),no_roster:Myth Esports(no_match:Myth Esports),skipped
-2026-08-06T17:30:00+00:00,LES,BO3,FALKE ESPORTS,Barça Esports,0.068019,0.931981,0.068019,0.931981,FALKN,Barça eSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-06T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-06T18:00:00+00:00,Road of Legends,BO3,Frites Esports Club,Dynasty,0.341849,0.658151,0.341849,0.658151,Fortress Esports,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-06T18:30:00+00:00,Arabian League,BO3,3BL GALAXY ESPORTS,GNG Amazigh,0.483853,0.516147,0.483853,0.516147,3BL Esports,GnG Amazigh,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-06T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-07T08:00:00+00:00,LCK,BO3,kt Rolster,Gen.G Esports,0.142424,0.857576,0.142424,0.857576,KT Rolster,Gen.G,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-07T10:00:00+00:00,LCK,BO3,BNK FEARX,HANJIN BRION,0.577818,0.422182,0.577818,0.422182,BNK FEARX,HANJIN BRION,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-07T15:00:00+00:00,LEC,BO3,Shifters,GIANTX,0.428233,0.571767,0.428233,0.571767,Shifters,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-07T17:15:00+00:00,LEC,BO3,Team Heretics,Fnatic,0.326696,0.673304,0.326696,0.673304,Team Heretics,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-07T21:00:00+00:00,CBLOL,BO3,Vivo Keyd Stars,Fluxo W7M,0.504204,0.495796,0.504204,0.495796,Vivo Keyd Stars,Fluxo W7M,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-08T00:00:00+00:00,CBLOL,BO3,FURIA,LOUD,0.489802,0.510198,0.489802,0.510198,FURIA,LOUD,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-08T08:00:00+00:00,LCK,BO3,T1,Hanwha Life Esports,0.368424,0.631576,0.368424,0.631576,T1,Hanwha Life Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-08T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,DN SOOPers,0.659035,0.340965,0.659035,0.340965,Nongshim RedForce,DN SOOPers,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-08T15:00:00+00:00,LEC,BO3,SK Gaming,Natus Vincere,0.362166,0.637834,0.362166,0.637834,SK Gaming,Natus Vincere,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-06T17:30:00+00:00,LES,BO3,FALKE ESPORTS,Barça Esports,0.082116,0.917884,0.082116,0.917884,FALKN,Barça eSports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-06T18:00:00+00:00,Road of Legends,BO3,Frites Esports Club,Dynasty,0.335912,0.664088,0.335912,0.664088,Fortress Esports,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-06T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-06T18:30:00+00:00,Arabian League,BO3,3BL GALAXY ESPORTS,GNG Amazigh,0.468302,0.531698,0.468302,0.531698,3BL Esports,GnG Amazigh,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-06T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-07T08:00:00+00:00,LCK,BO3,kt Rolster,Gen.G Esports,0.144625,0.855375,0.144625,0.855375,KT Rolster,Gen.G,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-07T10:00:00+00:00,LCK,BO3,BNK FEARX,HANJIN BRION,0.59023,0.40977,0.59023,0.40977,BNK FEARX,HANJIN BRION,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-07T15:00:00+00:00,LEC,BO3,Shifters,GIANTX,0.433095,0.566905,0.433095,0.566905,Shifters,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-07T17:15:00+00:00,LEC,BO3,Team Heretics,Fnatic,0.342735,0.657265,0.342735,0.657265,Team Heretics,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-07T21:00:00+00:00,CBLOL,BO3,Vivo Keyd Stars,Fluxo W7M,0.526838,0.473162,0.526838,0.473162,Vivo Keyd Stars,Fluxo W7M,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-08T00:00:00+00:00,CBLOL,BO3,FURIA,LOUD,0.504298,0.495702,0.504298,0.495702,FURIA,LOUD,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-08T08:00:00+00:00,LCK,BO3,T1,Hanwha Life Esports,0.39639,0.60361,0.39639,0.60361,T1,Hanwha Life Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-08T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,DN SOOPers,0.647014,0.352986,0.647014,0.352986,Nongshim RedForce,DN SOOPers,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-08T15:00:00+00:00,LEC,BO3,SK Gaming,Natus Vincere,0.348918,0.651082,0.348918,0.651082,SK Gaming,Natus Vincere,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-08T16:00:00+00:00,CBLOL,BO3,RED Kalunga,paiN Gaming,0.5,0.5,0.5,0.5,,paiN Gaming,GameModelV5_LGBM+XGB+CAT,no_roster:RED Kalunga(no_match:RED Kalunga),no_roster:RED Kalunga(no_match:RED Kalunga),skipped
-2026-08-08T17:15:00+00:00,LEC,BO3,Movistar KOI,GIANTX,0.71725,0.28275,0.71725,0.28275,Movistar KOI,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-08T19:00:00+00:00,CBLOL,BO3,LOS,LEVIATÁN,0.377533,0.622467,0.377533,0.622467,Lotus,Leviatan,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-08T20:00:00+00:00,LCS,BO3,Cloud9 Kia,Disguised,0.776755,0.223245,0.776755,0.223245,Cloud9,Disguised,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-08T23:00:00+00:00,LCS,BO3,Sentinels,Shopify Rebellion,0.828259,0.171741,0.828259,0.171741,Sentinels,Shopify Rebellion,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.736!=0.702
-2026-08-09T08:00:00+00:00,LCK,BO3,Dplus KIA,kt Rolster,0.709381,0.290619,0.709381,0.290619,Dplus Kia,KT Rolster,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-09T10:00:00+00:00,LCK,BO3,BNK FEARX,KIWOOM DRX,0.59572,0.40428,0.59572,0.40428,BNK FEARX,Kiwoom DRX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-09T15:00:00+00:00,LEC,BO3,Team Heretics,G2 Esports,0.126104,0.873896,0.126104,0.873896,Team Heretics,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-09T16:00:00+00:00,CBLOL,BO3,LOUD,Vivo Keyd Stars,0.492032,0.507968,0.492032,0.507968,LOUD,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-09T17:15:00+00:00,LEC,BO3,Fnatic,Karmine Corp,0.205657,0.794343,0.205657,0.794343,Fnatic,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-09T19:00:00+00:00,CBLOL,BO3,Fluxo W7M,FURIA,0.453018,0.546982,0.453018,0.546982,Fluxo W7M,FURIA,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.469!=0.446
-2026-08-09T20:00:00+00:00,LCS,BO3,Dignitas,LYON,0.050149,0.949851,0.050149,0.949851,Dignitas,LYON,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-09T23:00:00+00:00,LCS,BO3,FlyQuest,Team Liquid Alienware,0.774893,0.225107,0.774893,0.225107,FlyQuest,Team Liquid Challengers,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-10T15:00:00+00:00,LEC,BO3,SK Gaming,Team Vitality,0.142979,0.857021,0.142979,0.857021,SK Gaming,Team Vitality,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-10T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-10T17:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-10T17:15:00+00:00,LEC,BO3,Natus Vincere,G2 Esports,0.167965,0.832035,0.167965,0.832035,Natus Vincere,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-10T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-08T17:15:00+00:00,LEC,BO3,Movistar KOI,GIANTX,0.708815,0.291185,0.708815,0.291185,Movistar KOI,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-08T19:00:00+00:00,CBLOL,BO3,LOS,LEVIATÁN,0.391438,0.608562,0.391438,0.608562,Lotus,Leviatan,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-08T20:00:00+00:00,LCS,BO3,Cloud9 Kia,Disguised,0.765434,0.234566,0.765434,0.234566,Cloud9,Disguised,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-08T23:00:00+00:00,LCS,BO3,Sentinels,Shopify Rebellion,0.799186,0.200814,0.799186,0.200814,Sentinels,Shopify Rebellion,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-09T08:00:00+00:00,LCK,BO3,Dplus KIA,kt Rolster,0.702129,0.297871,0.702129,0.297871,Dplus Kia,KT Rolster,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-09T10:00:00+00:00,LCK,BO3,BNK FEARX,KIWOOM DRX,0.622245,0.377755,0.622245,0.377755,BNK FEARX,Kiwoom DRX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-09T15:00:00+00:00,LEC,BO3,Team Heretics,G2 Esports,0.104897,0.895103,0.104897,0.895103,Team Heretics,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.201!=0.231
+2026-08-09T16:00:00+00:00,CBLOL,BO3,LOUD,Vivo Keyd Stars,0.5092,0.4908,0.5092,0.4908,LOUD,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-09T17:15:00+00:00,LEC,BO3,Fnatic,Karmine Corp,0.200225,0.799775,0.200225,0.799775,Fnatic,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-09T19:00:00+00:00,CBLOL,BO3,Fluxo W7M,FURIA,0.438678,0.561322,0.438678,0.561322,Fluxo W7M,FURIA,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-09T20:00:00+00:00,LCS,BO3,Dignitas,LYON,0.052209,0.947791,0.052209,0.947791,Dignitas,LYON,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-09T23:00:00+00:00,LCS,BO3,FlyQuest,Team Liquid Alienware,0.76738,0.23262,0.76738,0.23262,FlyQuest,Team Liquid Challengers,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-10T15:00:00+00:00,LEC,BO3,SK Gaming,Team Vitality,0.13998,0.86002,0.13998,0.86002,SK Gaming,Team Vitality,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-10T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-10T17:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-10T17:15:00+00:00,LEC,BO3,Natus Vincere,G2 Esports,0.154685,0.845315,0.154685,0.845315,Natus Vincere,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.249!=0.270
+2026-08-10T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-10T21:00:00+00:00,CBLOL,BO3,LEVIATÁN,RED Kalunga,0.5,0.5,0.5,0.5,Leviatan,,GameModelV5_LGBM+XGB+CAT,no_roster:RED Kalunga(no_match:RED Kalunga),no_roster:RED Kalunga(no_match:RED Kalunga),skipped
-2026-08-10T23:00:00+00:00,LRN,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-11T00:00:00+00:00,CBLOL,BO3,LOS,paiN Gaming,0.258034,0.741966,0.258034,0.741966,Lotus,paiN Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-10T23:00:00+00:00,LRN,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-11T00:00:00+00:00,CBLOL,BO3,LOS,paiN Gaming,0.250313,0.749687,0.250313,0.749687,Lotus,paiN Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-11T16:00:00+00:00,Arabian League,BO3,Al-Ahli,3BL GALAXY ESPORTS,0.5,0.5,0.5,0.5,,3BL Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Al-Ahli(no_match:Al-Ahli),no_roster:Al-Ahli(no_match:Al-Ahli),skipped
-2026-08-11T17:00:00+00:00,Road of Legends,BO3,Frites Esports Club,mCon Esports,0.650114,0.349886,0.650114,0.349886,Fortress Esports,mCon esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-11T18:00:00+00:00,Road of Legends,BO3,Dynasty,Senshi eSports,0.853469,0.146531,0.853469,0.146531,Dung Dynasty,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-11T18:30:00+00:00,Arabian League,BO3,BAAM Esports,GNG Amazigh,0.524559,0.475441,0.524559,0.475441,BAAM Esports,GnG Amazigh,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-11T20:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-11T20:00:00+00:00,LRS,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-11T23:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-12T08:00:00+00:00,LCK,BO3,DN SOOPers,NONGSHIM RED FORCE,0.358304,0.641696,0.358304,0.641696,DN SOOPers,Nongshim RedForce,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-12T10:00:00+00:00,LCK,BO3,kt Rolster,Dplus KIA,0.286864,0.713136,0.286864,0.713136,KT Rolster,Dplus Kia,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-11T17:00:00+00:00,Road of Legends,BO3,Frites Esports Club,mCon Esports,0.679452,0.320548,0.679452,0.320548,Fortress Esports,mCon esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-11T18:00:00+00:00,Road of Legends,BO3,Dynasty,Senshi eSports,0.830546,0.169454,0.830546,0.169454,Dung Dynasty,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-11T18:30:00+00:00,Arabian League,BO3,BAAM Esports,GNG Amazigh,0.534175,0.465825,0.534175,0.465825,BAAM Esports,GnG Amazigh,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-11T20:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-11T20:00:00+00:00,LRS,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-11T23:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T08:00:00+00:00,LCK,BO3,DN SOOPers,NONGSHIM RED FORCE,0.355388,0.644612,0.355388,0.644612,DN SOOPers,Nongshim RedForce,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T10:00:00+00:00,LCK,BO3,kt Rolster,Dplus KIA,0.300471,0.699529,0.300471,0.699529,KT Rolster,Dplus Kia,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-12T15:00:00+00:00,LES,BO3,Barça Esports,UB Alma Mater,0.5,0.5,0.5,0.5,Barça eSports,,GameModelV5_LGBM+XGB+CAT,no_roster:UB Alma Mater(no_match:UB Alma Mater),no_roster:UB Alma Mater(no_match:UB Alma Mater),skipped
 2026-08-12T16:00:00+00:00,Arabian League,BO3,Disruptors,JSK Gamefy,0.5,0.5,0.5,0.5,,GAM Esports,GameModelV5_LGBM+XGB+CAT,no_roster:Disruptors(no_match:Disruptors),no_roster:Disruptors(no_match:Disruptors),skipped
-2026-08-12T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-12T17:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-12T17:30:00+00:00,LES,BO3,UCAM Esports Club,LUA Gaming,0.492358,0.507642,0.492358,0.507642,UCAM Esports,LUA Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-12T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-12T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-12T18:30:00+00:00,Arabian League,BO3,One More Esports,Anubis Gaming,0.039768,0.960232,0.039768,0.960232,One More Esports,Anubis Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-12T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-12T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-13T08:00:00+00:00,LCK,BO3,KIWOOM DRX,BNK FEARX,0.378858,0.621142,0.378858,0.621142,Kiwoom DRX,BNK FEARX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-13T10:00:00+00:00,LCK,BO3,Gen.G Esports,Hanwha Life Esports,0.562137,0.437863,0.562137,0.437863,Gen.G,Hanwha Life Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-13T15:00:00+00:00,LES,BO3,FALKE ESPORTS,GIANTX ITERO,0.039425,0.960575,0.039425,0.960575,FALKN,GIANTX iTero,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T17:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T17:30:00+00:00,LES,BO3,UCAM Esports Club,LUA Gaming,0.50995,0.49005,0.50995,0.49005,UCAM Esports,LUA Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T18:30:00+00:00,Arabian League,BO3,One More Esports,Anubis Gaming,0.041041,0.958959,0.041041,0.958959,One More Esports,Anubis Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-12T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-13T08:00:00+00:00,LCK,BO3,KIWOOM DRX,BNK FEARX,0.378544,0.621456,0.378544,0.621456,Kiwoom DRX,BNK FEARX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-13T10:00:00+00:00,LCK,BO3,Gen.G Esports,Hanwha Life Esports,0.553674,0.446326,0.553674,0.446326,Gen.G,Hanwha Life Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-13T15:00:00+00:00,LES,BO3,FALKE ESPORTS,GIANTX ITERO,0.038612,0.961388,0.038612,0.961388,FALKN,GIANTX iTero,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-13T17:00:00+00:00,Road of Legends,BO3,The Bandits,Once Upon a Team,0.5,0.5,0.5,0.5,Royal Bandits,,GameModelV5_LGBM+XGB+CAT,no_roster:Once Upon a Team(no_match:Once Upon a Team),no_roster:Once Upon a Team(no_match:Once Upon a Team),skipped
-2026-08-13T17:30:00+00:00,LES,BO3,Heretics Academy,Movistar KOI Fénix,0.699913,0.300087,0.699913,0.300087,Team Heretics Academy,Movistar KOI Fénix,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-13T17:30:00+00:00,LES,BO3,Heretics Academy,Movistar KOI Fénix,0.70925,0.29075,0.70925,0.29075,Team Heretics Academy,Movistar KOI Fénix,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-13T18:00:00+00:00,Road of Legends,BO3,Myth Esports,ZennIT,0.5,0.5,0.5,0.5,,Zenshi Gaming,GameModelV5_LGBM+XGB+CAT,no_roster:Myth Esports(no_match:Myth Esports),no_roster:Myth Esports(no_match:Myth Esports),skipped
-2026-08-13T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-13T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-14T08:00:00+00:00,LCK,BO3,T1,Dplus KIA,0.646127,0.353873,0.646127,0.353873,T1,Dplus Kia,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-14T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,HANJIN BRION,0.426014,0.573986,0.426014,0.573986,Nongshim RedForce,HANJIN BRION,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-14T15:00:00+00:00,LEC,BO3,Shifters,SK Gaming,0.645116,0.354884,0.645116,0.354884,Shifters,SK Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-14T17:15:00+00:00,LEC,BO3,GIANTX,Team Vitality,0.388066,0.611934,0.388066,0.611934,GiantX,Team Vitality,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-15T08:00:00+00:00,LCK,BO3,Hanwha Life Esports,kt Rolster,0.894984,0.105016,0.894984,0.105016,Hanwha Life Esports,KT Rolster,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-15T10:00:00+00:00,LCK,BO3,BNK FEARX,DN SOOPers,0.77845,0.22155,0.77845,0.22155,BNK FEARX,DN SOOPers,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-15T15:00:00+00:00,LEC,BO3,SK Gaming,Fnatic,0.34783,0.65217,0.34783,0.65217,SK Gaming,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-13T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-13T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-14T08:00:00+00:00,LCK,BO3,T1,Dplus KIA,0.630223,0.369777,0.630223,0.369777,T1,Dplus Kia,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-14T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,HANJIN BRION,0.423821,0.576179,0.423821,0.576179,Nongshim RedForce,HANJIN BRION,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.449!=0.428
+2026-08-14T15:00:00+00:00,LEC,BO3,Shifters,SK Gaming,0.628899,0.371101,0.628899,0.371101,Shifters,SK Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-14T17:15:00+00:00,LEC,BO3,GIANTX,Team Vitality,0.417816,0.582184,0.417816,0.582184,GiantX,Team Vitality,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-15T08:00:00+00:00,LCK,BO3,Hanwha Life Esports,kt Rolster,0.912317,0.087683,0.912317,0.087683,Hanwha Life Esports,KT Rolster,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-15T10:00:00+00:00,LCK,BO3,BNK FEARX,DN SOOPers,0.783296,0.216704,0.783296,0.216704,BNK FEARX,DN SOOPers,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-15T15:00:00+00:00,LEC,BO3,SK Gaming,Fnatic,0.345832,0.654168,0.345832,0.654168,SK Gaming,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-15T16:00:00+00:00,CBLOL,BO3,FURIA,RED Kalunga,0.5,0.5,0.5,0.5,FURIA,,GameModelV5_LGBM+XGB+CAT,no_roster:RED Kalunga(no_match:RED Kalunga),no_roster:RED Kalunga(no_match:RED Kalunga),skipped
-2026-08-15T17:15:00+00:00,LEC,BO3,G2 Esports,Shifters,0.753291,0.246709,0.753291,0.246709,G2 Esports,Shifters,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-15T19:00:00+00:00,CBLOL,BO3,Vivo Keyd Stars,LOS,0.769553,0.230447,0.769553,0.230447,Vivo Keyd Stars,Lotus,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-15T20:00:00+00:00,LCS,BO3,Disguised,Team Liquid Alienware,0.458758,0.541242,0.458758,0.541242,Disguised,Team Liquid Challengers,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-15T23:00:00+00:00,LCS,BO3,Shopify Rebellion,Dignitas,0.584142,0.415858,0.584142,0.415858,Shopify Rebellion,Dignitas,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-16T08:00:00+00:00,LCK,BO3,T1,Gen.G Esports,0.357376,0.642624,0.357376,0.642624,T1,Gen.G,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-16T10:00:00+00:00,LCK,BO3,KIWOOM DRX,HANJIN BRION,0.424558,0.575442,0.424558,0.575442,Kiwoom DRX,HANJIN BRION,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-16T15:00:00+00:00,LEC,BO3,Movistar KOI,Natus Vincere,0.752123,0.247877,0.752123,0.247877,Movistar KOI,Natus Vincere,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-16T16:00:00+00:00,CBLOL,BO3,LOUD,LEVIATÁN,0.804154,0.195846,0.804154,0.195846,LOUD,Leviatan,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-16T17:15:00+00:00,LEC,BO3,G2 Esports,Fnatic,0.789809,0.210191,0.789809,0.210191,G2 Esports,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-16T19:00:00+00:00,CBLOL,BO3,paiN Gaming,Fluxo W7M,0.442002,0.557998,0.442002,0.557998,paiN Gaming,Fluxo W7M,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-16T20:00:00+00:00,LCS,BO3,FlyQuest,Cloud9 Kia,0.565571,0.434429,0.565571,0.434429,FlyQuest,Cloud9,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-16T23:00:00+00:00,LCS,BO3,LYON,Sentinels,0.794646,0.205354,0.794646,0.205354,LYON,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-17T15:00:00+00:00,LEC,BO3,Natus Vincere,Team Heretics,0.644835,0.355165,0.644835,0.355165,Natus Vincere,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.598!=0.618
-2026-08-17T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-17T17:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-17T17:15:00+00:00,LEC,BO3,GIANTX,Karmine Corp,0.282576,0.717424,0.282576,0.717424,GiantX,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-17T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-17T20:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-17T23:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-17T23:00:00+00:00,LRN,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-18T15:00:00+00:00,LES,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-15T17:15:00+00:00,LEC,BO3,G2 Esports,Shifters,0.729387,0.270613,0.729387,0.270613,G2 Esports,Shifters,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.658!=0.679
+2026-08-15T19:00:00+00:00,CBLOL,BO3,Vivo Keyd Stars,LOS,0.786765,0.213235,0.786765,0.213235,Vivo Keyd Stars,Lotus,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-15T20:00:00+00:00,LCS,BO3,Disguised,Team Liquid Alienware,0.457763,0.542237,0.457763,0.542237,Disguised,Team Liquid Challengers,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-15T23:00:00+00:00,LCS,BO3,Shopify Rebellion,Dignitas,0.580512,0.419488,0.580512,0.419488,Shopify Rebellion,Dignitas,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-16T08:00:00+00:00,LCK,BO3,T1,Gen.G Esports,0.356559,0.643441,0.356559,0.643441,T1,Gen.G,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-16T10:00:00+00:00,LCK,BO3,KIWOOM DRX,HANJIN BRION,0.428837,0.571163,0.428837,0.571163,Kiwoom DRX,HANJIN BRION,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-16T15:00:00+00:00,LEC,BO3,Movistar KOI,Natus Vincere,0.757309,0.242691,0.757309,0.242691,Movistar KOI,Natus Vincere,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-16T16:00:00+00:00,CBLOL,BO3,LOUD,LEVIATÁN,0.804556,0.195444,0.804556,0.195444,LOUD,Leviatan,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-16T17:15:00+00:00,LEC,BO3,G2 Esports,Fnatic,0.7778,0.2222,0.7778,0.2222,G2 Esports,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-16T19:00:00+00:00,CBLOL,BO3,paiN Gaming,Fluxo W7M,0.432118,0.567882,0.432118,0.567882,paiN Gaming,Fluxo W7M,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-16T20:00:00+00:00,LCS,BO3,FlyQuest,Cloud9 Kia,0.565361,0.434639,0.565361,0.434639,FlyQuest,Cloud9,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-16T23:00:00+00:00,LCS,BO3,LYON,Sentinels,0.834538,0.165462,0.834538,0.165462,LYON,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-17T15:00:00+00:00,LEC,BO3,Natus Vincere,Team Heretics,0.655143,0.344857,0.655143,0.344857,Natus Vincere,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-17T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-17T17:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-17T17:15:00+00:00,LEC,BO3,GIANTX,Karmine Corp,0.264321,0.735679,0.264321,0.735679,GiantX,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-17T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-17T20:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-17T23:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-17T23:00:00+00:00,LRN,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-18T15:00:00+00:00,LES,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-18T17:00:00+00:00,Road of Legends,BO3,Once Upon a Team,Dynasty,0.5,0.5,0.5,0.5,,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,no_roster:Once Upon a Team(no_match:Once Upon a Team),no_roster:Once Upon a Team(no_match:Once Upon a Team),skipped
 2026-08-18T18:00:00+00:00,Road of Legends,BO3,mCon Esports,Myth Esports,0.5,0.5,0.5,0.5,mCon esports,,GameModelV5_LGBM+XGB+CAT,no_roster:Myth Esports(no_match:Myth Esports),no_roster:Myth Esports(no_match:Myth Esports),skipped
-2026-08-18T20:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-18T23:00:00+00:00,LRN,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-18T23:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-19T08:00:00+00:00,LCK,BO3,Gen.G Esports,kt Rolster,0.864828,0.135172,0.864828,0.135172,Gen.G,KT Rolster,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-19T10:00:00+00:00,LCK,BO3,HANJIN BRION,DN SOOPers,0.710503,0.289497,0.710503,0.289497,HANJIN BRION,DN SOOPers,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-19T15:00:00+00:00,LES,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-19T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-19T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-19T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-19T20:00:00+00:00,LRS,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-19T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-20T08:00:00+00:00,LCK,BO3,Dplus KIA,Hanwha Life Esports,0.275342,0.724658,0.275342,0.724658,Dplus Kia,Hanwha Life Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-20T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,KIWOOM DRX,0.508696,0.491304,0.508696,0.491304,Nongshim RedForce,Kiwoom DRX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-20T13:00:00+00:00,LES,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-20T14:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-20T16:00:00+00:00,LES,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-20T17:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-20T17:00:00+00:00,Road of Legends,BO3,The Bandits,Senshi eSports,0.80887,0.19113,0.80887,0.19113,Royal Bandits,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-20T18:00:00+00:00,Road of Legends,BO3,Frites Esports Club,ZennIT,0.681152,0.318848,0.681152,0.318848,Fortress Esports,Zenshi Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-20T20:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-21T08:00:00+00:00,LCK,BO3,HANJIN BRION,BNK FEARX,0.429323,0.570677,0.429323,0.570677,HANJIN BRION,BNK FEARX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-21T10:00:00+00:00,LCK,BO3,kt Rolster,T1,0.224437,0.775563,0.224437,0.775563,KT Rolster,T1,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.307!=0.276
-2026-08-21T15:00:00+00:00,LEC,BO3,Team Heretics,SK Gaming,0.459499,0.540501,0.459499,0.540501,Team Heretics,SK Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-21T17:15:00+00:00,LEC,BO3,Team Vitality,Natus Vincere,0.668366,0.331634,0.668366,0.331634,Team Vitality,Natus Vincere,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-22T08:00:00+00:00,LCK,BO3,Dplus KIA,Gen.G Esports,0.276612,0.723388,0.276612,0.723388,Dplus Kia,Gen.G,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.346!=0.320
-2026-08-22T10:00:00+00:00,LCK,BO3,DN SOOPers,KIWOOM DRX,0.361333,0.638667,0.361333,0.638667,DN SOOPers,Kiwoom DRX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-22T15:00:00+00:00,LEC,BO3,Fnatic,Shifters,0.513678,0.486322,0.513678,0.486322,Fnatic,Shifters,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-22T16:00:00+00:00,CBLOL,BO3,LEVIATÁN,Vivo Keyd Stars,0.241341,0.758659,0.241341,0.758659,Leviatan,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-22T17:15:00+00:00,LEC,BO3,SK Gaming,Movistar KOI,0.107346,0.892654,0.107346,0.892654,SK Gaming,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-22T19:00:00+00:00,CBLOL,BO3,paiN Gaming,FURIA,0.371777,0.628223,0.371777,0.628223,paiN Gaming,FURIA,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-22T20:00:00+00:00,LCS,BO3,Team Liquid Alienware,Shopify Rebellion,0.601651,0.398349,0.601651,0.398349,Team Liquid Challengers,Shopify Rebellion,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-22T23:00:00+00:00,LCS,BO3,Cloud9 Kia,LYON,0.191006,0.808994,0.191006,0.808994,Cloud9,LYON,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-23T08:00:00+00:00,LCK,BO3,Hanwha Life Esports,T1,0.637358,0.362642,0.637358,0.362642,Hanwha Life Esports,T1,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-23T10:00:00+00:00,LCK,BO3,BNK FEARX,NONGSHIM RED FORCE,0.634469,0.365531,0.634469,0.365531,BNK FEARX,Nongshim RedForce,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-23T15:00:00+00:00,LEC,BO3,Team Heretics,GIANTX,0.266266,0.733734,0.266266,0.733734,Team Heretics,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-18T20:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-18T23:00:00+00:00,LRN,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-18T23:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-19T08:00:00+00:00,LCK,BO3,Gen.G Esports,kt Rolster,0.864249,0.135751,0.864249,0.135751,Gen.G,KT Rolster,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-19T10:00:00+00:00,LCK,BO3,HANJIN BRION,DN SOOPers,0.710281,0.289719,0.710281,0.289719,HANJIN BRION,DN SOOPers,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-19T15:00:00+00:00,LES,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-19T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-19T18:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-19T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-19T20:00:00+00:00,LRS,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-19T21:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-20T08:00:00+00:00,LCK,BO3,Dplus KIA,Hanwha Life Esports,0.237224,0.762776,0.237224,0.762776,Dplus Kia,Hanwha Life Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-20T10:00:00+00:00,LCK,BO3,NONGSHIM RED FORCE,KIWOOM DRX,0.509263,0.490737,0.509263,0.490737,Nongshim RedForce,Kiwoom DRX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-20T13:00:00+00:00,LES,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-20T14:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-20T16:00:00+00:00,LES,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-20T17:00:00+00:00,Road of Legends,BO3,The Bandits,Senshi eSports,0.815886,0.184114,0.815886,0.184114,Royal Bandits,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-20T17:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-20T18:00:00+00:00,Road of Legends,BO3,Frites Esports Club,ZennIT,0.683411,0.316589,0.683411,0.316589,Fortress Esports,Zenshi Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-20T20:00:00+00:00,Liga Portuguesa,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-21T08:00:00+00:00,LCK,BO3,HANJIN BRION,BNK FEARX,0.407667,0.592333,0.407667,0.592333,HANJIN BRION,BNK FEARX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-21T10:00:00+00:00,LCK,BO3,kt Rolster,T1,0.182209,0.817791,0.182209,0.817791,KT Rolster,T1,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.272!=0.292
+2026-08-21T15:00:00+00:00,LEC,BO3,Team Heretics,SK Gaming,0.445265,0.554735,0.445265,0.554735,Team Heretics,SK Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-21T17:15:00+00:00,LEC,BO3,Team Vitality,Natus Vincere,0.657979,0.342021,0.657979,0.342021,Team Vitality,Natus Vincere,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.607!=0.584
+2026-08-22T08:00:00+00:00,LCK,BO3,Dplus KIA,Gen.G Esports,0.27624,0.72376,0.27624,0.72376,Dplus Kia,Gen.G,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-22T10:00:00+00:00,LCK,BO3,DN SOOPers,KIWOOM DRX,0.372685,0.627315,0.372685,0.627315,DN SOOPers,Kiwoom DRX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-22T15:00:00+00:00,LEC,BO3,Fnatic,Shifters,0.512071,0.487929,0.512071,0.487929,Fnatic,Shifters,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-22T16:00:00+00:00,CBLOL,BO3,LEVIATÁN,Vivo Keyd Stars,0.240284,0.759716,0.240284,0.759716,Leviatan,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-22T17:15:00+00:00,LEC,BO3,SK Gaming,Movistar KOI,0.108666,0.891334,0.108666,0.891334,SK Gaming,Movistar KOI,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-22T19:00:00+00:00,CBLOL,BO3,paiN Gaming,FURIA,0.409784,0.590216,0.409784,0.590216,paiN Gaming,FURIA,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.440!=0.407
+2026-08-22T20:00:00+00:00,LCS,BO3,Team Liquid Alienware,Shopify Rebellion,0.602892,0.397108,0.602892,0.397108,Team Liquid Challengers,Shopify Rebellion,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.569!=0.591
+2026-08-22T23:00:00+00:00,LCS,BO3,Cloud9 Kia,LYON,0.151706,0.848294,0.151706,0.848294,Cloud9,LYON,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-23T08:00:00+00:00,LCK,BO3,Hanwha Life Esports,T1,0.600194,0.399806,0.600194,0.399806,Hanwha Life Esports,T1,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-23T10:00:00+00:00,LCK,BO3,BNK FEARX,NONGSHIM RED FORCE,0.640136,0.359864,0.640136,0.359864,BNK FEARX,Nongshim RedForce,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-23T15:00:00+00:00,LEC,BO3,Team Heretics,GIANTX,0.251741,0.748259,0.251741,0.748259,Team Heretics,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-23T16:00:00+00:00,CBLOL,BO3,RED Kalunga,Fluxo W7M,0.5,0.5,0.5,0.5,,Fluxo W7M,GameModelV5_LGBM+XGB+CAT,no_roster:RED Kalunga(no_match:RED Kalunga),no_roster:RED Kalunga(no_match:RED Kalunga),skipped
-2026-08-23T17:15:00+00:00,LEC,BO3,Shifters,Karmine Corp,0.218962,0.781038,0.218962,0.781038,Shifters,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-23T19:00:00+00:00,CBLOL,BO3,LOS,LOUD,0.194631,0.805369,0.194631,0.805369,Lotus,LOUD,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-23T20:00:00+00:00,LCS,BO3,Disguised,Sentinels,0.221546,0.778454,0.221546,0.778454,Disguised,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-23T23:00:00+00:00,LCS,BO3,Dignitas,FlyQuest,0.175953,0.824047,0.175953,0.824047,Dignitas,FlyQuest,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-24T15:00:00+00:00,LEC,BO3,Natus Vincere,Fnatic,0.568357,0.431643,0.568357,0.431643,Natus Vincere,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-24T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-24T17:15:00+00:00,LEC,BO3,GIANTX,G2 Esports,0.231705,0.768295,0.231705,0.768295,GiantX,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-24T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-24T20:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-24T23:00:00+00:00,LRN,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-24T23:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-23T17:15:00+00:00,LEC,BO3,Shifters,Karmine Corp,0.209102,0.790898,0.209102,0.790898,Shifters,Karmine Corp,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-23T19:00:00+00:00,CBLOL,BO3,LOS,LOUD,0.195372,0.804628,0.195372,0.804628,Lotus,LOUD,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-23T20:00:00+00:00,LCS,BO3,Disguised,Sentinels,0.212833,0.787167,0.212833,0.787167,Disguised,Sentinels,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-23T23:00:00+00:00,LCS,BO3,Dignitas,FlyQuest,0.191745,0.808255,0.191745,0.808255,Dignitas,FlyQuest,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-24T15:00:00+00:00,LEC,BO3,Natus Vincere,Fnatic,0.565405,0.434595,0.565405,0.434595,Natus Vincere,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-24T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-24T17:15:00+00:00,LEC,BO3,GIANTX,G2 Esports,0.216585,0.783415,0.216585,0.783415,GiantX,G2 Esports,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-24T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-24T20:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-24T23:00:00+00:00,LRN,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-24T23:00:00+00:00,Circuito Desafiante,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-25T17:00:00+00:00,Road of Legends,BO3,Frites Esports Club,Myth Esports,0.5,0.5,0.5,0.5,Fortress Esports,,GameModelV5_LGBM+XGB+CAT,no_roster:Myth Esports(no_match:Myth Esports),no_roster:Myth Esports(no_match:Myth Esports),skipped
-2026-08-25T18:00:00+00:00,Road of Legends,BO3,The Bandits,Dynasty,0.618226,0.381774,0.618226,0.381774,Royal Bandits,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.579!=0.559
-2026-08-25T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-25T20:00:00+00:00,LRS,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-26T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-26T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-26T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-26T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-26T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-27T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-27T13:00:00+00:00,Hellenic Legends League,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-27T17:00:00+00:00,Road of Legends,BO3,mCon Esports,ZennIT,0.477359,0.522641,0.477359,0.522641,mCon esports,Zenshi Gaming,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.485!=0.460
-2026-08-27T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-25T18:00:00+00:00,Road of Legends,BO3,The Bandits,Dynasty,0.620932,0.379068,0.620932,0.379068,Royal Bandits,Dung Dynasty,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-25T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-25T20:00:00+00:00,LRS,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-26T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-26T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-26T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-26T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-26T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-27T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-27T13:00:00+00:00,Hellenic Legends League,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-27T17:00:00+00:00,Road of Legends,BO3,mCon Esports,ZennIT,0.468445,0.531555,0.468445,0.531555,mCon esports,Zenshi Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-27T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-27T18:00:00+00:00,Road of Legends,BO3,Once Upon a Team,Senshi eSports,0.5,0.5,0.5,0.5,,Senshi Esports Club,GameModelV5_LGBM+XGB+CAT,no_roster:Once Upon a Team(no_match:Once Upon a Team),no_roster:Once Upon a Team(no_match:Once Upon a Team),skipped
-2026-08-28T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-28T13:00:00+00:00,Hellenic Legends League,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-28T15:00:00+00:00,LEC,BO3,Shifters,Team Heretics,0.620771,0.379229,0.620771,0.379229,Shifters,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-28T17:15:00+00:00,LEC,BO3,Team Vitality,Fnatic,0.722402,0.277598,0.722402,0.277598,Team Vitality,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-29T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-29T15:00:00+00:00,LEC,BO3,Karmine Corp,SK Gaming,0.888319,0.111681,0.888319,0.111681,Karmine Corp,SK Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-28T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-28T13:00:00+00:00,Hellenic Legends League,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-28T15:00:00+00:00,LEC,BO3,Shifters,Team Heretics,0.638372,0.361628,0.638372,0.361628,Shifters,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-28T17:15:00+00:00,LEC,BO3,Team Vitality,Fnatic,0.735625,0.264375,0.735625,0.264375,Team Vitality,Fnatic,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-29T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-29T15:00:00+00:00,LEC,BO3,Karmine Corp,SK Gaming,0.901761,0.098239,0.901761,0.098239,Karmine Corp,SK Gaming,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-08-29T16:00:00+00:00,CBLOL,BO3,LOUD,RED Kalunga,0.5,0.5,0.5,0.5,LOUD,,GameModelV5_LGBM+XGB+CAT,no_roster:RED Kalunga(no_match:RED Kalunga),no_roster:RED Kalunga(no_match:RED Kalunga),skipped
-2026-08-29T17:15:00+00:00,LEC,BO3,Natus Vincere,GIANTX,0.448393,0.551607,0.448393,0.551607,Natus Vincere,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-29T19:00:00+00:00,CBLOL,BO3,Fluxo W7M,LOS,0.785842,0.214158,0.785842,0.214158,Fluxo W7M,Lotus,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.701!=0.678
-2026-08-29T20:00:00+00:00,LCS,BO3,Sentinels,FlyQuest,0.41449,0.58551,0.41449,0.58551,Sentinels,FlyQuest,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-29T23:00:00+00:00,LCS,BO3,Disguised,Dignitas,0.543565,0.456435,0.543565,0.456435,Disguised,Dignitas,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-30T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-30T12:00:00+00:00,LEC,BO3,Shifters,Team Vitality,0.253983,0.746017,0.253983,0.746017,Shifters,Team Vitality,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.329!=0.351
-2026-08-30T14:15:00+00:00,LEC,BO3,Movistar KOI,Team Heretics,0.882927,0.117073,0.882927,0.117073,Movistar KOI,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-30T16:00:00+00:00,CBLOL,BO3,paiN Gaming,Vivo Keyd Stars,0.435958,0.564042,0.435958,0.564042,paiN Gaming,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-30T16:30:00+00:00,LEC,BO3,Fnatic,GIANTX,0.418841,0.581159,0.418841,0.581159,Fnatic,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-30T19:00:00+00:00,CBLOL,BO3,FURIA,LEVIATÁN,0.770588,0.229412,0.770588,0.229412,FURIA,Leviatan,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-30T20:00:00+00:00,LCS,BO3,LYON,Team Liquid Alienware,0.873842,0.126158,0.873842,0.126158,LYON,Team Liquid Challengers,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-30T23:00:00+00:00,LCS,BO3,Cloud9 Kia,Shopify Rebellion,0.856878,0.143122,0.856878,0.143122,Cloud9,Shopify Rebellion,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-31T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-31T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-31T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-08-31T23:00:00+00:00,LRN,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-01T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-01T15:00:00+00:00,LES,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-01T16:00:00+00:00,Road of Legends,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-01T20:00:00+00:00,LRS,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-01T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-02T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-02T15:00:00+00:00,LES,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-02T16:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-02T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-02T18:00:00+00:00,NLC,BO3,TBD,TBD,0.505917,0.494083,0.505917,0.494083,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-02T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-03T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-03T16:00:00+00:00,Road of Legends,BO3,TBD,TBD,0.505291,0.494709,0.505291,0.494709,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-03T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-04T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-05T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-05T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-05T20:00:00+00:00,LCS,BO3,Sentinels,Cloud9 Kia,0.477849,0.522151,0.477849,0.522151,Sentinels,Cloud9,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-05T23:00:00+00:00,LCS,BO3,Team Liquid Alienware,Dignitas,0.570346,0.429654,0.570346,0.429654,Team Liquid Challengers,Dignitas,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-06T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-06T10:00:00+00:00,LES,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-06T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-06T20:00:00+00:00,LCS,BO3,Shopify Rebellion,FlyQuest,0.149402,0.850598,0.149402,0.850598,Shopify Rebellion,FlyQuest,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-06T23:00:00+00:00,LCS,BO3,LYON,Disguised,0.951548,0.048452,0.951548,0.048452,LYON,Disguised,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-07T16:00:00+00:00,NLC,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-07T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-07T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-07T23:00:00+00:00,LRN,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-08T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-08T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-08T20:00:00+00:00,LRS,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-08T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-09T16:00:00+00:00,NLC,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-10T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-12T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-12T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-13T08:00:00+00:00,LCK,BO5,TBD,TBD,0.506685,0.493315,0.506685,0.493315,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-13T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-13T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-14T16:00:00+00:00,NLC,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-14T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-15T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-16T16:00:00+00:00,NLC,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-17T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,0.506613,0.493387,0.506613,0.493387,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-19T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-20T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-26T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-09-27T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-10-03T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-10-10T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.507396,0.492604,0.507396,0.492604,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-29T17:15:00+00:00,LEC,BO3,Natus Vincere,GIANTX,0.462879,0.537121,0.462879,0.537121,Natus Vincere,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-29T19:00:00+00:00,CBLOL,BO3,Fluxo W7M,LOS,0.761237,0.238763,0.761237,0.238763,Fluxo W7M,Lotus,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-29T20:00:00+00:00,LCS,BO3,Sentinels,FlyQuest,0.429147,0.570853,0.429147,0.570853,Sentinels,FlyQuest,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-29T23:00:00+00:00,LCS,BO3,Disguised,Dignitas,0.541323,0.458677,0.541323,0.458677,Disguised,Dignitas,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-30T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-30T12:00:00+00:00,LEC,BO3,Shifters,Team Vitality,0.283403,0.716597,0.283403,0.716597,Shifters,Team Vitality,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-30T14:15:00+00:00,LEC,BO3,Movistar KOI,Team Heretics,0.88966,0.11034,0.88966,0.11034,Movistar KOI,Team Heretics,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-30T16:00:00+00:00,CBLOL,BO3,paiN Gaming,Vivo Keyd Stars,0.436571,0.563429,0.436571,0.563429,paiN Gaming,Vivo Keyd Stars,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-30T16:30:00+00:00,LEC,BO3,Fnatic,GIANTX,0.391324,0.608676,0.391324,0.608676,Fnatic,GiantX,GameModelV5_LGBM+XGB+CAT,ok,,warn:0.427!=0.449
+2026-08-30T19:00:00+00:00,CBLOL,BO3,FURIA,LEVIATÁN,0.788383,0.211617,0.788383,0.211617,FURIA,Leviatan,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-30T20:00:00+00:00,LCS,BO3,LYON,Team Liquid Alienware,0.891597,0.108403,0.891597,0.108403,LYON,Team Liquid Challengers,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-30T23:00:00+00:00,LCS,BO3,Cloud9 Kia,Shopify Rebellion,0.855839,0.144161,0.855839,0.144161,Cloud9,Shopify Rebellion,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-31T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-31T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-31T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-08-31T23:00:00+00:00,LRN,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-01T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-01T15:00:00+00:00,LES,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-01T16:00:00+00:00,Road of Legends,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-01T20:00:00+00:00,LRS,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-01T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-02T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-02T15:00:00+00:00,LES,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-02T16:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-02T18:00:00+00:00,NLC,BO3,TBD,TBD,0.498209,0.501791,0.498209,0.501791,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-02T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-02T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-03T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-03T16:00:00+00:00,Road of Legends,BO3,TBD,TBD,0.498088,0.501912,0.498088,0.501912,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-03T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-04T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-05T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-05T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-05T20:00:00+00:00,LCS,BO3,Sentinels,Cloud9 Kia,0.476577,0.523423,0.476577,0.523423,Sentinels,Cloud9,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-05T23:00:00+00:00,LCS,BO3,Team Liquid Alienware,Dignitas,0.563947,0.436053,0.563947,0.436053,Team Liquid Challengers,Dignitas,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-06T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-06T10:00:00+00:00,LES,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-06T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-06T20:00:00+00:00,LCS,BO3,Shopify Rebellion,FlyQuest,0.15865,0.84135,0.15865,0.84135,Shopify Rebellion,FlyQuest,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-06T23:00:00+00:00,LCS,BO3,LYON,Disguised,0.947421,0.052579,0.947421,0.052579,LYON,Disguised,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-07T16:00:00+00:00,NLC,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-07T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-07T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-07T23:00:00+00:00,LRN,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-08T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-08T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-08T20:00:00+00:00,LRS,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-08T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-09T16:00:00+00:00,NLC,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-10T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-12T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-12T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-13T08:00:00+00:00,LCK,BO5,TBD,TBD,0.497127,0.502873,0.497127,0.502873,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-13T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-13T18:00:00+00:00,Liga Portuguesa,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-14T16:00:00+00:00,NLC,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-14T20:00:00+00:00,Circuito Desafiante,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-15T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-16T16:00:00+00:00,NLC,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-17T16:00:00+00:00,Road of Legends,BO5,TBD,TBD,0.49761,0.50239,0.49761,0.50239,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-19T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-20T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-26T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-09-27T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-03T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-10T16:00:00+00:00,CBLOL,BO5,TBD,TBD,0.497762,0.502238,0.497762,0.502238,Team BDS,Team BDS,GameModelV5_LGBM+XGB+CAT,ok,,ok
