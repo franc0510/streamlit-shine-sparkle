@@ -70,10 +70,15 @@ const OddsCell = ({ label, odds, recommendedSide, affiliateUrl, betLabel }: { la
 };
 
 export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdds, pinnacleOdds, unibetOdds, polymarketOdds, stakeOdds, recoPinnacle, recoStake, bestBet }: MatchCardProps) => {
-  const showUsedName = (name: string, usedName?: string) => {
-    if (!usedName || usedName === name) return null;
-    return <span className="text-[9px] sm:text-[10px] text-muted-foreground/60 font-normal">({usedName})</span>;
+  const renderUsedName = (name: string, usedName?: string) => {
+    if (!usedName || usedName.trim() === '' || usedName.trim().toLowerCase() === name.trim().toLowerCase()) return null;
+    return (
+      <span className="block text-[9px] sm:text-[10px] text-muted-foreground/70 font-normal break-words leading-tight mt-0.5">
+        ({usedName})
+      </span>
+    );
   };
+
   const { t } = useTranslation();
 
   const hasOdds = pinnacleOdds?.team1 !== null || unibetOdds?.team1 !== null || polymarketOdds?.team1 !== null || stakeOdds?.team1 !== null;
