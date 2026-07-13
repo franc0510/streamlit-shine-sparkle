@@ -210,17 +210,6 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
           </div>
         </div>
 
-        <div className="mt-3 rounded-lg border border-border/60 bg-secondary/30 px-2.5 py-2">
-          <div className="grid grid-cols-[1fr_auto_1fr] gap-2 items-start text-[10px] sm:text-xs leading-tight">
-            <p className="min-w-0 text-center font-medium text-primary break-words whitespace-normal">
-              ({team1UsedName})
-            </p>
-            <span className="text-muted-foreground/60 font-semibold">CSV</span>
-            <p className="min-w-0 text-center font-medium text-accent break-words whitespace-normal">
-              ({team2UsedName})
-            </p>
-          </div>
-        </div>
 
         {/* Bookmaker Odds Section */}
         {hasOdds && (
