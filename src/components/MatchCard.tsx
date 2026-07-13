@@ -70,10 +70,15 @@ const OddsCell = ({ label, odds, recommendedSide, affiliateUrl, betLabel }: { la
 };
 
 export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdds, pinnacleOdds, unibetOdds, polymarketOdds, stakeOdds, recoPinnacle, recoStake, bestBet }: MatchCardProps) => {
-  const showUsedName = (name: string, usedName?: string) => {
-    if (!usedName || usedName === name) return null;
-    return <span className="text-[9px] sm:text-[10px] text-muted-foreground/60 font-normal">({usedName})</span>;
+  const renderUsedName = (name: string, usedName?: string) => {
+    if (!usedName || usedName.trim() === '' || usedName.trim().toLowerCase() === name.trim().toLowerCase()) return null;
+    return (
+      <span className="block text-[9px] sm:text-[10px] text-muted-foreground/70 font-normal break-words leading-tight mt-0.5">
+        ({usedName})
+      </span>
+    );
   };
+
   const { t } = useTranslation();
 
   const hasOdds = pinnacleOdds?.team1 !== null || unibetOdds?.team1 !== null || polymarketOdds?.team1 !== null || stakeOdds?.team1 !== null;
@@ -142,7 +147,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
                 }}
               />
             </div>
-            <h3 className="font-semibold text-center text-xs sm:text-sm line-clamp-2">{team1.name} {showUsedName(team1.name, team1.usedName)}</h3>
+            <h3 className="font-semibold text-center text-xs sm:text-sm break-words">{team1.name}{renderUsedName(team1.name, team1.usedName)}</h3>
             <div className="flex flex-col items-center gap-0.5 sm:gap-1 w-full">
               <span className="text-lg sm:text-xl md:text-2xl font-display font-bold text-primary">
                 {Math.round(team1.winProbability)}%
@@ -179,7 +184,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
                 }}
               />
             </div>
-            <h3 className="font-semibold text-center text-xs sm:text-sm line-clamp-2">{team2.name} {showUsedName(team2.name, team2.usedName)}</h3>
+            <h3 className="font-semibold text-center text-xs sm:text-sm break-words">{team2.name}{renderUsedName(team2.name, team2.usedName)}</h3>
             <div className="flex flex-col items-center gap-0.5 sm:gap-1 w-full">
               <span className="text-lg sm:text-xl md:text-2xl font-display font-bold text-accent">
                 {Math.round(team2.winProbability)}%
