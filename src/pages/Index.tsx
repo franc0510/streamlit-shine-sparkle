@@ -341,8 +341,8 @@ const Index = () => {
                         date={match.date}
                         time={match.time}
                         format={match.format}
-                        team1={{ name: match.team1, logo: getTeamLogo(match.team1), winProbability: Math.round(match.proba1) }}
-                        team2={{ name: match.team2, logo: getTeamLogo(match.team2), winProbability: Math.round(match.proba2) }}
+                        team1={{ name: match.team1, logo: getTeamLogo(match.team1), winProbability: Math.round(match.proba1), usedName: match.used_team1 }}
+                        team2={{ name: match.team2, logo: getTeamLogo(match.team2), winProbability: Math.round(match.proba2), usedName: match.used_team2 }}
                         minOdds={{ team1: parseFloat(calculateMinOdds(match.proba1)), team2: parseFloat(calculateMinOdds(match.proba2)) }}
                         pinnacleOdds={match.pinnacleOdds}
                         unibetOdds={match.unibetOdds}
@@ -388,8 +388,8 @@ const Index = () => {
                 date={match.date}
                 time={match.time}
                 format={match.format}
-                team1={{ name: match.team1, logo: getTeamLogo(match.team1), winProbability: Math.round(match.proba1) }}
-                team2={{ name: match.team2, logo: getTeamLogo(match.team2), winProbability: Math.round(match.proba2) }}
+                        team1={{ name: match.team1, logo: getTeamLogo(match.team1), winProbability: Math.round(match.proba1), usedName: match.used_team1 }}
+                        team2={{ name: match.team2, logo: getTeamLogo(match.team2), winProbability: Math.round(match.proba2), usedName: match.used_team2 }}
                 minOdds={{ team1: parseFloat(calculateMinOdds(match.proba1)), team2: parseFloat(calculateMinOdds(match.proba2)) }}
                 pinnacleOdds={match.pinnacleOdds}
                 unibetOdds={match.unibetOdds}
