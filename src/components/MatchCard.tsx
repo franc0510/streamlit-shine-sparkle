@@ -79,8 +79,6 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
     );
   };
 
-  const team1UsedName = team1.usedName?.trim() || team1.name;
-  const team2UsedName = team2.usedName?.trim() || team2.name;
 
   const { t } = useTranslation();
 
