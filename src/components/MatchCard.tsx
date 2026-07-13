@@ -12,11 +12,13 @@ interface MatchCardProps {
     name: string;
     logo: string;
     winProbability: number;
+    usedName?: string;
   };
   team2: {
     name: string;
     logo: string;
     winProbability: number;
+    usedName?: string;
   };
   minOdds: {
     team1: number;
