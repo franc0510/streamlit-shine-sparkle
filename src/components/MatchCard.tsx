@@ -142,7 +142,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
                 }}
               />
             </div>
-            <h3 className="font-semibold text-center text-xs sm:text-sm line-clamp-2">{team1.name}</h3>
+            <h3 className="font-semibold text-center text-xs sm:text-sm line-clamp-2">{team1.name} {showUsedName(team1.name, team1.usedName)}</h3>
             <div className="flex flex-col items-center gap-0.5 sm:gap-1 w-full">
               <span className="text-lg sm:text-xl md:text-2xl font-display font-bold text-primary">
                 {Math.round(team1.winProbability)}%
@@ -179,7 +179,7 @@ export const MatchCard = ({ tournament, date, time, format, team1, team2, minOdd
                 }}
               />
             </div>
-            <h3 className="font-semibold text-center text-xs sm:text-sm line-clamp-2">{team2.name}</h3>
+            <h3 className="font-semibold text-center text-xs sm:text-sm line-clamp-2">{team2.name} {showUsedName(team2.name, team2.usedName)}</h3>
             <div className="flex flex-col items-center gap-0.5 sm:gap-1 w-full">
               <span className="text-lg sm:text-xl md:text-2xl font-display font-bold text-accent">
                 {Math.round(team2.winProbability)}%
