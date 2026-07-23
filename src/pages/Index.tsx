@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { MatchCard } from "@/components/MatchCard";
 import { MatchFilters } from "@/components/MatchFilters";
 import { Faq } from "@/components/Faq";
+import { BacktestPerformance } from "@/components/BacktestPerformance";
 import { Button } from "@/components/ui/button";
 import { Lock, Check, Trophy, Gift, ChevronDown, Users, Zap, ShieldCheck, BarChart3, Sparkles, Info } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -213,6 +214,9 @@ const Index = () => {
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+        {/* Performance du modèle — première chose visible */}
+        <BacktestPerformance />
+
         {/* HERO */}
         <div className="text-center mb-8 sm:mb-10 animate-fade-in">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-2 bg-gradient-gaming bg-clip-text text-transparent">
