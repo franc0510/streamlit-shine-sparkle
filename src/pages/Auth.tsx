@@ -44,10 +44,21 @@ const Auth = () => {
   const navigate = useNavigate();
   const { isPremium, isTrialing, trialEnd, subscriptionStatus, refreshSubscription } = useSubscription();
 
+  // Consume ?next=<same-origin path> to return the user to a target
+  // (e.g. the OAuth consent page) after authentication.
+  const getSafeNext = (): string | null => {
+    const raw = new URLSearchParams(window.location.search).get("next");
+    if (!raw) return null;
+    if (!raw.startsWith("/") || raw.startsWith("//")) return null;
+    return raw;
+  };
+
   useEffect(() => {
-    // Pas de redirection automatique depuis la page abonnement
-    // On laisse l'utilisateur gérer son abonnement ici même s'il est connecté
-  }, []);
+    if (user) {
+      const next = getSafeNext();
+      if (next) window.location.replace(next);
+    }
+  }, [user]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +68,7 @@ const Auth = () => {
       const validationResult = loginSchema.safeParse({ email, password });
 
       if (!validationResult.success) {
-        const firstError = validationResult.error.errors[0];
+        const firstError = validationResult.error.issues[0];
         toast({
           title: t('auth.validationFailed'),
           description: firstError.message,
@@ -105,7 +116,7 @@ const Auth = () => {
       const validationResult = signupSchema.safeParse({ email, password, name });
 
       if (!validationResult.success) {
-        const firstError = validationResult.error.errors[0];
+        const firstError = validationResult.error.issues[0];
         toast({
           title: t('auth.validationFailed'),
           description: firstError.message,
@@ -115,7 +126,10 @@ const Auth = () => {
         return;
       }
 
-      const redirectUrl = `${window.location.origin}/`;
+      const next = getSafeNext();
+      const redirectUrl = next
+        ? `${window.location.origin}${next}`
+        : `${window.location.origin}/`;
 
       const { error } = await supabase.auth.signUp({
         email: validationResult.data.email,
