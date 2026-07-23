@@ -57,7 +57,7 @@ const Auth = () => {
       const validationResult = loginSchema.safeParse({ email, password });
 
       if (!validationResult.success) {
-        const firstError = validationResult.error.errors[0];
+        const firstError = validationResult.error.issues[0];
         toast({
           title: t('auth.validationFailed'),
           description: firstError.message,
@@ -105,7 +105,7 @@ const Auth = () => {
       const validationResult = signupSchema.safeParse({ email, password, name });
 
       if (!validationResult.success) {
-        const firstError = validationResult.error.errors[0];
+        const firstError = validationResult.error.issues[0];
         toast({
           title: t('auth.validationFailed'),
           description: firstError.message,
