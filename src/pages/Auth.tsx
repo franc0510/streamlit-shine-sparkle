@@ -126,8 +126,6 @@ const Auth = () => {
         return;
       }
 
-      const redirectUrl = `${window.location.origin}/`;
-
       const next = getSafeNext();
       const redirectUrl = next
         ? `${window.location.origin}${next}`
