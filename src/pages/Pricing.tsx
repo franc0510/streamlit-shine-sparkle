@@ -4,6 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Check, Crown, Sparkles, Calendar, ShieldCheck, TrendingUp, HelpCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
   STRIPE_PAYMENT_LINK_MONTHLY,
   STRIPE_PAYMENT_LINK_YEARLY,
   buildStripeLink,
@@ -136,20 +142,49 @@ const Pricing = () => {
             </Card>
           </div>
 
-          {/* Reassurance row */}
-          <div className="grid sm:grid-cols-3 gap-4 mb-12">
-            <Card className="p-4 bg-gradient-card border-border/50 text-sm text-center">
-              <p className="font-semibold mb-1">🔒 {t("pricing.reassurance.secureTitle")}</p>
-              <p className="text-muted-foreground text-xs">{t("pricing.reassurance.secureDesc")}</p>
-            </Card>
-            <Card className="p-4 bg-gradient-card border-border/50 text-sm text-center">
-              <p className="font-semibold mb-1">⏱️ {t("pricing.reassurance.cancelTitle")}</p>
-              <p className="text-muted-foreground text-xs">{t("pricing.reassurance.cancelDesc")}</p>
-            </Card>
-            <Card className="p-4 bg-gradient-card border-border/50 text-sm text-center">
-              <p className="font-semibold mb-1">📊 {t("pricing.reassurance.algoTitle")}</p>
-              <p className="text-muted-foreground text-xs">{t("pricing.reassurance.algoDesc")}</p>
-            </Card>
+          {/* Pourquoi 100€ — justification de la valeur */}
+          <Card className="p-6 sm:p-8 bg-gradient-card border-border/50 mb-8">
+            <div className="flex items-center gap-2 mb-4 justify-center">
+              <TrendingUp className="w-5 h-5 text-primary" />
+              <h2 className="text-xl sm:text-2xl font-display font-bold text-center">
+                {t("pricing.valueTitle")}
+              </h2>
+            </div>
+            <ul className="space-y-3 max-w-2xl mx-auto">
+              {valuePoints.map((p, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm sm:text-base">
+                  <Check className="w-4 h-4 text-primary mt-1 shrink-0" />
+                  <span className="text-foreground/90">{p}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="text-center mt-6">
+              <Link to="/results" className="text-sm text-accent hover:underline">
+                {t("hero.ctaResults")} →
+              </Link>
+            </div>
+          </Card>
+
+          {/* FAQ courte */}
+          <div className="mb-12 max-w-2xl mx-auto">
+            <div className="flex items-center gap-2 mb-4 justify-center">
+              <HelpCircle className="w-5 h-5 text-primary" />
+              <h2 className="text-xl sm:text-2xl font-display font-bold text-center">
+                {t("pricing.faqTitle")}
+              </h2>
+            </div>
+            <Accordion type="single" collapsible className="w-full">
+              {faqItems.map((item, i) => (
+                <AccordionItem key={i} value={`faq-${i}`}>
+                  <AccordionTrigger className="text-left text-sm font-semibold">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
 
           {/* Pourquoi 100€ — justification de la valeur */}
