@@ -70,14 +70,14 @@
       "title": "Monthly",
       "desc": "Billed monthly, no commitment.",
       "perMonth": "month",
-      "trialNote": "7 days free, then €14.90/month"
+      "trialNote": "7 days free, then €100/month"
     },
     "yearly": {
       "title": "Yearly",
-      "desc": "Save €30.10 per year with the annual plan.",
+      "desc": "Save €200 per year with the annual plan.",
       "perYear": "year",
       "badge": "Best value · 2 months free",
-      "trialNote": "7 days free, then €149.90/year"
+      "trialNote": "7 days free, then €1000/year"
     },
     "reassurance": {
       "secureTitle": "Secure Stripe payment",
@@ -302,7 +302,7 @@
     "unexpectedError": "An unexpected error occurred",
     "loggedInAs": "You are logged in",
     "loggedInDesc": "Discover our Premium offer →",
-    "price": "€10/month",
+    "price": "€100/month",
     "subscribe": "Subscribe Now",
     "manageSubscription": "Manage Subscription",
     "premiumFeatures": {
@@ -340,7 +340,7 @@
     "cancelAnytime": "Cancel anytime",
     "freeTrialBadge": "7-day free trial",
     "startFreeTrial": "Start 7-day free trial",
-    "trialInfo": "7 days free, then €20/month. Cancel anytime.",
+    "trialInfo": "7 days free, then €100/month. Cancel anytime.",
     "trialBadge": "Free trial",
     "trialEndsOn": "Free trial until"
   },
@@ -367,5 +367,33 @@
     "aiRecommendation": "🤖 AI Recommendation",
     "betOn": "Bet ↗",
     "seriesWinProbability": "Series win probability"
+  },
+  "backtest": {
+    "title": "{{start}} tracked since January 2026 → {{final}}",
+    "subtitle": "Backtest on real 2026 results (historical odds + actual winners): what the starting bankroll would have become by following the model's value bets.",
+    "edge0": "Edge > 0%",
+    "edge5": "Edge ≥ 5%",
+    "edge10": "Edge ≥ 10%",
+    "strategyFlat": "Flat stake (1%)",
+    "strategyKelly": "Bounded Kelly 1-2%",
+    "start": "Start",
+    "betsTracked": "{{count}} bets tracked",
+    "winRate": "{{rate}}% won",
+    "coverageTitle": "Monthly coverage",
+    "betsTaken": "Bets placed",
+    "matchesAnalyzed": "Matches analyzed",
+    "month": "Month",
+    "allBetsTitle": "All bets",
+    "selectMonth": "Select a month",
+    "date": "Date",
+    "match": "Match",
+    "betOn": "Bet",
+    "odds": "Odds",
+    "result": "Result",
+    "profit": "Profit",
+    "seeAllBets": "See all bets",
+    "hideBets": "Hide bets",
+    "coverageNote": "\"Matches analyzed\" = matches the model produced a prediction for (not all had odds available).",
+    "disclaimer": "Bounded Kelly assumes a realistically placeable stake. Past performance ≠ future guarantee."
   }
 }

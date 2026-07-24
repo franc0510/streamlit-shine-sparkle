@@ -1,16 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   ResponsiveContainer,
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   ReferenceLine,
-  Legend,
 } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -20,7 +18,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TrendingUp } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { ChevronDown, ChevronUp, ShieldCheck } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 /* -------------------------------------------------------------------------- */
 /*  Config                                                                     */
@@ -31,26 +38,11 @@ const GITHUB_RAW_BASE =
 
 const START_BANKROLL = 10000;
 
-const FLAT_COLOR = "#3b82f6"; // bleu — Mise fixe (flat 1%)
-const KELLY_COLOR = "#22c55e"; // vert — Kelly borné 1-2%
+// Couleurs de la charte (recharts ne lit pas les classes Tailwind)
+const FLAT_COLOR = "hsl(var(--accent))"; // cyan — Mise fixe (flat 1%)
+const KELLY_COLOR = "hsl(var(--primary))"; // or — Kelly borné 1-2%
 
-const EDGE_OPTIONS = [
-  { value: "0", label: "Edge > 0 %" },
-  { value: "5", label: "Edge ≥ 5 %" },
-  { value: "10", label: "Edge ≥ 10 %" },
-];
-
-const eur = new Intl.NumberFormat("fr-FR", {
-  style: "currency",
-  currency: "EUR",
-  maximumFractionDigits: 0,
-});
-
-const eur2 = new Intl.NumberFormat("fr-FR", {
-  style: "currency",
-  currency: "EUR",
-  maximumFractionDigits: 2,
-});
+const EDGE_VALUES = ["0", "5", "10"] as const;
 
 /* -------------------------------------------------------------------------- */
 /*  Types                                                                      */
@@ -161,37 +153,35 @@ const parseBets = (text: string): BetRow[] => {
   });
 };
 
-/* -------------------------------------------------------------------------- */
-/*  Formatting helpers                                                         */
-/* -------------------------------------------------------------------------- */
-
-const MONTHS_FR = [
-  "janv.",
-  "févr.",
-  "mars",
-  "avr.",
-  "mai",
-  "juin",
-  "juil.",
-  "août",
-  "sept.",
-  "oct.",
-  "nov.",
-  "déc.",
-];
-
-const formatMonth = (month: string): string => {
-  const [y, m] = month.split("-");
-  const idx = parseInt(m, 10) - 1;
-  if (isNaN(idx) || idx < 0 || idx > 11) return month;
-  return `${MONTHS_FR[idx]} ${y}`;
+// Compte les matchs analysés (status=='ok') par mois 2026 depuis predictions_history.csv
+const parseMatchCounts = (text: string): Record<string, number> => {
+  const lines = text.split("\n").filter((l) => l.trim());
+  if (lines.length < 2) return {};
+  const col = buildColMap(lines[0]);
+  const di = col["match_date_utc"];
+  const si = col["status"];
+  const out: Record<string, number> = {};
+  for (let i = 1; i < lines.length; i++) {
+    const c = lines[i].split(",");
+    if (si !== undefined && (c[si] ?? "").trim() !== "ok") continue;
+    const d = (c[di] ?? "").trim();
+    if (d.length < 7) continue;
+    const m = d.slice(0, 7);
+    if (!m.startsWith("2026")) continue;
+    out[m] = (out[m] || 0) + 1;
+  }
+  return out;
 };
 
-const formatBetDate = (date: string): string => {
-  // date attendue en YYYY-MM-DD (éventuellement avec heure)
-  const d = new Date(date);
-  if (isNaN(d.getTime())) return date;
-  return d.toLocaleDateString("fr-FR", { day: "2-digit", month: "short" });
+/* -------------------------------------------------------------------------- */
+/*  i18n locale mapping                                                        */
+/* -------------------------------------------------------------------------- */
+
+const INTL_LOCALE: Record<string, string> = {
+  fr: "fr-FR",
+  en: "en-US",
+  es: "es-ES",
+  zh: "zh-CN",
 };
 
 /* -------------------------------------------------------------------------- */
@@ -199,12 +189,93 @@ const formatBetDate = (date: string): string => {
 /* -------------------------------------------------------------------------- */
 
 export const BacktestPerformance = () => {
+  const { t, i18n } = useTranslation();
+
   const [bankrollRows, setBankrollRows] = useState<BankrollRow[] | null>(null);
   const [betRows, setBetRows] = useState<BetRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
   const [edge, setEdge] = useState("5");
 
+  const [expanded, setExpanded] = useState(false);
+  const [matchCounts, setMatchCounts] = useState<Record<string, number> | null>(
+    null
+  );
+  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
+
+  /* --- formatteurs localisés --- */
+  const locale = useMemo(
+    () => INTL_LOCALE[(i18n.language || "fr").split("-")[0]] || "fr-FR",
+    [i18n.language]
+  );
+  const eur0 = useMemo(
+    () =>
+      new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency: "EUR",
+        maximumFractionDigits: 0,
+      }),
+    [locale]
+  );
+  const eur2 = useMemo(
+    () =>
+      new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency: "EUR",
+        maximumFractionDigits: 2,
+      }),
+    [locale]
+  );
+  const eurCompact = useMemo(
+    () =>
+      new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency: "EUR",
+        notation: "compact",
+        maximumFractionDigits: 1,
+      }),
+    [locale]
+  );
+  const pctFmt = useMemo(
+    () =>
+      new Intl.NumberFormat(locale, {
+        style: "percent",
+        maximumFractionDigits: 1,
+        signDisplay: "always",
+      }),
+    [locale]
+  );
+
+  const formatMonth = useMemo(
+    () => (month: string) => {
+      const [y, m] = month.split("-");
+      const idx = parseInt(m, 10) - 1;
+      if (isNaN(idx)) return month;
+      return new Date(Number(y), idx, 1).toLocaleDateString(locale, {
+        month: "short",
+        year: "numeric",
+      });
+    },
+    [locale]
+  );
+
+  const formatBetDate = useMemo(
+    () => (date: string) => {
+      const d = new Date(date);
+      if (isNaN(d.getTime())) return date;
+      return d.toLocaleDateString(locale, { day: "2-digit", month: "short" });
+    },
+    [locale]
+  );
+
+  const edgeLabel = (v: string) =>
+    v === "0"
+      ? t("backtest.edge0")
+      : v === "5"
+      ? t("backtest.edge5")
+      : t("backtest.edge10");
+
+  /* --- chargement initial (bankroll + bets) --- */
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
@@ -233,6 +304,22 @@ export const BacktestPerformance = () => {
     };
   }, []);
 
+  /* --- couverture : chargée à la première ouverture du volet (lazy) --- */
+  useEffect(() => {
+    if (!expanded || matchCounts !== null) return;
+    let cancelled = false;
+    fetchCSV("predictions_history.csv")
+      .then((txt) => {
+        if (!cancelled) setMatchCounts(parseMatchCounts(txt));
+      })
+      .catch(() => {
+        if (!cancelled) setMatchCounts({});
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [expanded, matchCounts]);
+
   /* --- données du graphe pour l'edge sélectionné --- */
   const { chartData, flatFinal, kellyFinal } = useMemo(() => {
     const empty = {
@@ -252,15 +339,15 @@ export const BacktestPerformance = () => {
       .filter((r) => r.bet_type === "kelly_bounded")
       .sort((a, b) => a.month.localeCompare(b.month));
 
-    const months = Array.from(
-      new Set(forEdge.map((r) => r.month))
-    ).sort((a, b) => a.localeCompare(b));
+    const months = Array.from(new Set(forEdge.map((r) => r.month))).sort(
+      (a, b) => a.localeCompare(b)
+    );
 
     const flatByMonth = new Map(flat.map((r) => [r.month, r.bankroll_eur]));
     const kellyByMonth = new Map(kelly.map((r) => [r.month, r.bankroll_eur]));
 
     const data: ChartPoint[] = [
-      { month: "Départ", flat: START_BANKROLL, kelly: START_BANKROLL },
+      { month: t("backtest.start"), flat: START_BANKROLL, kelly: START_BANKROLL },
     ];
     months.forEach((m) => {
       data.push({
@@ -274,258 +361,431 @@ export const BacktestPerformance = () => {
     const kellyFinal = kelly.length ? kelly[kelly.length - 1].bankroll_eur : 0;
 
     return { chartData: data, flatFinal, kellyFinal };
-  }, [bankrollRows, edge]);
+  }, [bankrollRows, edge, formatMonth, t]);
 
-  /* --- derniers paris (edge sélectionné + flat, 10 plus récents) --- */
-  const recentBets = useMemo(() => {
-    return betRows
-      .filter((b) => b.edge === edge && b.bet_type === "flat")
-      .sort((a, b) => b.date.localeCompare(a.date))
-      .slice(0, 10);
+  /* --- stats agrégées (contexte + couverture par mois) --- */
+  const stats = useMemo(() => {
+    if (!bankrollRows) return null;
+    const flatRows = bankrollRows
+      .filter((r) => r.edge === edge && r.bet_type === "flat")
+      .sort((a, b) => a.month.localeCompare(b.month));
+    if (flatRows.length === 0) return null;
+    const totalBets = flatRows.reduce((s, r) => s + r.n_bets, 0);
+    const bets = betRows.filter((b) => b.edge === edge && b.bet_type === "flat");
+    const wins = bets.filter((b) => b.won).length;
+    const winRate = bets.length ? Math.round((wins / bets.length) * 100) : null;
+    return {
+      firstMonth: flatRows[0].month,
+      lastMonth: flatRows[flatRows.length - 1].month,
+      totalBets,
+      winRate,
+      monthlyBets: flatRows, // { month, n_bets }
+    };
+  }, [bankrollRows, betRows, edge]);
+
+  /* --- mois disponibles pour le navigateur pari-par-pari --- */
+  const betMonths = useMemo(() => {
+    const ms = Array.from(
+      new Set(
+        betRows
+          .filter((b) => b.edge === edge && b.bet_type === "flat")
+          .map((b) => b.month)
+      )
+    ).sort((a, b) => b.localeCompare(a)); // récent -> ancien
+    return ms;
   }, [betRows, edge]);
 
+  const effectiveMonth =
+    selectedMonth && betMonths.includes(selectedMonth)
+      ? selectedMonth
+      : betMonths[0] ?? null;
+
+  const monthBets = useMemo(() => {
+    if (!effectiveMonth) return [];
+    return betRows
+      .filter(
+        (b) =>
+          b.edge === edge &&
+          b.bet_type === "flat" &&
+          b.month === effectiveMonth
+      )
+      .sort((a, b) => b.date.localeCompare(a.date));
+  }, [betRows, edge, effectiveMonth]);
+
   const bestFinal = Math.max(flatFinal, kellyFinal);
+
+  const strategies = [
+    {
+      key: "flat",
+      name: t("backtest.strategyFlat"),
+      color: FLAT_COLOR,
+      tint: "text-accent",
+      final: flatFinal,
+    },
+    {
+      key: "kelly",
+      name: t("backtest.strategyKelly"),
+      color: KELLY_COLOR,
+      tint: "text-primary",
+      final: kellyFinal,
+    },
+  ];
 
   /* --- rendu : rien tant que ça charge ou en cas d'échec --- */
   if (loading || failed || !bankrollRows || chartData.length <= 1) return null;
 
   return (
-    <section className="mb-10 sm:mb-12 animate-fade-in">
-      <div className="bg-gradient-card border border-border/50 rounded-xl p-5 sm:p-8">
+    <section className="mb-8 animate-fade-in">
+      <div className="bg-gradient-card border border-border/50 rounded-xl p-4 sm:p-6">
         {/* En-tête */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold mb-3">
-            <span className="bg-gradient-gaming bg-clip-text text-transparent">
-              10 000 € suivis depuis janvier 2026 → {eur.format(bestFinal)}
-            </span>
+        <div className="text-center mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold mb-2">
+            {t("backtest.title", {
+              start: eur0.format(START_BANKROLL),
+              final: eur0.format(bestFinal),
+            })
+              .split("→")
+              .map((part, i) =>
+                i === 0 ? (
+                  <span key={i} className="text-foreground">
+                    {part}
+                    <span className="text-muted-foreground">→</span>
+                  </span>
+                ) : (
+                  <span
+                    key={i}
+                    className="bg-gradient-gaming bg-clip-text text-transparent"
+                  >
+                    {part}
+                  </span>
+                )
+              )}
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-3xl mx-auto">
-            Backtest sur résultats réels 2026 (cotes historiques + vrais
-            vainqueurs) : ce qu'une bankroll de 10 000 € serait devenue en
-            suivant les paris value du modèle.
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto">
+            {t("backtest.subtitle")}
           </p>
         </div>
 
         {/* Sélecteur d'edge */}
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-4">
           <Tabs value={edge} onValueChange={setEdge}>
             <TabsList>
-              {EDGE_OPTIONS.map((o) => (
-                <TabsTrigger key={o.value} value={o.value}>
-                  {o.label}
+              {EDGE_VALUES.map((v) => (
+                <TabsTrigger key={v} value={v}>
+                  {edgeLabel(v)}
                 </TabsTrigger>
               ))}
             </TabsList>
           </Tabs>
         </div>
 
-        {/* Cartes KPI */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-          <KpiCard
-            label="Mise fixe (flat 1%)"
-            color={FLAT_COLOR}
-            final={flatFinal}
-          />
-          <KpiCard
-            label="Kelly borné 1-2%"
-            color={KELLY_COLOR}
-            final={kellyFinal}
-          />
+        {/* Bandeau contexte (crédibilité) */}
+        {stats && (
+          <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-muted-foreground mb-4">
+            <ShieldCheck className="w-3.5 h-3.5 text-primary" />
+            <span>
+              {formatMonth(stats.firstMonth)} – {formatMonth(stats.lastMonth)}
+            </span>
+            <span className="text-border">·</span>
+            <span>{t("backtest.betsTracked", { count: stats.totalBets })}</span>
+            {stats.winRate != null && (
+              <>
+                <span className="text-border">·</span>
+                <span>{t("backtest.winRate", { rate: stats.winRate })}</span>
+              </>
+            )}
+          </p>
+        )}
+
+        {/* Cartes KPI enrichies */}
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          {strategies.map((s) => {
+            const plus = s.final - START_BANKROLL;
+            const positive = plus >= 0;
+            const growth = (s.final - START_BANKROLL) / START_BANKROLL;
+            return (
+              <div
+                key={s.key}
+                className="rounded-lg border border-border/50 bg-background/40 p-3 sm:p-4"
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <span
+                    className="inline-block w-2.5 h-2.5 rounded-full shrink-0"
+                    style={{ backgroundColor: s.color }}
+                  />
+                  <span className="text-xs sm:text-sm font-medium text-muted-foreground truncate">
+                    {s.name}
+                  </span>
+                </div>
+                <div
+                  className={`text-xl sm:text-2xl font-display font-bold ${s.tint}`}
+                >
+                  {eur0.format(s.final)}
+                </div>
+                <div className="text-xs sm:text-sm font-semibold mt-0.5">
+                  <span
+                    className={positive ? "text-emerald-500" : "text-red-500"}
+                  >
+                    {positive ? "+" : ""}
+                    {eur0.format(plus)}
+                  </span>
+                  <span className="text-muted-foreground font-normal">
+                    {" · "}
+                    {pctFmt.format(growth)}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Graphe */}
-        <Card className="bg-background/40 border-border/50 mb-6">
-          <CardContent className="pt-6">
-            <div className="h-[300px] sm:h-[360px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  data={chartData}
-                  margin={{ top: 10, right: 16, left: 0, bottom: 0 }}
-                >
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    stroke="hsl(var(--border))"
-                    opacity={0.4}
-                  />
-                  <XAxis
-                    dataKey="month"
-                    tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
-                    tickLine={false}
-                    axisLine={{ stroke: "hsl(var(--border))" }}
-                  />
-                  <YAxis
-                    tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
-                    tickLine={false}
-                    axisLine={{ stroke: "hsl(var(--border))" }}
-                    tickFormatter={(v) => eur.format(v as number)}
-                    width={78}
-                    domain={["auto", "auto"]}
-                  />
-                  <Tooltip
-                    formatter={(value: number | string, name: string) => [
-                      eur2.format(Number(value)),
-                      name,
-                    ]}
-                    contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "0.5rem",
-                      color: "hsl(var(--card-foreground))",
-                      fontSize: "0.8rem",
-                    }}
-                    labelStyle={{ color: "hsl(var(--foreground))" }}
-                  />
-                  <Legend wrapperStyle={{ fontSize: "0.8rem" }} />
-                  <ReferenceLine
-                    y={START_BANKROLL}
-                    stroke="hsl(var(--muted-foreground))"
-                    strokeDasharray="4 4"
-                    label={{
-                      value: "10 000 €",
-                      position: "insideBottomRight",
-                      fill: "hsl(var(--muted-foreground))",
-                      fontSize: 11,
-                    }}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="flat"
-                    name="Mise fixe (flat 1%)"
-                    stroke={FLAT_COLOR}
-                    strokeWidth={2.5}
-                    dot={{ r: 3 }}
-                    activeDot={{ r: 5 }}
-                    connectNulls
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="kelly"
-                    name="Kelly borné 1-2%"
-                    stroke={KELLY_COLOR}
-                    strokeWidth={2.5}
-                    dot={{ r: 3 }}
-                    activeDot={{ r: 5 }}
-                    connectNulls
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Graphe en aire dégradée */}
+        <div className="h-[220px] sm:h-[260px] w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
+              data={chartData}
+              margin={{ top: 8, right: 12, left: 0, bottom: 0 }}
+            >
+              <defs>
+                <linearGradient id="fillFlat" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={FLAT_COLOR} stopOpacity={0.25} />
+                  <stop offset="100%" stopColor={FLAT_COLOR} stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="fillKelly" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={KELLY_COLOR} stopOpacity={0.28} />
+                  <stop offset="100%" stopColor={KELLY_COLOR} stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="hsl(var(--border))"
+                opacity={0.35}
+                vertical={false}
+              />
+              <XAxis
+                dataKey="month"
+                tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
+                tickLine={false}
+                axisLine={{ stroke: "hsl(var(--border))" }}
+              />
+              <YAxis
+                tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={(v) => eurCompact.format(v as number)}
+                width={56}
+                domain={["auto", "auto"]}
+              />
+              <Tooltip
+                formatter={(value: number | string, name: string) => [
+                  eur2.format(Number(value)),
+                  name,
+                ]}
+                contentStyle={{
+                  backgroundColor: "hsl(var(--card))",
+                  border: "1px solid hsl(var(--border))",
+                  borderRadius: "0.5rem",
+                  color: "hsl(var(--card-foreground))",
+                  fontSize: "0.8rem",
+                }}
+                labelStyle={{ color: "hsl(var(--foreground))" }}
+              />
+              <ReferenceLine
+                y={START_BANKROLL}
+                stroke="hsl(var(--muted-foreground))"
+                strokeDasharray="4 4"
+                label={{
+                  value: eur0.format(START_BANKROLL),
+                  position: "insideBottomRight",
+                  fill: "hsl(var(--muted-foreground))",
+                  fontSize: 10,
+                }}
+              />
+              <Area
+                type="monotone"
+                dataKey="flat"
+                name={t("backtest.strategyFlat")}
+                stroke={FLAT_COLOR}
+                strokeWidth={2.5}
+                fill="url(#fillFlat)"
+                dot={{ r: 2.5 }}
+                activeDot={{ r: 5 }}
+                connectNulls
+              />
+              <Area
+                type="monotone"
+                dataKey="kelly"
+                name={t("backtest.strategyKelly")}
+                stroke={KELLY_COLOR}
+                strokeWidth={2.5}
+                fill="url(#fillKelly)"
+                dot={{ r: 2.5 }}
+                activeDot={{ r: 5 }}
+                connectNulls
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
 
-        {/* Table des derniers paris */}
-        {recentBets.length > 0 && (
-          <Card className="bg-background/40 border-border/50 mb-4">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-primary" />
-                Derniers paris
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Match</TableHead>
-                      <TableHead>Pari</TableHead>
-                      <TableHead className="text-right">Cote</TableHead>
-                      <TableHead className="text-center">Résultat</TableHead>
-                      <TableHead className="text-right">Profit</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {recentBets.map((b, i) => (
-                      <TableRow key={i}>
-                        <TableCell className="whitespace-nowrap text-muted-foreground">
-                          {formatBetDate(b.date)}
-                        </TableCell>
-                        <TableCell className="max-w-[220px] truncate">
-                          {b.match}
-                        </TableCell>
-                        <TableCell className="font-medium whitespace-nowrap">
-                          {b.bet_on}
-                        </TableCell>
-                        <TableCell className="text-right tabular-nums">
-                          {b.odds.toFixed(2)}
-                        </TableCell>
-                        <TableCell className="text-center">
-                          {b.won ? "✅" : "❌"}
-                        </TableCell>
-                        <TableCell
-                          className={`text-right tabular-nums font-medium ${
-                            b.profit_eur >= 0
-                              ? "text-emerald-500"
-                              : "text-red-500"
-                          }`}
-                        >
-                          {b.profit_eur >= 0 ? "+" : ""}
-                          {eur2.format(b.profit_eur)}
-                        </TableCell>
+        {/* Bouton de transparence */}
+        <div className="mt-4 flex justify-center">
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={() => setExpanded((v) => !v)}
+          >
+            {expanded ? (
+              <>
+                {t("backtest.hideBets")}
+                <ChevronUp className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                {t("backtest.seeAllBets")}
+                <ChevronDown className="w-4 h-4" />
+              </>
+            )}
+          </Button>
+        </div>
+
+        {/* Volet dépliable : couverture + navigateur pari-par-pari */}
+        {expanded && (
+          <div className="mt-4 pt-4 border-t border-border/50 space-y-6 animate-fade-in">
+            {/* Couverture par mois */}
+            {stats && (
+              <div>
+                <h3 className="text-sm font-display font-bold mb-2">
+                  {t("backtest.coverageTitle")}
+                </h3>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>{t("backtest.month")}</TableHead>
+                        <TableHead className="text-right">
+                          {t("backtest.betsTaken")}
+                        </TableHead>
+                        <TableHead className="text-right">
+                          {t("backtest.matchesAnalyzed")}
+                        </TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {stats.monthlyBets.map((r) => {
+                        const matches = matchCounts?.[r.month];
+                        return (
+                          <TableRow key={r.month}>
+                            <TableCell className="whitespace-nowrap">
+                              {formatMonth(r.month)}
+                            </TableCell>
+                            <TableCell className="text-right tabular-nums font-medium">
+                              {r.n_bets}
+                            </TableCell>
+                            <TableCell className="text-right tabular-nums text-muted-foreground">
+                              {matchCounts === null
+                                ? "…"
+                                : matches != null
+                                ? matches
+                                : "—"}
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </div>
               </div>
-            </CardContent>
-          </Card>
+            )}
+
+            {/* Navigateur pari-par-pari */}
+            {betMonths.length > 0 && (
+              <div>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                  <h3 className="text-sm font-display font-bold">
+                    {t("backtest.allBetsTitle")}
+                  </h3>
+                  <Select
+                    value={effectiveMonth ?? undefined}
+                    onValueChange={setSelectedMonth}
+                  >
+                    <SelectTrigger className="w-full sm:w-[180px] bg-background border-border">
+                      <SelectValue placeholder={t("backtest.selectMonth")} />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background border-border z-50">
+                      {betMonths.map((m) => (
+                        <SelectItem key={m} value={m}>
+                          {formatMonth(m)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="max-h-[420px] overflow-y-auto overflow-x-auto rounded-lg border border-border/50">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>{t("backtest.date")}</TableHead>
+                        <TableHead>{t("backtest.match")}</TableHead>
+                        <TableHead>{t("backtest.betOn")}</TableHead>
+                        <TableHead className="text-right">
+                          {t("backtest.odds")}
+                        </TableHead>
+                        <TableHead className="text-center">
+                          {t("backtest.result")}
+                        </TableHead>
+                        <TableHead className="text-right">
+                          {t("backtest.profit")}
+                        </TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {monthBets.map((b, i) => (
+                        <TableRow key={i}>
+                          <TableCell className="whitespace-nowrap text-muted-foreground">
+                            {formatBetDate(b.date)}
+                          </TableCell>
+                          <TableCell className="max-w-[200px] truncate">
+                            {b.match}
+                          </TableCell>
+                          <TableCell className="font-medium whitespace-nowrap">
+                            {b.bet_on}
+                          </TableCell>
+                          <TableCell className="text-right tabular-nums">
+                            {b.odds.toFixed(2)}
+                          </TableCell>
+                          <TableCell className="text-center">
+                            {b.won ? "✅" : "❌"}
+                          </TableCell>
+                          <TableCell
+                            className={`text-right tabular-nums font-medium ${
+                              b.profit_eur >= 0
+                                ? "text-emerald-500"
+                                : "text-red-500"
+                            }`}
+                          >
+                            {b.profit_eur >= 0 ? "+" : ""}
+                            {eur2.format(b.profit_eur)}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+                <p className="text-[11px] text-muted-foreground/70 mt-2">
+                  {t("backtest.coverageNote")}
+                </p>
+              </div>
+            )}
+          </div>
         )}
 
         {/* Disclaimer */}
-        <p className="text-xs text-muted-foreground/70 text-center">
-          Le Kelly borné suppose une mise réellement plaçable. Performances
-          passées ≠ garantie future.
+        <p className="text-xs text-muted-foreground/70 text-center mt-4">
+          {t("backtest.disclaimer")}
         </p>
       </div>
     </section>
-  );
-};
-
-/* -------------------------------------------------------------------------- */
-/*  KPI Card                                                                   */
-/* -------------------------------------------------------------------------- */
-
-const KpiCard = ({
-  label,
-  color,
-  final,
-}: {
-  label: string;
-  color: string;
-  final: number;
-}) => {
-  const plusValue = final - START_BANKROLL;
-  const positive = plusValue >= 0;
-  return (
-    <Card className="bg-background/40 border-border/50">
-      <CardContent className="pt-5 pb-5">
-        <div className="flex items-center gap-2 mb-1">
-          <span
-            className="inline-block w-2.5 h-2.5 rounded-full"
-            style={{ backgroundColor: color }}
-          />
-          <span className="text-sm font-medium text-muted-foreground">
-            {label}
-          </span>
-        </div>
-        <div className="text-2xl sm:text-3xl font-display font-bold">
-          {eur.format(final)}
-        </div>
-        <div
-          className={`text-sm font-semibold mt-1 ${
-            positive ? "text-emerald-500" : "text-red-500"
-          }`}
-        >
-          {positive ? "+" : ""}
-          {eur.format(plusValue)}
-          <span className="text-muted-foreground font-normal">
-            {" "}
-            de plus-value
-          </span>
-        </div>
-      </CardContent>
-    </Card>
   );
 };
 

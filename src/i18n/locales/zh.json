@@ -70,14 +70,14 @@
       "title": "月度",
       "desc": "按月计费，无承诺。",
       "perMonth": "月",
-      "trialNote": "7 天免费，之后每月 €14.90"
+      "trialNote": "7 天免费，之后每月 €100"
     },
     "yearly": {
       "title": "年度",
-      "desc": "通过年度订阅每年节省 €30.10。",
+      "desc": "通过年度订阅每年节省 €200。",
       "perYear": "年",
       "badge": "最佳选择 · 2 个月免费",
-      "trialNote": "7 天免费，之后每年 €149.90"
+      "trialNote": "7 天免费，之后每年 €1000"
     },
     "reassurance": {
       "secureTitle": "Stripe 安全支付",
@@ -302,7 +302,7 @@
     "unexpectedError": "发生意外错误",
     "loggedInAs": "您已登录",
     "loggedInDesc": "发现我们的高级优惠 →",
-    "price": "€10/月",
+    "price": "€100/月",
     "subscribe": "立即订阅",
     "manageSubscription": "管理订阅",
     "premiumFeatures": {
@@ -340,7 +340,7 @@
     "cancelAnytime": "随时取消",
     "freeTrialBadge": "7天免费试用",
     "startFreeTrial": "开始7天免费试用",
-    "trialInfo": "7天免费，之后每月20€。随时取消。",
+    "trialInfo": "7天免费，之后每月100€。随时取消。",
     "trialBadge": "免费试用",
     "trialEndsOn": "免费试用至"
   },
@@ -367,5 +367,33 @@
     "aiRecommendation": "🤖 AI推荐",
     "betOn": "投注 ↗",
     "seriesWinProbability": "系列赛胜率"
+  },
+  "backtest": {
+    "title": "自2026年1月起跟踪 {{start}} → {{final}}",
+    "subtitle": "基于2026年真实结果的回测（历史赔率 + 真实胜者）：按照模型的价值投注，初始本金会变成多少。",
+    "edge0": "Edge > 0%",
+    "edge5": "Edge ≥ 5%",
+    "edge10": "Edge ≥ 10%",
+    "strategyFlat": "固定注 (1%)",
+    "strategyKelly": "有界凯利 1-2%",
+    "start": "起点",
+    "betsTracked": "已跟踪 {{count}} 注",
+    "winRate": "{{rate}}% 命中",
+    "coverageTitle": "每月覆盖",
+    "betsTaken": "已下注",
+    "matchesAnalyzed": "已分析比赛",
+    "month": "月份",
+    "allBetsTitle": "全部投注",
+    "selectMonth": "选择月份",
+    "date": "日期",
+    "match": "比赛",
+    "betOn": "投注",
+    "odds": "赔率",
+    "result": "结果",
+    "profit": "盈利",
+    "seeAllBets": "查看全部投注",
+    "hideBets": "隐藏投注",
+    "coverageNote": "\"已分析比赛\" = 模型生成了预测的比赛（并非全部都有可用赔率）。",
+    "disclaimer": "有界凯利假设注额实际可下。过往表现 ≠ 未来保证。"
   }
 }
