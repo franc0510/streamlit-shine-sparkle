@@ -15,6 +15,7 @@ import CS2 from "./pages/CS2";
 import Dota2 from "./pages/Dota2";
 import MatchDetails from "./pages/MatchDetails";
 import AdminReviews from "./pages/AdminReviews";
+import OAuthConsent from "./pages/OAuthConsent";
 import NotFound from "./pages/NotFound";
 import "./i18n/config";
 
@@ -41,6 +42,7 @@ const App = () => {
                 <Route path="/cs2" element={<CS2 />} />
                 <Route path="/dota2" element={<Dota2 />} />
                 <Route path="/admin/reviews" element={<AdminReviews />} />
+                <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
                 {/* Match details route */}
                 <Route path="/match/:tournament/:date/:time/:team1_vs_team2" element={<MatchDetails />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

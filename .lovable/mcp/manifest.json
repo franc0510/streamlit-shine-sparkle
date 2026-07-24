@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "sdk_version": "0.24.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://obivwrnbupnbcqzxvztp.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "predictesport-mcp",
+      "version": "0.1.0",
+      "title": "PredictEsport MCP"
+    },
+    "tools": [
+      {
+        "name": "get_my_profile",
+        "title": "Get my profile",
+        "description": "Return the signed-in user's PredictEsport profile and premium access status.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_reviews",
+        "title": "List approved reviews",
+        "description": "List approved public reviews of PredictEsport, most recent first.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "limit": {
+              "default": 20,
+              "description": "Maximum number of reviews to return (default 20).",
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_review",
+        "title": "Submit a review",
+        "description": "Submit a new PredictEsport review as the signed-in user. The review is created unapproved and must be approved by an admin before appearing publicly.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "author_name": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 100,
+              "description": "Display name shown with the review."
+            },
+            "rating": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "Star rating from 1 to 5."
+            },
+            "content": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 2000,
+              "description": "Review text."
+            }
+          },
+          "required": [
+            "author_name",
+            "rating",
+            "content"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_upcoming_matches",
+        "title": "List upcoming LoL matches",
+        "description": "List upcoming League of Legends matches with PredictEsport win probabilities. Returns tournament, date, teams, and BO1 win probabilities for each side.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "limit": {
+              "default": 10,
+              "description": "Maximum number of matches to return (default 10).",
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          }
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
