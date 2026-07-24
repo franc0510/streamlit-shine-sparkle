@@ -208,7 +208,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="PredictEsport — Prédictions LoL & Pronostics IA"
-        description="Prédictions League of Legends générées par IA sur LFL, LEC, LCK, LPL, MSI et Worlds. Value bets et 7 jours d'essai gratuit."
+        description="Prédictions League of Legends générées par IA sur LFL, LEC, LCK, LPL, MSI et Worlds. Value bets et abonnement sans engagement."
         path="/"
       />
       <Navbar />
@@ -281,7 +281,7 @@ const Index = () => {
             value bet EV expected value LFL LEC LCK LPL LCS MSI Worlds EMEA Masters Arabian League NLC PRM Ultraliga
             Hitpoint Masters LJL CBLOL LLA. Pinnacle Unibet Polymarket Stake odds comparison.
             English: best LoL prediction tool, esports betting tips, AI esports predictions, LoL odds analysis,
-            value bet finder, free 7-day trial. Español: pronósticos esports League of Legends IA, mejores cuotas LoL,
+            value bet finder, no commitment subscription. Español: pronósticos esports League of Legends IA, mejores cuotas LoL,
             apuestas valor LFL LEC. 中文: 英雄联盟预测 电竞预测 AI 价值投注 免费试用.
           </p>
         </div>
@@ -444,7 +444,7 @@ const Index = () => {
             winrates par patch — pour produire des prédictions LoL fiables sur la LFL, LEC, LCK, LPL, LCS, MSI, Worlds, EMEA Masters,
             Arabian League, NLC, PRM, Ultraliga, Hitpoint Masters, LJL, CBLOL, LLA et autres ligues régionales. Comparez
             instantanément les cotes Pinnacle, Unibet, Polymarket et Stake, identifiez les value bets (cotes sous-évaluées) et
-            optimisez votre Expected Value (EV) sur le long terme. Démarrez gratuitement avec 7 jours d'essai sur l'abonnement
+            optimisez votre Expected Value (EV) sur le long terme. Abonnez-vous sans engagement, avec l'abonnement
             mensuel à 100€ ou annuel à 1000€ (2 mois offerts).
           </p>
         </div>

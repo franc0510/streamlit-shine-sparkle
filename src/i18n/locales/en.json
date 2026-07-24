@@ -48,36 +48,36 @@
     "subtitle": "LoL Predictions & Esports Tips",
     "leagues": "LFL, LEC, LCK, LPL, LCS and 15+ other leagues",
     "social": {
-      "subscribers": "+1,000 subscribers",
+      "subscribers": "Verifiable 2026 backtest",
       "upToDate": "Predictions updated before each match",
-      "freeTrial": "7 days free",
+      "freeTrial": "No commitment",
       "leagues": "15+ leagues analyzed",
       "securePayments": "Secure payments"
     },
-    "ctaTrial": "7-day free trial",
+    "ctaTrial": "Subscribe",
     "ctaResults": "See our results",
     "seoCopy": "PredictEsport analyzes every League of Legends match to give you the best predictions before betting. LFL, LEC, LCK, MSI, Worlds: get our AI-powered tips."
   },
   "pricing": {
-    "trialBadge": "7-day free trial",
+    "trialBadge": "No commitment",
     "title": "Choose your PredictEsport plan",
     "subtitle": "Access all League of Legends predictions powered by our AI. Cancel anytime.",
-    "startTrial": "Start free trial",
+    "startTrial": "Subscribe",
     "loginRequiredTitle": "Login required",
-    "loginRequiredDesc": "Create an account or log in to start your free trial.",
+    "loginRequiredDesc": "Create an account or log in to subscribe.",
     "alreadyAccount": "Already have an account?",
     "monthly": {
       "title": "Monthly",
       "desc": "Billed monthly, no commitment.",
       "perMonth": "month",
-      "trialNote": "7 days free, then €100/month"
+      "trialNote": "No commitment · cancel anytime"
     },
     "yearly": {
       "title": "Yearly",
       "desc": "Save €200 per year with the annual plan.",
       "perYear": "year",
       "badge": "Best value · 2 months free",
-      "trialNote": "7 days free, then €1000/year"
+      "trialNote": "€1000/year · that's 2 months free"
     },
     "reassurance": {
       "secureTitle": "Secure Stripe payment",
@@ -338,9 +338,9 @@
     "premiumSubscription": "Premium Subscription",
     "renewalDate": "Renewal on",
     "cancelAnytime": "Cancel anytime",
-    "freeTrialBadge": "7-day free trial",
-    "startFreeTrial": "Start 7-day free trial",
-    "trialInfo": "7 days free, then €100/month. Cancel anytime.",
+    "freeTrialBadge": "No commitment",
+    "startFreeTrial": "Subscribe",
+    "trialInfo": "€100/month, no commitment. Cancel anytime.",
     "trialBadge": "Free trial",
     "trialEndsOn": "Free trial until"
   },
@@ -394,6 +394,9 @@
     "seeAllBets": "See all bets",
     "hideBets": "Hide bets",
     "coverageNote": "\"Matches analyzed\" = matches the model produced a prediction for (not all had odds available).",
+    "yourBankroll": "Your bankroll",
+    "stake": "Kelly stake",
+    "kellyNote": "Stakes computed with the Bounded Kelly 1-2% strategy applied to your bankroll. Adjust the amount above.",
     "disclaimer": "Bounded Kelly assumes a realistically placeable stake. Past performance ≠ future guarantee."
   }
 }
