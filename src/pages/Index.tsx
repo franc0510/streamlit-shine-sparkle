@@ -4,7 +4,7 @@ import { MatchFilters } from "@/components/MatchFilters";
 import { Faq } from "@/components/Faq";
 import { BacktestPerformance } from "@/components/BacktestPerformance";
 import { Button } from "@/components/ui/button";
-import { Lock, Check, Trophy, Crown, ChevronDown, Zap, ShieldCheck, BarChart3, Info, Wallet, Search } from "lucide-react";
+import { Lock, Check, Crown, ChevronDown, Zap, ShieldCheck, BarChart3, Info, Wallet, Search } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
@@ -223,32 +223,29 @@ const Index = () => {
             {t("hero.subtitle")}
           </p>
 
-          {/* CTA principal unique + lien secondaire */}
-          <div className="flex flex-col items-center gap-3 mb-5">
-            <Link to="/pricing">
-              <Button
-                size="lg"
-                className="gap-2 text-base sm:text-lg font-bold px-8 py-6 animate-glow-pulse bg-gradient-gaming hover:opacity-90"
-              >
-                <Crown className="w-5 h-5" />
-                {t("hero.ctaTrial")}
-              </Button>
-            </Link>
-            <Link
-              to="/results"
-              className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 transition-colors"
-            >
-              <Trophy className="w-3.5 h-3.5" />
-              {t("hero.ctaResults")}
-            </Link>
-          </div>
+          {/* CTA d'abonnement — uniquement pour les visiteurs non abonnés */}
+          {!isPremium && (
+            <>
+              <div className="flex flex-col items-center gap-3 mb-5">
+                <Link to="/pricing">
+                  <Button
+                    size="lg"
+                    className="gap-2 text-base sm:text-lg font-bold px-8 py-6 animate-glow-pulse bg-gradient-gaming hover:opacity-90"
+                  >
+                    <Crown className="w-5 h-5" />
+                    {t("hero.ctaTrial")}
+                  </Button>
+                </Link>
+              </div>
 
-          {/* Ligne de confiance discrète (3 items, sans encadré) */}
-          <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
-            <li className="flex items-center gap-1.5"><BarChart3 className="w-3.5 h-3.5 text-primary" /> {t("hero.social.subscribers")}</li>
-            <li className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-primary" /> {t("hero.social.freeTrial")}</li>
-            <li className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-primary" /> {t("hero.social.securePayments")}</li>
-          </ul>
+              {/* Ligne de confiance discrète (3 items, sans encadré) */}
+              <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                <li className="flex items-center gap-1.5"><BarChart3 className="w-3.5 h-3.5 text-primary" /> {t("hero.social.subscribers")}</li>
+                <li className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-primary" /> {t("hero.social.freeTrial")}</li>
+                <li className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-primary" /> {t("hero.social.securePayments")}</li>
+              </ul>
+            </>
+          )}
 
           {isPremium && !isTrialing && (
             <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 mt-6">

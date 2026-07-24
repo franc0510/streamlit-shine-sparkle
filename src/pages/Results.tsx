@@ -1,34 +1,10 @@
 import { Navbar } from "@/components/Navbar";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
-import { supabase } from "@/integrations/supabase/client";
 import { SEO } from "@/components/SEO";
 
 const Results = () => {
   const { t } = useTranslation();
-  const { toast } = useToast();
-  const [roiEmail, setRoiEmail] = useState("");
-  const [roiLoading, setRoiLoading] = useState(false);
-
-  const handleRoiSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setRoiLoading(true);
-    try {
-      const { error } = await supabase.functions.invoke("send-roi-results", { body: { email: roiEmail } });
-      if (error) throw error;
-      toast({ title: t("about.roi.successTitle"), description: t("about.roi.successDescription") });
-      setRoiEmail("");
-    } catch {
-      toast({ title: t("about.roi.errorTitle"), description: t("about.roi.errorDescription"), variant: "destructive" });
-    } finally {
-      setRoiLoading(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -47,28 +23,6 @@ const Results = () => {
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
               {t("results.subtitle")}
             </p>
-          </div>
-
-          <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 mb-12">
-            <h2 className="text-2xl font-display font-bold mb-3 text-center">{t("about.roi.title")}</h2>
-            <p className="text-muted-foreground text-center mb-6">{t("about.roi.description")}</p>
-            <form onSubmit={handleRoiSubmit} className="max-w-md mx-auto space-y-4">
-              <Input
-                type="email"
-                placeholder={t("about.roi.emailPlaceholder")}
-                value={roiEmail}
-                onChange={(e) => setRoiEmail(e.target.value)}
-                required
-                className="bg-background/50"
-              />
-              <Button type="submit" className="w-full" disabled={roiLoading}>
-                {roiLoading ? (
-                  <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{t("about.roi.sending")}</>
-                ) : (
-                  t("about.roi.submit")
-                )}
-              </Button>
-            </form>
           </div>
 
           <section className="mb-12">
@@ -133,8 +87,7 @@ const Results = () => {
               PredictEsport publie en toute transparence les performances de son modèle de Machine Learning sur les paris esport.
               Accuracy, AUC, LogLoss : nos métriques sont mesurées en continu sur l'ensemble des matchs LFL, LEC, LCK, LPL, LCS,
               MSI et Worlds. Notre approche basée sur LightGBM et le Voting Ensemble nous permet d'identifier des value bets sur
-              Pinnacle, Unibet, Polymarket et Stake. Recevez gratuitement par email un rapport détaillé du ROI réalisé sur
-              les Worlds 2025 pour évaluer la rentabilité réelle de notre algorithme avant de souscrire.
+              Pinnacle, Unibet, Polymarket et Stake, pour évaluer la performance réelle de notre algorithme.
             </p>
           </div>
         </div>
