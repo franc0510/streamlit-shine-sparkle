@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, Crown, Sparkles, Calendar, Gift } from "lucide-react";
+import { Check, Crown, Sparkles, Calendar, ShieldCheck, TrendingUp, HelpCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   STRIPE_PAYMENT_LINK_MONTHLY,
@@ -21,6 +21,8 @@ const Pricing = () => {
   const { toast } = useToast();
 
   const features = t("pricing.features", { returnObjects: true }) as string[];
+  const valuePoints = t("pricing.valuePoints", { returnObjects: true }) as string[];
+  const faqItems = t("pricing.faqItems", { returnObjects: true }) as { q: string; a: string }[];
 
   const handleCheckout = (plan: "monthly" | "yearly") => {
     if (!user) {
@@ -50,7 +52,7 @@ const Pricing = () => {
           {/* Header */}
           <div className="text-center mb-10 sm:mb-14 animate-fade-in">
             <Badge className="mb-4 gap-1 bg-amber-500/15 text-amber-500 border-amber-500/30">
-              <Gift className="w-3.5 h-3.5" />
+              <ShieldCheck className="w-3.5 h-3.5" />
               {t("pricing.trialBadge")}
             </Badge>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 bg-gradient-gaming bg-clip-text text-transparent">
@@ -148,6 +150,47 @@ const Pricing = () => {
               <p className="font-semibold mb-1">📊 {t("pricing.reassurance.algoTitle")}</p>
               <p className="text-muted-foreground text-xs">{t("pricing.reassurance.algoDesc")}</p>
             </Card>
+          </div>
+
+          {/* Pourquoi 100€ — justification de la valeur */}
+          <Card className="p-6 sm:p-8 bg-gradient-card border-border/50 mb-8">
+            <div className="flex items-center gap-2 mb-4 justify-center">
+              <TrendingUp className="w-5 h-5 text-primary" />
+              <h2 className="text-xl sm:text-2xl font-display font-bold text-center">
+                {t("pricing.valueTitle")}
+              </h2>
+            </div>
+            <ul className="space-y-3 max-w-2xl mx-auto">
+              {valuePoints.map((p, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm sm:text-base">
+                  <Check className="w-4 h-4 text-primary mt-1 shrink-0" />
+                  <span className="text-foreground/90">{p}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="text-center mt-6">
+              <Link to="/results" className="text-sm text-accent hover:underline">
+                {t("hero.ctaResults")} →
+              </Link>
+            </div>
+          </Card>
+
+          {/* FAQ courte */}
+          <div className="mb-12 max-w-2xl mx-auto">
+            <div className="flex items-center gap-2 mb-4 justify-center">
+              <HelpCircle className="w-5 h-5 text-primary" />
+              <h2 className="text-xl sm:text-2xl font-display font-bold text-center">
+                {t("pricing.faqTitle")}
+              </h2>
+            </div>
+            <div className="space-y-3">
+              {faqItems.map((item, i) => (
+                <Card key={i} className="p-4 bg-gradient-card border-border/50">
+                  <p className="font-semibold text-sm mb-1">{item.q}</p>
+                  <p className="text-muted-foreground text-sm">{item.a}</p>
+                </Card>
+              ))}
+            </div>
           </div>
 
           {/* Hidden SEO copy */}

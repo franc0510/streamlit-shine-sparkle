@@ -152,7 +152,14 @@ export const Navbar = () => {
                               else setMobileMenuOpen(false);
                             }}
                           >
-                            {game.name}
+                            <span className="flex items-center justify-between">
+                              {game.name}
+                              {!game.active && (
+                                <span className="rounded bg-accent/15 text-accent text-[10px] font-semibold px-1.5 py-0.5">
+                                  {t('nav.soon')}
+                                </span>
+                              )}
+                            </span>
                           </Link>
                         </DrawerClose>
                       ))}
@@ -242,6 +249,11 @@ export const Navbar = () => {
                     onClick={(e) => !game.active && e.preventDefault()}
                   >
                     {game.name}
+                    {!game.active && (
+                      <span className="ml-1 rounded bg-accent/15 text-accent text-[9px] font-semibold px-1 py-0.5 align-middle">
+                        {t('nav.soon')}
+                      </span>
+                    )}
                   </Link>
                 ))}
               </div>

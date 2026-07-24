@@ -21,7 +21,8 @@
     "logoutAllTitle": "Déconnexion de tous les appareils",
     "logoutAllDescription": "Êtes-vous sûr de vouloir vous déconnecter de tous vos appareils ? Vous devrez vous reconnecter sur chacun d'eux.",
     "cancel": "Annuler",
-    "confirm": "Confirmer"
+    "confirm": "Confirmer",
+    "soon": "Bientôt"
   },
   "reviews": {
     "title": "Avis Clients",
@@ -96,6 +97,27 @@
       "Statistiques détaillées par joueur et par équipe",
       "Notifications des nouveaux matchs et opportunités",
       "Support prioritaire par email et Discord"
+    ],
+    "valueTitle": "Pourquoi 100€ / mois ?",
+    "valuePoints": [
+      "Un vrai algorithme de Machine Learning (LightGBM, Voting Ensemble) entraîné sur 10 ans de données — pas des avis subjectifs.",
+      "Détection automatique des value bets (EV+) sur toutes les grandes ligues, cotes comparées en temps réel.",
+      "Backtest 2026 vérifiable : un seul bon value bet peut couvrir l'abonnement du mois."
+    ],
+    "faqTitle": "Questions fréquentes",
+    "faqItems": [
+      {
+        "q": "Puis-je résilier à tout moment ?",
+        "a": "Oui. Aucun engagement : vous résiliez en 1 clic depuis votre espace, et l'accès reste actif jusqu'à la fin de la période déjà payée."
+      },
+      {
+        "q": "Et le remboursement ?",
+        "a": "Les abonnements sont sans engagement et résiliables à tout moment. Pour toute question de facturation, contactez-nous : on trouve une solution."
+      },
+      {
+        "q": "Pourquoi ce prix ?",
+        "a": "Le produit repose sur un véritable algorithme prédictif et un suivi backtesté des performances. Le prix reflète cette valeur et l'accès complet à toutes les ligues."
+      }
     ]
   },
   "faq": {
@@ -145,7 +167,17 @@
       "description": "Accédez à l'ensemble de nos analyses, prédictions avancées et statistiques détaillées pour maximiser vos chances de succès.",
       "startNow": "Commencer maintenant",
       "subscribePremium": "S'abonner Premium"
-    }
+    },
+    "howItWorks": {
+      "title": "Comment ça marche",
+      "step1Title": "Le modèle analyse",
+      "step1Desc": "Notre IA (LightGBM, Voting Ensemble) traite 10 ans de données pour estimer la probabilité de victoire de chaque équipe.",
+      "step2Title": "Les value bets sont détectés",
+      "step2Desc": "On compare nos probabilités aux cotes des bookmakers et on isole les paris à valeur positive (EV+).",
+      "step3Title": "Tu mises avec Kelly",
+      "step3Desc": "Chaque pari indique la mise recommandée (Kelly borné 1-2%) selon ta bankroll. Tu suis, c'est tout."
+    },
+    "responsibleGambling": "18+ · Les paris comportent un risque. Jouez responsablement."
   },
   "results": {
     "title": "Nos Résultats & Performances",
