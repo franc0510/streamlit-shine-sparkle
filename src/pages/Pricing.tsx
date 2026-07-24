@@ -4,6 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Check, Crown, Sparkles, Calendar, ShieldCheck, TrendingUp, HelpCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
   STRIPE_PAYMENT_LINK_MONTHLY,
   STRIPE_PAYMENT_LINK_YEARLY,
   buildStripeLink,
@@ -136,22 +142,6 @@ const Pricing = () => {
             </Card>
           </div>
 
-          {/* Reassurance row */}
-          <div className="grid sm:grid-cols-3 gap-4 mb-12">
-            <Card className="p-4 bg-gradient-card border-border/50 text-sm text-center">
-              <p className="font-semibold mb-1">🔒 {t("pricing.reassurance.secureTitle")}</p>
-              <p className="text-muted-foreground text-xs">{t("pricing.reassurance.secureDesc")}</p>
-            </Card>
-            <Card className="p-4 bg-gradient-card border-border/50 text-sm text-center">
-              <p className="font-semibold mb-1">⏱️ {t("pricing.reassurance.cancelTitle")}</p>
-              <p className="text-muted-foreground text-xs">{t("pricing.reassurance.cancelDesc")}</p>
-            </Card>
-            <Card className="p-4 bg-gradient-card border-border/50 text-sm text-center">
-              <p className="font-semibold mb-1">📊 {t("pricing.reassurance.algoTitle")}</p>
-              <p className="text-muted-foreground text-xs">{t("pricing.reassurance.algoDesc")}</p>
-            </Card>
-          </div>
-
           {/* Pourquoi 100€ — justification de la valeur */}
           <Card className="p-6 sm:p-8 bg-gradient-card border-border/50 mb-8">
             <div className="flex items-center gap-2 mb-4 justify-center">
@@ -183,14 +173,18 @@ const Pricing = () => {
                 {t("pricing.faqTitle")}
               </h2>
             </div>
-            <div className="space-y-3">
+            <Accordion type="single" collapsible className="w-full">
               {faqItems.map((item, i) => (
-                <Card key={i} className="p-4 bg-gradient-card border-border/50">
-                  <p className="font-semibold text-sm mb-1">{item.q}</p>
-                  <p className="text-muted-foreground text-sm">{item.a}</p>
-                </Card>
+                <AccordionItem key={i} value={`faq-${i}`}>
+                  <AccordionTrigger className="text-left text-sm font-semibold">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
 
           {/* Hidden SEO copy */}

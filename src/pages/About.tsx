@@ -186,19 +186,6 @@ const About = () => {
             </div>
           </section>
 
-          {/* Lien vers la page résultats */}
-          <section className="mb-12">
-            <div className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 text-center">
-              <h2 className="text-2xl font-display font-bold mb-3">Découvrez nos résultats</h2>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Performances détaillées de notre algorithme de Machine Learning, métriques de précision et ROI réel.
-              </p>
-              <Link to="/results">
-                <Button size="lg" variant="default">Voir nos résultats & performances</Button>
-              </Link>
-            </div>
-          </section>
-
           {/* Avis */}
           <section id="avis" className="mb-12 scroll-mt-20">
             <div className="text-center mb-8">

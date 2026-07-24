@@ -4,7 +4,7 @@ import { MatchFilters } from "@/components/MatchFilters";
 import { Faq } from "@/components/Faq";
 import { BacktestPerformance } from "@/components/BacktestPerformance";
 import { Button } from "@/components/ui/button";
-import { Lock, Check, Trophy, Crown, ChevronDown, Users, Zap, ShieldCheck, BarChart3, Sparkles, Info, Wallet, Search } from "lucide-react";
+import { Lock, Check, Trophy, Crown, ChevronDown, Zap, ShieldCheck, BarChart3, Info, Wallet, Search } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
@@ -214,56 +214,41 @@ const Index = () => {
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
-        {/* Performance du modèle — première chose visible */}
-        <BacktestPerformance />
-
-        {/* HERO — allégé (le backtest ci-dessus fait le hook principal) */}
-        <div className="text-center mb-8 sm:mb-10 animate-fade-in">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold mb-1.5 bg-gradient-gaming bg-clip-text text-transparent">
+        {/* HERO minimal — quoi + 1 CTA */}
+        <div className="text-center mb-8 animate-fade-in">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold mb-2 bg-gradient-gaming bg-clip-text text-transparent">
             {t("hero.title")}
           </h1>
-          <p className="text-base sm:text-lg md:text-xl font-display font-semibold text-foreground/90 mb-2">
+          <p className="text-base sm:text-lg md:text-xl font-display font-semibold text-foreground/90 mb-6">
             {t("hero.subtitle")}
           </p>
-          <p className="text-xs sm:text-sm text-muted-foreground mb-5 px-4">
-            {t("hero.leagues")}
-          </p>
 
-          {/* Social proof bar — full width, single line with icons */}
-          <div className="max-w-5xl mx-auto bg-gradient-card border border-border/50 rounded-xl px-4 py-3 mb-6">
-            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm text-foreground/90">
-              <li className="flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" /> {t("hero.social.subscribers")}</li>
-              <li className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-primary" /> {t("hero.social.upToDate")}</li>
-              <li className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-amber-500" /> {t("hero.social.freeTrial")}</li>
-              <li className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" /> {t("hero.social.leagues")}</li>
-              <li className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-primary" /> {t("hero.social.securePayments")}</li>
-            </ul>
-          </div>
-
-          {/* CTAs sous la barre */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-4">
+          {/* CTA principal unique + lien secondaire */}
+          <div className="flex flex-col items-center gap-3 mb-5">
             <Link to="/pricing">
               <Button
                 size="lg"
-                className="gap-2 text-base sm:text-lg font-bold px-6 sm:px-8 py-6 sm:py-7 shadow-elegant animate-glow-pulse bg-gradient-gaming hover:opacity-90"
+                className="gap-2 text-base sm:text-lg font-bold px-8 py-6 animate-glow-pulse bg-gradient-gaming hover:opacity-90"
               >
-                <Crown className="w-5 h-5 sm:w-6 sm:h-6" />
+                <Crown className="w-5 h-5" />
                 {t("hero.ctaTrial")}
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
             </Link>
-            <Link to="/results">
-              <Button size="lg" variant="outline" className="gap-2">
-                <Trophy className="w-4 h-4" />
-                {t("hero.ctaResults")}
-              </Button>
+            <Link
+              to="/results"
+              className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 transition-colors"
+            >
+              <Trophy className="w-3.5 h-3.5" />
+              {t("hero.ctaResults")}
             </Link>
           </div>
 
-          {/* Mention jeu responsable */}
-          <p className="text-xs text-muted-foreground/70 mb-2">
-            {t("home.responsibleGambling")}
-          </p>
+          {/* Ligne de confiance discrète (3 items, sans encadré) */}
+          <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+            <li className="flex items-center gap-1.5"><BarChart3 className="w-3.5 h-3.5 text-primary" /> {t("hero.social.subscribers")}</li>
+            <li className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-primary" /> {t("hero.social.freeTrial")}</li>
+            <li className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-primary" /> {t("hero.social.securePayments")}</li>
+          </ul>
 
           {isPremium && !isTrialing && (
             <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 mt-6">
@@ -281,46 +266,18 @@ const Index = () => {
 
           {/* SEO text — invisible (sr-only), heavy keywords */}
           <p className="sr-only">
-            {t("hero.seoCopy")}
+            {t("hero.seoCopy")} {t("hero.leagues")}
             PredictEsport prédictions LoL pronostics esport League of Legends IA Machine Learning LightGBM Voting Ensemble
             value bet EV expected value LFL LEC LCK LPL LCS MSI Worlds EMEA Masters Arabian League NLC PRM Ultraliga
             Hitpoint Masters LJL CBLOL LLA. Pinnacle Unibet Polymarket Stake odds comparison.
             English: best LoL prediction tool, esports betting tips, AI esports predictions, LoL odds analysis,
             value bet finder, no commitment subscription. Español: pronósticos esports League of Legends IA, mejores cuotas LoL,
-            apuestas valor LFL LEC. 中文: 英雄联盟预测 电竞预测 AI 价值投注 免费试用.
+            apuestas valor LFL LEC. 中文: 英雄联盟预测 电竞预测 AI 价值投注.
           </p>
         </div>
 
-        {/* Comment ça marche — 3 étapes */}
-        <div className="mb-10 sm:mb-12">
-          <h2 className="text-xl sm:text-2xl font-display font-bold text-center mb-6">
-            {t("home.howItWorks.title")}
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              { icon: Search, title: t("home.howItWorks.step1Title"), desc: t("home.howItWorks.step1Desc") },
-              { icon: Zap, title: t("home.howItWorks.step2Title"), desc: t("home.howItWorks.step2Desc") },
-              { icon: Wallet, title: t("home.howItWorks.step3Title"), desc: t("home.howItWorks.step3Desc") },
-            ].map((step, i) => {
-              const Icon = step.icon;
-              return (
-                <div
-                  key={i}
-                  className="relative bg-gradient-card border border-border/50 rounded-xl p-5 text-center"
-                >
-                  <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <span className="absolute top-3 right-4 text-xs font-display font-bold text-muted-foreground/40">
-                    {i + 1}
-                  </span>
-                  <h3 className="font-display font-bold mb-1.5">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground">{step.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        {/* Performance du modèle — preuve juste sous le hero */}
+        <BacktestPerformance />
 
         {/* Matches section */}
         <div className="mb-6">
@@ -414,14 +371,43 @@ const Index = () => {
           </>
         )}
 
-        {/* Recent predictions */}
-        <div className="mt-16 mb-8">
+        {/* Comment ça marche — bandeau compact */}
+        <div className="mt-12 mb-10 bg-gradient-card border border-border/50 rounded-xl p-5 sm:p-6">
+          <h2 className="text-base sm:text-lg font-display font-bold text-center mb-4">
+            {t("home.howItWorks.title")}
+          </h2>
+          <div className="grid gap-4 sm:gap-6 sm:grid-cols-3">
+            {[
+              { icon: Search, n: 1, title: t("home.howItWorks.step1Title"), desc: t("home.howItWorks.step1Desc") },
+              { icon: Zap, n: 2, title: t("home.howItWorks.step2Title"), desc: t("home.howItWorks.step2Desc") },
+              { icon: Wallet, n: 3, title: t("home.howItWorks.step3Title"), desc: t("home.howItWorks.step3Desc") },
+            ].map((step) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.n} className="flex items-start gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold leading-tight">
+                      {step.n}. {step.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{step.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Recent predictions (réduites à 3) */}
+        <div className="mt-10 mb-6">
           <h2 className="text-2xl font-display font-bold">{t('home.recentPredictions')}</h2>
           <p className="text-sm text-muted-foreground mt-2">{t('home.recentPredictionsDesc')}</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {pastMatches.map((match, index) => (
+          {pastMatches.slice(0, 3).map((match, index) => (
             <Link key={index} to={`${buildMatchUrl(match)}&proba1=${match.proba1}&proba2=${match.proba2}&ev1=${calculateMinOdds(match.proba1)}&ev2=${calculateMinOdds(match.proba2)}`} className="block">
               <MatchCard
                 tournament={match.tournament}
@@ -447,21 +433,14 @@ const Index = () => {
           <div className="mt-12 text-center bg-gradient-card border border-border/50 rounded-xl p-8">
             <h3 className="text-2xl font-display font-bold mb-4">{t('home.premiumCta.title')}</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">{t('home.premiumCta.description')}</p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="flex items-center justify-center">
               <Link to="/pricing">
                 <Button
                   size="lg"
-                  className="gap-2 text-base sm:text-lg font-bold px-6 sm:px-8 py-6 sm:py-7 shadow-elegant animate-glow-pulse bg-gradient-gaming hover:opacity-90"
+                  className="gap-2 text-base sm:text-lg font-bold px-8 py-6 animate-glow-pulse bg-gradient-gaming hover:opacity-90"
                 >
-                  <Crown className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <Crown className="w-5 h-5" />
                   {t("hero.ctaTrial")}
-                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
-                </Button>
-              </Link>
-              <Link to="/results">
-                <Button size="lg" variant="outline" className="gap-2">
-                  <Trophy className="w-4 h-4" />
-                  {t("hero.ctaResults")}
                 </Button>
               </Link>
             </div>
@@ -495,6 +474,9 @@ const Index = () => {
             <p>{t("footer.rights")}</p>
             <p className="mt-2 max-w-3xl mx-auto">
               {t("footer.disclaimer")}
+            </p>
+            <p className="mt-2 font-medium text-muted-foreground">
+              {t("home.responsibleGambling")}
             </p>
           </div>
         </div>
