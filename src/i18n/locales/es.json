@@ -48,36 +48,36 @@
     "subtitle": "Predicciones LoL y Pronósticos Esports",
     "leagues": "LFL, LEC, LCK, LPL, LCS y 15+ ligas más",
     "social": {
-      "subscribers": "+1.000 suscriptores",
+      "subscribers": "Backtest 2026 verificable",
       "upToDate": "Pronósticos actualizados antes de cada partido",
-      "freeTrial": "7 días gratis",
+      "freeTrial": "Sin compromiso",
       "leagues": "Análisis de 15+ ligas",
       "securePayments": "Pagos seguros"
     },
-    "ctaTrial": "Prueba gratuita de 7 días",
+    "ctaTrial": "Suscribirse",
     "ctaResults": "Ver nuestros resultados",
     "seoCopy": "PredictEsport analiza cada partido de League of Legends para darte las mejores predicciones antes de apostar. LFL, LEC, LCK, MSI, Worlds: descubre nuestros pronósticos con IA."
   },
   "pricing": {
-    "trialBadge": "Prueba gratuita de 7 días",
+    "trialBadge": "Sin compromiso",
     "title": "Elige tu plan PredictEsport",
     "subtitle": "Accede a todas las predicciones de League of Legends generadas por nuestra IA. Cancela cuando quieras.",
-    "startTrial": "Comenzar prueba gratuita",
+    "startTrial": "Suscribirse",
     "loginRequiredTitle": "Inicio de sesión requerido",
-    "loginRequiredDesc": "Crea una cuenta o inicia sesión para comenzar tu prueba gratuita.",
+    "loginRequiredDesc": "Crea una cuenta o inicia sesión para suscribirte.",
     "alreadyAccount": "¿Ya tienes una cuenta?",
     "monthly": {
       "title": "Mensual",
       "desc": "Facturación mensual, sin compromiso.",
       "perMonth": "mes",
-      "trialNote": "7 días gratis, luego 100€/mes"
+      "trialNote": "Sin compromiso · cancela cuando quieras"
     },
     "yearly": {
       "title": "Anual",
       "desc": "Ahorra 200€ al año con la suscripción anual.",
       "perYear": "año",
       "badge": "Mejor oferta · 2 meses gratis",
-      "trialNote": "7 días gratis, luego 1000€/año"
+      "trialNote": "1000€/año · equivale a 2 meses gratis"
     },
     "reassurance": {
       "secureTitle": "Pago seguro Stripe",
@@ -338,9 +338,9 @@
     "premiumSubscription": "Suscripción Premium",
     "renewalDate": "Renovación el",
     "cancelAnytime": "Cancelar en cualquier momento",
-    "freeTrialBadge": "7 días de prueba gratis",
-    "startFreeTrial": "Probar gratis 7 días",
-    "trialInfo": "7 días gratis, luego 100€/mes. Cancelar en cualquier momento.",
+    "freeTrialBadge": "Sin compromiso",
+    "startFreeTrial": "Suscribirse",
+    "trialInfo": "100€/mes, sin compromiso. Cancela cuando quieras.",
     "trialBadge": "Prueba gratis",
     "trialEndsOn": "Prueba gratis hasta el"
   },
@@ -394,6 +394,9 @@
     "seeAllBets": "Ver todas las apuestas",
     "hideBets": "Ocultar apuestas",
     "coverageNote": "«Partidos analizados» = partidos para los que el modelo generó una predicción (no todos tenían cuotas disponibles).",
+    "yourBankroll": "Tu banca",
+    "stake": "Apuesta Kelly",
+    "kellyNote": "Apuestas calculadas con la estrategia Kelly acotado 1-2 % aplicada a tu banca. Ajusta el importe arriba.",
     "disclaimer": "El Kelly acotado supone una apuesta realmente colocable. Rentabilidad pasada ≠ garantía futura."
   }
 }

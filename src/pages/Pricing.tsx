@@ -40,7 +40,7 @@ const Pricing = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Abonnement Premium — PredictEsport"
-        description="Accédez à toutes les prédictions LoL IA pour 100€/mois. 7 jours d'essai gratuit, sans engagement."
+        description="Accédez à toutes les prédictions LoL IA pour 100€/mois. Sans engagement, annulation à tout moment."
         path="/pricing"
       />
       <Navbar />
@@ -156,13 +156,13 @@ const Pricing = () => {
             <p>
               PredictEsport propose deux formules d'abonnement à son outil de prédictions esport pour
               League of Legends : un abonnement mensuel à 100€ et un abonnement annuel à 1000€
-              équivalent à 2 mois offerts (1200€ - 200€ d'économie). Tous les abonnements incluent 7 jours
-              d'essai gratuit pour tester l'algorithme de Machine Learning (LightGBM, Voting Ensemble, Random Forest)
+              équivalent à 2 mois offerts (1200€ - 200€ d'économie). Sans engagement, résiliable à tout moment,
+              pour tester l'algorithme de Machine Learning (LightGBM, Voting Ensemble, Random Forest)
               sur les compétitions LFL, LEC, LCK, LPL, LCS, MSI, Worlds, EMEA Masters, Arabian League, NLC, PRM,
               Ultraliga, Hitpoint Masters, LJL, CBLOL et LLA. L'objectif est d'identifier les value bets (EV positif)
               sur les cotes proposées par Pinnacle, Unibet, Polymarket et Stake. Subscription LoL betting tips,
               esports prediction subscription, pronosticos esports League of Legends, 英雄联盟预测订阅.
-              Pronostic LoL gratuit 7 jours, pronostic League of Legends IA, pronostic esport LFL LEC LCK,
+              Pronostic LoL IA, pronostic League of Legends IA, pronostic esport LFL LEC LCK,
               pari LoL value bet expected value, abonnement pronostic esport mensuel annuel.
             </p>
           </div>

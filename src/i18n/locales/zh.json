@@ -48,36 +48,36 @@
     "subtitle": "LoL 预测与电竞投注建议",
     "leagues": "LFL、LEC、LCK、LPL、LCS 及其他 15+ 联赛",
     "social": {
-      "subscribers": "+1,000 名订阅者",
+      "subscribers": "2026年可验证回测",
       "upToDate": "每场比赛前更新预测",
-      "freeTrial": "7 天免费试用",
+      "freeTrial": "无需承诺",
       "leagues": "分析 15+ 联赛",
       "securePayments": "安全支付"
     },
-    "ctaTrial": "7 天免费试用",
+    "ctaTrial": "订阅",
     "ctaResults": "查看我们的结果",
     "seoCopy": "PredictEsport 分析每一场英雄联盟比赛，在您下注前提供最佳预测。LFL、LEC、LCK、MSI、全球总决赛：通过我们的 AI 获取专业预测。"
   },
   "pricing": {
-    "trialBadge": "7 天免费试用",
+    "trialBadge": "无需承诺",
     "title": "选择您的 PredictEsport 套餐",
     "subtitle": "通过我们的 AI 访问所有英雄联盟预测。可随时取消。",
-    "startTrial": "开始免费试用",
+    "startTrial": "订阅",
     "loginRequiredTitle": "需要登录",
-    "loginRequiredDesc": "创建账户或登录以开始免费试用。",
+    "loginRequiredDesc": "创建账户或登录以订阅。",
     "alreadyAccount": "已有账户？",
     "monthly": {
       "title": "月度",
       "desc": "按月计费，无承诺。",
       "perMonth": "月",
-      "trialNote": "7 天免费，之后每月 €100"
+      "trialNote": "无需承诺 · 随时取消"
     },
     "yearly": {
       "title": "年度",
       "desc": "通过年度订阅每年节省 €200。",
       "perYear": "年",
       "badge": "最佳选择 · 2 个月免费",
-      "trialNote": "7 天免费，之后每年 €1000"
+      "trialNote": "1000€/年 · 相当于多送2个月"
     },
     "reassurance": {
       "secureTitle": "Stripe 安全支付",
@@ -338,9 +338,9 @@
     "premiumSubscription": "高级订阅",
     "renewalDate": "续订日期",
     "cancelAnytime": "随时取消",
-    "freeTrialBadge": "7天免费试用",
-    "startFreeTrial": "开始7天免费试用",
-    "trialInfo": "7天免费，之后每月100€。随时取消。",
+    "freeTrialBadge": "无需承诺",
+    "startFreeTrial": "订阅",
+    "trialInfo": "€100/月，无需承诺。随时取消。",
     "trialBadge": "免费试用",
     "trialEndsOn": "免费试用至"
   },
@@ -394,6 +394,9 @@
     "seeAllBets": "查看全部投注",
     "hideBets": "隐藏投注",
     "coverageNote": "\"已分析比赛\" = 模型生成了预测的比赛（并非全部都有可用赔率）。",
+    "yourBankroll": "你的本金",
+    "stake": "凯利注额",
+    "kellyNote": "注额按有界凯利 1-2% 策略应用到你的本金计算。请在上方调整金额。",
     "disclaimer": "有界凯利假设注额实际可下。过往表现 ≠ 未来保证。"
   }
 }

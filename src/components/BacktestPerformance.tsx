@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ChevronDown, ChevronUp, ShieldCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -202,6 +203,7 @@ export const BacktestPerformance = () => {
     null
   );
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
+  const [bankroll, setBankroll] = useState(1000);
 
   /* --- formatteurs localisés --- */
   const locale = useMemo(
@@ -383,12 +385,12 @@ export const BacktestPerformance = () => {
     };
   }, [bankrollRows, betRows, edge]);
 
-  /* --- mois disponibles pour le navigateur pari-par-pari --- */
+  /* --- mois disponibles pour le navigateur pari-par-pari (stratégie Kelly) --- */
   const betMonths = useMemo(() => {
     const ms = Array.from(
       new Set(
         betRows
-          .filter((b) => b.edge === edge && b.bet_type === "flat")
+          .filter((b) => b.edge === edge && b.bet_type === "kelly_bounded")
           .map((b) => b.month)
       )
     ).sort((a, b) => b.localeCompare(a)); // récent -> ancien
@@ -400,17 +402,26 @@ export const BacktestPerformance = () => {
       ? selectedMonth
       : betMonths[0] ?? null;
 
+  // Paris Kelly du mois, avec mise/gain recalculés pour la bankroll de l'utilisateur.
+  // Kelly borné 1-2% : la mise est un % de la bankroll → on applique ce même % à la bankroll saisie.
   const monthBets = useMemo(() => {
     if (!effectiveMonth) return [];
     return betRows
       .filter(
         (b) =>
           b.edge === edge &&
-          b.bet_type === "flat" &&
+          b.bet_type === "kelly_bounded" &&
           b.month === effectiveMonth
       )
-      .sort((a, b) => b.date.localeCompare(a.date));
-  }, [betRows, edge, effectiveMonth]);
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .map((b) => {
+        const bkBefore = b.bankroll_after_eur - b.profit_eur;
+        const pct = bkBefore > 0 ? b.stake_eur / bkBefore : 0;
+        const userStake = pct * bankroll;
+        const userProfit = b.won ? userStake * (b.odds - 1) : -userStake;
+        return { ...b, pct, userStake, userProfit };
+      });
+  }, [betRows, edge, effectiveMonth, bankroll]);
 
   const bestFinal = Math.max(flatFinal, kellyFinal);
 
@@ -695,31 +706,58 @@ export const BacktestPerformance = () => {
                     </TableBody>
                   </Table>
                 </div>
+                <p className="text-[11px] text-muted-foreground/70 mt-2">
+                  {t("backtest.coverageNote")}
+                </p>
               </div>
             )}
 
-            {/* Navigateur pari-par-pari */}
+            {/* Navigateur pari-par-pari + simulateur de mise Kelly */}
             {betMonths.length > 0 && (
               <div>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
                   <h3 className="text-sm font-display font-bold">
                     {t("backtest.allBetsTitle")}
                   </h3>
-                  <Select
-                    value={effectiveMonth ?? undefined}
-                    onValueChange={setSelectedMonth}
-                  >
-                    <SelectTrigger className="w-full sm:w-[180px] bg-background border-border">
-                      <SelectValue placeholder={t("backtest.selectMonth")} />
-                    </SelectTrigger>
-                    <SelectContent className="bg-background border-border z-50">
-                      {betMonths.map((m) => (
-                        <SelectItem key={m} value={m}>
-                          {formatMonth(m)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <div className="flex items-center gap-2">
+                    <label
+                      htmlFor="bk-input"
+                      className="text-xs text-muted-foreground whitespace-nowrap"
+                    >
+                      {t("backtest.yourBankroll")}
+                    </label>
+                    <div className="relative">
+                      <Input
+                        id="bk-input"
+                        type="number"
+                        min={0}
+                        step={100}
+                        value={bankroll}
+                        onChange={(e) =>
+                          setBankroll(Math.max(0, Number(e.target.value) || 0))
+                        }
+                        className="w-[104px] h-9 pr-6 bg-background border-border tabular-nums"
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-muted-foreground pointer-events-none">
+                        €
+                      </span>
+                    </div>
+                    <Select
+                      value={effectiveMonth ?? undefined}
+                      onValueChange={setSelectedMonth}
+                    >
+                      <SelectTrigger className="w-[130px] sm:w-[150px] bg-background border-border">
+                        <SelectValue placeholder={t("backtest.selectMonth")} />
+                      </SelectTrigger>
+                      <SelectContent className="bg-background border-border z-50">
+                        {betMonths.map((m) => (
+                          <SelectItem key={m} value={m}>
+                            {formatMonth(m)}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
                 <div className="max-h-[420px] overflow-y-auto overflow-x-auto rounded-lg border border-border/50">
                   <Table>
@@ -730,6 +768,9 @@ export const BacktestPerformance = () => {
                         <TableHead>{t("backtest.betOn")}</TableHead>
                         <TableHead className="text-right">
                           {t("backtest.odds")}
+                        </TableHead>
+                        <TableHead className="text-right">
+                          {t("backtest.stake")}
                         </TableHead>
                         <TableHead className="text-center">
                           {t("backtest.result")}
@@ -745,7 +786,7 @@ export const BacktestPerformance = () => {
                           <TableCell className="whitespace-nowrap text-muted-foreground">
                             {formatBetDate(b.date)}
                           </TableCell>
-                          <TableCell className="max-w-[200px] truncate">
+                          <TableCell className="max-w-[180px] truncate">
                             {b.match}
                           </TableCell>
                           <TableCell className="font-medium whitespace-nowrap">
@@ -754,18 +795,27 @@ export const BacktestPerformance = () => {
                           <TableCell className="text-right tabular-nums">
                             {b.odds.toFixed(2)}
                           </TableCell>
+                          <TableCell className="text-right tabular-nums whitespace-nowrap">
+                            <span className="font-semibold text-primary">
+                              {eur2.format(b.userStake)}
+                            </span>
+                            <span className="text-muted-foreground/70 text-[11px]">
+                              {" "}
+                              ({(b.pct * 100).toFixed(1)}%)
+                            </span>
+                          </TableCell>
                           <TableCell className="text-center">
                             {b.won ? "✅" : "❌"}
                           </TableCell>
                           <TableCell
                             className={`text-right tabular-nums font-medium ${
-                              b.profit_eur >= 0
+                              b.userProfit >= 0
                                 ? "text-emerald-500"
                                 : "text-red-500"
                             }`}
                           >
-                            {b.profit_eur >= 0 ? "+" : ""}
-                            {eur2.format(b.profit_eur)}
+                            {b.userProfit >= 0 ? "+" : ""}
+                            {eur2.format(b.userProfit)}
                           </TableCell>
                         </TableRow>
                       ))}
@@ -773,7 +823,7 @@ export const BacktestPerformance = () => {
                   </Table>
                 </div>
                 <p className="text-[11px] text-muted-foreground/70 mt-2">
-                  {t("backtest.coverageNote")}
+                  {t("backtest.kellyNote")}
                 </p>
               </div>
             )}
