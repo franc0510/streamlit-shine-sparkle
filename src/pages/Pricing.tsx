@@ -158,11 +158,6 @@ const Pricing = () => {
                 </li>
               ))}
             </ul>
-            <div className="text-center mt-6">
-              <Link to="/results" className="text-sm text-accent hover:underline">
-                {t("hero.ctaResults")} →
-              </Link>
-            </div>
           </Card>
 
           {/* FAQ courte */}
@@ -185,47 +180,6 @@ const Pricing = () => {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
-
-          {/* Pourquoi 100€ — justification de la valeur */}
-          <Card className="p-6 sm:p-8 bg-gradient-card border-border/50 mb-8">
-            <div className="flex items-center gap-2 mb-4 justify-center">
-              <TrendingUp className="w-5 h-5 text-primary" />
-              <h2 className="text-xl sm:text-2xl font-display font-bold text-center">
-                {t("pricing.valueTitle")}
-              </h2>
-            </div>
-            <ul className="space-y-3 max-w-2xl mx-auto">
-              {valuePoints.map((p, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-sm sm:text-base">
-                  <Check className="w-4 h-4 text-primary mt-1 shrink-0" />
-                  <span className="text-foreground/90">{p}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="text-center mt-6">
-              <Link to="/results" className="text-sm text-accent hover:underline">
-                {t("hero.ctaResults")} →
-              </Link>
-            </div>
-          </Card>
-
-          {/* FAQ courte */}
-          <div className="mb-12 max-w-2xl mx-auto">
-            <div className="flex items-center gap-2 mb-4 justify-center">
-              <HelpCircle className="w-5 h-5 text-primary" />
-              <h2 className="text-xl sm:text-2xl font-display font-bold text-center">
-                {t("pricing.faqTitle")}
-              </h2>
-            </div>
-            <div className="space-y-3">
-              {faqItems.map((item, i) => (
-                <Card key={i} className="p-4 bg-gradient-card border-border/50">
-                  <p className="font-semibold text-sm mb-1">{item.q}</p>
-                  <p className="text-muted-foreground text-sm">{item.a}</p>
-                </Card>
-              ))}
-            </div>
           </div>
 
           {/* Hidden SEO copy */}

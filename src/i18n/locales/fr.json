@@ -113,10 +113,6 @@
       {
         "q": "Et le remboursement ?",
         "a": "Les abonnements sont sans engagement et résiliables à tout moment. Pour toute question de facturation, contactez-nous : on trouve une solution."
-      },
-      {
-        "q": "Pourquoi ce prix ?",
-        "a": "Le produit repose sur un véritable algorithme prédictif et un suivi backtesté des performances. Le prix reflète cette valeur et l'accès complet à toutes les ligues."
       }
     ]
   },
@@ -398,7 +394,8 @@
     "odds": "Cotes",
     "aiRecommendation": "🤖 Recommandation IA",
     "betOn": "Parier ↗",
-    "seriesWinProbability": "Probabilité de victoire de série"
+    "seriesWinProbability": "Probabilité de victoire de série",
+    "kellyStake": "Mise Kelly : {{pct}} % de votre bankroll"
   },
   "backtest": {
     "title": "{{start}} suivis depuis janvier 2026 → {{final}}",

@@ -113,10 +113,6 @@
       {
         "q": "What about refunds?",
         "a": "Subscriptions are commitment-free and cancellable anytime. For any billing question, contact us and we'll find a solution."
-      },
-      {
-        "q": "Why this price?",
-        "a": "The product relies on a genuine predictive algorithm and backtested performance tracking. The price reflects that value and full access to every league."
       }
     ]
   },
@@ -398,7 +394,8 @@
     "odds": "Odds",
     "aiRecommendation": "🤖 AI Recommendation",
     "betOn": "Bet ↗",
-    "seriesWinProbability": "Series win probability"
+    "seriesWinProbability": "Series win probability",
+    "kellyStake": "Kelly stake: {{pct}}% of your bankroll"
   },
   "backtest": {
     "title": "{{start}} tracked since January 2026 → {{final}}",

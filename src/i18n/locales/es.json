@@ -113,10 +113,6 @@
       {
         "q": "¿Y los reembolsos?",
         "a": "Las suscripciones son sin compromiso y cancelables en cualquier momento. Para cualquier duda de facturación, contáctanos y buscamos una solución."
-      },
-      {
-        "q": "¿Por qué este precio?",
-        "a": "El producto se basa en un algoritmo predictivo real y un seguimiento de rendimiento con backtest. El precio refleja ese valor y el acceso completo a todas las ligas."
       }
     ]
   },
@@ -398,7 +394,8 @@
     "odds": "Cuotas",
     "aiRecommendation": "🤖 Recomendación IA",
     "betOn": "Apostar ↗",
-    "seriesWinProbability": "Probabilidad de victoria de serie"
+    "seriesWinProbability": "Probabilidad de victoria de serie",
+    "kellyStake": "Apuesta Kelly: {{pct}} % de tu banca"
   },
   "backtest": {
     "title": "{{start}} seguidos desde enero de 2026 → {{final}}",
