@@ -4,7 +4,7 @@ import { MatchFilters } from "@/components/MatchFilters";
 import { Faq } from "@/components/Faq";
 import { BacktestPerformance } from "@/components/BacktestPerformance";
 import { Button } from "@/components/ui/button";
-import { Lock, Check, Trophy, Gift, ChevronDown, Users, Zap, ShieldCheck, BarChart3, Sparkles, Info } from "lucide-react";
+import { Lock, Check, Trophy, Crown, ChevronDown, Users, Zap, ShieldCheck, BarChart3, Sparkles, Info, Wallet, Search } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import { parseScheduleCSV, parsePredictionsHistoryCSV, getTeamLogo, Match } from "@/lib/csvParser";
@@ -217,15 +217,15 @@ const Index = () => {
         {/* Performance du modèle — première chose visible */}
         <BacktestPerformance />
 
-        {/* HERO */}
+        {/* HERO — allégé (le backtest ci-dessus fait le hook principal) */}
         <div className="text-center mb-8 sm:mb-10 animate-fade-in">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-2 bg-gradient-gaming bg-clip-text text-transparent">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold mb-1.5 bg-gradient-gaming bg-clip-text text-transparent">
             {t("hero.title")}
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl font-display font-semibold text-foreground/90 mb-3">
+          <p className="text-base sm:text-lg md:text-xl font-display font-semibold text-foreground/90 mb-2">
             {t("hero.subtitle")}
           </p>
-          <p className="text-sm sm:text-base text-muted-foreground mb-6 px-4">
+          <p className="text-xs sm:text-sm text-muted-foreground mb-5 px-4">
             {t("hero.leagues")}
           </p>
 
@@ -247,7 +247,7 @@ const Index = () => {
                 size="lg"
                 className="gap-2 text-base sm:text-lg font-bold px-6 sm:px-8 py-6 sm:py-7 shadow-elegant animate-glow-pulse bg-gradient-gaming hover:opacity-90"
               >
-                <Gift className="w-5 h-5 sm:w-6 sm:h-6" />
+                <Crown className="w-5 h-5 sm:w-6 sm:h-6" />
                 {t("hero.ctaTrial")}
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
@@ -259,6 +259,11 @@ const Index = () => {
               </Button>
             </Link>
           </div>
+
+          {/* Mention jeu responsable */}
+          <p className="text-xs text-muted-foreground/70 mb-2">
+            {t("home.responsibleGambling")}
+          </p>
 
           {isPremium && !isTrialing && (
             <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 mt-6">
@@ -284,6 +289,37 @@ const Index = () => {
             value bet finder, no commitment subscription. Español: pronósticos esports League of Legends IA, mejores cuotas LoL,
             apuestas valor LFL LEC. 中文: 英雄联盟预测 电竞预测 AI 价值投注 免费试用.
           </p>
+        </div>
+
+        {/* Comment ça marche — 3 étapes */}
+        <div className="mb-10 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-display font-bold text-center mb-6">
+            {t("home.howItWorks.title")}
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              { icon: Search, title: t("home.howItWorks.step1Title"), desc: t("home.howItWorks.step1Desc") },
+              { icon: Zap, title: t("home.howItWorks.step2Title"), desc: t("home.howItWorks.step2Desc") },
+              { icon: Wallet, title: t("home.howItWorks.step3Title"), desc: t("home.howItWorks.step3Desc") },
+            ].map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={i}
+                  className="relative bg-gradient-card border border-border/50 rounded-xl p-5 text-center"
+                >
+                  <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <span className="absolute top-3 right-4 text-xs font-display font-bold text-muted-foreground/40">
+                    {i + 1}
+                  </span>
+                  <h3 className="font-display font-bold mb-1.5">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground">{step.desc}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Matches section */}
@@ -417,7 +453,7 @@ const Index = () => {
                   size="lg"
                   className="gap-2 text-base sm:text-lg font-bold px-6 sm:px-8 py-6 sm:py-7 shadow-elegant animate-glow-pulse bg-gradient-gaming hover:opacity-90"
                 >
-                  <Gift className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <Crown className="w-5 h-5 sm:w-6 sm:h-6" />
                   {t("hero.ctaTrial")}
                   <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>

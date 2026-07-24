@@ -21,7 +21,8 @@
     "logoutAllTitle": "Logout from all devices",
     "logoutAllDescription": "Are you sure you want to logout from all your devices? You will need to log in again on each one.",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "soon": "Soon"
   },
   "reviews": {
     "title": "Customer Reviews",
@@ -96,6 +97,27 @@
       "Detailed player and team statistics",
       "New match and opportunity notifications",
       "Priority email and Discord support"
+    ],
+    "valueTitle": "Why €100 / month?",
+    "valuePoints": [
+      "A real Machine Learning algorithm (LightGBM, Voting Ensemble) trained on 10 years of data — not subjective opinions.",
+      "Automatic value bet (EV+) detection across all major leagues, with odds compared in real time.",
+      "Verifiable 2026 backtest: a single good value bet can cover the month's subscription."
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faqItems": [
+      {
+        "q": "Can I cancel anytime?",
+        "a": "Yes. No commitment: cancel in one click from your account, and access stays active until the end of the period you already paid for."
+      },
+      {
+        "q": "What about refunds?",
+        "a": "Subscriptions are commitment-free and cancellable anytime. For any billing question, contact us and we'll find a solution."
+      },
+      {
+        "q": "Why this price?",
+        "a": "The product relies on a genuine predictive algorithm and backtested performance tracking. The price reflects that value and full access to every league."
+      }
     ]
   },
   "faq": {
@@ -145,7 +167,17 @@
       "description": "Access all our analyses, advanced predictions and detailed statistics to maximize your chances of success.",
       "startNow": "Start Now",
       "subscribePremium": "Subscribe Premium"
-    }
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "step1Title": "The model analyzes",
+      "step1Desc": "Our AI (LightGBM, Voting Ensemble) processes 10 years of data to estimate each team's win probability.",
+      "step2Title": "Value bets are detected",
+      "step2Desc": "We compare our probabilities to bookmaker odds and isolate positive expected value (EV+) bets.",
+      "step3Title": "You stake with Kelly",
+      "step3Desc": "Each bet shows the recommended stake (Bounded Kelly 1-2%) based on your bankroll. Just follow it."
+    },
+    "responsibleGambling": "18+ · Betting involves risk. Please gamble responsibly."
   },
   "results": {
     "title": "Our Results & Performance",
