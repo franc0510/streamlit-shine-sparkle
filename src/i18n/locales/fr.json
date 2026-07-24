@@ -70,14 +70,14 @@
       "title": "Mensuel",
       "desc": "Facturation chaque mois, sans engagement.",
       "perMonth": "mois",
-      "trialNote": "7 jours gratuits, puis 14,90€/mois"
+      "trialNote": "7 jours gratuits, puis 100€/mois"
     },
     "yearly": {
       "title": "Annuel",
-      "desc": "Économisez 30,10€ par an grâce à l'abonnement annuel.",
+      "desc": "Économisez 200€ par an grâce à l'abonnement annuel.",
       "perYear": "an",
       "badge": "Meilleure offre · 2 mois offerts",
-      "trialNote": "7 jours gratuits, puis 149,90€/an"
+      "trialNote": "7 jours gratuits, puis 1000€/an"
     },
     "reassurance": {
       "secureTitle": "Paiement sécurisé Stripe",
@@ -302,7 +302,7 @@
     "unexpectedError": "Une erreur inattendue s'est produite",
     "loggedInAs": "Vous êtes connecté",
     "loggedInDesc": "Découvrez notre offre Premium ci-contre →",
-    "price": "10€/mois",
+    "price": "100€/mois",
     "subscribe": "S'abonner maintenant",
     "manageSubscription": "Gérer mon abonnement",
     "premiumFeatures": {
@@ -340,7 +340,7 @@
     "cancelAnytime": "Annulation possible à tout moment",
     "freeTrialBadge": "7 jours d'essai gratuit",
     "startFreeTrial": "Essayer gratuitement 7 jours",
-    "trialInfo": "7 jours gratuits, puis 20€/mois. Annulation possible à tout moment.",
+    "trialInfo": "7 jours gratuits, puis 100€/mois. Annulation possible à tout moment.",
     "trialBadge": "Essai gratuit",
     "trialEndsOn": "Essai gratuit jusqu'au"
   },
@@ -367,5 +367,33 @@
     "aiRecommendation": "🤖 Recommandation IA",
     "betOn": "Parier ↗",
     "seriesWinProbability": "Probabilité de victoire de série"
+  },
+  "backtest": {
+    "title": "{{start}} suivis depuis janvier 2026 → {{final}}",
+    "subtitle": "Backtest sur résultats réels 2026 (cotes historiques + vrais vainqueurs) : ce que la bankroll de départ serait devenue en suivant les paris value du modèle.",
+    "edge0": "Edge > 0 %",
+    "edge5": "Edge ≥ 5 %",
+    "edge10": "Edge ≥ 10 %",
+    "strategyFlat": "Mise fixe (flat 1%)",
+    "strategyKelly": "Kelly borné 1-2%",
+    "start": "Départ",
+    "betsTracked": "{{count}} paris suivis",
+    "winRate": "{{rate}} % réussis",
+    "coverageTitle": "Couverture par mois",
+    "betsTaken": "Paris pris",
+    "matchesAnalyzed": "Matchs analysés",
+    "month": "Mois",
+    "allBetsTitle": "Tous les paris",
+    "selectMonth": "Choisir un mois",
+    "date": "Date",
+    "match": "Match",
+    "betOn": "Pari",
+    "odds": "Cote",
+    "result": "Résultat",
+    "profit": "Profit",
+    "seeAllBets": "Voir tous les paris",
+    "hideBets": "Masquer les paris",
+    "coverageNote": "« Matchs analysés » = matchs pour lesquels le modèle a produit une prédiction (tous n'avaient pas forcément de cotes disponibles).",
+    "disclaimer": "Le Kelly borné suppose une mise réellement plaçable. Performances passées ≠ garantie future."
   }
 }

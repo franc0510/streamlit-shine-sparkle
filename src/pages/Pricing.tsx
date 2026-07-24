@@ -40,7 +40,7 @@ const Pricing = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Abonnement Premium — PredictEsport"
-        description="Accédez à toutes les prédictions LoL IA pour 20€/mois. 7 jours d'essai gratuit, sans engagement."
+        description="Accédez à toutes les prédictions LoL IA pour 100€/mois. 7 jours d'essai gratuit, sans engagement."
         path="/pricing"
       />
       <Navbar />
@@ -73,7 +73,7 @@ const Pricing = () => {
 
               <div className="mb-6">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl sm:text-5xl font-bold">14,90€</span>
+                  <span className="text-4xl sm:text-5xl font-bold">100€</span>
                   <span className="text-muted-foreground">/{t("pricing.monthly.perMonth")}</span>
                 </div>
                 <p className="text-sm text-amber-500 mt-2 font-semibold">{t("pricing.monthly.trialNote")}</p>
@@ -110,9 +110,9 @@ const Pricing = () => {
               <div className="mb-6">
                 <div className="flex items-baseline gap-3 flex-wrap">
                   <span className="text-3xl sm:text-4xl font-bold text-muted-foreground/60 line-through decoration-2">
-                    180€
+                    1200€
                   </span>
-                  <span className="text-4xl sm:text-5xl font-bold">149,90€</span>
+                  <span className="text-4xl sm:text-5xl font-bold">1000€</span>
                   <span className="text-muted-foreground">/{t("pricing.yearly.perYear")}</span>
                 </div>
                 <p className="text-sm text-amber-500 mt-2 font-semibold">{t("pricing.yearly.trialNote")}</p>
@@ -155,8 +155,8 @@ const Pricing = () => {
             <h2>Abonnement pronostics esport League of Legends — PredictEsport</h2>
             <p>
               PredictEsport propose deux formules d'abonnement à son outil de prédictions esport pour
-              League of Legends : un abonnement mensuel à 14,90€ et un abonnement annuel à 149,90€
-              équivalent à 2 mois offerts (180€ - 30,10€ d'économie). Tous les abonnements incluent 7 jours
+              League of Legends : un abonnement mensuel à 100€ et un abonnement annuel à 1000€
+              équivalent à 2 mois offerts (1200€ - 200€ d'économie). Tous les abonnements incluent 7 jours
               d'essai gratuit pour tester l'algorithme de Machine Learning (LightGBM, Voting Ensemble, Random Forest)
               sur les compétitions LFL, LEC, LCK, LPL, LCS, MSI, Worlds, EMEA Masters, Arabian League, NLC, PRM,
               Ultraliga, Hitpoint Masters, LJL, CBLOL et LLA. L'objectif est d'identifier les value bets (EV positif)

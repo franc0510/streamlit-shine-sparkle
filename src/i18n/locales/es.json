@@ -70,14 +70,14 @@
       "title": "Mensual",
       "desc": "Facturación mensual, sin compromiso.",
       "perMonth": "mes",
-      "trialNote": "7 días gratis, luego 14,90€/mes"
+      "trialNote": "7 días gratis, luego 100€/mes"
     },
     "yearly": {
       "title": "Anual",
-      "desc": "Ahorra 30,10€ al año con la suscripción anual.",
+      "desc": "Ahorra 200€ al año con la suscripción anual.",
       "perYear": "año",
       "badge": "Mejor oferta · 2 meses gratis",
-      "trialNote": "7 días gratis, luego 149,90€/año"
+      "trialNote": "7 días gratis, luego 1000€/año"
     },
     "reassurance": {
       "secureTitle": "Pago seguro Stripe",
@@ -302,7 +302,7 @@
     "unexpectedError": "Ocurrió un error inesperado",
     "loggedInAs": "Has iniciado sesión",
     "loggedInDesc": "Descubre nuestra oferta Premium →",
-    "price": "10€/mes",
+    "price": "100€/mes",
     "subscribe": "Suscribirse ahora",
     "manageSubscription": "Gestionar suscripción",
     "premiumFeatures": {
@@ -340,7 +340,7 @@
     "cancelAnytime": "Cancelar en cualquier momento",
     "freeTrialBadge": "7 días de prueba gratis",
     "startFreeTrial": "Probar gratis 7 días",
-    "trialInfo": "7 días gratis, luego 20€/mes. Cancelar en cualquier momento.",
+    "trialInfo": "7 días gratis, luego 100€/mes. Cancelar en cualquier momento.",
     "trialBadge": "Prueba gratis",
     "trialEndsOn": "Prueba gratis hasta el"
   },
@@ -367,5 +367,33 @@
     "aiRecommendation": "🤖 Recomendación IA",
     "betOn": "Apostar ↗",
     "seriesWinProbability": "Probabilidad de victoria de serie"
+  },
+  "backtest": {
+    "title": "{{start}} seguidos desde enero de 2026 → {{final}}",
+    "subtitle": "Backtest sobre resultados reales de 2026 (cuotas históricas + ganadores reales): en qué se habría convertido la banca inicial siguiendo las apuestas de valor del modelo.",
+    "edge0": "Edge > 0%",
+    "edge5": "Edge ≥ 5%",
+    "edge10": "Edge ≥ 10%",
+    "strategyFlat": "Apuesta fija (1%)",
+    "strategyKelly": "Kelly acotado 1-2%",
+    "start": "Inicio",
+    "betsTracked": "{{count}} apuestas seguidas",
+    "winRate": "{{rate}}% acertadas",
+    "coverageTitle": "Cobertura por mes",
+    "betsTaken": "Apuestas realizadas",
+    "matchesAnalyzed": "Partidos analizados",
+    "month": "Mes",
+    "allBetsTitle": "Todas las apuestas",
+    "selectMonth": "Elegir un mes",
+    "date": "Fecha",
+    "match": "Partido",
+    "betOn": "Apuesta",
+    "odds": "Cuota",
+    "result": "Resultado",
+    "profit": "Beneficio",
+    "seeAllBets": "Ver todas las apuestas",
+    "hideBets": "Ocultar apuestas",
+    "coverageNote": "«Partidos analizados» = partidos para los que el modelo generó una predicción (no todos tenían cuotas disponibles).",
+    "disclaimer": "El Kelly acotado supone una apuesta realmente colocable. Rentabilidad pasada ≠ garantía futura."
   }
 }

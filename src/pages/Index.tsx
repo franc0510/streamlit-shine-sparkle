@@ -445,7 +445,7 @@ const Index = () => {
             Arabian League, NLC, PRM, Ultraliga, Hitpoint Masters, LJL, CBLOL, LLA et autres ligues régionales. Comparez
             instantanément les cotes Pinnacle, Unibet, Polymarket et Stake, identifiez les value bets (cotes sous-évaluées) et
             optimisez votre Expected Value (EV) sur le long terme. Démarrez gratuitement avec 7 jours d'essai sur l'abonnement
-            mensuel à 14,90€ ou annuel à 149,90€ (2 mois offerts).
+            mensuel à 100€ ou annuel à 1000€ (2 mois offerts).
           </p>
         </div>
       </main>

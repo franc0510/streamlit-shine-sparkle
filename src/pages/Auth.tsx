@@ -363,7 +363,7 @@ const Auth = () => {
                     <h3 className="text-3xl font-display font-bold mb-2">{t('auth.premiumSubscription')}</h3>
                     <div className="flex items-baseline gap-2">
                       <span className="text-5xl font-display font-bold bg-gradient-gaming bg-clip-text text-transparent">
-                        14,90€
+                        100€
                       </span>
                       <span className="text-muted-foreground">/mois</span>
                     </div>
@@ -413,7 +413,7 @@ const Auth = () => {
                     <h3 className="text-3xl font-display font-bold mb-2">{t('auth.premiumSubscription')}</h3>
                     <div className="flex items-baseline gap-2">
                       <span className="text-5xl font-display font-bold bg-gradient-gaming bg-clip-text text-transparent">
-                        14,90€
+                        100€
                       </span>
                       <span className="text-muted-foreground">/mois</span>
                     </div>
