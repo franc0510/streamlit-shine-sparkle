@@ -12,7 +12,11 @@ const log = (step: string, details?: unknown) =>
   console.log(`[CREATE-CHECKOUT] ${step}${details ? " - " + JSON.stringify(details) : ""}`);
 
 const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY_2") || Deno.env.get("STRIPE_SECRET_KEY") || "";
-const STRIPE_PRICE_ID = Deno.env.get("STRIPE_PRICE_ID") || "price_1SoliXH8e5UibDVFmAQG9kIm";
+const DEFAULT_PRICE_ID = "price_1TyYOtH8e5UibDVFst0xBfqu"; // 100€/mois
+const ALLOWED_PRICE_IDS = new Set([
+  "price_1TyYOtH8e5UibDVFst0xBfqu", // 100€/mois
+  "price_1TyYPjH8e5UibDVFseMmi0Ye", // 1000€/an
+]);
 const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "https://preview--predict-esport.lovable.app";
 
 serve(async (req) => {
@@ -20,6 +24,13 @@ serve(async (req) => {
 
   try {
     log("Function started");
+
+    let priceId = DEFAULT_PRICE_ID;
+    try {
+      const body = await req.json();
+      if (body?.priceId && ALLOWED_PRICE_IDS.has(body.priceId)) priceId = body.priceId;
+    } catch (_e) { /* no body */ }
+    log("Price selected", { priceId });
 
     // 1) Essaye via Authorization (si un jour tu actives Supabase Auth)
     let userEmail: string | null = null;
@@ -59,7 +70,7 @@ serve(async (req) => {
       ...(customerId ? { customer: customerId } : {}),
       ...(userEmail && !customerId ? { customer_email: userEmail } : {}),
       mode: "subscription",
-      line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
+      line_items: [{ price: priceId, quantity: 1 }],
       success_url: `${origin}/?subscription=success`,
       cancel_url: `${origin}/?subscription=cancelled`,
     });

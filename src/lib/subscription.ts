@@ -2,7 +2,10 @@
 import { supabase } from "@/integrations/supabase/client";
 
 export const PREMIUM_PRODUCT_ID = "prod_TJVNCl5roSeR21";
-export const PREMIUM_PRICE_ID = "price_1SoliXH8e5UibDVFmAQG9kIm";
+// Prix actuels
+export const PREMIUM_PRICE_ID_MONTHLY = "price_1TyYOtH8e5UibDVFst0xBfqu"; // 100€ / mois
+export const PREMIUM_PRICE_ID_YEARLY = "price_1TyYPjH8e5UibDVFseMmi0Ye"; // 1000€ / an
+export const PREMIUM_PRICE_ID = PREMIUM_PRICE_ID_MONTHLY;
 
 export interface SubscriptionStatus {
   subscribed: boolean;
@@ -12,10 +15,6 @@ export interface SubscriptionStatus {
   trial_end?: string | null;
 }
 
-export const STRIPE_PAYMENT_LINK_MONTHLY = "https://buy.stripe.com/3cIaEX1RF9Bhcr90Aaak003";
-export const STRIPE_PAYMENT_LINK_YEARLY = "https://buy.stripe.com/7sYcN5cwjcNt4YHer0ak004";
-// Backward compatibility (default = monthly)
-export const STRIPE_PAYMENT_LINK = STRIPE_PAYMENT_LINK_MONTHLY;
 
 /**
  * Build a Stripe payment link with the user's email pre-filled,
@@ -106,9 +105,12 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
  * @returns L'URL de checkout Stripe ou null en cas d'erreur
  */
 
-export const createCheckoutSession = async (email?: string): Promise<string | null> => {
+export const createCheckoutSession = async (
+  email?: string,
+  priceId: string = PREMIUM_PRICE_ID_MONTHLY,
+): Promise<string | null> => {
   try {
-    console.log("[createCheckoutSession] Calling create-checkout edge function");
+    console.log("[createCheckoutSession] Calling create-checkout edge function", { priceId });
 
     const {
       data: { session },
@@ -130,7 +132,7 @@ export const createCheckoutSession = async (email?: string): Promise<string | nu
 
     const { data, error } = await supabase.functions.invoke("create-checkout", {
       headers,
-      body: {},
+      body: { priceId },
     });
 
     console.log("[createCheckoutSession] Response:", { hasData: !!data, hasError: !!error, dataUrl: data?.url });

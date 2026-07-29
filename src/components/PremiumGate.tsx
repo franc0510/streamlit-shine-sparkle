@@ -2,7 +2,6 @@ import { useSubscription } from "@/contexts/SubscriptionContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, Sparkles } from "lucide-react";
-import { STRIPE_PAYMENT_LINK } from "@/lib/subscription";
 interface PremiumGateProps {
   children: React.ReactNode;
   freeLimit?: number;
@@ -27,7 +26,7 @@ export const PremiumGate = ({
   const { isPremium, isLoading } = useSubscription();
 
   const handleUpgrade = () => {
-    window.location.href = STRIPE_PAYMENT_LINK;
+    window.location.href = "/pricing";
   };
 
   // Si premium, afficher tout le contenu
