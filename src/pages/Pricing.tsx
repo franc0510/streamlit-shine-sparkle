@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/accordion";
 import {
   PREMIUM_PRICE_ID_MONTHLY,
-  PREMIUM_PRICE_ID_YEARLY,
   createCheckoutSession,
 } from "@/lib/subscription";
 import { Link, useNavigate } from "react-router-dom";
@@ -30,7 +29,7 @@ const Pricing = () => {
   const valuePoints = t("pricing.valuePoints", { returnObjects: true }) as string[];
   const faqItems = t("pricing.faqItems", { returnObjects: true }) as { q: string; a: string }[];
 
-  const handleCheckout = async (plan: "monthly" | "yearly") => {
+  const handleCheckout = async (plan: "monthly") => {
     if (!user) {
       toast({
         title: t("pricing.loginRequiredTitle"),
@@ -39,7 +38,7 @@ const Pricing = () => {
       navigate("/auth?redirect=/pricing");
       return;
     }
-    const priceId = plan === "monthly" ? PREMIUM_PRICE_ID_MONTHLY : PREMIUM_PRICE_ID_YEARLY;
+    const priceId = PREMIUM_PRICE_ID_MONTHLY;
     const url = await createCheckoutSession(user.email, priceId, plan);
     if (url) {
       window.location.href = url;
@@ -56,7 +55,7 @@ const Pricing = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Abonnement Premium — PredictEsport"
-        description="Accédez à toutes les prédictions LoL IA pour 100€/mois. Sans engagement, annulation à tout moment."
+        description="Accédez à toutes les prédictions LoL IA pour 250€/mois. Sans engagement, annulation à tout moment."
         path="/pricing"
       />
       <Navbar />
@@ -78,7 +77,7 @@ const Pricing = () => {
           </div>
 
           {/* Plans */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid gap-6 mb-12 max-w-xl mx-auto">
             {/* Mensuel */}
             <Card className="p-6 sm:p-8 bg-gradient-card border-border/50 hover:border-primary/30 transition-all relative">
               <div className="flex items-center gap-2 mb-2">
@@ -89,7 +88,7 @@ const Pricing = () => {
 
               <div className="mb-6">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl sm:text-5xl font-bold">100€</span>
+                  <span className="text-4xl sm:text-5xl font-bold">250€</span>
                   <span className="text-muted-foreground">/{t("pricing.monthly.perMonth")}</span>
                 </div>
                 <p className="text-sm text-amber-500 mt-2 font-semibold">{t("pricing.monthly.trialNote")}</p>
@@ -110,47 +109,9 @@ const Pricing = () => {
               </ul>
             </Card>
 
-            {/* Annuel — Best value */}
-            <Card className="p-6 sm:p-8 bg-gradient-card border-2 border-primary/60 relative shadow-elegant">
-              <Badge className="absolute -top-4 left-1/2 -translate-x-1/2 gap-1.5 whitespace-nowrap px-4 py-1.5 text-sm sm:text-base font-bold shadow-elegant">
-                <Crown className="w-4 h-4 sm:w-5 sm:h-5" />
-                {t("pricing.yearly.badge")}
-              </Badge>
-
-              <div className="flex items-center gap-2 mb-2">
-                <Crown className="w-5 h-5 text-primary" />
-                <h2 className="text-xl font-display font-bold">{t("pricing.yearly.title")}</h2>
-              </div>
-              <p className="text-sm text-muted-foreground mb-6">{t("pricing.yearly.desc")}</p>
-
-              <div className="mb-6">
-                <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="text-3xl sm:text-4xl font-bold text-muted-foreground/60 line-through decoration-2">
-                    1200€
-                  </span>
-                  <span className="text-4xl sm:text-5xl font-bold">1000€</span>
-                  <span className="text-muted-foreground">/{t("pricing.yearly.perYear")}</span>
-                </div>
-                <p className="text-sm text-amber-500 mt-2 font-semibold">{t("pricing.yearly.trialNote")}</p>
-              </div>
-
-              <Button onClick={() => handleCheckout("yearly")} className="w-full gap-2" size="lg" variant="default">
-                <Crown className="w-4 h-4" />
-                {t("pricing.startTrial")}
-              </Button>
-
-              <ul className="mt-6 space-y-2.5 text-sm">
-                {features.map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                    <span className="text-foreground/90">{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
           </div>
 
-          {/* Pourquoi 100€ — justification de la valeur */}
+          {/* Pourquoi 250€ — justification de la valeur */}
           <Card className="p-6 sm:p-8 bg-gradient-card border-border/50 mb-8">
             <div className="flex items-center gap-2 mb-4 justify-center">
               <TrendingUp className="w-5 h-5 text-primary" />
@@ -195,8 +156,7 @@ const Pricing = () => {
             <h2>Abonnement pronostics esport League of Legends — PredictEsport</h2>
             <p>
               PredictEsport propose deux formules d'abonnement à son outil de prédictions esport pour
-              League of Legends : un abonnement mensuel à 100€ et un abonnement annuel à 1000€
-              équivalent à 2 mois offerts (1200€ - 200€ d'économie). Sans engagement, résiliable à tout moment,
+              League of Legends : un abonnement mensuel à 250€. Sans engagement, résiliable à tout moment,
               pour tester l'algorithme de Machine Learning (LightGBM, Voting Ensemble, Random Forest)
               sur les compétitions LFL, LEC, LCK, LPL, LCS, MSI, Worlds, EMEA Masters, Arabian League, NLC, PRM,
               Ultraliga, Hitpoint Masters, LJL, CBLOL et LLA. L'objectif est d'identifier les value bets (EV positif)
