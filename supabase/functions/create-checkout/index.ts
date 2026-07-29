@@ -15,7 +15,7 @@ const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY_2") || Deno.env.get("S
 const DEFAULT_PRICE_ID = "price_1TyYOtH8e5UibDVFst0xBfqu"; // 100€/mois
 const ALLOWED_PRICE_IDS = new Set([
   "price_1TyYOtH8e5UibDVFst0xBfqu", // 100€/mois
-  "price_1TyYPjH8e5UibDVFseMmi0Ye", // 1000€/an
+  "price_1TyZ8pH8e5UibDVFRlzRltwY", // 1000€/an
 ]);
 const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "https://preview--predict-esport.lovable.app";
 
