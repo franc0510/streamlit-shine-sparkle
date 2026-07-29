@@ -30,7 +30,7 @@ const Pricing = () => {
   const valuePoints = t("pricing.valuePoints", { returnObjects: true }) as string[];
   const faqItems = t("pricing.faqItems", { returnObjects: true }) as { q: string; a: string }[];
 
-  const handleCheckout = (plan: "monthly" | "yearly") => {
+  const handleCheckout = async (plan: "monthly" | "yearly") => {
     if (!user) {
       toast({
         title: t("pricing.loginRequiredTitle"),
@@ -39,9 +39,17 @@ const Pricing = () => {
       navigate("/auth?redirect=/pricing");
       return;
     }
-    const base = plan === "monthly" ? STRIPE_PAYMENT_LINK_MONTHLY : STRIPE_PAYMENT_LINK_YEARLY;
-    const url = buildStripeLink(base, user.email);
-    window.location.href = url;
+    const priceId = plan === "monthly" ? PREMIUM_PRICE_ID_MONTHLY : PREMIUM_PRICE_ID_YEARLY;
+    const url = await createCheckoutSession(user.email, priceId);
+    if (url) {
+      window.location.href = url;
+    } else {
+      toast({
+        title: "Erreur",
+        description: "Impossible de créer la session de paiement",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
