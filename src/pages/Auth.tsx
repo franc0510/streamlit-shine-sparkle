@@ -10,7 +10,7 @@ import { Lock, Mail, User, CreditCard, Check, ExternalLink } from "lucide-react"
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-import { createCheckoutSession, openCustomerPortal, STRIPE_PAYMENT_LINK, type DiagnosticStep } from "@/lib/subscription";
+import { createCheckoutSession, openCustomerPortal, type DiagnosticStep } from "@/lib/subscription";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { z } from "zod";
@@ -170,7 +170,7 @@ const Auth = () => {
   };
 
   const handleSubscribe = () => {
-    window.location.href = STRIPE_PAYMENT_LINK;
+    window.location.href = "/pricing";
   };
 
   const handleManageSubscription = async () => {
