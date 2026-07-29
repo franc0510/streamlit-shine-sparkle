@@ -10,9 +10,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  STRIPE_PAYMENT_LINK_MONTHLY,
-  STRIPE_PAYMENT_LINK_YEARLY,
-  buildStripeLink,
+  PREMIUM_PRICE_ID_MONTHLY,
+  PREMIUM_PRICE_ID_YEARLY,
+  createCheckoutSession,
 } from "@/lib/subscription";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
