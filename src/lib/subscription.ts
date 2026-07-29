@@ -109,9 +109,12 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
  * @returns L'URL de checkout Stripe ou null en cas d'erreur
  */
 
-export const createCheckoutSession = async (email?: string): Promise<string | null> => {
+export const createCheckoutSession = async (
+  email?: string,
+  priceId: string = PREMIUM_PRICE_ID_MONTHLY,
+): Promise<string | null> => {
   try {
-    console.log("[createCheckoutSession] Calling create-checkout edge function");
+    console.log("[createCheckoutSession] Calling create-checkout edge function", { priceId });
 
     const {
       data: { session },
@@ -133,7 +136,7 @@ export const createCheckoutSession = async (email?: string): Promise<string | nu
 
     const { data, error } = await supabase.functions.invoke("create-checkout", {
       headers,
-      body: {},
+      body: { priceId },
     });
 
     console.log("[createCheckoutSession] Response:", { hasData: !!data, hasError: !!error, dataUrl: data?.url });
