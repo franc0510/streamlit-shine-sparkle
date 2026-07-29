@@ -13,12 +13,8 @@ const log = (step: string, details?: unknown) =>
   console.log(`[CREATE-CHECKOUT] ${step}${details ? " - " + JSON.stringify(details) : ""}`);
 
 const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY_2") || Deno.env.get("STRIPE_SECRET_KEY") || "";
-const DEFAULT_PRICE_ID = "price_1TyYOtH8e5UibDVFst0xBfqu"; // 100€/mois
-const YEARLY_PRICE_ID = "price_1TyZ8pH8e5UibDVFRlzRltwY"; // 1000€/an
-const ALLOWED_PRICE_IDS = new Set([
-  "price_1TyYOtH8e5UibDVFst0xBfqu", // 100€/mois
-  YEARLY_PRICE_ID,
-]);
+const DEFAULT_PRICE_ID = "price_1TyZEtH8e5UibDVFJURnXdxK"; // 250€/mois
+const ALLOWED_PRICE_IDS = new Set([DEFAULT_PRICE_ID]);
 const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "https://preview--predict-esport.lovable.app";
 
 serve(async (req) => {
@@ -30,9 +26,7 @@ serve(async (req) => {
     let priceId = DEFAULT_PRICE_ID;
     try {
       const body = await req.json();
-      if (body?.plan === "yearly") {
-        priceId = YEARLY_PRICE_ID;
-      } else if (body?.plan === "monthly") {
+      if (body?.plan === "monthly") {
         priceId = DEFAULT_PRICE_ID;
       } else if (body?.priceId) {
         if (!ALLOWED_PRICE_IDS.has(body.priceId)) {
