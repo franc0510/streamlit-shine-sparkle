@@ -40,7 +40,7 @@ const Pricing = () => {
       return;
     }
     const priceId = plan === "monthly" ? PREMIUM_PRICE_ID_MONTHLY : PREMIUM_PRICE_ID_YEARLY;
-    const url = await createCheckoutSession(user.email, priceId);
+    const url = await createCheckoutSession(user.email, priceId, plan);
     if (url) {
       window.location.href = url;
     } else {

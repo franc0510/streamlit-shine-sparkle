@@ -6,6 +6,7 @@ export const PREMIUM_PRODUCT_ID = "prod_TJVNCl5roSeR21";
 export const PREMIUM_PRICE_ID_MONTHLY = "price_1TyYOtH8e5UibDVFst0xBfqu"; // 100€ / mois
 export const PREMIUM_PRICE_ID_YEARLY = "price_1TyZ8pH8e5UibDVFRlzRltwY"; // 1000€ / an
 export const PREMIUM_PRICE_ID = PREMIUM_PRICE_ID_MONTHLY;
+export type SubscriptionPlan = "monthly" | "yearly";
 
 export interface SubscriptionStatus {
   subscribed: boolean;
@@ -108,9 +109,10 @@ export const checkSubscription = async (): Promise<SubscriptionStatus> => {
 export const createCheckoutSession = async (
   email?: string,
   priceId: string = PREMIUM_PRICE_ID_MONTHLY,
+  plan?: SubscriptionPlan,
 ): Promise<string | null> => {
   try {
-    console.log("[createCheckoutSession] Calling create-checkout edge function", { priceId });
+    console.log("[createCheckoutSession] Calling create-checkout edge function", { priceId, plan });
 
     const {
       data: { session },
@@ -132,7 +134,7 @@ export const createCheckoutSession = async (
 
     const { data, error } = await supabase.functions.invoke("create-checkout", {
       headers,
-      body: { priceId },
+      body: { priceId, plan },
     });
 
     console.log("[createCheckoutSession] Response:", { hasData: !!data, hasError: !!error, dataUrl: data?.url });
