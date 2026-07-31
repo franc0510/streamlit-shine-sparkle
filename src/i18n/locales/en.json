@@ -73,13 +73,6 @@
       "perMonth": "month",
       "trialNote": "No commitment · cancel anytime"
     },
-    "yearly": {
-      "title": "Yearly",
-      "desc": "Save €200 per year with the annual plan.",
-      "perYear": "year",
-      "badge": "Best value · 2 months free",
-      "trialNote": "€1000/year · that's 2 months free"
-    },
     "reassurance": {
       "secureTitle": "Secure Stripe payment",
       "secureDesc": "Credit card, Apple Pay, Google Pay",
@@ -98,7 +91,7 @@
       "New match and opportunity notifications",
       "Priority email and Discord support"
     ],
-    "valueTitle": "Why €100 / month?",
+    "valueTitle": "Why €250 / month?",
     "valuePoints": [
       "A real Machine Learning algorithm (LightGBM, Voting Ensemble) trained on 10 years of data — not subjective opinions.",
       "Automatic value bet (EV+) detection across all major leagues, with odds compared in real time.",
@@ -330,7 +323,7 @@
     "unexpectedError": "An unexpected error occurred",
     "loggedInAs": "You are logged in",
     "loggedInDesc": "Discover our Premium offer →",
-    "price": "€100/month",
+    "price": "€250/month",
     "subscribe": "Subscribe Now",
     "manageSubscription": "Manage Subscription",
     "premiumFeatures": {
@@ -368,7 +361,7 @@
     "cancelAnytime": "Cancel anytime",
     "freeTrialBadge": "No commitment",
     "startFreeTrial": "Subscribe",
-    "trialInfo": "€100/month, no commitment. Cancel anytime.",
+    "trialInfo": "€250/month, no commitment. Cancel anytime.",
     "trialBadge": "Free trial",
     "trialEndsOn": "Free trial until"
   },

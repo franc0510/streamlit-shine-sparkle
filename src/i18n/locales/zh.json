@@ -73,13 +73,6 @@
       "perMonth": "月",
       "trialNote": "无需承诺 · 随时取消"
     },
-    "yearly": {
-      "title": "年度",
-      "desc": "通过年度订阅每年节省 €200。",
-      "perYear": "年",
-      "badge": "最佳选择 · 2 个月免费",
-      "trialNote": "1000€/年 · 相当于多送2个月"
-    },
     "reassurance": {
       "secureTitle": "Stripe 安全支付",
       "secureDesc": "信用卡、Apple Pay、Google Pay",
@@ -98,7 +91,7 @@
       "新比赛和机会通知",
       "邮件和 Discord 优先支持"
     ],
-    "valueTitle": "为什么 100€/月？",
+    "valueTitle": "为什么 250€/月？",
     "valuePoints": [
       "真正的机器学习算法（LightGBM、Voting Ensemble），基于10年数据训练——而非主观意见。",
       "在所有主要联赛自动检测价值投注（EV+），实时比较赔率。",
@@ -330,7 +323,7 @@
     "unexpectedError": "发生意外错误",
     "loggedInAs": "您已登录",
     "loggedInDesc": "发现我们的高级优惠 →",
-    "price": "€100/月",
+    "price": "€250/月",
     "subscribe": "立即订阅",
     "manageSubscription": "管理订阅",
     "premiumFeatures": {
@@ -368,7 +361,7 @@
     "cancelAnytime": "随时取消",
     "freeTrialBadge": "无需承诺",
     "startFreeTrial": "订阅",
-    "trialInfo": "€100/月，无需承诺。随时取消。",
+    "trialInfo": "€250/月，无需承诺。随时取消。",
     "trialBadge": "免费试用",
     "trialEndsOn": "免费试用至"
   },

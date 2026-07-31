@@ -73,13 +73,6 @@
       "perMonth": "mois",
       "trialNote": "Sans engagement · annulation à tout moment"
     },
-    "yearly": {
-      "title": "Annuel",
-      "desc": "Économisez 200€ par an grâce à l'abonnement annuel.",
-      "perYear": "an",
-      "badge": "Meilleure offre · 2 mois offerts",
-      "trialNote": "1000€/an · soit 2 mois offerts"
-    },
     "reassurance": {
       "secureTitle": "Paiement sécurisé Stripe",
       "secureDesc": "Carte bancaire, Apple Pay, Google Pay",
@@ -98,7 +91,7 @@
       "Notifications des nouveaux matchs et opportunités",
       "Support prioritaire par email et Discord"
     ],
-    "valueTitle": "Pourquoi 100€ / mois ?",
+    "valueTitle": "Pourquoi 250€ / mois ?",
     "valuePoints": [
       "Un vrai algorithme de Machine Learning (LightGBM, Voting Ensemble) entraîné sur 10 ans de données — pas des avis subjectifs.",
       "Détection automatique des value bets (EV+) sur toutes les grandes ligues, cotes comparées en temps réel.",
@@ -330,7 +323,7 @@
     "unexpectedError": "Une erreur inattendue s'est produite",
     "loggedInAs": "Vous êtes connecté",
     "loggedInDesc": "Découvrez notre offre Premium ci-contre →",
-    "price": "100€/mois",
+    "price": "250€/mois",
     "subscribe": "S'abonner maintenant",
     "manageSubscription": "Gérer mon abonnement",
     "premiumFeatures": {
@@ -368,7 +361,7 @@
     "cancelAnytime": "Annulation possible à tout moment",
     "freeTrialBadge": "Sans engagement",
     "startFreeTrial": "S'abonner",
-    "trialInfo": "100€/mois, sans engagement. Annulation à tout moment.",
+    "trialInfo": "250€/mois, sans engagement. Annulation à tout moment.",
     "trialBadge": "Essai gratuit",
     "trialEndsOn": "Essai gratuit jusqu'au"
   },
