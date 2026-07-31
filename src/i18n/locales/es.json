@@ -73,13 +73,6 @@
       "perMonth": "mes",
       "trialNote": "Sin compromiso · cancela cuando quieras"
     },
-    "yearly": {
-      "title": "Anual",
-      "desc": "Ahorra 200€ al año con la suscripción anual.",
-      "perYear": "año",
-      "badge": "Mejor oferta · 2 meses gratis",
-      "trialNote": "1000€/año · equivale a 2 meses gratis"
-    },
     "reassurance": {
       "secureTitle": "Pago seguro Stripe",
       "secureDesc": "Tarjeta, Apple Pay, Google Pay",
@@ -98,7 +91,7 @@
       "Notificaciones de nuevos partidos y oportunidades",
       "Soporte prioritario por email y Discord"
     ],
-    "valueTitle": "¿Por qué 100€ / mes?",
+    "valueTitle": "¿Por qué 250€ / mes?",
     "valuePoints": [
       "Un verdadero algoritmo de Machine Learning (LightGBM, Voting Ensemble) entrenado con 10 años de datos, no opiniones subjetivas.",
       "Detección automática de apuestas de valor (EV+) en todas las grandes ligas, con cuotas comparadas en tiempo real.",
@@ -330,7 +323,7 @@
     "unexpectedError": "Ocurrió un error inesperado",
     "loggedInAs": "Has iniciado sesión",
     "loggedInDesc": "Descubre nuestra oferta Premium →",
-    "price": "100€/mes",
+    "price": "250€/mes",
     "subscribe": "Suscribirse ahora",
     "manageSubscription": "Gestionar suscripción",
     "premiumFeatures": {
@@ -368,7 +361,7 @@
     "cancelAnytime": "Cancelar en cualquier momento",
     "freeTrialBadge": "Sin compromiso",
     "startFreeTrial": "Suscribirse",
-    "trialInfo": "100€/mes, sin compromiso. Cancela cuando quieras.",
+    "trialInfo": "250€/mes, sin compromiso. Cancela cuando quieras.",
     "trialBadge": "Prueba gratis",
     "trialEndsOn": "Prueba gratis hasta el"
   },
