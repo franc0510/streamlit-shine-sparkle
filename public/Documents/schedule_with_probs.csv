@@ -1,13 +1,13 @@
 match_date_utc,league,bo_format,team1,team2,proba_team1,proba_team2,last_proba_team1,last_proba_team2,used_team1,used_team2,conf_team1,conf_team2,model_info,status,debug_error,symmetry_check
-2026-10-22T12:00:00+00:00,EMEA Masters,BO5,Galions,Solary,0.589215,0.410785,0.589215,0.410785,Galions,Solary,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-10-23T17:00:00+00:00,Worlds,BO1,Gen.G Esports,Invictus Gaming,0.73646,0.26354,0.73646,0.26354,Gen.G,Invictus Gaming,0.95,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-10-23T18:00:00+00:00,Worlds,BO1,Team Liquid Alienware,CTBC Flying Oyster,0.595135,0.404865,0.595135,0.404865,Team Liquid,CTBC Flying Oyster,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-10-23T19:00:00+00:00,Worlds,BO1,Anyone's Legend,Karmine Corp,0.419088,0.580912,0.419088,0.580912,Anyone's Legend,Karmine Corp,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-10-23T20:00:00+00:00,Worlds,BO1,G2 Esports,Dplus KIA,0.562272,0.437728,0.562272,0.437728,G2 Esports,Dplus Kia,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-10-23T21:00:00+00:00,Worlds,BO1,Hanwha Life Esports,TOP ESPORTS,0.71348,0.28652,0.71348,0.28652,Hanwha Life Esports,Top Esports,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-10-23T22:00:00+00:00,Worlds,BO1,LOS,T1,0.5,0.5,0.5,0.5,Lotus,T1,0.75,1.0,GameModelV5_LGBM+XGB+CAT,"low_confidence:LOS->Lotus(0.75,fuzzy:lotus)","low_confidence:LOS->Lotus(0.75,fuzzy:lotus)",skipped
-2026-10-23T23:00:00+00:00,Worlds,BO1,Team Secret Whales,LYON,0.682565,0.317435,0.682565,0.317435,Team Secret Whales,LYON,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
-2026-10-24T00:00:00+00:00,Worlds,BO1,BILIBILI GAMING,Movistar KOI,0.6757,0.3243,0.6757,0.3243,Bilibili Gaming,Movistar KOI,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-22T12:00:00+00:00,EMEA Masters,BO5,Galions,Solary,0.603356,0.396644,0.603356,0.396644,Galions,Solary,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-23T17:00:00+00:00,Worlds,BO1,Gen.G Esports,Invictus Gaming,0.724477,0.275523,0.724477,0.275523,Gen.G,Invictus Gaming,0.95,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-23T18:00:00+00:00,Worlds,BO1,Hanwha Life Esports,TOP ESPORTS,0.714472,0.285528,0.714472,0.285528,Hanwha Life Esports,Top Esports,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-23T19:00:00+00:00,Worlds,BO1,BILIBILI GAMING,Movistar KOI,0.675153,0.324847,0.675153,0.324847,Bilibili Gaming,Movistar KOI,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-23T20:00:00+00:00,Worlds,BO1,Anyone's Legend,Karmine Corp,0.412459,0.587541,0.412459,0.587541,Anyone's Legend,Karmine Corp,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-23T21:00:00+00:00,Worlds,BO1,G2 Esports,Dplus KIA,0.576819,0.423181,0.576819,0.423181,G2 Esports,Dplus Kia,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-23T22:00:00+00:00,Worlds,BO1,Team Liquid Alienware,CTBC Flying Oyster,0.594254,0.405746,0.594254,0.405746,Team Liquid,CTBC Flying Oyster,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-10-23T23:00:00+00:00,Worlds,BO1,LOS,T1,0.5,0.5,0.5,0.5,Lotus,T1,0.75,1.0,GameModelV5_LGBM+XGB+CAT,"low_confidence:LOS->Lotus(0.75,fuzzy:lotus)","low_confidence:LOS->Lotus(0.75,fuzzy:lotus)",skipped
+2026-10-24T00:00:00+00:00,Worlds,BO1,Team Secret Whales,LYON,0.692626,0.307374,0.692626,0.307374,Team Secret Whales,LYON,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-10-24T17:00:00+00:00,Worlds,BO1,TBD,TBD,0.5,0.5,0.5,0.5,,,0.0,0.0,GameModelV5_LGBM+XGB+CAT,no_roster:TBD(placeholder)+TBD(placeholder),no_roster:TBD(placeholder)+TBD(placeholder),skipped
 2026-10-24T18:00:00+00:00,Worlds,BO1,TBD,TBD,0.5,0.5,0.5,0.5,,,0.0,0.0,GameModelV5_LGBM+XGB+CAT,no_roster:TBD(placeholder)+TBD(placeholder),no_roster:TBD(placeholder)+TBD(placeholder),skipped
 2026-10-24T19:00:00+00:00,Worlds,BO1,TBD,TBD,0.5,0.5,0.5,0.5,,,0.0,0.0,GameModelV5_LGBM+XGB+CAT,no_roster:TBD(placeholder)+TBD(placeholder),no_roster:TBD(placeholder)+TBD(placeholder),skipped
@@ -41,7 +41,7 @@ match_date_utc,league,bo_format,team1,team2,proba_team1,proba_team2,last_proba_t
 2026-11-08T22:00:00+00:00,Worlds,BO5,TBD,TBD,0.5,0.5,0.5,0.5,,,0.0,0.0,GameModelV5_LGBM+XGB+CAT,no_roster:TBD(placeholder)+TBD(placeholder),no_roster:TBD(placeholder)+TBD(placeholder),skipped
 2026-11-10T05:00:00+00:00,LCP P&R,BO5,TBD,TBD,0.5,0.5,0.5,0.5,,,0.0,0.0,GameModelV5_LGBM+XGB+CAT,no_roster:TBD(placeholder)+TBD(placeholder),no_roster:TBD(placeholder)+TBD(placeholder),skipped
 2026-11-10T09:00:00+00:00,LCP P&R,BO5,TBD,TBD,0.5,0.5,0.5,0.5,,,0.0,0.0,GameModelV5_LGBM+XGB+CAT,no_roster:TBD(placeholder)+TBD(placeholder),no_roster:TBD(placeholder)+TBD(placeholder),skipped
-2026-11-11T09:00:00+00:00,LCP P&R,BO5,Ground Zero Gaming,Frank Esports,0.22359,0.77641,0.22359,0.77641,Ground Zero Gaming,Frank Esports,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
+2026-11-11T09:00:00+00:00,LCP P&R,BO5,Ground Zero Gaming,Frank Esports,0.223086,0.776914,0.223086,0.776914,Ground Zero Gaming,Frank Esports,1.0,1.0,GameModelV5_LGBM+XGB+CAT,ok,,ok
 2026-11-12T09:00:00+00:00,LCP P&R,BO5,TBD,TBD,0.5,0.5,0.5,0.5,,,0.0,0.0,GameModelV5_LGBM+XGB+CAT,no_roster:TBD(placeholder)+TBD(placeholder),no_roster:TBD(placeholder)+TBD(placeholder),skipped
 2026-11-13T09:00:00+00:00,LCP P&R,BO5,TBD,DetonatioN FocusMe,0.5,0.5,0.5,0.5,,DetonatioN FocusMe,0.0,1.0,GameModelV5_LGBM+XGB+CAT,no_roster:TBD(placeholder),no_roster:TBD(placeholder),skipped
 2026-11-14T19:00:00+00:00,Worlds,BO5,TBD,TBD,0.5,0.5,0.5,0.5,,,0.0,0.0,GameModelV5_LGBM+XGB+CAT,no_roster:TBD(placeholder)+TBD(placeholder),no_roster:TBD(placeholder)+TBD(placeholder),skipped
