@@ -2,18 +2,20 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { Navigate } from "react-router-dom";
-import { lazy, Suspense } from "react";
-import Index from "./pages/Index";
+import { lazy, Suspense, useEffect } from "react";
+import Landing from "./pages/Landing";
 import "./i18n/config";
 
 // Routes secondaires chargées à la demande (code-splitting) pour alléger
 // le bundle initial et accélérer le premier rendu de l'accueil.
 const About = lazy(() => import("./pages/About"));
-const Results = lazy(() => import("./pages/Results"));
+const Index = lazy(() => import("./pages/Index"));
+const TrackRecord = lazy(() => import("./pages/TrackRecord"));
+const Labs = lazy(() => import("./pages/Labs"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const Auth = lazy(() => import("./pages/Auth"));
 const CS2 = lazy(() => import("./pages/CS2"));
@@ -24,6 +26,17 @@ const OAuthConsent = lazy(() => import("./pages/OAuthConsent"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
+
+// Fait défiler jusqu'à l'ancre (#verification…) après la navigation, et remonte en haut sinon.
+const ScrollManager = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) { window.scrollTo(0, 0); return; }
+    const t = setTimeout(() => document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth" }), 400);
+    return () => clearTimeout(t);
+  }, [pathname, hash]);
+  return null;
+};
 
 const RouteFallback = () => (
   <div className="min-h-screen bg-background flex items-center justify-center">
@@ -41,11 +54,15 @@ const App = () => {
             <Toaster />
             <Sonner />
             <BrowserRouter>
+              <ScrollManager />
               <Suspense fallback={<RouteFallback />}>
                 <Routes>
-                  <Route path="/" element={<Index />} />
+                  <Route path="/" element={<Landing />} />
+                  <Route path="/predictions" element={<Index />} />
+                  <Route path="/track-record" element={<TrackRecord />} />
+                  <Route path="/labs" element={<Labs />} />
                   <Route path="/about" element={<About />} />
-                  <Route path="/results" element={<Results />} />
+                  <Route path="/results" element={<Navigate to="/track-record" replace />} />
                   <Route path="/pricing" element={<Pricing />} />
                   <Route path="/contact" element={<Navigate to="/about#contact" replace />} />
                   <Route path="/reviews" element={<Navigate to="/about#avis" replace />} />

@@ -1,74 +1,137 @@
 import { Navbar } from "@/components/Navbar";
-import { Lock, Gamepad2, Target, Trophy, Clock } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import { Kpi, Loading, Section, StagePill } from "@/components/stats/parts";
+import { VerifyPanel } from "@/components/stats/Verify";
+import { Cs2Status, EvalRow, pct, usd, useCs2Status } from "@/lib/stats";
+import { useTr } from "@/hooks/useTr";
+import { CheckCircle2, XCircle } from "lucide-react";
+
+const SKIP_LABEL: Record<string, [string, string]> = {
+  bet: ["Pari papier placé", "Paper bet placed"],
+  illiquid_spread: ["Écart acheteur/vendeur trop large", "Bid/ask spread too wide"],
+  no_market: ["Pas de marché Polymarket", "No Polymarket market"],
+  too_late: ["Trop tard avant le match", "Too close to kick-off"],
+  edge_below_min: ["Avantage sous le seuil (3 %)", "Edge below threshold (3%)"],
+};
+
+const Row = ({ label, r, best }: { label: string; r: EvalRow | null; best?: boolean }) => (
+  <tr className={`border-t border-border/40 ${best ? "bg-primary/5" : ""}`}>
+    <td className="px-3 py-2 font-medium">{label}</td>
+    <td className="px-3 py-2 text-right tabular-nums">{r ? r.logloss.toFixed(4) : "—"}</td>
+    <td className="px-3 py-2 text-right tabular-nums">{r ? r.brier.toFixed(4) : "—"}</td>
+    <td className="px-3 py-2 text-right tabular-nums">{r ? pct(r.acc, 1) : "—"}</td>
+  </tr>
+);
+
+const Body = ({ d }: { d: Cs2Status }) => {
+  const { tr, lng } = useTr();
+  const v = d.eval.vs_market;
+  const reasons = Object.entries(d.skip_reasons).sort((a, b) => b[1] - a[1]);
+  return (
+    <>
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <Kpi label={tr("Bankroll fictive", "Virtual bankroll")} value={d.bankroll_virtual_usd == null ? "—" : usd(d.bankroll_virtual_usd)} sub={tr(`départ ${usd(d.bankroll0_usd ?? 50)} · argent fictif`, `start ${usd(d.bankroll0_usd ?? 50)} · play money`)} />
+        <Kpi label={tr("Décisions journalisées", "Decisions logged")} value={d.decisions_logged} sub={tr("y compris les non-paris", "including non-bets")} />
+        <Kpi label={tr("Paris papier", "Paper bets")} value={d.bets_logged} sub={`${d.open} ${tr("ouverts", "open")} · ${d.settled_bets} ${tr("réglés", "settled")}`} />
+        <Kpi label={tr("Période de test", "Test period")} value={d.period ? new Date(d.period[0]).toLocaleDateString(lng, { day: "numeric", month: "short" }) : "—"} sub={tr("depuis le premier run", "since the first run")} />
+      </div>
+      <div className="mt-4 rounded-lg border border-sky-500/30 bg-sky-500/10 px-4 py-3 text-sm text-sky-100">
+        {tr(
+          "Aucun résultat de rentabilité n'est annoncé : avec si peu de paris réglés, un ROI ne voudrait rien dire. On juge d'abord la qualité des probabilités (log-loss) et la CLV.",
+          "No profitability figure is claimed: with so few settled bets a ROI would mean nothing. We first judge probability quality (log-loss) and CLV.",
+        )}
+      </div>
+
+      <Section title={tr("Le modèle contre le marché", "Model vs market")} kicker={tr("Évaluation walk-forward", "Walk-forward evaluation")}>
+        <p className="mb-3 max-w-3xl text-sm text-muted-foreground">
+          {tr(
+            `Sur ${v.n.toLocaleString(lng)} séries passées dont on connaît le prix Polymarket à 09:00 UTC, le jour du match. Plus le log-loss est bas, meilleur est le pronostic.`,
+            `On ${v.n.toLocaleString(lng)} past series with a known Polymarket price at 09:00 UTC on match day. Lower log-loss is better.`,
+          )}
+        </p>
+        <div className="overflow-x-auto rounded-xl border border-border/60">
+          <table className="w-full text-sm">
+            <thead className="bg-secondary/50 text-xs uppercase tracking-wider text-muted-foreground">
+              <tr><th className="px-3 py-2 text-left" /><th className="px-3 py-2 text-right">Log-loss</th><th className="px-3 py-2 text-right">Brier</th><th className="px-3 py-2 text-right">{tr("Justesse", "Accuracy")}</th></tr>
+            </thead>
+            <tbody>
+              <Row label={tr("Prix du marché (référence)", "Market price (benchmark)")} r={v.market} />
+              <Row label={tr("Notre modèle seul", "Our model alone")} r={v.model} />
+              <Row label={tr("Modèle + marché (mélange par niveau de tournoi)", "Model + market blend (by tournament tier)")} r={v.blend_tier} best />
+              <Row label={tr("… en ne gardant que les marchés liquides", "… liquid markets only")} r={v.blend_tier_liq} />
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
+          {tr(
+            "Lecture honnête : notre modèle seul est à peine meilleur que le marché (écart non significatif). L'avantage vient du mélange modèle + marché, surtout sur les tournois de niveau intermédiaire — d'où la phase de test avant tout argent réel.",
+            "Honest reading: our model alone is barely better than the market (difference not significant). The edge comes from blending model and market, mainly on mid-tier tournaments — hence the test phase before any real money.",
+          )}
+        </p>
+      </Section>
+
+      <Section title={tr("Pourquoi si peu de paris ?", "Why so few bets?")} kicker={tr("Garde-fous", "Safeguards")}>
+        <ul className="max-w-2xl space-y-2">
+          {reasons.map(([k, n]) => (
+            <li key={k} className="flex items-center justify-between rounded-lg border border-border/50 bg-card/50 px-4 py-2 text-sm">
+              <span>{(SKIP_LABEL[k] ? tr(...SKIP_LABEL[k]) : k)}</span><b className="tabular-nums">{n}</b>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
+          {tr(
+            "Le robot refuse de parier quand le carnet est trop peu liquide, quand il est trop tard, ou quand l'avantage est sous le seuil. Prix utilisé = prix réel d'achat dans le carnet + frais taker, jamais le milieu de fourchette.",
+            "The bot refuses to bet when the book is illiquid, when it is too late, or when the edge is under the threshold. Price used = real ask in the order book + taker fees, never the mid-price.",
+          )}
+        </p>
+      </Section>
+
+      <Section title={tr("Santé des données", "Data health")} kicker={tr("Contrôles automatiques", "Automatic checks")}>
+        <ul className="grid gap-2 sm:grid-cols-2">
+          {d.data_checks.map((c) => (
+            <li key={c.check} className="flex items-start gap-2 rounded-lg border border-border/50 bg-card/50 px-3 py-2 text-sm">
+              {c.ok ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /> : <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />}
+              <span><b>{c.check}</b> <span className="text-muted-foreground">— {c.detail}</span></span>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </>
+  );
+};
 
 const CS2 = () => {
-  const { t } = useTranslation();
-  
+  const { tr } = useTr();
+  const { data, isLoading, error } = useCs2Status();
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Prédictions Counter-Strike 2 — bientôt sur PredictEsport"
-        description="Module CS2 en préparation : pronostics IA, value bets et suivi des tournois Counter-Strike 2."
+        title="CS2 en test — paper trading public | PredictEsport"
+        description="Notre modèle Counter-Strike 2 est en phase de test : paper trading quotidien, journal public des décisions et comparaison honnête avec le prix du marché."
         path="/cs2"
       />
       <Navbar />
-      
-      <main className="container mx-auto px-4 py-8 sm:py-12 md:py-16">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Hero Section with Glow Effect */}
-          <div className="relative mb-8 sm:mb-12">
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-red-500/20 to-yellow-500/20 blur-3xl rounded-full" />
-            <div className="relative inline-flex items-center justify-center w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-orange-500/30 to-red-500/30 border-2 border-orange-500/50 shadow-lg shadow-orange-500/20 animate-pulse">
-              <Target className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 text-orange-400" />
-            </div>
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-4 sm:mb-6 bg-gradient-to-r from-orange-400 via-red-400 to-yellow-400 bg-clip-text text-transparent">
-            {t('comingSoon.cs2.title')}
-          </h1>
-          
-          <p className="text-lg sm:text-xl text-muted-foreground mb-8 sm:mb-10 px-4">
-            {t('comingSoon.cs2.subtitle')}
-          </p>
-          
-          {/* Feature Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
-            <div className="bg-gradient-card border border-orange-500/20 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-300 group">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Gamepad2 className="w-6 h-6 text-orange-400" />
-              </div>
-              <h2 className="font-semibold text-foreground mb-2">{t('comingSoon.features.aiPredictions')}</h2>
-              <p className="text-sm text-muted-foreground">{t('comingSoon.features.aiPredictionsDesc')}</p>
-            </div>
-            
-            <div className="bg-gradient-card border border-orange-500/20 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-300 group">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Trophy className="w-6 h-6 text-orange-400" />
-              </div>
-              <h2 className="font-semibold text-foreground mb-2">{t('comingSoon.features.tournaments')}</h2>
-              <p className="text-sm text-muted-foreground">{t('comingSoon.features.tournamentsDesc')}</p>
-            </div>
-            
-            <div className="bg-gradient-card border border-orange-500/20 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-300 group">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Clock className="w-6 h-6 text-orange-400" />
-              </div>
-              <h2 className="font-semibold text-foreground mb-2">{t('comingSoon.features.realtime')}</h2>
-              <p className="text-sm text-muted-foreground">{t('comingSoon.features.realtimeDesc')}</p>
-            </div>
-          </div>
-          
-          {/* Coming Soon Badge */}
-          <div className="inline-flex items-center gap-3 bg-orange-500/10 border border-orange-500/30 rounded-full px-6 py-3">
-            <Lock className="w-5 h-5 text-orange-400" />
-            <span className="text-sm font-semibold text-orange-300">
-              {t('comingSoon.cs2.description')}
-            </span>
-          </div>
+      <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
+        <div className="mb-3 flex flex-wrap items-center gap-3">
+          <StagePill stage="test" />
+          <span className="text-sm text-muted-foreground">Counter-Strike 2 · Polymarket</span>
         </div>
+        <h1 className="mb-3 font-display text-4xl font-bold sm:text-5xl">{tr("CS2 : en phase de test", "CS2: in testing")}</h1>
+        <p className="mb-8 max-w-3xl text-muted-foreground">
+          {tr(
+            "Le module CS2 n'est pas encore commercialisé. Il tourne chaque jour en paper trading (argent fictif) et nous publions ici ce qu'il fait, y compris quand il ne mise pas.",
+            "The CS2 module is not on sale yet. It runs daily in paper trading (play money) and we publish what it does here, including when it doesn't bet.",
+          )}
+        </p>
+        {isLoading && <Loading />}
+        {error && <p className="text-red-400">{tr("Données indisponibles.", "Data unavailable.")}</p>}
+        {data && <Body d={data} />}
+        <Section id="verification" title={tr("Sources et vérification", "Sources and verification")} kicker={tr("Transparence", "Transparency")}>
+          <VerifyPanel />
+        </Section>
       </main>
+      <Footer />
     </div>
   );
 };

@@ -27,6 +27,7 @@ import { Crown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { LanguageSelector } from "./LanguageSelector";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useTr } from "@/hooks/useTr";
 
 export const Navbar = () => {
   const location = useLocation();
@@ -39,10 +40,12 @@ export const Navbar = () => {
   const { t } = useTranslation();
   const isMobile = useIsMobile();
 
+  const { tr } = useTr();
   const games = [
-    { id: "lol", name: t('nav.games.lol'), path: "/", active: true },
-    { id: "cs2", name: t('nav.games.cs2'), path: "/cs2", active: false },
-    { id: "dota2", name: t('nav.games.dota2'), path: "/dota2", active: false },
+    { id: "predictions", name: tr("Prédictions", "Predictions"), path: "/predictions", active: true, badge: "" },
+    { id: "track", name: tr("Track record LoL", "LoL track record"), path: "/track-record", active: true, badge: "" },
+    { id: "labs", name: "Labs", path: "/labs", active: true, badge: tr("dev", "dev") },
+    { id: "cs2", name: "CS2", path: "/cs2", active: true, badge: tr("test", "test") },
   ];
 
   const handleLogout = async () => {
@@ -154,9 +157,9 @@ export const Navbar = () => {
                           >
                             <span className="flex items-center justify-between">
                               {game.name}
-                              {!game.active && (
+                              {game.badge && (
                                 <span className="rounded bg-accent/15 text-accent text-[10px] font-semibold px-1.5 py-0.5">
-                                  {t('nav.soon')}
+                                  {game.badge}
                                 </span>
                               )}
                             </span>
@@ -168,8 +171,8 @@ export const Navbar = () => {
                     {/* Pages */}
                     <div className="space-y-2">
                       <DrawerClose asChild>
-                        <Link to="/results" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
-                          {t('nav.results')}
+                        <Link to="/track-record#verification" className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
+                          {tr("Vérifier les chiffres", "Verify the numbers")}
                         </Link>
                       </DrawerClose>
                       <DrawerClose asChild>
@@ -249,9 +252,9 @@ export const Navbar = () => {
                     onClick={(e) => !game.active && e.preventDefault()}
                   >
                     {game.name}
-                    {!game.active && (
+                    {game.badge && (
                       <span className="ml-1 rounded bg-accent/15 text-accent text-[9px] font-semibold px-1 py-0.5 align-middle">
-                        {t('nav.soon')}
+                        {game.badge}
                       </span>
                     )}
                   </Link>
@@ -259,9 +262,9 @@ export const Navbar = () => {
               </div>
 
               <div className="flex items-center gap-2 sm:gap-3">
-                <Link to="/results">
+                <Link to="/track-record#verification">
                   <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
-                    {t('nav.results')}
+                    {tr("Vérifier", "Verify")}
                   </Button>
                 </Link>
                 <Link to="/pricing">

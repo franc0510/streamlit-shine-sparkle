@@ -1,0 +1,174 @@
+{
+ "mode": "paper",
+ "stage": "test",
+ "bankroll_virtual_usd": 45.79,
+ "bankroll0_usd": 50.0,
+ "period": [
+  "2026-11-16",
+  "2026-11-16"
+ ],
+ "decisions_logged": 24,
+ "bets_logged": 2,
+ "open": 24,
+ "skip_reasons": {
+  "illiquid_spread": 10,
+  "no_market": 6,
+  "too_late": 3,
+  "edge_below_min": 3,
+  "bet": 2
+ },
+ "settled_bets": 0,
+ "report_generated_utc": "2026-11-16T15:02:09+00:00",
+ "last_build_run_date": "2026-11-16",
+ "data_ok": true,
+ "data_checks": [
+  {
+   "check": "load",
+   "ok": true,
+   "detail": "46993 séries, 93092 maps"
+  },
+  {
+   "check": "unique_keys",
+   "ok": true,
+   "detail": "{\"dup_match_id\": 0, \"dup_game_id\": 0}"
+  },
+  {
+   "check": "freshness",
+   "ok": true,
+   "detail": "dernière série terminée il y a 2.8 h (max 36 h)"
+  },
+  {
+   "check": "no_future_dates",
+   "ok": true,
+   "detail": "0 séries datées dans le futur"
+  },
+  {
+   "check": "volume_7d",
+   "ok": true,
+   "detail": "273 séries terminées sur 7 j (min 50)"
+  },
+  {
+   "check": "daily_run",
+   "ok": true,
+   "detail": "daily il y a 0.0 h, ok=True"
+  }
+ ],
+ "last_finished_match_utc": "2026-11-16T12:10:00+00:00",
+ "eval": {
+  "variant": "c2",
+  "period": [
+   "2025-01-02 17:00:00+00:00",
+   "2026-11-09 12:00:00+00:00"
+  ],
+  "n_series": 27206,
+  "vs_market": {
+   "n": 8724,
+   "market": {
+    "n": 8724,
+    "logloss": 0.6095,
+    "brier": 0.2116,
+    "acc": 0.6453
+   },
+   "model": {
+    "n": 8724,
+    "logloss": 0.6083,
+    "brier": 0.2108,
+    "acc": 0.6621
+   },
+   "blend_tier": {
+    "n": 8724,
+    "logloss": 0.6003,
+    "brier": 0.2074,
+    "acc": 0.6686
+   },
+   "blend_tier_liq": {
+    "n": 8724,
+    "logloss": 0.5996,
+    "brier": 0.2071,
+    "acc": 0.6696
+   }
+  },
+  "reliability": [
+   {
+    "bin": "0.0-0.1",
+    "n": 122,
+    "p_mean": 0.076,
+    "win_rate": 0.09
+   },
+   {
+    "bin": "0.1-0.2",
+    "n": 685,
+    "p_mean": 0.157,
+    "win_rate": 0.152
+   },
+   {
+    "bin": "0.2-0.3",
+    "n": 1857,
+    "p_mean": 0.256,
+    "win_rate": 0.262
+   },
+   {
+    "bin": "0.3-0.4",
+    "n": 3504,
+    "p_mean": 0.354,
+    "win_rate": 0.348
+   },
+   {
+    "bin": "0.4-0.5",
+    "n": 4700,
+    "p_mean": 0.452,
+    "win_rate": 0.452
+   },
+   {
+    "bin": "0.5-0.6",
+    "n": 5265,
+    "p_mean": 0.549,
+    "win_rate": 0.551
+   },
+   {
+    "bin": "0.6-0.7",
+    "n": 4717,
+    "p_mean": 0.649,
+    "win_rate": 0.651
+   },
+   {
+    "bin": "0.7-0.8",
+    "n": 3694,
+    "p_mean": 0.746,
+    "win_rate": 0.744
+   },
+   {
+    "bin": "0.8-0.9",
+    "n": 2171,
+    "p_mean": 0.843,
+    "win_rate": 0.842
+   },
+   {
+    "bin": "0.9-1.0",
+    "n": 491,
+    "p_mean": 0.923,
+    "win_rate": 0.927
+   }
+  ]
+ },
+ "config": {
+  "bankroll0": 50.0,
+  "kelly_mult": 0.25,
+  "max_frac": 0.05,
+  "min_frac": 0.02,
+  "kelly_ref_low": 0.01,
+  "kelly_ref_high": 0.05,
+  "min_stake_usd": 1.0,
+  "min_edge": 0.03,
+  "tiers": [
+   "b",
+   "c"
+  ],
+  "max_spread": 0.05,
+  "min_depth_usd": 100.0,
+  "band": 0.05,
+  "min_lead_h": 1.0,
+  "default_fee_rate": 0.05
+ },
+ "note": "Paper trading uniquement. Prix = ask réel du carnet CLOB à la décision + frais taker. Échantillon petit : ROI indicatif, juger d'abord log-loss et CLV."
+}
