@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import { CountBars, Reliability, VsMarket } from "@/components/stats/charts";
 import { Kpi, Loading, Section, StagePill } from "@/components/stats/parts";
 import { VerifyPanel } from "@/components/stats/Verify";
 import { Cs2Status, EvalRow, pct, usd, useCs2Status } from "@/lib/stats";
@@ -48,10 +49,7 @@ const Body = ({ d }: { d: Cs2Status }) => {
         <Kpi label={tr("Période de test", "Test period")} value={d.period ? new Date(d.period[0]).toLocaleDateString(lng, { day: "numeric", month: "short" }) : "—"} sub={tr("depuis le premier run", "since the first run")} />
       </div>
       <div className="mt-4 rounded-lg border border-sky-500/30 bg-sky-500/10 px-4 py-3 text-sm text-sky-100">
-        {tr(
-          "Aucun résultat de rentabilité n'est annoncé : avec si peu de paris réglés, un ROI ne voudrait rien dire. On juge d'abord la qualité des probabilités (log-loss) et la CLV.",
-          "No profitability figure is claimed: with so few settled bets a ROI would mean nothing. We first judge probability quality (log-loss) and CLV.",
-        )}
+        {tr("Pas de ROI annoncé : trop peu de paris réglés. On juge la qualité des probabilités.", "No ROI claimed: too few settled bets. We judge probability quality.")}
       </div>
 
       <Tabs value={tab} onValueChange={setTab} className="mt-8">
@@ -61,50 +59,42 @@ const Body = ({ d }: { d: Cs2Status }) => {
           <TabsTrigger value="verification" className="px-5">{tr("Vérification", "Verification")}</TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
-      <Section title={tr("Le modèle contre le marché", "Model vs market")} kicker={tr("Évaluation walk-forward", "Walk-forward evaluation")}>
-        <p className="mb-3 max-w-3xl text-sm text-muted-foreground">
-          {tr(
-            `Sur ${v.n.toLocaleString(lng)} séries passées dont on connaît le prix Polymarket à 09:00 UTC, le jour du match. Plus le log-loss est bas, meilleur est le pronostic.`,
-            `On ${v.n.toLocaleString(lng)} past series with a known Polymarket price at 09:00 UTC on match day. Lower log-loss is better.`,
-          )}
-        </p>
-        <div className="overflow-x-auto rounded-xl border border-border/60">
+      <Section title={tr("Le modèle contre le marché", "Model vs market")} kicker={tr("Évaluation sur séries passées", "Evaluation on past series")}>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-card/60 p-5">
+            <div className="mb-3 text-sm font-semibold">{tr(`Écart de log-loss vs marché · ${v.n.toLocaleString(lng)} séries`, `Log-loss gap vs market · ${v.n.toLocaleString(lng)} series`)}</div>
+            <VsMarket rows={[
+              { label: tr("Marché (référence)", "Market (benchmark)"), delta: 0 },
+              { label: tr("Notre modèle seul", "Our model alone"), delta: (v.model?.logloss ?? 0) - (v.market?.logloss ?? 0) },
+              { label: tr("Modèle + marché", "Model + market"), delta: (v.blend_tier?.logloss ?? 0) - (v.market?.logloss ?? 0), highlight: true },
+              { label: tr("… marchés liquides", "… liquid markets"), delta: (v.blend_tier_liq?.logloss ?? 0) - (v.market?.logloss ?? 0), highlight: true },
+            ]} />
+          </div>
+          <div className="rounded-2xl border border-border bg-card/60 p-5">
+            <div className="mb-3 text-sm font-semibold">{tr("Fiabilité : annoncé vs observé", "Reliability: predicted vs observed")}</div>
+            <Reliability bins={d.eval.reliability} />
+          </div>
+        </div>
+        <div className="mt-4 overflow-x-auto rounded-xl border border-border/60">
           <table className="w-full text-sm">
             <thead className="bg-secondary/50 text-xs uppercase tracking-wider text-muted-foreground">
               <tr><th className="px-3 py-2 text-left" /><th className="px-3 py-2 text-right">Log-loss</th><th className="px-3 py-2 text-right">Brier</th><th className="px-3 py-2 text-right">{tr("Justesse", "Accuracy")}</th></tr>
             </thead>
             <tbody>
-              <Row label={tr("Prix du marché (référence)", "Market price (benchmark)")} r={v.market} />
-              <Row label={tr("Notre modèle seul", "Our model alone")} r={v.model} />
-              <Row label={tr("Modèle + marché (mélange par niveau de tournoi)", "Model + market blend (by tournament tier)")} r={v.blend_tier} best />
-              <Row label={tr("… en ne gardant que les marchés liquides", "… liquid markets only")} r={v.blend_tier_liq} />
+              <Row label={tr("Marché", "Market")} r={v.market} />
+              <Row label={tr("Modèle seul", "Model alone")} r={v.model} />
+              <Row label={tr("Modèle + marché", "Model + market")} r={v.blend_tier} best />
             </tbody>
           </table>
         </div>
-        <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
-          {tr(
-            "Lecture honnête : notre modèle seul est à peine meilleur que le marché (écart non significatif). L'avantage vient du mélange modèle + marché, surtout sur les tournois de niveau intermédiaire — d'où la phase de test avant tout argent réel.",
-            "Honest reading: our model alone is barely better than the market (difference not significant). The edge comes from blending model and market, mainly on mid-tier tournaments — hence the test phase before any real money.",
-          )}
-        </p>
       </Section>
 
         </TabsContent>
         <TabsContent value="details">
       <Section title={tr("Pourquoi si peu de paris ?", "Why so few bets?")} kicker={tr("Garde-fous", "Safeguards")}>
-        <ul className="max-w-2xl space-y-2">
-          {reasons.map(([k, n]) => (
-            <li key={k} className="flex items-center justify-between rounded-lg border border-border/50 bg-card/50 px-4 py-2 text-sm">
-              <span>{(SKIP_LABEL[k] ? tr(...SKIP_LABEL[k]) : k)}</span><b className="tabular-nums">{n}</b>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
-          {tr(
-            "Le robot refuse de parier quand le carnet est trop peu liquide, quand il est trop tard, ou quand l'avantage est sous le seuil. Prix utilisé = prix réel d'achat dans le carnet + frais taker, jamais le milieu de fourchette.",
-            "The bot refuses to bet when the book is illiquid, when it is too late, or when the edge is under the threshold. Price used = real ask in the order book + taker fees, never the mid-price.",
-          )}
-        </p>
+        <div className="max-w-2xl rounded-2xl border border-border bg-card/60 p-5">
+          <CountBars rows={reasons.map(([k, n]) => ({ label: SKIP_LABEL[k] ? tr(...SKIP_LABEL[k]) : k, n, highlight: k === "bet" }))} />
+        </div>
       </Section>
 
       <Section title={tr("Santé des données", "Data health")} kicker={tr("Contrôles automatiques", "Automatic checks")}>
@@ -145,12 +135,7 @@ const CS2 = () => {
           <span className="text-sm text-muted-foreground">Counter-Strike 2 · Polymarket</span>
         </div>
         <h1 className="mb-3 font-display text-4xl font-bold sm:text-5xl">{tr("CS2 : en phase de test", "CS2: in testing")}</h1>
-        <p className="mb-8 max-w-3xl text-muted-foreground">
-          {tr(
-            "Le module CS2 n'est pas encore commercialisé. Il tourne chaque jour en paper trading (argent fictif) et nous publions ici ce qu'il fait, y compris quand il ne mise pas.",
-            "The CS2 module is not on sale yet. It runs daily in paper trading (play money) and we publish what it does here, including when it doesn't bet.",
-          )}
-        </p>
+        <p className="mb-8 max-w-2xl text-muted-foreground">{tr("Argent fictif. Journal public, même quand il ne mise pas.", "Play money. Public log, even when it doesn't bet.")}</p>
         {isLoading && <Loading />}
         {error && <p className="text-red-400">{tr("Données indisponibles.", "Data unavailable.")}</p>}
         {data && <Body d={data} />}

@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { LeagueRoi, Legend2, MonthRoi, PriceVsWin, WinDonut } from "@/components/stats/charts";
 import { Freshness, Kpi, Loading, PnlChart, Section, StagePill } from "@/components/stats/parts";
 import { VerifyPanel } from "@/components/stats/Verify";
 import { LedgerRow, pct, shortDate, usd, useLedger, useLolTrack, useManifest } from "@/lib/stats";
@@ -140,12 +141,7 @@ const TrackRecord = () => {
           <span className="text-sm text-muted-foreground">League of Legends · Polymarket · {tr("depuis le 13 août 2026", "since 13 Aug 2026")}</span>
         </div>
         <h1 className="mb-3 font-display text-4xl font-bold sm:text-5xl">{tr("Track record LoL", "LoL track record")}</h1>
-        <p className="mb-6 max-w-3xl text-muted-foreground">
-          {tr(
-            "Chaque pari placé avec de l'argent réel depuis le 13 août 2026 est dans le registre ci-dessous — gagnants et perdants, sans sélection. Tout est recalculé automatiquement par notre pipeline, et vous pouvez le vérifier.",
-            "Every real-money bet placed since 13 Aug 2026 is in the ledger below — winners and losers, no cherry-picking. Everything is recomputed automatically by our pipeline and you can verify it.",
-          )}
-        </p>
+        <p className="mb-6 max-w-2xl text-muted-foreground">{tr("Argent réel. Tous les paris, gagnants et perdants.", "Real money. Every bet, winners and losers.")}</p>
 
         {isLoading && <Loading />}
         {error && <p className="text-red-400">{tr("Données indisponibles.", "Data unavailable.")}</p>}
@@ -181,11 +177,8 @@ const TrackRecord = () => {
                 <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 <p className="text-muted-foreground">
                   {sig
-                    ? tr("L'intervalle de confiance à 95 % du ROI est entièrement positif.", "The 95% confidence interval of the ROI is entirely positive.")
-                    : tr(
-                      `Lecture honnête : avec ${s.n_settled} paris, l'intervalle de confiance à 95 % du ROI inclut zéro. Le résultat est encourageant mais pas encore statistiquement concluant. Plus l'échantillon grandit, plus l'intervalle se resserre — il est recalculé à chaque mise à jour.`,
-                      `Honest reading: with ${s.n_settled} bets, the 95% confidence interval of the ROI includes zero. The result is encouraging but not yet statistically conclusive. The interval tightens as the sample grows and is recomputed on every update.`,
-                    )}
+                    ? tr("Intervalle de confiance à 95 % du ROI entièrement positif.", "95% ROI confidence interval entirely positive.")
+                    : tr(`Échantillon encore petit (${s.n_settled} paris) : l'intervalle de confiance du ROI inclut zéro.`, `Sample still small (${s.n_settled} bets): the ROI confidence interval includes zero.`)}
                 </p>
               </div>
 
@@ -196,41 +189,43 @@ const TrackRecord = () => {
                   <TabsTrigger value="verification" className="px-5">{tr("Vérification", "Verification")}</TabsTrigger>
                 </TabsList>
                 <TabsContent value="overview">
-              <Section title={tr("Résultat cumulé depuis le 13 août", "Cumulative profit since 13 Aug")} kicker="P&L">
-                <div className="rounded-xl border border-border/60 bg-card/60 p-3 sm:p-5">
+              <div className="mt-6 grid gap-4 lg:grid-cols-3">
+                <div className="rounded-2xl border border-border bg-card/60 p-5 lg:col-span-2">
+                  <div className="mb-3 text-sm font-semibold">{tr("Gain cumulé ($)", "Cumulative profit ($)")}</div>
                   <PnlChart daily={data.daily} />
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    {tr("Dollars réels, mises incluses, par jour de match. Plus grosse baisse depuis un sommet :", "Real dollars, stakes included, by match day. Largest peak-to-trough drop:")} <b>{usd(s.max_drawdown_usd)}</b>.
-                  </p>
+                  <div className="mt-2 text-xs text-muted-foreground">{tr("Plus grosse baisse depuis un sommet", "Largest drop from a peak")} : <b>{usd(s.max_drawdown_usd)}</b></div>
                 </div>
-              </Section>
-
-              <Section title={tr("Par mois et par ligue", "By month and by league")} kicker={tr("Détail", "Breakdown")}>
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="rounded-xl border border-border/60 bg-card/60 p-5">
-                    <h3 className="mb-3 font-semibold">{tr("ROI par mois", "ROI by month")}</h3>
-                    <Bars max={0.6} items={data.by_month.map((m) => ({ label: m.month, value: m.roi, sub: `${pct(m.roi, 1, true)} · ${m.n} ${tr("paris", "bets")}` }))} />
-                  </div>
-                  <div className="rounded-xl border border-border/60 bg-card/60 p-5">
-                    <h3 className="mb-3 font-semibold">{tr("ROI par ligue (≥ 8 paris)", "ROI by league (≥ 8 bets)")}</h3>
-                    <Bars max={0.8} items={data.by_league.filter((l) => l.n >= 8).map((l) => ({ label: l.league, value: l.roi, sub: `${pct(l.roi, 0, true)} · ${l.n} ${tr("paris", "bets")}` }))} />
+                <div className="rounded-2xl border border-border bg-card/60 p-5">
+                  <div className="mb-3 text-sm font-semibold">{tr("Paris gagnés", "Bets won")}</div>
+                  <WinDonut won={s.n_won} lost={s.n_lost} size={200} />
+                  <div className="mt-4 flex justify-center gap-5 text-xs text-muted-foreground">
+                    <span><i className="mr-1.5 inline-block h-2.5 w-2.5 rounded-full bg-emerald-400" />{s.n_won}</span>
+                    <span><i className="mr-1.5 inline-block h-2.5 w-2.5 rounded-full bg-red-400" />{s.n_lost}</span>
                   </div>
                 </div>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  {tr(
-                    "Nous affichons aussi les ligues perdantes : certaines ligues sont négatives sur cet échantillon, et on ne les masque pas. Les petits échantillons par ligue sont très bruités.",
-                    "Losing leagues are shown too: some leagues are negative on this sample and we do not hide them. Small per-league samples are very noisy.",
-                  )}
-                </p>
-              </Section>
+                <div className="rounded-2xl border border-border bg-card/60 p-5">
+                  <div className="mb-1 text-sm font-semibold">{tr("ROI par mois", "ROI by month")}</div>
+                  <MonthRoi data={data.by_month} />
+                </div>
+                <div className="rounded-2xl border border-border bg-card/60 p-5 lg:col-span-2">
+                  <div className="mb-1 text-sm font-semibold">{tr("ROI par ligue (≥ 8 paris)", "ROI by league (≥ 8 bets)")}</div>
+                  <LeagueRoi data={data.by_league.filter((l) => l.n >= 8)} />
+                </div>
+              </div>
 
                 </TabsContent>
                 <TabsContent value="details">
-              <Section title={tr("Le modèle bat-il vraiment le prix ?", "Does the model really beat the price?")} kicker={tr("Calibration", "Calibration")}>
-                <div className="grid gap-4 sm:grid-cols-3">
-                  <Kpi label={tr("Prix moyen payé", "Average price paid")} value={pct(data.calibration.implied_win_rate, 1)} sub={tr("= probabilité implicite du marché", "= market-implied probability")} />
-                  <Kpi label={tr("Réussite réelle", "Actual win rate")} value={pct(data.calibration.actual_win_rate, 1)} tone={data.calibration.actual_win_rate >= data.calibration.implied_win_rate ? "pos" : "neg"} sub={tr("sur les mêmes paris", "on the same bets")} />
-                  <Kpi label={tr("Proba moyenne du modèle", "Avg model probability")} value={data.calibration.avg_model_prob == null ? "—" : pct(data.calibration.avg_model_prob, 1)} sub={tr("à la décision, sur les paris placés — à comparer à la réussite réelle (biais de sélection : on ne parie que quand le modèle diverge du marché)", "at decision time, on the bets placed — compare with the actual win rate (selection bias: we only bet when the model disagrees with the market)")} />
+              <Section title={tr("Le modèle bat-il le prix ?", "Does the model beat the price?")} kicker={tr("Calibration", "Calibration")}>
+                <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+                  <div className="rounded-2xl border border-border bg-card/60 p-5">
+                    <PriceVsWin buckets={data.price_buckets} />
+                    <Legend2 a={tr("Prix payé (proba du marché)", "Price paid (market probability)")} b={tr("Réussite réelle", "Actual win rate")} />
+                  </div>
+                  <div className="grid gap-3">
+                    <Kpi label={tr("Prix moyen payé", "Average price paid")} value={pct(data.calibration.implied_win_rate, 1)} />
+                    <Kpi label={tr("Réussite réelle", "Actual win rate")} value={pct(data.calibration.actual_win_rate, 1)} tone={data.calibration.actual_win_rate >= data.calibration.implied_win_rate ? "pos" : "neg"} />
+                    <Kpi label={tr("Proba moyenne du modèle", "Avg model probability")} value={data.calibration.avg_model_prob == null ? "—" : pct(data.calibration.avg_model_prob, 1)} />
+                  </div>
                 </div>
                 <div className="mt-4 overflow-x-auto rounded-xl border border-border/60">
                   <table className="w-full text-sm">
@@ -252,12 +247,6 @@ const TrackRecord = () => {
 
               <Section title={tr("Registre complet des paris", "Full bet ledger")} kicker={tr("Preuve", "Proof")}>
                 <Ledger />
-                <p className="mt-3 text-xs text-muted-foreground">
-                  {tr(
-                    "Le wallet n'est pas publié. Chaque ligne renvoie au marché Polymarket public pour vérifier l'issue.",
-                    "The wallet address is not published. Each row links to the public Polymarket market so the outcome can be checked.",
-                  )}
-                </p>
               </Section>
 
                 </TabsContent>
@@ -269,13 +258,8 @@ const TrackRecord = () => {
                 </TabsContent>
               </Tabs>
 
-              <div className="rounded-xl border border-border/60 bg-card/40 p-5 text-xs text-muted-foreground">
-                <b className="text-foreground">{tr("Avertissement.", "Disclaimer.")}</b>{" "}
-                {tr(
-                  "Les performances passées ne préjugent pas des performances futures. Les paris comportent un risque de perte en capital. Ces données sont fournies à titre informatif, ce ne sont pas des conseils financiers. Mises réelles de petite taille (moyenne ",
-                  "Past performance does not predict future results. Betting carries a risk of losing capital. This data is informational and not financial advice. Small real-money stakes (average ",
-                )}
-                {usd(s.avg_stake_usd)}).{" "}
+              <div className="mt-6 rounded-xl border border-border/60 bg-card/40 p-5 text-xs text-muted-foreground">
+                <b className="text-foreground">{tr("Avertissement.", "Disclaimer.")}</b>{" "}{tr("Performances passées ≠ résultats futurs. Risque de perte en capital.", "Past performance ≠ future results. Risk of capital loss.")}{" "}
                 <Link to="/labs" className="text-primary hover:underline">{tr("Ce qui est en développement →", "What we are building →")}</Link>
               </div>
             </>
