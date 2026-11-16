@@ -46,7 +46,7 @@ const Labs = () => {
         "Dimensionner les mises selon l'edge et la profondeur réelle du carnet Polymarket, avec prix limite, pour limiter le glissement.",
         "Size stakes from edge and the real Polymarket order-book depth, with limit prices, to limit slippage.",
       ),
-      proof: tr("Relevés de profondeur du carnet collectés en continu dans le dépôt.", "Order-book depth snapshots are collected continuously in the repository."),
+      proof: tr("Relevés de profondeur du carnet collectés en continu.", "Order-book depth snapshots are collected continuously."),
     },
     {
       icon: Target, stage: "dev",

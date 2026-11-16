@@ -71,10 +71,8 @@ export interface Cs2Status {
 }
 export interface Manifest {
   generated_utc: string;
-  generator: { script: string; sha256: string };
   rules: string[];
-  repos: Record<string, { github: string; head_commit: string; head_date: string }>;
-  files: { repo: string; path: string; role: string; sha256: string; bytes: number; last_commit: string; last_commit_date: string }[];
+  files: { id: string; role: string; sha256: string; bytes: number; last_update: string }[];
   outputs: { path: string; sha256: string; bytes: number }[];
 }
 export interface LedgerRow {

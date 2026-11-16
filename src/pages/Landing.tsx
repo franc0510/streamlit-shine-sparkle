@@ -40,7 +40,7 @@ const Feature = ({ eyebrow, title, body, bullets, cta, to, visual, flip }: { eye
   </div>
 );
 
-// Exemple réel : dernière prédiction « ok » de Documents/predictions_history.csv (dépôt LoL)
+// Exemple réel : dernière prédiction « ok » de Documents/predictions_history.csv
 const SAMPLE = `{
   "match": "Gen.G Esports vs BILIBILI GAMING",
   "league": "Worlds",
@@ -105,8 +105,8 @@ const Landing = () => {
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
               {tr(
-                "Probabilités de victoire, cotes et value bets pour l'esport. Chaque statistique est recalculée automatiquement depuis notre code et peut être auditée.",
-                "Win probabilities, odds and value bets for esports. Every statistic is recomputed automatically from our code and can be audited.",
+                "Probabilités de victoire, cotes et value bets pour l'esport. Chaque statistique est recalculée automatiquement par notre pipeline et peut être auditée.",
+                "Win probabilities, odds and value bets for esports. Every statistic is recomputed automatically by our pipeline and can be audited.",
               )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -206,7 +206,7 @@ const Landing = () => {
         <Feature
           eyebrow={tr("Jeux de données", "Datasets")}
           title={tr("Des fichiers que l'on peut auditer.", "Files you can audit.")}
-          body={tr("Historiques de prédictions, séries de cotes et registre des paris, livrés en CSV et JSON. Chaque fichier est empreint en SHA-256 et rattaché au commit qui l'a produit.", "Prediction histories, odds series and the bet ledger, delivered as CSV and JSON. Each file is SHA-256 fingerprinted and tied to the commit that produced it.")}
+          body={tr("Historiques de prédictions, séries de cotes et registre des paris, livrés en CSV et JSON. Chaque fichier est empreint en SHA-256.", "Prediction histories, odds series and the bet ledger, delivered as CSV and JSON. Each file is SHA-256 fingerprinted.")}
           bullets={[tr("Régénération automatique toutes les 6 heures", "Automatic regeneration every 6 hours"), tr("Manifeste de provenance public", "Public provenance manifest"), tr("Vérification d'intégrité en un clic", "One-click integrity check")]}
           cta={tr("Voir la vérification", "See verification")} to="/track-record#verification"
           visual={

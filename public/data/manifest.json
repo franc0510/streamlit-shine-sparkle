@@ -1,99 +1,67 @@
 {
- "generated_utc": "2026-11-16T15:28:04Z",
- "generator": {
-  "script": "scripts/build_stats.py",
-  "sha256": "9a7e9172f2d84120910b8f096fabfb7cc7ca3104b09611db16ecc81388679b4f"
- },
+ "generated_utc": "2026-11-16T15:55:36Z",
  "rules": [
   "PnL d'un marché = somme des REDEEM - somme des BUY (Polymarket).",
   "Marché sans REDEEM, dont la date de match précède d'au moins 1 jour la dernière donnée connue = perdu.",
   "Marchés plus récents = 'pending', exclus de tous les totaux.",
   "Le suivi LoL commence le 2026-08-13. Aucune sélection : tous les marchés misés sont inclus."
  ],
- "repos": {
-  "lol": {
-   "github": "franc0510/Francky-Predictor-Esports---LOL",
-   "head_commit": "5d00e545ccb53b94dc27f620f0bee347ff400d6a",
-   "head_date": "2026-11-16T12:46:37+00:00"
-  },
-  "cs2": {
-   "github": "franc0510/Francky-Predictor-Esports---CS2",
-   "head_commit": "3dac4b6447380e66c2ab2b43373926a5d37260b7",
-   "head_date": "2026-11-16T15:20:59+00:00"
-  }
- },
  "files": [
   {
-   "repo": "lol",
-   "path": "Documents/polymarket_trades.csv",
+   "id": "lol-1",
    "role": "Historique d'activité Polymarket (BUY + REDEEM)",
    "sha256": "442c9f88271d5087d79bd8544d8da9136762924e4088c3d56af1f6f3fae6ec79",
    "bytes": 359079,
-   "last_commit": "12199751ea25a5b54816fb6892b3d381ff6068ac",
-   "last_commit_date": "2026-11-06T11:59:38+00:00"
+   "last_update": "2026-11-06"
   },
   {
-   "repo": "lol",
-   "path": "Documents/polymarket_auto_bets.csv",
+   "id": "lol-2",
    "role": "Journal du bot (proba modèle, prix marché, mise)",
    "sha256": "3d659c0b45cb76dee6773665ff20c739c3a9f3446315fef956737d2b276ba63b",
    "bytes": 138446,
-   "last_commit": "106d88e32ac401087bfbb62d30fb2ce936738a7b",
-   "last_commit_date": "2026-11-13T12:03:08+00:00"
+   "last_update": "2026-11-13"
   },
   {
-   "repo": "lol",
-   "path": "Documents/predictions_history.csv",
+   "id": "lol-3",
    "role": "Prédictions horodatées publiées",
    "sha256": "17287b1a2e43c553583bbd75d42c5b531f00ffadc33163de30e1da7514b031af",
    "bytes": 1637290,
-   "last_commit": "eb56088526cf0f2f65d55c56ed4da5410978065a",
-   "last_commit_date": "2026-11-14T11:41:27+00:00"
+   "last_update": "2026-11-14"
   },
   {
-   "repo": "cs2",
-   "path": "Documents/paper_report.json",
+   "id": "cs2-4",
    "role": "Rapport du paper bot",
    "sha256": "571f67cc69bc4a67e1a7670f1a92209cc2f60a1db53922b4a0a77b0f66018fe6",
    "bytes": 1251,
-   "last_commit": "32a355d144d3a46e7fc5dbfb4a4a88fb3e59d8e9",
-   "last_commit_date": "2026-11-16T15:02:10+00:00"
+   "last_update": "2026-11-16"
   },
   {
-   "repo": "cs2",
-   "path": "Documents/paper_trades.csv",
+   "id": "cs2-5",
    "role": "Journal du paper bot (toutes les décisions)",
    "sha256": "dd424689aba897d1d45c531ccb22080ccb7c9ee4130300c0819b65b81e8af9be",
    "bytes": 12969,
-   "last_commit": "32a355d144d3a46e7fc5dbfb4a4a88fb3e59d8e9",
-   "last_commit_date": "2026-11-16T15:02:10+00:00"
+   "last_update": "2026-11-16"
   },
   {
-   "repo": "cs2",
-   "path": "Documents/stage2_eval_c2.json",
+   "id": "cs2-6",
    "role": "Évaluation walk-forward du modèle",
    "sha256": "fa98acd7adbc03da1b24f7e6510e286b79833a88f24f1bd9b992705f7a494430",
    "bytes": 34926,
-   "last_commit": "d046ca3eef446a186c1dbca8ab298bfed455a8f7",
-   "last_commit_date": "2026-11-13T15:56:35+00:00"
+   "last_update": "2026-11-13"
   },
   {
-   "repo": "cs2",
-   "path": "Documents/data_freshness.json",
+   "id": "cs2-7",
    "role": "Contrôles de fraîcheur des données",
    "sha256": "6653f9a989206ed9b11d2c2a60a0e7e46c3f2ff0c9ccc3b1c729eec681b46d83",
    "bytes": 879,
-   "last_commit": "32a355d144d3a46e7fc5dbfb4a4a88fb3e59d8e9",
-   "last_commit_date": "2026-11-16T15:02:10+00:00"
+   "last_update": "2026-11-16"
   },
   {
-   "repo": "cs2",
-   "path": "Documents/build_status.json",
+   "id": "cs2-8",
    "role": "Statut du build quotidien",
    "sha256": "a4a89dd9a3ac686dc9b7c77e62273fbf499784a0b4f3a4da8b4f06eb92c44e6d",
    "bytes": 1749,
-   "last_commit": "32a355d144d3a46e7fc5dbfb4a4a88fb3e59d8e9",
-   "last_commit_date": "2026-11-16T15:02:10+00:00"
+   "last_update": "2026-11-16"
   }
  ],
  "outputs": [

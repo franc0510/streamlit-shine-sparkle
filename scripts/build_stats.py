@@ -68,14 +68,13 @@ class Manifest:
         if not p.exists():
             raise FileNotFoundError(p)
         sha = git(repo_path, "log", "-1", "--format=%H", "--", rel)
+        # Manifeste PUBLIC : aucun nom de dépôt, de chemin, ni de commit.
         self.files.append({
-            "repo": key,
-            "path": rel,
+            "id": f"{key}-{len(self.files) + 1}",
             "role": role,
             "sha256": sha256(p),
             "bytes": p.stat().st_size,
-            "last_commit": sha,
-            "last_commit_date": git(repo_path, "log", "-1", "--format=%cI", "--", rel),
+            "last_update": git(repo_path, "log", "-1", "--format=%cI", "--", rel)[:10],
         })
         return p
 
@@ -375,14 +374,12 @@ def main() -> int:
     me = Path(__file__).resolve()
     manifest = {
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "generator": {"script": "scripts/build_stats.py", "sha256": sha256(me)},
         "rules": [
             "PnL d'un marché = somme des REDEEM - somme des BUY (Polymarket).",
             "Marché sans REDEEM, dont la date de match précède d'au moins 1 jour la dernière donnée connue = perdu.",
             "Marchés plus récents = 'pending', exclus de tous les totaux.",
             "Le suivi LoL commence le 2026-08-13. Aucune sélection : tous les marchés misés sont inclus.",
         ],
-        "repos": man.repos,
         "files": man.files,
         "outputs": [],
     }

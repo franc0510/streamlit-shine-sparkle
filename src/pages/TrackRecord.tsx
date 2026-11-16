@@ -142,8 +142,8 @@ const TrackRecord = () => {
         <h1 className="mb-3 font-display text-4xl font-bold sm:text-5xl">{tr("Track record LoL", "LoL track record")}</h1>
         <p className="mb-6 max-w-3xl text-muted-foreground">
           {tr(
-            "Chaque pari placé avec de l'argent réel depuis le 13 août 2026 est dans le registre ci-dessous — gagnants et perdants, sans sélection. Tout est recalculé automatiquement depuis nos dépôts de code, et vous pouvez le vérifier.",
-            "Every real-money bet placed since 13 Aug 2026 is in the ledger below — winners and losers, no cherry-picking. Everything is recomputed automatically from our code repositories and you can verify it.",
+            "Chaque pari placé avec de l'argent réel depuis le 13 août 2026 est dans le registre ci-dessous — gagnants et perdants, sans sélection. Tout est recalculé automatiquement par notre pipeline, et vous pouvez le vérifier.",
+            "Every real-money bet placed since 13 Aug 2026 is in the ledger below — winners and losers, no cherry-picking. Everything is recomputed automatically by our pipeline and you can verify it.",
           )}
         </p>
 
