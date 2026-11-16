@@ -6,6 +6,16 @@ import { VerifyPanel } from "@/components/stats/Verify";
 import { Cs2Status, EvalRow, pct, usd, useCs2Status } from "@/lib/stats";
 import { useTr } from "@/hooks/useTr";
 import { CheckCircle2, XCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+const TABS = ["overview", "details", "verification"];
+const useHashTab = () => {
+  const read = () => { const h = window.location.hash.slice(1); return TABS.includes(h) ? h : "overview"; };
+  const [tab, setTab] = useState(read);
+  useEffect(() => { const f = () => setTab(read()); window.addEventListener("hashchange", f); f(); return () => window.removeEventListener("hashchange", f); }, []);
+  return [tab, (v: string) => { setTab(v); history.replaceState(null, "", v === "overview" ? window.location.pathname : `#${v}`); }] as const;
+};
 
 const SKIP_LABEL: Record<string, [string, string]> = {
   bet: ["Pari papier placé", "Paper bet placed"],
@@ -28,6 +38,7 @@ const Body = ({ d }: { d: Cs2Status }) => {
   const { tr, lng } = useTr();
   const v = d.eval.vs_market;
   const reasons = Object.entries(d.skip_reasons).sort((a, b) => b[1] - a[1]);
+  const [tab, setTab] = useHashTab();
   return (
     <>
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -43,6 +54,13 @@ const Body = ({ d }: { d: Cs2Status }) => {
         )}
       </div>
 
+      <Tabs value={tab} onValueChange={setTab} className="mt-8">
+        <TabsList className="h-11 w-full justify-start gap-1 rounded-xl bg-secondary/60 p-1 sm:w-auto">
+          <TabsTrigger value="overview" className="px-5">{tr("Aperçu", "Overview")}</TabsTrigger>
+          <TabsTrigger value="details" className="px-5">{tr("Détails", "Details")}</TabsTrigger>
+          <TabsTrigger value="verification" className="px-5">{tr("Vérification", "Verification")}</TabsTrigger>
+        </TabsList>
+        <TabsContent value="overview">
       <Section title={tr("Le modèle contre le marché", "Model vs market")} kicker={tr("Évaluation walk-forward", "Walk-forward evaluation")}>
         <p className="mb-3 max-w-3xl text-sm text-muted-foreground">
           {tr(
@@ -71,6 +89,8 @@ const Body = ({ d }: { d: Cs2Status }) => {
         </p>
       </Section>
 
+        </TabsContent>
+        <TabsContent value="details">
       <Section title={tr("Pourquoi si peu de paris ?", "Why so few bets?")} kicker={tr("Garde-fous", "Safeguards")}>
         <ul className="max-w-2xl space-y-2">
           {reasons.map(([k, n]) => (
@@ -97,6 +117,13 @@ const Body = ({ d }: { d: Cs2Status }) => {
           ))}
         </ul>
       </Section>
+        </TabsContent>
+        <TabsContent value="verification">
+          <Section title={tr("Sources et vérification", "Sources and verification")} kicker={tr("Transparence", "Transparency")}>
+            <VerifyPanel />
+          </Section>
+        </TabsContent>
+      </Tabs>
     </>
   );
 };
@@ -127,9 +154,6 @@ const CS2 = () => {
         {isLoading && <Loading />}
         {error && <p className="text-red-400">{tr("Données indisponibles.", "Data unavailable.")}</p>}
         {data && <Body d={data} />}
-        <Section id="verification" title={tr("Sources et vérification", "Sources and verification")} kicker={tr("Transparence", "Transparency")}>
-          <VerifyPanel />
-        </Section>
       </main>
       <Footer />
     </div>

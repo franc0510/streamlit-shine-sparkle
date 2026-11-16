@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
 import { Download, Info } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
@@ -11,6 +12,14 @@ import { LedgerRow, pct, shortDate, usd, useLedger, useLolTrack, useManifest } f
 import { useTr } from "@/hooks/useTr";
 
 const PAGE = 20;
+const TABS = ["overview", "details", "verification"] as const;
+const useHashTab = () => {
+  const read = () => { const h = window.location.hash.slice(1); return (TABS as readonly string[]).includes(h) ? h : "overview"; };
+  const [tab, setTab] = useState(read);
+  useEffect(() => { const f = () => setTab(read()); window.addEventListener("hashchange", f); f(); return () => window.removeEventListener("hashchange", f); }, []);
+  const set = (v: string) => { setTab(v); history.replaceState(null, "", v === "overview" ? window.location.pathname : `#${v}`); };
+  return [tab, set] as const;
+};
 
 const Ledger = () => {
   const { tr, lng } = useTr();
@@ -115,6 +124,7 @@ const TrackRecord = () => {
   const { tr, lng } = useTr();
   const { data, isLoading, error } = useLolTrack();
   const { data: manifest } = useManifest();
+  const [tab, setTab] = useHashTab();
 
   return (
     <div className="min-h-screen bg-background">
@@ -179,6 +189,13 @@ const TrackRecord = () => {
                 </p>
               </div>
 
+              <Tabs value={tab} onValueChange={setTab} className="mt-8">
+                <TabsList className="h-11 w-full justify-start gap-1 rounded-xl bg-secondary/60 p-1 sm:w-auto">
+                  <TabsTrigger value="overview" className="px-5">{tr("Aperçu", "Overview")}</TabsTrigger>
+                  <TabsTrigger value="details" className="px-5">{tr("Détails", "Details")}</TabsTrigger>
+                  <TabsTrigger value="verification" className="px-5">{tr("Vérification", "Verification")}</TabsTrigger>
+                </TabsList>
+                <TabsContent value="overview">
               <Section title={tr("Résultat cumulé depuis le 13 août", "Cumulative profit since 13 Aug")} kicker="P&L">
                 <div className="rounded-xl border border-border/60 bg-card/60 p-3 sm:p-5">
                   <PnlChart daily={data.daily} />
@@ -207,6 +224,8 @@ const TrackRecord = () => {
                 </p>
               </Section>
 
+                </TabsContent>
+                <TabsContent value="details">
               <Section title={tr("Le modèle bat-il vraiment le prix ?", "Does the model really beat the price?")} kicker={tr("Calibration", "Calibration")}>
                 <div className="grid gap-4 sm:grid-cols-3">
                   <Kpi label={tr("Prix moyen payé", "Average price paid")} value={pct(data.calibration.implied_win_rate, 1)} sub={tr("= probabilité implicite du marché", "= market-implied probability")} />
@@ -241,9 +260,14 @@ const TrackRecord = () => {
                 </p>
               </Section>
 
-              <Section id="verification" title={tr("Vérifier ces chiffres", "Verify these numbers")} kicker={tr("Transparence", "Transparency")}>
+                </TabsContent>
+                <TabsContent value="verification">
+              <Section title={tr("Vérifier ces chiffres", "Verify these numbers")} kicker={tr("Transparence", "Transparency")}>
                 <VerifyPanel />
               </Section>
+
+                </TabsContent>
+              </Tabs>
 
               <div className="rounded-xl border border-border/60 bg-card/40 p-5 text-xs text-muted-foreground">
                 <b className="text-foreground">{tr("Avertissement.", "Disclaimer.")}</b>{" "}

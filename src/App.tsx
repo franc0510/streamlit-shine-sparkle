@@ -32,7 +32,7 @@ const ScrollManager = () => {
   const { pathname, hash } = useLocation();
   useEffect(() => {
     if (!hash) { window.scrollTo(0, 0); return; }
-    const t = setTimeout(() => document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth" }), 400);
+    const t = setTimeout(() => { const el = document.getElementById(hash.slice(1)); el ? el.scrollIntoView({ behavior: "smooth" }) : window.scrollTo(0, 0); }, 150);
     return () => clearTimeout(t);
   }, [pathname, hash]);
   return null;
