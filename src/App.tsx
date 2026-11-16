@@ -21,7 +21,6 @@ const Auth = lazy(() => import("./pages/Auth"));
 const CS2 = lazy(() => import("./pages/CS2"));
 const Dota2 = lazy(() => import("./pages/Dota2"));
 const MatchDetails = lazy(() => import("./pages/MatchDetails"));
-const AdminReviews = lazy(() => import("./pages/AdminReviews"));
 const OAuthConsent = lazy(() => import("./pages/OAuthConsent"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -65,11 +64,9 @@ const App = () => {
                   <Route path="/results" element={<Navigate to="/track-record" replace />} />
                   <Route path="/pricing" element={<Pricing />} />
                   <Route path="/contact" element={<Navigate to="/about#contact" replace />} />
-                  <Route path="/reviews" element={<Navigate to="/about#avis" replace />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/cs2" element={<CS2 />} />
                   <Route path="/dota2" element={<Dota2 />} />
-                  <Route path="/admin/reviews" element={<AdminReviews />} />
                   <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
                   {/* Match details route */}
                   <Route path="/match/:tournament/:date/:time/:team1_vs_team2" element={<MatchDetails />} />

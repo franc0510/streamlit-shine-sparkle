@@ -4,55 +4,19 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Mail, MessageSquare, Send, Star, Loader2 } from "lucide-react";
+import { Mail, MessageSquare, Send } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import founderPhoto from "@/assets/founder.jpg";
 import { SEO } from "@/components/SEO";
-
-interface Review {
-  id: string;
-  author_name: string;
-  rating: number;
-  content: string;
-  created_at: string;
-}
-
-const StarRating = ({ rating, onRatingChange, interactive = false }: {
-  rating: number;
-  onRatingChange?: (rating: number) => void;
-  interactive?: boolean;
-}) => {
-  const [hoverRating, setHoverRating] = useState(0);
-  return (
-    <div className="flex gap-1">
-      {[1, 2, 3, 4, 5].map((star) => (
-        <Star
-          key={star}
-          className={`w-5 h-5 transition-colors ${
-            (interactive ? (hoverRating || rating) : rating) >= star
-              ? "fill-yellow-400 text-yellow-400"
-              : "text-muted-foreground"
-          } ${interactive ? "cursor-pointer" : ""}`}
-          onMouseEnter={() => interactive && setHoverRating(star)}
-          onMouseLeave={() => interactive && setHoverRating(0)}
-          onClick={() => interactive && onRatingChange?.(star)}
-        />
-      ))}
-    </div>
-  );
-};
 
 const About = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const { user } = useAuth();
-  const queryClient = useQueryClient();
 
   // Contact form
   const [name, setName] = useState("");
@@ -62,44 +26,6 @@ const About = () => {
   // ROI form
   const [roiEmail, setRoiEmail] = useState("");
   const [roiLoading, setRoiLoading] = useState(false);
-
-  // Reviews
-  const [authorName, setAuthorName] = useState("");
-  const [rating, setRating] = useState(5);
-  const [content, setContent] = useState("");
-
-  const { data: reviews = [], isLoading: reviewsLoading } = useQuery({
-    queryKey: ["reviews"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("reviews")
-        .select("id, author_name, rating, content, created_at")
-        .eq("is_approved", true)
-        .order("created_at", { ascending: false });
-      if (error) throw error;
-      return data as Review[];
-    },
-  });
-
-  const submitReview = useMutation({
-    mutationFn: async () => {
-      if (!user) throw new Error("Must be logged in");
-      const { error } = await supabase.from("reviews").insert({
-        user_id: user.id,
-        author_name: authorName.trim(),
-        rating,
-        content: content.trim(),
-      });
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      toast({ title: t("reviews.submitSuccess"), description: t("reviews.submitSuccessDesc") });
-      setAuthorName(""); setRating(5); setContent("");
-    },
-    onError: () => {
-      toast({ title: t("reviews.submitError"), description: t("reviews.submitErrorDesc"), variant: "destructive" });
-    },
-  });
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,15 +58,11 @@ const About = () => {
     }
   };
 
-  const averageRating = reviews.length > 0
-    ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)
-    : "0";
-
   return (
     <div className="min-h-screen bg-background">
       <SEO
         title="À propos de PredictEsport — méthodologie & contact"
-        description="Découvrez l'histoire de PredictEsport, notre méthodologie IA, les avis de notre communauté et contactez-nous."
+        description="Contactez l'équipe PredictEsport pour accéder à nos probabilités, cotes et jeux de données esport."
         path="/about"
       />
       <Navbar />
@@ -153,112 +75,14 @@ const About = () => {
               À propos de PredictEsport
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-              Découvrez notre histoire, contactez-nous et lisez les avis de notre communauté.
+              Une question, un besoin en données ? Contactez l'équipe.
             </p>
 
             {/* In-page nav */}
             <nav className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm">
-              <a href="#histoire" className="px-4 py-2 rounded-full bg-secondary/60 hover:bg-secondary transition">Notre histoire</a>
-              <a href="#avis" className="px-4 py-2 rounded-full bg-secondary/60 hover:bg-secondary transition">Avis</a>
               <a href="#contact" className="px-4 py-2 rounded-full bg-secondary/60 hover:bg-secondary transition">Contact</a>
             </nav>
           </div>
-
-          {/* Notre histoire (avec photo) */}
-          <section id="histoire" className="bg-gradient-card border border-border/50 rounded-xl p-6 sm:p-8 mb-12 scroll-mt-20">
-            <h2 className="text-2xl sm:text-3xl font-display font-bold mb-6 text-center">{t('about.story.title')}</h2>
-            <div className="grid md:grid-cols-[200px_1fr] gap-6 items-start">
-              <div className="mx-auto md:mx-0">
-                <img
-                  src={founderPhoto}
-                  alt="Fondateur de PredictEsport, créateur de l'algorithme de prédictions esport"
-                  className="w-40 h-40 sm:w-48 sm:h-48 rounded-2xl object-cover border-2 border-primary/30 shadow-elegant"
-                  loading="lazy"
-                />
-                <p className="text-xs text-muted-foreground text-center mt-2">Le fondateur</p>
-              </div>
-              <div className="space-y-3 text-muted-foreground leading-relaxed">
-                <p>{t('about.story.text1')}</p>
-                <p>{t('about.story.text2')}</p>
-                <p>{t('about.story.text3')}</p>
-                <p className="italic">{t('about.story.text4')}</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Avis */}
-          <section id="avis" className="mb-12 scroll-mt-20">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl font-display font-bold mb-2">{t("reviews.title")}</h2>
-              <p className="text-muted-foreground">{t("reviews.subtitle")}</p>
-              <div className="flex items-center justify-center gap-6 mt-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary">{averageRating}</div>
-                  <StarRating rating={Math.round(Number(averageRating))} />
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary">{reviews.length}</div>
-                  <div className="text-sm text-muted-foreground">{t("reviews.totalReviews")}</div>
-                </div>
-              </div>
-            </div>
-
-            <Card className="p-6 mb-6 bg-gradient-card border-border/50">
-              <h3 className="text-xl font-display font-bold mb-4 flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-primary" />
-                {t("reviews.leaveReview")}
-              </h3>
-              {user ? (
-                <form onSubmit={(e) => { e.preventDefault(); if (authorName.trim() && content.trim()) submitReview.mutate(); }} className="space-y-4">
-                  <div>
-                    <Label className="block text-sm font-medium mb-2">{t("reviews.yourName")}</Label>
-                    <Input value={authorName} onChange={(e) => setAuthorName(e.target.value)} placeholder={t("reviews.namePlaceholder")} maxLength={50} required className="bg-background/50" />
-                  </div>
-                  <div>
-                    <Label className="block text-sm font-medium mb-2">{t("reviews.yourRating")}</Label>
-                    <StarRating rating={rating} onRatingChange={setRating} interactive />
-                  </div>
-                  <div>
-                    <Label className="block text-sm font-medium mb-2">{t("reviews.yourReview")}</Label>
-                    <Textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder={t("reviews.reviewPlaceholder")} maxLength={500} rows={4} required className="bg-background/50" />
-                  </div>
-                  <Button type="submit" disabled={submitReview.isPending || !authorName.trim() || !content.trim()}>
-                    {submitReview.isPending ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />{t("reviews.submitting")}</>) : t("reviews.submit")}
-                  </Button>
-                </form>
-              ) : (
-                <div className="text-center py-4">
-                  <p className="text-muted-foreground mb-4">{t("reviews.loginRequired")}</p>
-                  <Link to="/auth"><Button>{t("nav.login")}</Button></Link>
-                </div>
-              )}
-            </Card>
-
-            {reviewsLoading ? (
-              <div className="flex items-center justify-center py-12">
-                <Loader2 className="w-8 h-8 animate-spin text-primary" />
-              </div>
-            ) : reviews.length === 0 ? (
-              <Card className="p-8 text-center bg-gradient-card border-border/50">
-                <p className="text-muted-foreground">{t("reviews.noReviews")}</p>
-              </Card>
-            ) : (
-              <div className="grid gap-4">
-                {reviews.map((review) => (
-                  <Card key={review.id} className="p-6 bg-gradient-card border-border/50">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h4 className="font-semibold text-foreground">{review.author_name}</h4>
-                        <p className="text-xs text-muted-foreground">{new Date(review.created_at).toLocaleDateString()}</p>
-                      </div>
-                      <StarRating rating={review.rating} />
-                    </div>
-                    <p className="text-muted-foreground leading-relaxed">{review.content}</p>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </section>
 
           {/* Contact */}
           <section id="contact" className="mb-12 scroll-mt-20">
