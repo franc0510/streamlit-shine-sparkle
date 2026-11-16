@@ -97,7 +97,6 @@ export const Navbar = () => {
     { to: "/track-record", label: "Track record" },
     { to: "/labs", label: "Labs" },
     { to: "/cs2", label: "CS2", badge: "test" },
-    { to: "/pricing", label: tr("Tarifs", "Pricing") },
   ];
   const isActive = (to: string) => !to.includes("#") && location.pathname === to;
 
@@ -113,7 +112,7 @@ export const Navbar = () => {
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => navigate("/predictions")} className="cursor-pointer">{tr("Prédictions du jour", "Today's predictions")}</DropdownMenuItem>
           <DropdownMenuItem onClick={handleOpenPortal} className="cursor-pointer gap-2"><ExternalLink className="h-4 w-4" />{t("nav.manageSubscription")}</DropdownMenuItem>
-          {!isPremium && <DropdownMenuItem onClick={() => navigate("/pricing")} className="cursor-pointer gap-2"><CreditCard className="h-4 w-4" />{t("nav.subscribePremium")}</DropdownMenuItem>}
+          
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout} className="cursor-pointer gap-2"><LogOut className="h-4 w-4" />{t("nav.logout")}</DropdownMenuItem>
         </DropdownMenuContent>

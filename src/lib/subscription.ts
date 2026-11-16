@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const PREMIUM_PRODUCT_ID = "prod_TJVNCl5roSeR21";
 // Prix actuels
-export const PREMIUM_PRICE_ID_MONTHLY = "price_1TyZEtH8e5UibDVFJURnXdxK"; // 250€ / mois
+export const PREMIUM_PRICE_ID_MONTHLY = "price_1TyZEtH8e5UibDVFJURnXdxK";
 export const PREMIUM_PRICE_ID = PREMIUM_PRICE_ID_MONTHLY;
 export type SubscriptionPlan = "monthly";
 

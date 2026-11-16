@@ -361,12 +361,7 @@ const Auth = () => {
 
                   <div className="mb-6">
                     <h3 className="text-3xl font-display font-bold mb-2">{t('auth.premiumSubscription')}</h3>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-5xl font-display font-bold bg-gradient-gaming bg-clip-text text-transparent">
-                        250€
-                      </span>
-                      <span className="text-muted-foreground">/mois</span>
-                    </div>
+                    <div className="text-2xl font-display font-bold bg-gradient-gaming bg-clip-text text-transparent">Sur devis</div>
                     {isTrialing && trialEnd && (
                       <p className="text-sm text-amber-500 mt-2 font-semibold">
                         🎁 {t('auth.trialEndsOn')} {new Date(trialEnd).toLocaleDateString("fr-FR")}
@@ -411,12 +406,7 @@ const Auth = () => {
 
                   <div className="mb-6">
                     <h3 className="text-3xl font-display font-bold mb-2">{t('auth.premiumSubscription')}</h3>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-5xl font-display font-bold bg-gradient-gaming bg-clip-text text-transparent">
-                        250€
-                      </span>
-                      <span className="text-muted-foreground">/mois</span>
-                    </div>
+                    <div className="text-2xl font-display font-bold bg-gradient-gaming bg-clip-text text-transparent">Sur devis</div>
                     <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-green-500/10 px-4 py-1.5 text-sm font-semibold text-green-500">
                       🎁 {t('auth.freeTrialBadge')}
                     </div>

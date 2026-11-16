@@ -8,7 +8,7 @@ export const Footer = () => {
     { h: tr("Produits", "Products"), l: [[tr("Probabilités", "Probabilities"), "/predictions"], [tr("Cotes & value bets", "Odds & value bets"), "/track-record#details"], [tr("Jeux de données", "Datasets"), "/track-record#verification"]] },
     { h: tr("Transparence", "Transparency"), l: [["Track record LoL", "/track-record"], [tr("Vérifier les chiffres", "Verify the numbers"), "/track-record#verification"], ["CS2 · paper trading", "/cs2"]] },
     { h: tr("Recherche", "Research"), l: [[tr("Labs · algos en développement", "Labs · algorithms in development"), "/labs"], ["Dota 2", "/dota2"]] },
-    { h: tr("Société", "Company"), l: [[tr("À propos", "About"), "/about"], [tr("Tarifs", "Pricing"), "/pricing"], [tr("Contact", "Contact"), "/about#contact"]] },
+    { h: tr("Société", "Company"), l: [[tr("À propos", "About"), "/about"], [tr("Contact", "Contact"), "/about#contact"]] },
   ];
   return (
     <footer className="border-t border-border bg-card/30">

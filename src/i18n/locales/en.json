@@ -91,7 +91,7 @@
       "New match and opportunity notifications",
       "Priority email and Discord support"
     ],
-    "valueTitle": "Why €250 / month?",
+    "valueTitle": "Tailored plan",
     "valuePoints": [
       "A real Machine Learning algorithm (LightGBM, Voting Ensemble) trained on 10 years of data — not subjective opinions.",
       "Automatic value bet (EV+) detection across all major leagues, with odds compared in real time.",
@@ -323,7 +323,7 @@
     "unexpectedError": "An unexpected error occurred",
     "loggedInAs": "You are logged in",
     "loggedInDesc": "Discover our Premium offer →",
-    "price": "€250/month",
+    "price": "Tailored plan",
     "subscribe": "Subscribe Now",
     "manageSubscription": "Manage Subscription",
     "premiumFeatures": {
@@ -361,7 +361,7 @@
     "cancelAnytime": "Cancel anytime",
     "freeTrialBadge": "No commitment",
     "startFreeTrial": "Subscribe",
-    "trialInfo": "€250/month, no commitment. Cancel anytime.",
+    "trialInfo": "Contact us for a tailored offer.",
     "trialBadge": "Free trial",
     "trialEndsOn": "Free trial until"
   },

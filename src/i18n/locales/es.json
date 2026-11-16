@@ -91,7 +91,7 @@
       "Notificaciones de nuevos partidos y oportunidades",
       "Soporte prioritario por email y Discord"
     ],
-    "valueTitle": "¿Por qué 250€ / mes?",
+    "valueTitle": "Oferta a medida",
     "valuePoints": [
       "Un verdadero algoritmo de Machine Learning (LightGBM, Voting Ensemble) entrenado con 10 años de datos, no opiniones subjetivas.",
       "Detección automática de apuestas de valor (EV+) en todas las grandes ligas, con cuotas comparadas en tiempo real.",
@@ -323,7 +323,7 @@
     "unexpectedError": "Ocurrió un error inesperado",
     "loggedInAs": "Has iniciado sesión",
     "loggedInDesc": "Descubre nuestra oferta Premium →",
-    "price": "250€/mes",
+    "price": "Oferta a medida",
     "subscribe": "Suscribirse ahora",
     "manageSubscription": "Gestionar suscripción",
     "premiumFeatures": {
@@ -361,7 +361,7 @@
     "cancelAnytime": "Cancelar en cualquier momento",
     "freeTrialBadge": "Sin compromiso",
     "startFreeTrial": "Suscribirse",
-    "trialInfo": "250€/mes, sin compromiso. Cancela cuando quieras.",
+    "trialInfo": "Contáctanos para una oferta a medida.",
     "trialBadge": "Prueba gratis",
     "trialEndsOn": "Prueba gratis hasta el"
   },

@@ -285,7 +285,7 @@ const Landing = () => {
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">{tr("Médias, analystes, opérateurs : décrivez votre cas d'usage, nous revenons vers vous avec une proposition.", "Media, analysts, operators: describe your use case and we'll come back with a proposal.")}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link to="/about#contact"><Button size="lg" className="h-12 px-7">{tr("Contacter l'équipe", "Contact sales")}</Button></Link>
-              <Link to="/pricing"><Button size="lg" variant="outline" className="h-12 px-7">{tr("Voir les tarifs", "View pricing")}</Button></Link>
+              <Link to="/track-record"><Button size="lg" variant="outline" className="h-12 px-7">{tr("Voir les résultats", "View results")}</Button></Link>
             </div>
           </div>
         </div>
