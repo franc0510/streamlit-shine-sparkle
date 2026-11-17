@@ -74,7 +74,9 @@ class Manifest:
             "role": role,
             "sha256": sha256(p),
             "bytes": p.stat().st_size,
-            "last_update": git(repo_path, "log", "-1", "--format=%cI", "--", rel)[:10],
+            "last_update": (datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).date().isoformat()
+                            if git(repo_path, "status", "--porcelain", "--", rel)
+                            else git(repo_path, "log", "-1", "--format=%cI", "--", rel)[:10]),
         })
         return p
 
@@ -304,7 +306,15 @@ def build_lol(lol: Path, out: Path, man: Manifest) -> dict:
 def build_cs2(cs2: Path, out: Path, man: Manifest) -> dict:
     rep_p = man.add("cs2", cs2, "Documents/paper_report.json", "Rapport du paper bot")
     trd_p = man.add("cs2", cs2, "Documents/paper_trades.csv", "Journal du paper bot (toutes les décisions)")
-    ev_p = man.add("cs2", cs2, "Documents/stage2_eval_c2.json", "Évaluation walk-forward du modèle")
+    # Variante de prod = défaut de daily_build.sh (CS2_STAGE2_VARIANT:-cX) ; le fichier d'éval suit.
+    variant = "c3"
+    try:
+        m = re.search(r"CS2_STAGE2_VARIANT:-(c\d)", (cs2 / "CS2" / "daily_build.sh").read_text())
+        variant = m.group(1) if m else variant
+    except Exception:
+        pass
+    ev_rel = "Documents/stage2_eval.json" if variant == "c1" else f"Documents/stage2_eval_{variant}.json"
+    ev_p = man.add("cs2", cs2, ev_rel, "Évaluation walk-forward du modèle")
     fr_p = man.add("cs2", cs2, "Documents/data_freshness.json", "Contrôles de fraîcheur des données")
     bs_p = man.add("cs2", cs2, "Documents/build_status.json", "Statut du build quotidien")
 
@@ -360,16 +370,29 @@ def build_cs2(cs2: Path, out: Path, man: Manifest) -> dict:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--lol", required=True, type=Path)
-    ap.add_argument("--cs2", required=True, type=Path)
+    ap.add_argument("--cs2", type=Path, default=None, help="optionnel : sans lui, le dernier statut CS2 publié est conservé")
     ap.add_argument("--out", default=Path("public/data"), type=Path)
     a = ap.parse_args()
 
     man = Manifest()
     man.repo("lol", a.lol, "Francky-Predictor-Esports---LOL")
-    man.repo("cs2", a.cs2, "Francky-Predictor-Esports---CS2")
+    old_manifest = {}
+    try:
+        old_manifest = json.loads((a.out / "manifest.json").read_text())
+    except Exception:
+        pass
 
     lol = build_lol(a.lol, a.out, man)
-    cs2 = build_cs2(a.cs2, a.out, man)
+    cs2 = None
+    if a.cs2 and a.cs2.is_dir():
+        try:
+            man.repo("cs2", a.cs2, "Francky-Predictor-Esports---CS2")
+            cs2 = build_cs2(a.cs2, a.out, man)
+        except Exception as e:  # CS2 indisponible : on garde le dernier état connu, sans casser le LoL
+            print(f"::warning::CS2 non régénéré ({e}) — dernier statut publié conservé")
+    if cs2 is None:
+        man.files += [f for f in old_manifest.get("files", []) if f.get("id", "").startswith("cs2-")]
+        cs2 = json.loads((a.out / "cs2_status.json").read_text())
 
     me = Path(__file__).resolve()
     manifest = {

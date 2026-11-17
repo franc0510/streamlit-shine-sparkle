@@ -1,8 +1,9 @@
-# Régénère public/data/* depuis les deux dépôts sources et commit si quelque chose a changé.
-# Secret requis : SOURCE_REPOS_TOKEN (PAT en lecture seule sur les deux dépôts, s'ils sont privés).
+# Régénère public/data/* (stats LoL + CS2) et commit si quelque chose a changé.
+# Secret requis : SOURCE_REPOS_TOKEN (PAT lecture seule sur les deux dépôts sources).
+# Déclencheurs : toutes les 3 h, à la demande, ou par repository_dispatch (types: sources-updated).
 name: Sync stats
 on:
-  schedule: [{ cron: "17 */6 * * *" }]
+  schedule: [{ cron: "17 */3 * * *" }]
   workflow_dispatch:
   repository_dispatch: { types: [sources-updated] }
 permissions: { contents: write }
@@ -19,11 +20,16 @@ jobs:
         with: { repository: franc0510/Francky-Predictor-Esports---CS2, path: cs2, fetch-depth: 0, token: "${{ secrets.SOURCE_REPOS_TOKEN || github.token }}" }
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - run: pip install pandas numpy
+      - run: pip install pandas numpy requests
+      # Historique du wallet relu à chaque run (API Data v2) : la courbe ne dépend plus
+      # du passage du workflow quotidien du dépôt LoL.
+      - name: Rafraîchir l'historique du wallet
+        working-directory: lol
+        run: python fetch_polymarket_positions.py
       - run: python site/scripts/build_stats.py --lol lol --cs2 cs2 --out site/public/data
       - name: Commit
         working-directory: site
         run: |
           git config user.name "stats-bot"; git config user.email "stats-bot@users.noreply.github.com"
           git add public/data
-          git diff --cached --quiet && echo "rien de neuf" || (git commit -m "chore(stats): resync LoL/CS2 ($(date -u +%FT%TZ))" && git push)
+          git diff --cached --quiet && echo "rien de neuf" || (git commit -m "chore(stats): resync ($(date -u +%FT%TZ))" && git pull --rebase -q && git push)

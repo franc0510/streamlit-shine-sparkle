@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-16T15:55:36Z",
+ "generated_utc": "2026-11-17T07:21:49Z",
  "rules": [
   "PnL d'un marché = somme des REDEEM - somme des BUY (Polymarket).",
   "Marché sans REDEEM, dont la date de match précède d'au moins 1 jour la dernière donnée connue = perdu.",
@@ -10,9 +10,9 @@
   {
    "id": "lol-1",
    "role": "Historique d'activité Polymarket (BUY + REDEEM)",
-   "sha256": "442c9f88271d5087d79bd8544d8da9136762924e4088c3d56af1f6f3fae6ec79",
-   "bytes": 359079,
-   "last_update": "2026-11-06"
+   "sha256": "fddc44c2027b0bf21886f9f00f5880d7163a01722f461cdeb8ed26f4c2316be8",
+   "bytes": 364091,
+   "last_update": "2026-11-17"
   },
   {
    "id": "lol-2",
@@ -45,9 +45,9 @@
   {
    "id": "cs2-6",
    "role": "Évaluation walk-forward du modèle",
-   "sha256": "fa98acd7adbc03da1b24f7e6510e286b79833a88f24f1bd9b992705f7a494430",
-   "bytes": 34926,
-   "last_update": "2026-11-13"
+   "sha256": "a6e60b791d62a233131b7c7a369145348c079841b7e35aa9753478c0178cf61f",
+   "bytes": 34971,
+   "last_update": "2026-11-16"
   },
   {
    "id": "cs2-7",
@@ -67,18 +67,18 @@
  "outputs": [
   {
    "path": "data/cs2_status.json",
-   "sha256": "522bf084663281f2c3b09037366d5007bb150d39bd077d10a8eb912006be29a6",
-   "bytes": 3142
+   "sha256": "4fb15dff1972b13247430c002b8218ad421e19d08d4c84d8c677835bb5458b71",
+   "bytes": 3139
   },
   {
    "path": "data/lol_ledger.csv",
-   "sha256": "33aa8d1d788284be2b8fb817cacda8895d2eca94f96ef12ad92d8dd0c4dc9770",
-   "bytes": 35452
+   "sha256": "67d27ec4e47aacf1787fb5b5903c4c4b08fa482fef0e64b6475481ac92199ab2",
+   "bytes": 36692
   },
   {
    "path": "data/lol_track_record.json",
-   "sha256": "509c538f3e31eb2f8207b7fd26f939e12134887d436a3ffcc5508969f1f0df55",
-   "bytes": 16599
+   "sha256": "9a0d3cf8655aec9e5fe7903a38b01aa6fbfbd6da7776b60f3900269b6648d525",
+   "bytes": 17971
   }
  ]
 }
